@@ -58,22 +58,22 @@ export default function Home() {
   };
 
   return (
-    <section className="relative">
-      <div className="brand-gradient absolute inset-0 opacity-10" />
-      <div className="max-w-6xl mx-auto px-4 py-20">
-        <div className="inline-block rounded-2xl px-3 py-1 text-xs font-semibold bg-neutral-900 text-white mb-5">
+    <section className="relative min-h-screen bg-brand text-white">
+      <div className="diagonal-stripes absolute inset-0 opacity-5"></div>
+      <div className="relative max-w-6xl mx-auto px-4 py-20">
+        <div className="inline-block rounded-2xl px-3 py-1 text-xs font-semibold bg-accent text-brand mb-5">
           Multidisciplinary • Creative Tech • SaaS
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
           Creative Technologist, Designer,<br className="hidden md:block"/> & Process Innovator
         </h1>
-        <p className="mt-6 text-lg max-w-2xl text-neutral-700">
+        <p className="mt-6 text-lg max-w-2xl text-brand-light">
           I build bold, vector-clean experiences that bridge design, code, and operations.
           From in-house print studios to SaaS concepts, I ship systems that scale.
         </p>
         <div className="mt-8 flex gap-4">
-          <Link to="/portfolio" className="px-5 py-3 rounded-xl bg-neutral-900 text-white font-semibold hover:bg-neutral-800 transition-colors">View Work</Link>
-          <Link to="/resume" className="px-5 py-3 rounded-xl bg-white border border-neutral-300 font-semibold hover:bg-neutral-50 transition-colors">Resume</Link>
+          <Link to="/portfolio" className="px-5 py-3 rounded-xl bg-accent text-brand font-semibold hover:bg-accent-dark transition-colors">View Work</Link>
+          <Link to="/resume" className="px-5 py-3 rounded-xl bg-white text-brand font-semibold hover:bg-brand-light transition-colors">Resume</Link>
         </div>
 
         <div className="mt-16">
@@ -81,10 +81,10 @@ export default function Home() {
           {loading ? (
             <div className="grid md:grid-cols-3 gap-6">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="card animate-pulse">
-                  <div className="h-4 bg-neutral-200 rounded w-1/3 mb-2"></div>
-                  <div className="h-6 bg-neutral-200 rounded w-2/3 mb-2"></div>
-                  <div className="h-4 bg-neutral-200 rounded w-full"></div>
+                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 animate-pulse">
+                  <div className="h-4 bg-accent/30 rounded w-1/3 mb-2"></div>
+                  <div className="h-6 bg-accent/30 rounded w-2/3 mb-2"></div>
+                  <div className="h-4 bg-accent/30 rounded w-full"></div>
                 </div>
               ))}
             </div>
@@ -94,19 +94,19 @@ export default function Home() {
                 <Link 
                   key={project.id} 
                   to={`/portfolio?project=${project.id}`}
-                  className="card group hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 group hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
                 >
-                  <div className="text-xs font-semibold text-neutral-600 mb-2">
+                  <div className="text-xs font-semibold text-accent mb-2">
                     {project.tags.join(' • ')}
                   </div>
-                  <div className="text-xl font-bold group-hover:text-brand transition-colors">
+                  <div className="text-xl font-bold group-hover:text-accent transition-colors">
                     {project.title}
                   </div>
-                  <div className="mt-2 text-neutral-700">
+                  <div className="mt-2 text-brand-light">
                     {project.summary}
                   </div>
                   {project.content.results && (
-                    <div className="mt-3 text-sm text-green-600 font-medium">
+                    <div className="mt-3 text-sm text-accent font-medium">
                       {project.content.results.split('.')[0]}.
                     </div>
                   )}
@@ -115,10 +115,10 @@ export default function Home() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-neutral-500">No featured projects available.</p>
+              <p className="text-brand-light">No featured projects available.</p>
               <Link 
                 to="/admin" 
-                className="inline-block mt-4 px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700 transition-colors"
+                className="inline-block mt-4 px-4 py-2 bg-accent text-brand rounded-lg hover:bg-accent-dark transition-colors"
               >
                 Add Featured Projects
               </Link>

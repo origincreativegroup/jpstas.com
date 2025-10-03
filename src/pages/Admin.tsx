@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import FileUpload, { MediaPreview } from '../components/FileUpload';
+import LoginForm from '../components/LoginForm';
 import { mockApi } from '../utils/mockApi';
+import { checkAuthStatus, setAuthenticated } from '../config/auth';
 
 interface Project {
   id: string;
@@ -30,14 +32,36 @@ interface Project {
 }
 
 export default function Admin() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
-    fetchProjects();
+    // Check if user is already authenticated
+    if (checkAuthStatus()) {
+      setIsAuthenticated(true);
+      fetchProjects();
+    } else {
+      setLoading(false);
+    }
   }, []);
+
+  const handleLogin = (success: boolean) => {
+    if (success) {
+      setIsAuthenticated(true);
+      fetchProjects();
+    }
+  };
+
+  const handleLogout = () => {
+    setAuthenticated(false);
+    setIsAuthenticated(false);
+    setProjects([]);
+    setShowAddForm(false);
+    setEditingProject(null);
+  };
 
   const fetchProjects = async () => {
     try {
@@ -100,6 +124,11 @@ export default function Admin() {
     }
   };
 
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -128,6 +157,12 @@ export default function Admin() {
               className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700"
             >
               Add Project
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Logout
             </button>
           </div>
         </div>
