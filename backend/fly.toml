@@ -1,35 +1,22 @@
-# Fly.io configuration for portfolio API
-app = "jpstas-portfolio-api"
-primary_region = "iad"
+# fly.toml app configuration file generated for backend-fragrant-haze-7389 on 2025-10-04T18:51:22-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'backend-fragrant-haze-7389'
+primary_region = 'ord'
 
 [build]
-
-[env]
-  NODE_ENV = "production"
-  PORT = "3000"
 
 [http_service]
   internal_port = 3000
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 0
-  processes = ["app"]
+  processes = ['app']
 
 [[vm]]
-  cpu_kind = "shared"
+  memory = '1gb'
+  cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 256
-
-[[statics]]
-  guest_path = "/app/uploads"
-  url_prefix = "/uploads/"
-
-# Health check
-[http_service.checks]
-  [http_service.checks.health]
-    grace_period = "10s"
-    interval = "30s"
-    method = "GET"
-    timeout = "5s"
-    path = "/health"
