@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useMedia } from '@/context/MediaContext';
 import FileUpload from '@/components/FileUpload';
-import LoadingSpinner, { LoadingPage } from '@/components/LoadingSpinner';
+import { LoadingPage } from '@/components/LoadingSpinner';
 
 export default function MediaLibrary() {
   const { media, loading, error, addMedia, removeMedia, refreshMedia } = useMedia();

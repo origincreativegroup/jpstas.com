@@ -9,9 +9,11 @@ interface CloudflareVideoProps {
   preload?: 'auto' | 'metadata' | 'none';
 }
 
+const DEFAULT_SUBDOMAIN = 'customer-h044ipu9nb6m47zm';
+
 export default function CloudflareVideo({
   videoId,
-  subdomain = 'customer-h044ipu9nb6m47zm',
+  subdomain,
   className = '',
   controls = true,
   autoplay = false,
@@ -23,15 +25,16 @@ export default function CloudflareVideo({
   const extractVideoId = (url: string): string => {
     if (url.includes('cloudflarestream.com')) {
       const match = url.match(/cloudflarestream\.com\/([^/]+)/);
-      return match ? match[1] : url;
+      return match?.[1] ?? url;
     }
     return url;
   };
 
   const id = extractVideoId(videoId);
+  const domain = subdomain || DEFAULT_SUBDOMAIN;
 
   // Use Stream's iframe player for best performance and features
-  const iframeUrl = `https://${subdomain}.cloudflarestream.com/${id}/iframe`;
+  const iframeUrl = `https://${domain}.cloudflarestream.com/${id}/iframe`;
   const params = new URLSearchParams({
     ...(autoplay && { autoplay: 'true' }),
     ...(muted && { muted: 'true' }),
@@ -62,7 +65,7 @@ interface CloudflareVideoDirectProps extends CloudflareVideoProps {
 
 export function CloudflareVideoDirect({
   videoId,
-  subdomain = 'customer-h044ipu9nb6m47zm',
+  subdomain,
   className = '',
   controls = true,
   autoplay = false,
@@ -74,14 +77,15 @@ export function CloudflareVideoDirect({
   const extractVideoId = (url: string): string => {
     if (url.includes('cloudflarestream.com')) {
       const match = url.match(/cloudflarestream\.com\/([^/]+)/);
-      return match ? match[1] : url;
+      return match?.[1] ?? url;
     }
     return url;
   };
 
   const id = extractVideoId(videoId);
-  const videoUrl = `https://${subdomain}.cloudflarestream.com/${id}/manifest/video.m3u8`;
-  const posterUrl = poster || `https://${subdomain}.cloudflarestream.com/${id}/thumbnails/thumbnail.jpg`;
+  const domain = subdomain || DEFAULT_SUBDOMAIN;
+  const videoUrl = `https://${domain}.cloudflarestream.com/${id}/manifest/video.m3u8`;
+  const posterUrl = poster || `https://${domain}.cloudflarestream.com/${id}/thumbnails/thumbnail.jpg`;
 
   return (
     <video
