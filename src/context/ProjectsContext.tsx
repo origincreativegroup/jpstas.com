@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { apiClient, Project, MediaFile } from '../services/api';
+import { apiClient, Project } from '../services/api';
 
 interface ProjectsContextType {
   projects: Project[];

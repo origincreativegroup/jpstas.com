@@ -37,13 +37,9 @@ const AdminLayout: React.FC = () => {
     checkAuth();
   }, []);
 
-  const handleLogin = async (success: boolean) => {
-    if (success) {
-      setIsAuthenticated(true);
-      showToast('Login successful', 'success');
-    } else {
-      showToast('Invalid credentials', 'error');
-    }
+  const handleLogin = async () => {
+    setIsAuthenticated(true);
+    showToast('Login successful', 'success');
   };
 
   const handleLogout = async () => {
@@ -79,7 +75,7 @@ const AdminLayout: React.FC = () => {
             <h1 className="text-3xl font-bold text-white mb-2">Admin Portal</h1>
             <p className="text-brand-light">Sign in to manage your portfolio</p>
           </div>
-          <LoginForm onLogin={handleLogin} />
+          <LoginForm onSuccess={handleLogin} />
         </div>
       </div>
     );

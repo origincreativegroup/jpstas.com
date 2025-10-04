@@ -101,19 +101,25 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
 
   const unpublishSection = async (key: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      const response = await apiClient.request<{ section: ContentSection }>(`/content/${key}/unpublish`, {
+      const response = await fetch(`http://localhost:3000/api/content/${key}/unpublish`, {
         method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(apiClient.getToken() && { Authorization: `Bearer ${apiClient.getToken()}` })
+        }
       });
       
-      if (response.data) {
+      const data = await response.json();
+      
+      if (response.ok) {
         // Update the section in the state
         setSections(prev => ({
           ...prev,
-          [key]: response.data!.section
+          [key]: data.section
         }));
         return { success: true };
       } else {
-        return { success: false, error: response.error || 'Failed to unpublish content section' };
+        return { success: false, error: data.error || 'Failed to unpublish content section' };
       }
     } catch (error) {
       return { success: false, error: 'Network error' };

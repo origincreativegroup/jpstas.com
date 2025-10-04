@@ -6,7 +6,7 @@ interface LoginFormProps {
   onCancel?: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onCancel }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onCancel }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -160,3 +160,5 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onCancel }) => 
     </div>
   );
 };
+
+export default LoginForm;

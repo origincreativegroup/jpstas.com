@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LoginForm } from '../components/LoginForm';
-import { ProjectManagement } from '../components/ProjectManagement';
-import { MediaManagement } from '../components/MediaManagement';
-import { WorkshopManagement } from '../components/WorkshopManagement';
+import LoginForm from '../components/LoginForm';
+import ProjectManagement from '../components/ProjectManagement';
+import MediaManagement from '../components/MediaManagement';
+import WorkshopManagement from '../components/WorkshopManagement';
 
 export default function Admin() {
   const { isAuthenticated, user, logout } = useAuth();
