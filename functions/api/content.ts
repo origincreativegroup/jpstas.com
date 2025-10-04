@@ -1,7 +1,24 @@
+/**
+ * DEPRECATED: Legacy Content API
+ *
+ * This endpoint is deprecated and maintained for backwards compatibility only.
+ * Please use the new content endpoints instead:
+ * - GET  /api/content/home      - Home page content
+ * - GET  /api/content/about     - About page content
+ * - GET  /api/content/contact   - Contact page content
+ * - GET  /api/content/settings  - Global settings
+ * - PATCH /api/content/{type}   - Update content
+ * - POST  /api/content/publish  - Publish draft content
+ *
+ * This endpoint will be removed in a future version.
+ */
+
 export const onRequestGet: PagesFunction = async (context) => {
   const { request, env } = context;
   const url = new URL(request.url);
   const contentType = url.searchParams.get('type') || 'all';
+
+  console.warn('[DEPRECATED] Using legacy /api/content endpoint. Please migrate to /api/content/{type}');
   
   try {
     // In a real implementation, you'd fetch from a database
@@ -173,11 +190,13 @@ export const onRequestGet: PagesFunction = async (context) => {
 
 export const onRequestPost: PagesFunction = async (context) => {
   const { request } = context;
-  
+
+  console.warn('[DEPRECATED] Using legacy /api/content POST endpoint. Please migrate to PATCH /api/content/{type}');
+
   try {
     const body = await request.json();
     const { type, data } = body;
-    
+
     // In a real implementation, you'd save to a database
     // For now, we'll just return success
     console.log('Content update:', { type, data });

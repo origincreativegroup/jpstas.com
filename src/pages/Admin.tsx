@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import FileUpload from '@/components/FileUpload';
 import LoginForm from '@/components/LoginForm';
 import { LoadingPage } from '@/components/LoadingSpinner';
+import MediaPicker from '@/components/MediaPicker';
+import SortableMediaGrid from '@/components/SortableMediaGrid';
+import { MediaFile } from '@/context/MediaContext';
+import { useToast } from '@/context/ToastContext';
 import { mockApi } from '@/utils/mockApi';
 import { checkAuthStatus, setAuthenticated } from '@/config/auth';
 
@@ -38,6 +41,7 @@ export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const toast = useToast();
 
   useEffect(() => {
     // Check if user is already authenticated
@@ -92,8 +96,10 @@ export default function Admin() {
       try {
         await fetch(`/api/content/${id}`, { method: 'DELETE' });
         setProjects(projects.filter(p => p.id !== id));
+        toast.success('Project deleted successfully');
       } catch (error) {
         console.error('Failed to delete project:', error);
+        toast.error('Failed to delete project');
       }
     }
   };
@@ -106,6 +112,7 @@ export default function Admin() {
         await fetchProjects();
         setShowAddForm(false);
         setEditingProject(null);
+        toast.success(editingProject ? 'Project updated successfully' : 'Project created successfully');
       } else {
         // Use real API in production
         const response = await fetch('/api/content', {
@@ -118,10 +125,14 @@ export default function Admin() {
           await fetchProjects();
           setShowAddForm(false);
           setEditingProject(null);
+          toast.success(editingProject ? 'Project updated successfully' : 'Project created successfully');
+        } else {
+          throw new Error('Failed to save project');
         }
       }
     } catch (error) {
       console.error('Failed to save project:', error);
+      toast.error('Failed to save project');
     }
   };
 
@@ -257,56 +268,85 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
   });
 
   const [mediaFiles, setMediaFiles] = useState(project?.images || []);
+  const [showMediaPicker, setShowMediaPicker] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const toast = useToast();
 
-  const handleMediaUpload = (uploadedFile: any) => {
+  // Form validation
+  const isFormValid =
+    formData.title.trim() !== '' &&
+    formData.role.trim() !== '' &&
+    formData.summary.trim() !== '';
+
+  // Convert MediaFile to Project image format
+  const handleMediaSelect = (file: MediaFile) => {
     const newMedia = {
-      id: uploadedFile.id,
-      url: uploadedFile.url,
-      alt: uploadedFile.name,
-      caption: '',
-      type: (uploadedFile.type.startsWith('video/') ? 'video' : 'image') as 'image' | 'video',
+      id: file.id,
+      url: file.url,
+      alt: file.metadata?.alt || file.name,
+      caption: file.metadata?.caption || '',
+      type: (file.type.startsWith('video/') ? 'video' : 'image') as 'image' | 'video',
     };
     setMediaFiles([...mediaFiles, newMedia]);
+    toast.success(`Added ${file.name}`);
+  };
+
+  const handleMediaReorder = (reorderedItems: typeof mediaFiles) => {
+    setMediaFiles(reorderedItems);
+  };
+
+  const handleMediaUpdate = (id: string, updates: Partial<typeof mediaFiles[0]>) => {
+    setMediaFiles(mediaFiles.map(file => (file.id === id ? { ...file, ...updates } : file)));
   };
 
   const handleMediaRemove = (fileId: string) => {
     setMediaFiles(mediaFiles.filter(file => file.id !== fileId));
+    toast.success('Media removed');
   };
 
-  const handleMediaCaptionChange = (fileId: string, caption: string) => {
-    setMediaFiles(mediaFiles.map(file => (file.id === fileId ? { ...file, caption } : file)));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const projectData: Partial<Project> = {
-      id: project?.id || Date.now().toString(),
-      title: formData.title,
-      role: formData.role,
-      summary: formData.summary,
-      tags: formData.tags
-        .split(',')
-        .map(tag => tag.trim())
-        .filter(Boolean),
-      type: 'case-study',
-      featured: formData.featured,
-      images: mediaFiles,
-      content: {
-        challenge: formData.challenge,
-        solution: formData.solution,
-        results: formData.results,
-        process: formData.process.split('\n').filter(Boolean),
-        technologies: formData.technologies
-          .split(',')
-          .map(tech => tech.trim())
-          .filter(Boolean),
-      },
-      createdAt: project?.createdAt || new Date().toISOString().split('T')[0],
-      updatedAt: new Date().toISOString().split('T')[0],
-    };
+    if (!isFormValid) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
 
-    onSave(projectData);
+    setSaving(true);
+
+    try {
+      const projectData: Partial<Project> = {
+        id: project?.id || Date.now().toString(),
+        title: formData.title,
+        role: formData.role,
+        summary: formData.summary,
+        tags: formData.tags
+          .split(',')
+          .map(tag => tag.trim())
+          .filter(Boolean),
+        type: 'case-study',
+        featured: formData.featured,
+        images: mediaFiles,
+        content: {
+          challenge: formData.challenge,
+          solution: formData.solution,
+          results: formData.results,
+          process: formData.process.split('\n').filter(Boolean),
+          technologies: formData.technologies
+            .split(',')
+            .map(tech => tech.trim())
+            .filter(Boolean),
+        },
+        createdAt: project?.createdAt || new Date().toISOString().split('T')[0],
+        updatedAt: new Date().toISOString().split('T')[0],
+      };
+
+      await onSave(projectData);
+    } catch (error) {
+      console.error('Error saving project:', error);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -341,7 +381,10 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Summary</label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-sm font-medium">Summary</label>
+              <span className="text-xs text-neutral-500">{formData.summary.length} characters</span>
+            </div>
             <textarea
               value={formData.summary}
               onChange={e => setFormData({ ...formData, summary: e.target.value })}
@@ -360,6 +403,11 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
               placeholder="Design, Web, E-commerce"
             />
+            {formData.tags && (
+              <p className="text-xs text-neutral-500 mt-1">
+                {formData.tags.split(',').filter(t => t.trim()).length} tag(s)
+              </p>
+            )}
           </div>
 
           <div className="flex items-center">
@@ -376,49 +424,31 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Media Files</h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold">Media Files</h3>
+              <button
+                type="button"
+                onClick={() => setShowMediaPicker(true)}
+                className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                Browse Media Library
+              </button>
+            </div>
 
-            <FileUpload
-              onUpload={handleMediaUpload}
-              accept="image/*,video/*"
-              multiple={true}
-              className="mb-4"
+            <SortableMediaGrid
+              items={mediaFiles}
+              onReorder={handleMediaReorder}
+              onUpdate={handleMediaUpdate}
+              onRemove={handleMediaRemove}
             />
-
-            {mediaFiles.length > 0 && (
-              <div className="space-y-4">
-                <h4 className="text-md font-medium">Uploaded Media</h4>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {mediaFiles.map(file => (
-                    <div key={file.id} className="space-y-2">
-                      <div className="relative aspect-video bg-neutral-100 rounded-lg overflow-hidden">
-                        {file.type === 'video' ? (
-                          <video src={file.url} className="w-full h-full object-cover" />
-                        ) : (
-                          <img src={file.url} alt={file.alt} className="w-full h-full object-cover" />
-                        )}
-                        <button
-                          type="button"
-                          onClick={() => handleMediaRemove(file.id)}
-                          className="absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        placeholder="Add caption..."
-                        value={file.caption}
-                        onChange={e => handleMediaCaptionChange(file.id, e.target.value)}
-                        className="w-full px-2 py-1 text-xs border border-neutral-300 rounded focus:ring-1 focus:ring-brand focus:border-transparent"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
           <div className="space-y-4">
@@ -482,19 +512,38 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
           <div className="flex gap-4 pt-4">
             <button
               type="submit"
-              className="px-6 py-2 bg-brand text-white rounded-lg hover:bg-purple-700"
+              disabled={!isFormValid || saving}
+              className="px-6 py-2 bg-brand text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              {project ? 'Update Project' : 'Create Project'}
+              {saving ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>{project ? 'Update Project' : 'Create Project'}</>
+              )}
             </button>
             <button
               type="button"
               onClick={onCancel}
-              className="px-6 py-2 border border-neutral-300 rounded-lg hover:bg-neutral-100"
+              disabled={saving}
+              className="px-6 py-2 border border-neutral-300 rounded-lg hover:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
           </div>
         </form>
+
+        {/* MediaPicker Modal */}
+        {showMediaPicker && (
+          <MediaPicker
+            onSelect={handleMediaSelect}
+            onClose={() => setShowMediaPicker(false)}
+            multiple={true}
+            accept="all"
+          />
+        )}
       </div>
     </div>
   );

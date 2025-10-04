@@ -118,6 +118,84 @@ export const onRequestPost: PagesFunction = async (context) => {
   }
 };
 
+export const onRequestPatch: PagesFunction = async (context) => {
+  const { request, env } = context;
+  const url = new URL(request.url);
+  const segments = url.pathname.split('/');
+  const id = segments[segments.length - 1];
+
+  try {
+    const updates = await request.json();
+
+    if (!id || id === 'media') {
+      return new Response(
+        JSON.stringify({ error: 'Media ID required' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // In development, return success without persistence
+    if (!env.MEDIA_KV) {
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: 'Media updated (dev mode - no persistence)',
+        }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // Get current media data
+    const currentMedia = await env.MEDIA_KV.get(`media:${id}`, 'json');
+    if (!currentMedia) {
+      return new Response(
+        JSON.stringify({ error: 'Media not found' }),
+        {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // Merge updates
+    const updatedMedia = {
+      ...currentMedia,
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    };
+
+    // Save updated media
+    await env.MEDIA_KV.put(`media:${id}`, JSON.stringify(updatedMedia));
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: 'Media updated successfully',
+        media: updatedMedia,
+      }),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  } catch (error) {
+    console.error('Media update error:', error);
+    return new Response(
+      JSON.stringify({
+        error: 'Failed to update media: ' + (error as Error).message,
+      }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+};
+
 export const onRequestDelete: PagesFunction = async (context) => {
   const { request, env } = context;
   const url = new URL(request.url);

@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { mockApi } from '../utils/mockApi';
+import { useToast } from '@/context/ToastContext';
+import { debug } from '@/utils/debug';
 
 interface UploadedFile {
   id: string;
@@ -32,26 +34,49 @@ export default function FileUpload({
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const toast = useToast();
 
   const uploadFile = useCallback(
     async (file: File) => {
+      debug.upload.start('Starting file upload', {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        lastModified: new Date(file.lastModified).toISOString(),
+      });
+      debug.perf.start(`upload:${file.name}`);
+
       setUploading(true);
       setUploadProgress(0);
 
       try {
         // Simulate progress
         const progressInterval = setInterval(() => {
-          setUploadProgress(prev => Math.min(prev + 10, 90));
+          setUploadProgress(prev => {
+            const newProgress = Math.min(prev + 10, 90);
+            debug.upload.progress('Upload progress', {
+              file: file.name,
+              progress: newProgress,
+            });
+            return newProgress;
+          });
         }, 100);
 
         let result;
         if (import.meta.env.DEV) {
+          debug.info('Using mock API for upload (dev mode)', { file: file.name });
           // Use mock API in development
           result = await mockApi.uploadFile(file);
         } else {
           // Use real API in production
           const formData = new FormData();
           formData.append('file', file);
+
+          debug.api.request('POST /api/upload', {
+            fileName: file.name,
+            fileSize: file.size,
+            fileType: file.type,
+          });
 
           const response = await fetch('/api/upload', {
             method: 'POST',
@@ -60,44 +85,108 @@ export default function FileUpload({
 
           if (!response.ok) {
             const error = await response.json();
+            debug.api.error(
+              'POST /api/upload - Failed',
+              new Error(error.error || 'Upload failed'),
+              {
+                fileName: file.name,
+                status: response.status,
+                error: error.error,
+              }
+            );
             throw new Error(error.error || 'Upload failed');
           }
 
           result = await response.json();
+          debug.api.response('POST /api/upload - Success', {
+            fileName: file.name,
+            status: response.status,
+            fileId: result.file?.id,
+          });
         }
 
         clearInterval(progressInterval);
         setUploadProgress(100);
 
+        debug.upload.complete('File uploaded successfully', {
+          fileName: file.name,
+          fileId: result.file?.id,
+          url: result.file?.url,
+        });
+
         onUpload(result.file);
+        toast.success(`Uploaded ${file.name}`);
+        debug.perf.end(`upload:${file.name}`);
       } catch (error) {
+        debug.upload.error('File upload failed', error as Error, {
+          fileName: file.name,
+          fileSize: file.size,
+        });
+        debug.perf.end(`upload:${file.name}`);
         console.error('Upload error:', error);
-        alert(`Upload failed: ${(error as Error).message}`);
+        toast.error(`Upload failed: ${(error as Error).message}`);
       } finally {
         setUploading(false);
         setUploadProgress(0);
       }
     },
-    [onUpload]
+    [onUpload, toast]
   );
 
   const handleFiles = useCallback(
     async (files: File[]) => {
+      debug.file.validate('Validating files', {
+        fileCount: files.length,
+        multiple: multiple,
+        maxSize: maxSize,
+        accept: accept,
+      });
+
       if (!multiple && files.length > 1) {
-        alert('Please select only one file');
+        debug.file.error(
+          'Multiple files selected but only single file allowed',
+          new Error('Multiple files not allowed'),
+          { fileCount: files.length }
+        );
+        toast.warning('Please select only one file');
         return;
       }
 
+      debug.info('Processing files for upload', {
+        totalFiles: files.length,
+        files: files.map(f => ({
+          name: f.name,
+          size: f.size,
+          type: f.type,
+        })),
+      });
+
       for (const file of files) {
         if (file.size > maxSize) {
-          alert(`File ${file.name} is too large. Maximum size is ${formatFileSize(maxSize)}`);
+          debug.file.error(
+            'File exceeds maximum size',
+            new Error('File too large'),
+            {
+              fileName: file.name,
+              fileSize: file.size,
+              maxSize: maxSize,
+              exceededBy: file.size - maxSize,
+            }
+          );
+          toast.error(`File ${file.name} is too large. Maximum size is ${formatFileSize(maxSize)}`);
           continue;
         }
+
+        debug.file.validate('File passed validation', {
+          fileName: file.name,
+          fileSize: file.size,
+          fileType: file.type,
+        });
 
         await uploadFile(file);
       }
     },
-    [multiple, maxSize, uploadFile]
+    [multiple, maxSize, uploadFile, toast, accept]
   );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {

@@ -9,10 +9,12 @@ import About from './pages/About';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
-import MediaLibrary from './pages/MediaLibrary';
+import MediaLibraryEnhanced from './pages/MediaLibraryEnhanced';
 import NotFound from './pages/NotFound';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { MediaProvider } from './context/MediaContext';
+import { ToastProvider } from './context/ToastContext';
+import { ContentProvider } from './context/ContentContext';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
       { path: '/resume', element: <Resume /> },
       { path: '/contact', element: <Contact /> },
       { path: '/admin', element: <Admin /> },
-      { path: '/admin/media', element: <MediaLibrary /> },
+      { path: '/admin/media', element: <MediaLibraryEnhanced /> },
       { path: '*', element: <NotFound /> },
     ],
   },
@@ -34,9 +36,13 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <MediaProvider>
-        <RouterProvider router={router} />
-      </MediaProvider>
+      <ToastProvider>
+        <MediaProvider>
+          <ContentProvider>
+            <RouterProvider router={router} />
+          </ContentProvider>
+        </MediaProvider>
+      </ToastProvider>
     </ErrorBoundary>
   </React.StrictMode>
 );

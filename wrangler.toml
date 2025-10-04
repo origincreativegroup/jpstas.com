@@ -1,0 +1,32 @@
+name = "jpstas-portfolio"
+compatibility_date = "2024-01-01"
+
+# Cloudflare Account ID
+account_id = "fa917615d33ac203929027798644acef"
+
+# Cloudflare Pages configuration
+pages_build_output_dir = "dist"
+
+# KV Namespaces
+# To create these namespaces, run:
+#   wrangler kv:namespace create "CONTENT_KV"
+#   wrangler kv:namespace create "MEDIA_KV"
+# Then update the 'id' values below with the generated namespace IDs
+
+[[kv_namespaces]]
+binding = "CONTENT_KV"
+id = "REPLACE_WITH_CONTENT_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_CONTENT_KV_PREVIEW_ID"
+
+[[kv_namespaces]]
+binding = "MEDIA_KV"
+id = "REPLACE_WITH_MEDIA_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_MEDIA_KV_PREVIEW_ID"
+
+# Environment Variables
+# Set these in Cloudflare Pages dashboard under Settings > Environment Variables
+# Required variables:
+#   - CLOUDFLARE_API_TOKEN (or separate CLOUDFLARE_STREAM_TOKEN and CLOUDFLARE_IMAGES_TOKEN)
+
+[build]
+command = "npm run build"
