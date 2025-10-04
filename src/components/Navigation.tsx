@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import CMSAdmin from './CMSAdmin';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [cmsAdminOpen, setCmsAdminOpen] = useState(false);
 
   // Handle scroll for sticky header effect
   useEffect(() => {
@@ -45,7 +47,8 @@ export default function Navigation() {
     { to: '/portfolio', label: 'Work' },
     { to: '/about', label: 'About' },
     { to: '/resume', label: 'Resume' },
-    { to: '/contact', label: 'Contact' },
+    { to: '/saas-demo', label: 'SaaS Editor' },
+    { to: '/workshop/contact', label: 'Contact' },
   ];
 
   const handleLinkClick = () => {
@@ -83,6 +86,15 @@ export default function Navigation() {
                 {link.label}
               </NavLink>
             ))}
+            
+            {/* CMS Admin Button */}
+            <button
+              onClick={() => setCmsAdminOpen(true)}
+              className="px-3 py-1 text-xs bg-accent/20 text-accent rounded-lg hover:bg-accent/30 transition-colors"
+              title="Open CMS Admin"
+            >
+              CMS
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -151,6 +163,17 @@ export default function Navigation() {
                 {link.label}
               </NavLink>
             ))}
+            
+            {/* CMS Admin Button */}
+            <button
+              onClick={() => {
+                setCmsAdminOpen(true);
+                setMobileMenuOpen(false);
+              }}
+              className="px-4 py-3 rounded-lg text-lg font-medium text-white hover:bg-white/10 hover:text-accent transition-all duration-200"
+            >
+              CMS Admin
+            </button>
           </div>
 
           {/* Social Links */}
@@ -219,6 +242,11 @@ export default function Navigation() {
           }
         }
       `}</style>
+      
+      {/* CMS Admin Modal */}
+      {cmsAdminOpen && (
+        <CMSAdmin onClose={() => setCmsAdminOpen(false)} />
+      )}
     </>
   );
 }

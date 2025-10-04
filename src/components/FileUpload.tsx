@@ -1,7 +1,8 @@
 import { useState, useRef, useCallback } from 'react';
-import { mockApi } from '../utils/mockApi';
+import { api, handleApiError } from '@/services/apiClient';
 import { useToast } from '@/context/ToastContext';
 import { debug } from '@/utils/debug';
+import { validateFile } from '@/config/environment';
 
 interface UploadedFile {
   id: string;
@@ -16,23 +17,33 @@ interface UploadedFile {
 interface FileUploadProps {
   onUpload: (file: UploadedFile) => void;
   onRemove?: (fileId: string) => void;
+  onBatchUpload?: (files: UploadedFile[]) => void;
   accept?: string;
   maxSize?: number;
   multiple?: boolean;
+  maxFiles?: number;
   className?: string;
+  showProgress?: boolean;
+  autoUpload?: boolean;
 }
 
 export default function FileUpload({
   onUpload,
   onRemove: _onRemove,
+  onBatchUpload,
   accept = 'image/*,video/*',
   maxSize = 10 * 1024 * 1024, // 10MB
   multiple = false,
+  maxFiles = 10,
   className = '',
+  showProgress = true,
+  autoUpload = true,
 }: FileUploadProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadQueue, setUploadQueue] = useState<File[]>([]);
+  const [uploadErrors, setUploadErrors] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
 
@@ -50,6 +61,12 @@ export default function FileUpload({
       setUploadProgress(0);
 
       try {
+        // Validate file before upload
+        const validation = validateFile(file);
+        if (!validation.valid) {
+          throw new Error(validation.error);
+        }
+
         // Simulate progress
         const progressInterval = setInterval(() => {
           setUploadProgress(prev => {
@@ -62,69 +79,44 @@ export default function FileUpload({
           });
         }, 100);
 
-        let result;
-        if (import.meta.env.DEV) {
-          debug.info('Using mock API for upload (dev mode)', { file: file.name });
-          // Use mock API in development
-          result = await mockApi.uploadFile(file);
-        } else {
-          // Use real API in production
-          const formData = new FormData();
-          formData.append('file', file);
-
-          debug.api.request('POST /api/upload', {
-            fileName: file.name,
-            fileSize: file.size,
-            fileType: file.type,
-          });
-
-          const response = await fetch('/api/upload', {
-            method: 'POST',
-            body: formData,
-          });
-
-          if (!response.ok) {
-            const error = await response.json();
-            debug.api.error(
-              'POST /api/upload - Failed',
-              new Error(error.error || 'Upload failed'),
-              {
-                fileName: file.name,
-                status: response.status,
-                error: error.error,
-              }
-            );
-            throw new Error(error.error || 'Upload failed');
-          }
-
-          result = await response.json();
-          debug.api.response('POST /api/upload - Success', {
-            fileName: file.name,
-            status: response.status,
-            fileId: result.file?.id,
-          });
-        }
+        // Use unified API client
+        const mediaFile = await api.uploadFile(file);
 
         clearInterval(progressInterval);
         setUploadProgress(100);
 
+        // Convert MediaFile to UploadedFile
+        const uploadedFile: UploadedFile = {
+          id: mediaFile.id,
+          name: mediaFile.name,
+          filename: mediaFile.filename,
+          url: mediaFile.url,
+          size: mediaFile.size,
+          type: mediaFile.type,
+          uploadedAt: mediaFile.uploadedAt || mediaFile.createdAt,
+        };
+
         debug.upload.complete('File uploaded successfully', {
           fileName: file.name,
-          fileId: result.file?.id,
-          url: result.file?.url,
+          fileId: uploadedFile.id,
+          url: uploadedFile.url,
         });
 
-        onUpload(result.file);
+        onUpload(uploadedFile);
         toast.success(`Uploaded ${file.name}`);
         debug.perf.end(`upload:${file.name}`);
+        
+        return uploadedFile;
       } catch (error) {
         debug.upload.error('File upload failed', error as Error, {
           fileName: file.name,
           fileSize: file.size,
         });
         debug.perf.end(`upload:${file.name}`);
-        console.error('Upload error:', error);
-        toast.error(`Upload failed: ${(error as Error).message}`);
+        
+        const errorMessage = handleApiError(error);
+        toast.error(`Upload failed: ${errorMessage}`);
+        throw error;
       } finally {
         setUploading(false);
         setUploadProgress(0);
@@ -140,8 +132,10 @@ export default function FileUpload({
         multiple: multiple,
         maxSize: maxSize,
         accept: accept,
+        maxFiles: maxFiles,
       });
 
+      // Validate file count
       if (!multiple && files.length > 1) {
         debug.file.error(
           'Multiple files selected but only single file allowed',
@@ -152,41 +146,75 @@ export default function FileUpload({
         return;
       }
 
+      if (files.length > maxFiles) {
+        debug.file.error(
+          'Too many files selected',
+          new Error('File limit exceeded'),
+          { fileCount: files.length, maxFiles }
+        );
+        toast.error(`Maximum ${maxFiles} files allowed`);
+        return;
+      }
+
+      // Validate files using environment config
+      const validFiles: File[] = [];
+      const errors: string[] = [];
+
+      for (const file of files) {
+        const validation = validateFile(file);
+        if (!validation.valid) {
+          const error = `File ${file.name}: ${validation.error}`;
+          errors.push(error);
+          debug.file.error(
+            'File validation failed',
+            new Error(validation.error!),
+            {
+              fileName: file.name,
+              fileSize: file.size,
+              fileType: file.type,
+            }
+          );
+          continue;
+        }
+
+        validFiles.push(file);
+        debug.file.validate('File passed validation', {
+          fileName: file.name,
+          fileSize: file.size,
+          fileType: file.type,
+        });
+      }
+
+      if (errors.length > 0) {
+        setUploadErrors(errors);
+        errors.forEach(error => toast.error(error));
+      }
+
+      if (validFiles.length === 0) {
+        return;
+      }
+
       debug.info('Processing files for upload', {
-        totalFiles: files.length,
-        files: files.map(f => ({
+        totalFiles: validFiles.length,
+        files: validFiles.map(f => ({
           name: f.name,
           size: f.size,
           type: f.type,
         })),
       });
 
-      for (const file of files) {
-        if (file.size > maxSize) {
-          debug.file.error(
-            'File exceeds maximum size',
-            new Error('File too large'),
-            {
-              fileName: file.name,
-              fileSize: file.size,
-              maxSize: maxSize,
-              exceededBy: file.size - maxSize,
-            }
-          );
-          toast.error(`File ${file.name} is too large. Maximum size is ${formatFileSize(maxSize)}`);
-          continue;
+      if (autoUpload) {
+        // Upload files immediately
+        for (const file of validFiles) {
+          await uploadFile(file);
         }
-
-        debug.file.validate('File passed validation', {
-          fileName: file.name,
-          fileSize: file.size,
-          fileType: file.type,
-        });
-
-        await uploadFile(file);
+      } else {
+        // Add to queue for manual upload
+        setUploadQueue(prev => [...prev, ...validFiles]);
+        toast.info(`${validFiles.length} file(s) added to upload queue`);
       }
     },
-    [multiple, maxSize, uploadFile, toast, accept]
+    [multiple, maxSize, maxFiles, uploadFile, toast, accept, autoUpload]
   );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -230,6 +258,58 @@ export default function FileUpload({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
+  const handleBatchUpload = useCallback(async () => {
+    if (uploadQueue.length === 0) return;
+
+    setUploading(true);
+    setUploadProgress(0);
+    setUploadErrors([]);
+
+    const uploadedFiles: UploadedFile[] = [];
+    const errors: string[] = [];
+
+    for (let i = 0; i < uploadQueue.length; i++) {
+      const file = uploadQueue[i];
+      if (!file) continue;
+      
+      try {
+        const result = await uploadFile(file);
+        uploadedFiles.push(result);
+        setUploadProgress(((i + 1) / uploadQueue.length) * 100);
+      } catch (error) {
+        const errorMsg = `Failed to upload ${file.name}: ${(error as Error).message}`;
+        errors.push(errorMsg);
+        console.error('Upload error:', error);
+      }
+    }
+
+    if (uploadedFiles.length > 0) {
+      if (onBatchUpload) {
+        onBatchUpload(uploadedFiles);
+      } else {
+        uploadedFiles.forEach(file => onUpload(file));
+      }
+      toast.success(`Successfully uploaded ${uploadedFiles.length} file(s)`);
+    }
+
+    if (errors.length > 0) {
+      setUploadErrors(errors);
+      errors.forEach(error => toast.error(error));
+    }
+
+    setUploadQueue([]);
+    setUploading(false);
+    setUploadProgress(0);
+  }, [uploadQueue, uploadFile, onUpload, onBatchUpload, toast]);
+
+  const removeFromQueue = useCallback((index: number) => {
+    setUploadQueue(prev => prev.filter((_, i) => i !== index));
+  }, []);
+
+  const clearQueue = useCallback(() => {
+    setUploadQueue([]);
+    setUploadErrors([]);
+  }, []);
 
   return (
     <div className={`w-full ${className}`}>
@@ -257,12 +337,14 @@ export default function FileUpload({
             </div>
             <div>
               <p className="text-sm font-medium text-neutral-700">Uploading...</p>
-              <div className="w-full bg-neutral-200 rounded-full h-2 mt-2">
-                <div
-                  className="bg-brand h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${uploadProgress}%` }}
-                ></div>
-              </div>
+              {showProgress && (
+                <div className="w-full bg-neutral-200 rounded-full h-2 mt-2">
+                  <div
+                    className="bg-brand h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${uploadProgress}%` }}
+                  ></div>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -285,7 +367,7 @@ export default function FileUpload({
                 Drag and drop files here, or click to select
               </p>
               <p className="text-xs text-neutral-400 mt-2">
-                Max size: {formatFileSize(maxSize)} • Images and videos supported
+                Max size: {formatFileSize(maxSize)} • {multiple ? `Max ${maxFiles} files` : 'Single file'} • Images and videos supported
               </p>
             </div>
             <button
@@ -297,6 +379,76 @@ export default function FileUpload({
           </div>
         )}
       </div>
+
+      {/* Upload Queue */}
+      {!autoUpload && uploadQueue.length > 0 && (
+        <div className="mt-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-neutral-700">
+              Upload Queue ({uploadQueue.length} files)
+            </h3>
+            <div className="flex gap-2">
+              <button
+                onClick={handleBatchUpload}
+                disabled={uploading}
+                className="px-3 py-1 text-sm bg-brand text-white rounded hover:bg-purple-700 disabled:opacity-50"
+              >
+                Upload All
+              </button>
+              <button
+                onClick={clearQueue}
+                className="px-3 py-1 text-sm border border-neutral-300 rounded hover:bg-neutral-100"
+              >
+                Clear Queue
+              </button>
+            </div>
+          </div>
+          
+          <div className="space-y-2 max-h-40 overflow-y-auto">
+            {uploadQueue.map((file, index) => (
+              <div key={index} className="flex items-center justify-between p-2 bg-neutral-50 rounded border">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-neutral-200 rounded flex items-center justify-center">
+                    {file.type.startsWith('image/') ? (
+                      <svg className="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    )}
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-neutral-700 truncate max-w-xs">{file.name}</p>
+                    <p className="text-xs text-neutral-500">{formatFileSize(file.size)}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => removeFromQueue(index)}
+                  className="p-1 text-neutral-400 hover:text-red-600"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Upload Errors */}
+      {uploadErrors.length > 0 && (
+        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded">
+          <h4 className="text-sm font-medium text-red-800 mb-2">Upload Errors:</h4>
+          <ul className="text-xs text-red-700 space-y-1">
+            {uploadErrors.map((error, index) => (
+              <li key={index}>• {error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

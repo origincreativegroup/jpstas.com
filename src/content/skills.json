@@ -1,0 +1,73 @@
+{
+  "skillGroups": [
+    {
+      "category": "Design",
+      "skills": [
+        {
+          "name": "UI/UX Design",
+          "level": 95,
+          "description": "Creating intuitive and beautiful user interfaces",
+          "proof": "Led design for Caribbean Pools e-commerce platform, increasing conversion by 40%"
+        },
+        {
+          "name": "Visual Identity",
+          "level": 90,
+          "description": "Brand development and visual systems",
+          "proof": "Designed complete brand identity for 5+ startups"
+        },
+        {
+          "name": "Prototyping",
+          "level": 88,
+          "description": "Interactive prototypes and user testing",
+          "proof": "Built 50+ prototypes using Figma, Framer, and custom tools"
+        }
+      ]
+    },
+    {
+      "category": "Development",
+      "skills": [
+        {
+          "name": "React/TypeScript",
+          "level": 92,
+          "description": "Modern frontend development",
+          "proof": "Built this portfolio and 10+ production applications"
+        },
+        {
+          "name": "Node.js/APIs",
+          "level": 85,
+          "description": "Backend services and API development",
+          "proof": "Architected microservices for SaaS platform handling 100k+ requests/day"
+        },
+        {
+          "name": "Cloud Infrastructure",
+          "level": 80,
+          "description": "AWS, Cloudflare, and deployment automation",
+          "proof": "Reduced deployment time by 70% through CI/CD optimization"
+        }
+      ]
+    },
+    {
+      "category": "Process",
+      "skills": [
+        {
+          "name": "Agile Leadership",
+          "level": 90,
+          "description": "Leading cross-functional teams",
+          "proof": "Managed 8-person team delivering 15+ projects on time"
+        },
+        {
+          "name": "System Design",
+          "level": 85,
+          "description": "Scalable architecture and workflows",
+          "proof": "Designed print studio workflow reducing costs by 40%"
+        },
+        {
+          "name": "Innovation",
+          "level": 88,
+          "description": "Creative problem solving and ideation",
+          "proof": "Patented 3D printing process improvement, 60% faster production"
+        }
+      ]
+    }
+  ]
+}

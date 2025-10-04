@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
+import Navigation from '../components/Navigation';
 
 export default function NotFound() {
   return (
-    <div className="min-h-[calc(100vh-200px)] flex items-center justify-center px-4">
+    <>
+      <Navigation />
+      <div className="min-h-[calc(100vh-200px)] flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
         <div className="mb-8">
           <h1 className="text-9xl font-bold text-brand mb-4">404</h1>
@@ -36,7 +39,7 @@ export default function NotFound() {
               About
             </Link>
             <Link
-              to="/contact"
+              to="/workshop/contact"
               className="px-4 py-2 text-sm border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors"
             >
               Contact
@@ -45,5 +48,6 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+    </>
   );
 }

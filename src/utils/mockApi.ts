@@ -1,7 +1,8 @@
 // Mock API for development - simulates the Cloudflare Pages functions
 // This will be replaced by the actual API when deployed
+import { Project } from '@/types/project';
 
-export const mockProjects = [
+export const mockProjects: Project[] = [
   {
     id: '1',
     title: 'In‑House Print Studio Build',
@@ -48,6 +49,7 @@ export const mockProjects = [
     },
     createdAt: '2024-01-15',
     updatedAt: '2024-01-15',
+    status: 'published',
   },
   {
     id: '2',
@@ -90,6 +92,7 @@ export const mockProjects = [
     },
     createdAt: '2024-02-10',
     updatedAt: '2024-02-10',
+    status: 'published',
   },
   {
     id: '3',
@@ -126,11 +129,12 @@ export const mockProjects = [
     },
     createdAt: '2024-03-05',
     updatedAt: '2024-03-05',
+    status: 'published',
   },
 ];
 
 export const mockApi = {
-  async getProjects() {
+  async getProjects(): Promise<Project[]> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 100));
     return mockProjects;

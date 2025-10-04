@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useMedia, MediaFile, MediaFilter } from '@/context/MediaContext';
+import { useMedia } from '@/context/MediaContext';
+import { MediaFile, MediaFilter } from '@/types/media';
 import { useMediaUpload } from '@/hooks/useMediaUpload';
 import { useToast } from '@/context/ToastContext';
 
@@ -94,7 +95,7 @@ export default function MediaPicker({
     if (search) {
       const searchLower = search.toLowerCase();
       const matchesName = file.name.toLowerCase().includes(searchLower);
-      const matchesTags = file.metadata?.tags?.some(tag =>
+      const matchesTags = file.metadata?.tags?.some((tag: string) =>
         tag.toLowerCase().includes(searchLower)
       );
       if (!matchesName && !matchesTags) return false;

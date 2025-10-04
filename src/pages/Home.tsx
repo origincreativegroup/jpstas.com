@@ -1,54 +1,27 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { mockApi } from '../utils/mockApi';
+import { useCMS } from '@/context/CMSContext';
+import { api } from '@/services/apiClient';
+import { Project } from '@/types/project';
+import Navigation from '../components/Navigation';
 
-interface Project {
-  id: string;
-  title: string;
-  role: string;
-  summary: string;
-  tags: string[];
-  type: string;
-  featured: boolean;
-  images: Array<{
-    id: string;
-    url: string;
-    alt: string;
-    caption: string;
-    type?: 'image' | 'video';
-  }>;
-  content: {
-    challenge: string;
-    solution: string;
-    results: string;
-    process: string[];
-    technologies: string[];
-  };
-  createdAt: string;
-  updatedAt: string;
-}
+// Project interface is now imported from types/project
 
 export default function Home() {
+  const { pageContent, fetchPageContent } = useCMS();
   const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    fetchPageContent('home');
     fetchFeaturedProjects();
-  }, []);
+  }, [fetchPageContent]);
 
   const fetchFeaturedProjects = async () => {
     try {
-      // Use mock API in development, real API in production
-      if (import.meta.env.DEV) {
-        const allProjects = await mockApi.getProjects();
-        const featured = allProjects.filter(project => project.featured).slice(0, 3);
-        setFeaturedProjects(featured);
-      } else {
-        const response = await fetch('/api/content?type=projects');
-        const allProjects = await response.json();
-        const featured = allProjects.filter((project: Project) => project.featured).slice(0, 3);
-        setFeaturedProjects(featured);
-      }
+      const allProjects = await api.getProjects();
+      const featured = allProjects.filter(project => project.featured).slice(0, 3);
+      setFeaturedProjects(featured);
     } catch (error) {
       console.error('Failed to fetch featured projects:', error);
     } finally {
@@ -56,34 +29,65 @@ export default function Home() {
     }
   };
 
+  const hero = pageContent?.hero;
+
   return (
-    <section className="relative min-h-screen bg-brand text-white">
-      <div className="diagonal-stripes absolute inset-0 opacity-5"></div>
-      <div className="relative max-w-6xl mx-auto px-4 py-20">
-        <div className="inline-block rounded-2xl px-3 py-1 text-xs font-semibold bg-accent text-brand mb-5">
-          Multidisciplinary • Creative Tech • SaaS
+    <>
+      <Navigation />
+      <section className="relative min-h-screen bg-brand text-white overflow-hidden">
+      {/* Hero Background Image */}
+      {hero?.backgroundImage && (
+        <div className="absolute inset-0">
+          <img
+            src={hero.backgroundImage.url}
+            alt={hero.backgroundImage.alt}
+            className="w-full h-full object-cover"
+          />
+          {hero.overlay?.enabled && (
+            <div 
+              className="absolute inset-0"
+              style={{
+                backgroundColor: hero.overlay.color,
+                opacity: hero.overlay.opacity,
+              }}
+            />
+          )}
         </div>
+      )}
+      
+      {/* Diagonal Stripes Overlay */}
+      <div className="diagonal-stripes absolute inset-0 opacity-5"></div>
+      
+      <div className="relative max-w-6xl mx-auto px-4 py-20">
+        {hero?.subtitle && (
+          <div className="inline-block rounded-2xl px-3 py-1 text-xs font-semibold bg-accent text-brand mb-5">
+            {hero.subtitle}
+          </div>
+        )}
+        
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-          Creative Technologist, Designer,
-          <br className="hidden md:block" /> & Process Innovator
+          {hero?.title || 'Creative Technologist, Designer, & Process Innovator'}
         </h1>
+        
         <p className="mt-6 text-lg max-w-2xl text-brand-light">
-          I build bold, vector-clean experiences that bridge design, code, and operations. From
-          in-house print studios to SaaS concepts, I ship systems that scale.
+          {hero?.description || 'I build bold, vector-clean experiences that bridge design, code, and operations. From in-house print studios to SaaS concepts, I ship systems that scale.'}
         </p>
+        
         <div className="mt-8 flex gap-4">
           <Link
-            to="/portfolio"
+            to={hero?.ctaPrimary?.link || '/portfolio'}
             className="px-5 py-3 rounded-xl bg-accent text-brand font-semibold hover:bg-accent-dark transition-colors"
           >
-            View Work
+            {hero?.ctaPrimary?.text || 'View Work'}
           </Link>
-          <Link
-            to="/resume"
-            className="px-5 py-3 rounded-xl bg-white text-brand font-semibold hover:bg-brand-light transition-colors"
-          >
-            Resume
-          </Link>
+          {hero?.ctaSecondary && (
+            <Link
+              to={hero.ctaSecondary.link}
+              className="px-5 py-3 rounded-xl bg-white text-brand font-semibold hover:bg-brand-light transition-colors"
+            >
+              {hero.ctaSecondary.text}
+            </Link>
+          )}
         </div>
 
         <div className="mt-16">
@@ -135,5 +139,6 @@ export default function Home() {
         </div>
       </div>
     </section>
+    </>
   );
 }

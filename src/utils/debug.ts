@@ -153,6 +153,7 @@ export const debug = {
     update: (message: string, data?: any) => log('media', 'info', message, data),
     select: (message: string, data?: any) => log('media', 'debug', message, data),
     error: (message: string, error: Error, data?: any) => log('media', 'error', message, data, error),
+    warn: (message: string, data?: any) => log('media', 'warn', message, data),
   },
 
   // Content operations
@@ -164,6 +165,25 @@ export const debug = {
       log('content', 'error', message, data, error),
   },
 
+  // CMS operations
+  cms: {
+    fetch: (message: string, data?: any) => log('content', 'info', message, data),
+    update: (message: string, data?: any) => log('content', 'info', message, data),
+    publish: (message: string, data?: any) => log('content', 'info', message, data),
+    upload: (message: string, data?: any) => log('upload', 'info', message, data),
+    error: (message: string, error: Error, data?: any) => log('content', 'error', message, data, error),
+  },
+
+  // Analytics operations
+  analytics: {
+    track: (message: string, data?: any) => log('general', 'info', message, data),
+    view: (message: string, data?: any) => log('general', 'info', message, data),
+    fetch: (message: string, data?: any) => log('general', 'info', message, data),
+    complete: (message: string, data?: any) => log('general', 'info', message, data),
+    export: (message: string, data?: any) => log('general', 'info', message, data),
+    error: (message: string, error: Error, data?: any) => log('general', 'error', message, data, error),
+  },
+
   // Upload operations
   upload: {
     start: (message: string, data?: any) => log('upload', 'info', message, data),
@@ -171,6 +191,17 @@ export const debug = {
     complete: (message: string, data?: any) => log('upload', 'info', message, data),
     error: (message: string, error: Error, data?: any) =>
       log('upload', 'error', message, data, error),
+  },
+
+  // Draft operations
+  draft: {
+    create: (message: string, data?: any) => log('content', 'info', message, data),
+    fetch: (message: string, data?: any) => log('content', 'info', message, data),
+    update: (message: string, data?: any) => log('content', 'info', message, data),
+    delete: (message: string, data?: any) => log('content', 'info', message, data),
+    publish: (message: string, data?: any) => log('content', 'info', message, data),
+    complete: (message: string, data?: any) => log('content', 'info', message, data),
+    error: (message: string, error: Error, data?: any) => log('content', 'error', message, data, error),
   },
 
   // API requests

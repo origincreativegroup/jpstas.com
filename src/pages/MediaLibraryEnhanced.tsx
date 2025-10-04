@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useMedia, MediaFilter } from '@/context/MediaContext';
+import { useMedia } from '@/context/MediaContext';
+import { MediaFilter } from '@/types/media';
 import { useToast } from '@/context/ToastContext';
 import { useMediaUpload } from '@/hooks/useMediaUpload';
 import BulkOperations from '@/components/BulkOperations';
 import { LoadingPage } from '@/components/LoadingSpinner';
+import Navigation from '@/components/Navigation';
 import { debug } from '@/utils/debug';
 
 export default function MediaLibraryEnhanced() {
@@ -113,7 +115,7 @@ export default function MediaLibraryEnhanced() {
         const matchesName = file.name.toLowerCase().includes(searchLower);
         const matchesAlt = file.metadata?.alt?.toLowerCase().includes(searchLower);
         const matchesCaption = file.metadata?.caption?.toLowerCase().includes(searchLower);
-        const matchesTags = file.metadata?.tags?.some(tag =>
+        const matchesTags = file.metadata?.tags?.some((tag: string) =>
           tag.toLowerCase().includes(searchLower)
         );
         if (!matchesName && !matchesAlt && !matchesCaption && !matchesTags) return false;
@@ -122,13 +124,13 @@ export default function MediaLibraryEnhanced() {
       // Tag filter
       if (filter.tags && filter.tags.length > 0) {
         const fileTags = file.metadata?.tags || [];
-        if (!filter.tags.every(tag => fileTags.includes(tag))) return false;
+        if (!filter.tags.every((tag: string) => fileTags.includes(tag))) return false;
       }
 
       // Collection filter
       if (filter.collections && filter.collections.length > 0) {
         const fileCollections = file.metadata?.collections || [];
-        if (!filter.collections.every(col => fileCollections.includes(col))) return false;
+        if (!filter.collections.every((col: string) => fileCollections.includes(col))) return false;
       }
 
       // Favorite filter
@@ -141,7 +143,7 @@ export default function MediaLibraryEnhanced() {
 
       switch (sortBy) {
         case 'date':
-          comparison = new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime();
+          comparison = new Date(a.uploadedAt || a.createdAt).getTime() - new Date(b.uploadedAt || b.createdAt).getTime();
           break;
         case 'name':
           comparison = a.name.localeCompare(b.name);
@@ -309,7 +311,9 @@ export default function MediaLibraryEnhanced() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <>
+      <Navigation />
+      <div className="min-h-screen bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -557,7 +561,7 @@ export default function MediaLibraryEnhanced() {
                           setFilter(prev => ({
                             ...prev,
                             tags: prev.tags?.includes(tag)
-                              ? prev.tags.filter(t => t !== tag)
+                              ? prev.tags.filter((t: string) => t !== tag)
                               : [...(prev.tags || []), tag],
                           }))
                         }
@@ -725,7 +729,7 @@ export default function MediaLibraryEnhanced() {
                   <button
                     onClick={e => {
                       e.stopPropagation();
-                      copyUrl(file.url);
+                      if (file.url) copyUrl(file.url);
                     }}
                     className="opacity-0 group-hover:opacity-100 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-neutral-100 transition-all"
                     title="Copy URL"
@@ -778,11 +782,11 @@ export default function MediaLibraryEnhanced() {
                     {file.name}
                   </p>
                   <p className="text-xs text-neutral-500 mt-1">
-                    {formatFileSize(file.size)} • {formatDate(file.uploadedAt)}
+                    {formatFileSize(file.size)} • {formatDate(file.uploadedAt || file.createdAt)}
                   </p>
                   {file.metadata?.tags && file.metadata.tags.length > 0 && (
                     <div className="flex gap-1 mt-2 flex-wrap">
-                      {file.metadata.tags.slice(0, 3).map(tag => (
+                      {file.metadata.tags.slice(0, 3).map((tag: string) => (
                         <span key={tag} className="px-1.5 py-0.5 text-xs bg-brand/10 text-brand rounded">
                           {tag}
                         </span>
@@ -878,11 +882,11 @@ export default function MediaLibraryEnhanced() {
                       {formatFileSize(file.size)}
                     </td>
                     <td className="px-4 py-3 text-sm text-neutral-600">
-                      {formatDate(file.uploadedAt)}
+                      {formatDate(file.uploadedAt || file.createdAt)}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex gap-1 flex-wrap max-w-xs">
-                        {file.metadata?.tags?.slice(0, 2).map(tag => (
+                        {file.metadata?.tags?.slice(0, 2).map((tag: string) => (
                           <span key={tag} className="px-1.5 py-0.5 text-xs bg-brand/10 text-brand rounded">
                             {tag}
                           </span>
@@ -915,7 +919,7 @@ export default function MediaLibraryEnhanced() {
                           </svg>
                         </button>
                         <button
-                          onClick={() => copyUrl(file.url)}
+                          onClick={() => file.url && copyUrl(file.url)}
                           className="p-1 text-neutral-600 hover:text-brand"
                           title="Copy URL"
                         >
@@ -998,5 +1002,6 @@ export default function MediaLibraryEnhanced() {
         )}
       </div>
     </div>
+    </>
   );
 }

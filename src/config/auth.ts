@@ -1,7 +1,7 @@
 // Admin authentication configuration
 export const ADMIN_CREDENTIALS = {
   username: import.meta.env.VITE_ADMIN_USERNAME || 'admin',
-  password: import.meta.env.VITE_ADMIN_PASSWORD || '',
+  password: import.meta.env.VITE_ADMIN_PASSWORD || 'admin123',
 };
 
 export const AUTH_TOKEN_KEY = 'admin_auth';

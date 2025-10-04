@@ -1,117 +1,162 @@
-import { useState } from 'react';
-import { ADMIN_CREDENTIALS, setAuthenticated } from '../config/auth';
+import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 interface LoginFormProps {
-  onLogin: (success: boolean) => void;
+  onSuccess?: () => void;
+  onCancel?: () => void;
 }
 
-export default function LoginForm({ onLogin }: LoginFormProps) {
-  const [credentials, setCredentials] = useState({
-    username: '',
+export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onCancel }) => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [formData, setFormData] = useState({
+    email: '',
     password: '',
+    name: '',
   });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const { login, register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
+    setIsLoading(true);
+    setError(null);
 
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      let result;
+      if (isLogin) {
+        result = await login(formData.email, formData.password);
+      } else {
+        if (!formData.name.trim()) {
+          setError('Name is required');
+          return;
+        }
+        result = await register(formData.email, formData.password, formData.name);
+      }
 
-    if (
-      credentials.username === ADMIN_CREDENTIALS.username &&
-      credentials.password === ADMIN_CREDENTIALS.password
-    ) {
-      // Store auth token in localStorage
-      setAuthenticated(true);
-      onLogin(true);
-    } else {
-      setError('Invalid username or password');
+      if (result.success) {
+        onSuccess?.();
+      } else {
+        setError(result.error || 'Authentication failed');
+      }
+    } catch (error) {
+      setError('Network error');
+    } finally {
+      setIsLoading(false);
     }
-
-    setLoading(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCredentials({
-      ...credentials,
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   return (
-    <div className="min-h-screen bg-brand flex items-center justify-center">
-      <div className="diagonal-stripes absolute inset-0 opacity-5"></div>
-      <div className="relative max-w-md w-full mx-4">
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-brand" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clipRule="evenodd"
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            {isLogin ? 'Sign in to your account' : 'Create your account'}
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            {isLogin ? "Don't have an account? " : "Already have an account? "}
+            <button
+              type="button"
+              onClick={() => setIsLogin(!isLogin)}
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              {isLogin ? 'Sign up' : 'Sign in'}
+            </button>
+          </p>
+        </div>
+        
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            {!isLogin && (
+              <div>
+                <label htmlFor="name" className="sr-only">
+                  Full name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required={!isLogin}
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Full name"
                 />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-bold text-white mb-2">Admin Access</h1>
-            <p className="text-brand-light">Enter your credentials to access the admin panel</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-accent mb-2">Username</label>
-              <input
-                type="text"
-                name="username"
-                value={credentials.username}
-                onChange={handleChange}
-                required
-                className="w-full rounded-xl border border-accent/30 bg-white/10 text-white placeholder-brand-light px-4 py-3 focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-colors"
-                placeholder="Enter username"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-accent mb-2">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={credentials.password}
-                onChange={handleChange}
-                required
-                className="w-full rounded-xl border border-accent/30 bg-white/10 text-white placeholder-brand-light px-4 py-3 focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none transition-colors"
-                placeholder="Enter password"
-              />
-            </div>
-
-            {error && (
-              <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-xl">
-                <p className="text-red-400 font-medium text-sm">{error}</p>
               </div>
             )}
+            
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={formData.email}
+                onChange={handleInputChange}
+                className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 ${
+                  !isLogin ? 'rounded-none' : 'rounded-t-md'
+                } focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                placeholder="Email address"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete={isLogin ? 'current-password' : 'new-password'}
+                required
+                value={formData.password}
+                onChange={handleInputChange}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Password"
+              />
+            </div>
+          </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full px-6 py-3 rounded-xl bg-accent text-brand font-bold hover:bg-accent-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {loading ? 'Signing In...' : 'Sign In'}
-            </button>
-          </form>
-
-          {import.meta.env.DEV && (
-            <div className="mt-6 text-center">
-              <p className="text-xs text-brand-light">
-                Dev mode - Username: {ADMIN_CREDENTIALS.username}
-              </p>
+          {error && (
+            <div className="rounded-md bg-red-50 p-4">
+              <div className="text-sm text-red-700">{error}</div>
             </div>
           )}
-        </div>
+
+          <div className="flex space-x-4">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? 'Processing...' : (isLogin ? 'Sign in' : 'Sign up')}
+            </button>
+            
+            {onCancel && (
+              <button
+                type="button"
+                onClick={onCancel}
+                className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+        </form>
       </div>
     </div>
   );
-}
+};

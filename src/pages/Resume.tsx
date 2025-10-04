@@ -1,6 +1,10 @@
+import Navigation from '../components/Navigation';
+
 export default function Resume() {
   return (
-    <section className="relative min-h-screen bg-brand text-white">
+    <>
+      <Navigation />
+      <section className="relative min-h-screen bg-brand text-white">
       <div className="diagonal-stripes absolute inset-0 opacity-5"></div>
       <div className="relative max-w-6xl mx-auto px-4 py-20">
         <div className="grid lg:grid-cols-3 gap-12 items-start">
@@ -180,5 +184,6 @@ export default function Resume() {
         </div>
       </div>
     </section>
+    </>
   );
 }

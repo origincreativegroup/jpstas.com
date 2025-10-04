@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MediaFile } from '@/context/MediaContext';
+import { MediaFile } from '@/types/media';
 
 interface BulkOperationsProps {
   selectedIds: string[];
@@ -224,7 +224,7 @@ export default function BulkOperations({
                     <div key={file.id} className="text-sm">
                       <span className="font-medium truncate block">{file.name}</span>
                       <div className="flex gap-1 flex-wrap mt-1">
-                        {(file.metadata?.tags || []).map(tag => (
+                        {(file.metadata?.tags || []).map((tag: string) => (
                           <span
                             key={tag}
                             className="px-2 py-0.5 text-xs bg-brand/10 text-brand rounded-full"
@@ -280,7 +280,7 @@ export default function BulkOperations({
                     <div key={file.id} className="text-sm">
                       <span className="font-medium truncate block">{file.name}</span>
                       <div className="flex gap-1 flex-wrap mt-1">
-                        {(file.metadata?.collections || []).map(col => (
+                        {(file.metadata?.collections || []).map((col: string) => (
                           <span
                             key={col}
                             className="px-2 py-0.5 text-xs bg-purple-100 text-purple-700 rounded-full"
