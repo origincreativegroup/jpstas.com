@@ -40,12 +40,17 @@ export default function CaseStudyTemplate({ project, variant = 'card' }: CaseStu
       <article className="group cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
         <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-neutral-50 transition-colors">
           <div className="flex-1">
-            <h3 className="font-semibold group-hover:text-brand transition-colors">{project.title}</h3>
+            <h3 className="font-semibold group-hover:text-brand transition-colors">
+              {project.title}
+            </h3>
             <p className="text-sm text-neutral-600 mt-1">{project.role}</p>
             <p className="text-sm text-neutral-700 mt-2">{project.summary}</p>
             <div className="flex gap-2 flex-wrap mt-3">
-              {project.tags.map((tag) => (
-                <span key={tag} className="px-2 py-1 text-xs rounded-full bg-neutral-100 border border-neutral-200">
+              {project.tags.map(tag => (
+                <span
+                  key={tag}
+                  className="px-2 py-1 text-xs rounded-full bg-neutral-100 border border-neutral-200"
+                >
                   {tag}
                 </span>
               ))}
@@ -66,21 +71,24 @@ export default function CaseStudyTemplate({ project, variant = 'card' }: CaseStu
       <article className="card group cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
-            <h3 className="text-xl font-bold group-hover:text-brand transition-colors">{project.title}</h3>
+            <h3 className="text-xl font-bold group-hover:text-brand transition-colors">
+              {project.title}
+            </h3>
             <div className="text-sm text-neutral-600 mt-1">{project.role}</div>
           </div>
           {project.featured && (
-            <span className="px-2 py-1 text-xs bg-accent text-white rounded-full">
-              Featured
-            </span>
+            <span className="px-2 py-1 text-xs bg-accent text-white rounded-full">Featured</span>
           )}
         </div>
-        
+
         <p className="text-neutral-700 mb-4">{project.summary}</p>
-        
+
         <div className="flex gap-2 flex-wrap mb-4">
-          {project.tags.map((tag) => (
-            <span key={tag} className="px-2 py-1 text-xs rounded-full bg-neutral-100 border border-neutral-200">
+          {project.tags.map(tag => (
+            <span
+              key={tag}
+              className="px-2 py-1 text-xs rounded-full bg-neutral-100 border border-neutral-200"
+            >
               {tag}
             </span>
           ))}
@@ -126,12 +134,15 @@ export default function CaseStudyTemplate({ project, variant = 'card' }: CaseStu
             </span>
           )}
         </div>
-        
+
         <p className="text-lg text-neutral-700 mb-6">{project.summary}</p>
-        
+
         <div className="flex gap-2 flex-wrap">
-          {project.tags.map((tag) => (
-            <span key={tag} className="px-3 py-1 text-sm rounded-full bg-neutral-100 border border-neutral-200">
+          {project.tags.map(tag => (
+            <span
+              key={tag}
+              className="px-3 py-1 text-sm rounded-full bg-neutral-100 border border-neutral-200"
+            >
               {tag}
             </span>
           ))}
@@ -191,8 +202,11 @@ export default function CaseStudyTemplate({ project, variant = 'card' }: CaseStu
             <div className="card">
               <h3 className="text-lg font-bold mb-3">Technologies</h3>
               <div className="flex flex-wrap gap-2">
-                {project.content.technologies.map((tech) => (
-                  <span key={tech} className="px-2 py-1 text-xs rounded bg-neutral-100 border border-neutral-200">
+                {project.content.technologies.map(tech => (
+                  <span
+                    key={tech}
+                    className="px-2 py-1 text-xs rounded bg-neutral-100 border border-neutral-200"
+                  >
                     {tech}
                   </span>
                 ))}

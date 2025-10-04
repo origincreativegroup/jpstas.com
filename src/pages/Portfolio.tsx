@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import CaseStudyTemplate from '../components/CaseStudyTemplate';
@@ -102,7 +101,12 @@ export default function Portfolio() {
           className="flex items-center gap-2 text-neutral-600 hover:text-brand transition-colors mb-8"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
           Back to Portfolio
         </button>
@@ -124,8 +128,8 @@ export default function Portfolio() {
           <button
             onClick={() => setFilter('all')}
             className={`px-3 py-1 text-sm rounded-full border transition-colors ${
-              filter === 'all' 
-                ? 'bg-brand text-white border-brand' 
+              filter === 'all'
+                ? 'bg-brand text-white border-brand'
                 : 'bg-white text-neutral-600 border-neutral-300 hover:border-brand'
             }`}
           >
@@ -134,8 +138,8 @@ export default function Portfolio() {
           <button
             onClick={() => setFilter('featured')}
             className={`px-3 py-1 text-sm rounded-full border transition-colors ${
-              filter === 'featured' 
-                ? 'bg-brand text-white border-brand' 
+              filter === 'featured'
+                ? 'bg-brand text-white border-brand'
                 : 'bg-white text-neutral-600 border-neutral-300 hover:border-brand'
             }`}
           >
@@ -146,8 +150,8 @@ export default function Portfolio() {
               key={tag}
               onClick={() => setFilter(tag)}
               className={`px-3 py-1 text-sm rounded-full border transition-colors ${
-                filter === tag 
-                  ? 'bg-brand text-white border-brand' 
+                filter === tag
+                  ? 'bg-brand text-white border-brand'
                   : 'bg-white text-neutral-600 border-neutral-300 hover:border-brand'
               }`}
             >
@@ -160,41 +164,49 @@ export default function Portfolio() {
           <button
             onClick={() => setViewMode('grid')}
             className={`p-2 rounded-lg transition-colors ${
-              viewMode === 'grid' 
-                ? 'bg-brand text-white' 
+              viewMode === 'grid'
+                ? 'bg-brand text-white'
                 : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
             }`}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              />
             </svg>
           </button>
           <button
             onClick={() => setViewMode('list')}
             className={`p-2 rounded-lg transition-colors ${
-              viewMode === 'list' 
-                ? 'bg-brand text-white' 
+              viewMode === 'list'
+                ? 'bg-brand text-white'
                 : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
             }`}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 10h16M4 14h16M4 18h16"
+              />
             </svg>
           </button>
         </div>
       </div>
 
       {/* Projects Grid/List */}
-      <div className={
-        viewMode === 'grid' 
-          ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-6' 
-          : 'space-y-4'
-      }>
-        {filteredProjects.map((project) => (
+      <div
+        className={viewMode === 'grid' ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}
+      >
+        {filteredProjects.map(project => (
           <div key={project.id} onClick={() => setSelectedProject(project)}>
-            <CaseStudyTemplate 
-              project={project} 
-              variant={viewMode === 'list' ? 'minimal' : 'card'} 
+            <CaseStudyTemplate
+              project={project}
+              variant={viewMode === 'list' ? 'minimal' : 'card'}
             />
           </div>
         ))}

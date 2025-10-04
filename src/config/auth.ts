@@ -1,8 +1,7 @@
 // Admin authentication configuration
-// In production, these should be environment variables
 export const ADMIN_CREDENTIALS = {
-  username: 'admin',
-  password: 'jpstas2024' // Change this to your desired password
+  username: import.meta.env.VITE_ADMIN_USERNAME || 'admin',
+  password: import.meta.env.VITE_ADMIN_PASSWORD || '',
 };
 
 export const AUTH_TOKEN_KEY = 'admin_auth';

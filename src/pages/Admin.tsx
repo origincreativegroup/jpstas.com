@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import FileUpload, { MediaPreview } from '../components/FileUpload';
-import LoginForm from '../components/LoginForm';
-import { mockApi } from '../utils/mockApi';
-import { checkAuthStatus, setAuthenticated } from '../config/auth';
+import FileUpload from '@/components/FileUpload';
+import LoginForm from '@/components/LoginForm';
+import { LoadingPage } from '@/components/LoadingSpinner';
+import { mockApi } from '@/utils/mockApi';
+import { checkAuthStatus, setAuthenticated } from '@/config/auth';
 
 interface Project {
   id: string;
@@ -110,9 +111,9 @@ export default function Admin() {
         const response = await fetch('/api/content', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'project', data: projectData })
+          body: JSON.stringify({ type: 'project', data: projectData }),
         });
-        
+
         if (response.ok) {
           await fetchProjects();
           setShowAddForm(false);
@@ -130,14 +131,7 @@ export default function Admin() {
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto"></div>
-          <p className="mt-4 text-neutral-600">Loading...</p>
-        </div>
-      </div>
-    );
+    return <LoadingPage message="Loading projects..." />;
   }
 
   return (
@@ -149,7 +143,10 @@ export default function Admin() {
             <p className="text-neutral-600 mt-2">Manage your portfolio content</p>
           </div>
           <div className="flex gap-4">
-            <NavLink to="/" className="px-4 py-2 text-sm border border-neutral-300 rounded-lg hover:bg-neutral-100">
+            <NavLink
+              to="/"
+              className="px-4 py-2 text-sm border border-neutral-300 rounded-lg hover:bg-neutral-100"
+            >
               View Site
             </NavLink>
             <button
@@ -171,9 +168,9 @@ export default function Admin() {
           <div className="px-6 py-4 border-b border-neutral-200">
             <h2 className="text-xl font-semibold">Projects ({projects.length})</h2>
           </div>
-          
+
           <div className="divide-y divide-neutral-200">
-            {projects.map((project) => (
+            {projects.map(project => (
               <div key={project.id} className="p-6 hover:bg-neutral-50">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -188,8 +185,11 @@ export default function Admin() {
                     <p className="text-sm text-neutral-600 mb-2">{project.role}</p>
                     <p className="text-neutral-700 mb-3">{project.summary}</p>
                     <div className="flex gap-2 flex-wrap">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="px-2 py-1 text-xs rounded-full bg-neutral-100 border border-neutral-200">
+                      {project.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 text-xs rounded-full bg-neutral-100 border border-neutral-200"
+                        >
                           {tag}
                         </span>
                       ))}
@@ -247,9 +247,9 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
     solution: project?.content?.solution || '',
     results: project?.content?.results || '',
     process: project?.content?.process.join('\n') || '',
-    technologies: project?.content?.technologies.join(', ') || ''
+    technologies: project?.content?.technologies.join(', ') || '',
   });
-  
+
   const [mediaFiles, setMediaFiles] = useState(project?.images || []);
 
   const handleMediaUpload = (uploadedFile: any) => {
@@ -258,7 +258,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
       url: uploadedFile.url,
       alt: uploadedFile.name,
       caption: '',
-      type: uploadedFile.type.startsWith('video/') ? 'video' : 'image'
+      type: (uploadedFile.type.startsWith('video/') ? 'video' : 'image') as 'image' | 'video',
     };
     setMediaFiles([...mediaFiles, newMedia]);
   };
@@ -268,20 +268,21 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
   };
 
   const handleMediaCaptionChange = (fileId: string, caption: string) => {
-    setMediaFiles(mediaFiles.map(file => 
-      file.id === fileId ? { ...file, caption } : file
-    ));
+    setMediaFiles(mediaFiles.map(file => (file.id === fileId ? { ...file, caption } : file)));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const projectData: Partial<Project> = {
       id: project?.id || Date.now().toString(),
       title: formData.title,
       role: formData.role,
       summary: formData.summary,
-      tags: formData.tags.split(',').map(tag => tag.trim()).filter(Boolean),
+      tags: formData.tags
+        .split(',')
+        .map(tag => tag.trim())
+        .filter(Boolean),
       type: 'case-study',
       featured: formData.featured,
       images: mediaFiles,
@@ -290,10 +291,13 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
         solution: formData.solution,
         results: formData.results,
         process: formData.process.split('\n').filter(Boolean),
-        technologies: formData.technologies.split(',').map(tech => tech.trim()).filter(Boolean)
+        technologies: formData.technologies
+          .split(',')
+          .map(tech => tech.trim())
+          .filter(Boolean),
       },
       createdAt: project?.createdAt || new Date().toISOString().split('T')[0],
-      updatedAt: new Date().toISOString().split('T')[0]
+      updatedAt: new Date().toISOString().split('T')[0],
     };
 
     onSave(projectData);
@@ -303,11 +307,9 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6 border-b border-neutral-200">
-          <h2 className="text-xl font-semibold">
-            {project ? 'Edit Project' : 'Add New Project'}
-          </h2>
+          <h2 className="text-xl font-semibold">{project ? 'Edit Project' : 'Add New Project'}</h2>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -315,7 +317,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               <input
                 type="text"
                 value={formData.title}
-                onChange={(e) => setFormData({...formData, title: e.target.value})}
+                onChange={e => setFormData({ ...formData, title: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                 required
               />
@@ -325,7 +327,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               <input
                 type="text"
                 value={formData.role}
-                onChange={(e) => setFormData({...formData, role: e.target.value})}
+                onChange={e => setFormData({ ...formData, role: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                 required
               />
@@ -336,7 +338,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
             <label className="block text-sm font-medium mb-2">Summary</label>
             <textarea
               value={formData.summary}
-              onChange={(e) => setFormData({...formData, summary: e.target.value})}
+              onChange={e => setFormData({ ...formData, summary: e.target.value })}
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
               rows={3}
               required
@@ -348,7 +350,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
             <input
               type="text"
               value={formData.tags}
-              onChange={(e) => setFormData({...formData, tags: e.target.value})}
+              onChange={e => setFormData({ ...formData, tags: e.target.value })}
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
               placeholder="Design, Web, E-commerce"
             />
@@ -359,7 +361,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               type="checkbox"
               id="featured"
               checked={formData.featured}
-              onChange={(e) => setFormData({...formData, featured: e.target.checked})}
+              onChange={e => setFormData({ ...formData, featured: e.target.checked })}
               className="h-4 w-4 text-brand focus:ring-brand border-neutral-300 rounded"
             />
             <label htmlFor="featured" className="ml-2 text-sm font-medium">
@@ -369,7 +371,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
 
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Media Files</h3>
-            
+
             <FileUpload
               onUpload={handleMediaUpload}
               accept="image/*,video/*"
@@ -381,17 +383,29 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               <div className="space-y-4">
                 <h4 className="text-md font-medium">Uploaded Media</h4>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {mediaFiles.map((file) => (
+                  {mediaFiles.map(file => (
                     <div key={file.id} className="space-y-2">
-                      <MediaPreview
-                        file={file}
-                        onRemove={handleMediaRemove}
-                      />
+                      <div className="relative aspect-video bg-neutral-100 rounded-lg overflow-hidden">
+                        {file.type === 'video' ? (
+                          <video src={file.url} className="w-full h-full object-cover" />
+                        ) : (
+                          <img src={file.url} alt={file.alt} className="w-full h-full object-cover" />
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => handleMediaRemove(file.id)}
+                          className="absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
                       <input
                         type="text"
                         placeholder="Add caption..."
                         value={file.caption}
-                        onChange={(e) => handleMediaCaptionChange(file.id, e.target.value)}
+                        onChange={e => handleMediaCaptionChange(file.id, e.target.value)}
                         className="w-full px-2 py-1 text-xs border border-neutral-300 rounded focus:ring-1 focus:ring-brand focus:border-transparent"
                       />
                     </div>
@@ -403,12 +417,12 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
 
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Case Study Content</h3>
-            
+
             <div>
               <label className="block text-sm font-medium mb-2">Challenge</label>
               <textarea
                 value={formData.challenge}
-                onChange={(e) => setFormData({...formData, challenge: e.target.value})}
+                onChange={e => setFormData({ ...formData, challenge: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                 rows={3}
               />
@@ -418,7 +432,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               <label className="block text-sm font-medium mb-2">Solution</label>
               <textarea
                 value={formData.solution}
-                onChange={(e) => setFormData({...formData, solution: e.target.value})}
+                onChange={e => setFormData({ ...formData, solution: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                 rows={3}
               />
@@ -428,7 +442,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               <label className="block text-sm font-medium mb-2">Results</label>
               <textarea
                 value={formData.results}
-                onChange={(e) => setFormData({...formData, results: e.target.value})}
+                onChange={e => setFormData({ ...formData, results: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                 rows={2}
               />
@@ -438,7 +452,7 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
               <label className="block text-sm font-medium mb-2">Process (one per line)</label>
               <textarea
                 value={formData.process}
-                onChange={(e) => setFormData({...formData, process: e.target.value})}
+                onChange={e => setFormData({ ...formData, process: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                 rows={4}
                 placeholder="Research and analysis&#10;Design and prototyping&#10;Development and testing&#10;Launch and optimization"
@@ -446,11 +460,13 @@ function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Technologies (comma-separated)</label>
+              <label className="block text-sm font-medium mb-2">
+                Technologies (comma-separated)
+              </label>
               <input
                 type="text"
                 value={formData.technologies}
-                onChange={(e) => setFormData({...formData, technologies: e.target.value})}
+                onChange={e => setFormData({ ...formData, technologies: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                 placeholder="React, TypeScript, Node.js, MongoDB"
               />

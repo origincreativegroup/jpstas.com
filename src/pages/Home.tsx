@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { mockApi } from '../utils/mockApi';
@@ -65,22 +64,33 @@ export default function Home() {
           Multidisciplinary • Creative Tech • SaaS
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-          Creative Technologist, Designer,<br className="hidden md:block"/> & Process Innovator
+          Creative Technologist, Designer,
+          <br className="hidden md:block" /> & Process Innovator
         </h1>
         <p className="mt-6 text-lg max-w-2xl text-brand-light">
-          I build bold, vector-clean experiences that bridge design, code, and operations.
-          From in-house print studios to SaaS concepts, I ship systems that scale.
+          I build bold, vector-clean experiences that bridge design, code, and operations. From
+          in-house print studios to SaaS concepts, I ship systems that scale.
         </p>
         <div className="mt-8 flex gap-4">
-          <Link to="/portfolio" className="px-5 py-3 rounded-xl bg-accent text-brand font-semibold hover:bg-accent-dark transition-colors">View Work</Link>
-          <Link to="/resume" className="px-5 py-3 rounded-xl bg-white text-brand font-semibold hover:bg-brand-light transition-colors">Resume</Link>
+          <Link
+            to="/portfolio"
+            className="px-5 py-3 rounded-xl bg-accent text-brand font-semibold hover:bg-accent-dark transition-colors"
+          >
+            View Work
+          </Link>
+          <Link
+            to="/resume"
+            className="px-5 py-3 rounded-xl bg-white text-brand font-semibold hover:bg-brand-light transition-colors"
+          >
+            Resume
+          </Link>
         </div>
 
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-6">Featured Work</h2>
           {loading ? (
             <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
+              {[1, 2, 3].map(i => (
                 <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 animate-pulse">
                   <div className="h-4 bg-accent/30 rounded w-1/3 mb-2"></div>
                   <div className="h-6 bg-accent/30 rounded w-2/3 mb-2"></div>
@@ -90,9 +100,9 @@ export default function Home() {
             </div>
           ) : featuredProjects.length > 0 ? (
             <div className="grid md:grid-cols-3 gap-6">
-              {featuredProjects.map((project) => (
-                <Link 
-                  key={project.id} 
+              {featuredProjects.map(project => (
+                <Link
+                  key={project.id}
                   to={`/portfolio?project=${project.id}`}
                   className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 group hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
                 >
@@ -102,9 +112,7 @@ export default function Home() {
                   <div className="text-xl font-bold group-hover:text-accent transition-colors">
                     {project.title}
                   </div>
-                  <div className="mt-2 text-brand-light">
-                    {project.summary}
-                  </div>
+                  <div className="mt-2 text-brand-light">{project.summary}</div>
                   {project.content.results && (
                     <div className="mt-3 text-sm text-accent font-medium">
                       {project.content.results.split('.')[0]}.
@@ -116,8 +124,8 @@ export default function Home() {
           ) : (
             <div className="text-center py-12">
               <p className="text-brand-light">No featured projects available.</p>
-              <Link 
-                to="/admin" 
+              <Link
+                to="/admin"
                 className="inline-block mt-4 px-4 py-2 bg-accent text-brand rounded-lg hover:bg-accent-dark transition-colors"
               >
                 Add Featured Projects

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,11 +5,11 @@
 /* Custom utilities */
 :root {
   --brand: #282850; /* Dark blue from resume */
-  --accent: #D4A848; /* Golden yellow from resume */
-  --brand-light: #E8E8F0; /* Light blue/lavender */
-  --brand-dark: #1A1A3A; /* Darker blue */
-  --accent-dark: #B8943A; /* Darker golden yellow */
-  --neutral-warm: #6B635B; /* Dark brown/olive */
+  --accent: #d4a848; /* Golden yellow from resume */
+  --brand-light: #e8e8f0; /* Light blue/lavender */
+  --brand-dark: #1a1a3a; /* Darker blue */
+  --accent-dark: #b8943a; /* Darker golden yellow */
+  --neutral-warm: #6b635b; /* Dark brown/olive */
 }
 
 .brand-gradient {

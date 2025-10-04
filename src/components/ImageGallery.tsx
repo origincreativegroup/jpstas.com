@@ -33,13 +33,13 @@ export default function MediaGallery({ images, className = '' }: MediaGalleryPro
   const nextMedia = () => {
     const nextIndex = (currentIndex + 1) % images.length;
     setCurrentIndex(nextIndex);
-    setSelectedMedia(images[nextIndex]);
+    setSelectedMedia(images[nextIndex] || null);
   };
 
   const prevMedia = () => {
     const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
     setCurrentIndex(prevIndex);
-    setSelectedMedia(images[prevIndex]);
+    setSelectedMedia(images[prevIndex] || null);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -76,12 +76,32 @@ export default function MediaGallery({ images, className = '' }: MediaGalleryPro
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center">
                     {media.type === 'video' ? (
-                      <svg className="w-6 h-6 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-6 h-6 text-neutral-800"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                     ) : (
-                      <svg className="w-6 h-6 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      <svg
+                        className="w-6 h-6 text-neutral-800"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                        />
                       </svg>
                     )}
                   </div>
@@ -111,42 +131,54 @@ export default function MediaGallery({ images, className = '' }: MediaGalleryPro
               className="absolute top-4 right-4 text-white hover:text-neutral-300 transition-colors z-10"
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
 
             {images.length > 1 && (
               <>
                 <button
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     prevMedia();
                   }}
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-neutral-300 transition-colors z-10"
                 >
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
                   </svg>
                 </button>
 
                 <button
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     nextMedia();
                   }}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-neutral-300 transition-colors z-10"
                 >
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </button>
               </>
             )}
 
-            <div
-              className="relative max-w-full max-h-full"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="relative max-w-full max-h-full" onClick={e => e.stopPropagation()}>
               {selectedMedia.type === 'video' ? (
                 <video
                   src={selectedMedia.url}
@@ -173,10 +205,10 @@ export default function MediaGallery({ images, className = '' }: MediaGalleryPro
                 {images.map((_, index) => (
                   <button
                     key={index}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.stopPropagation();
                       setCurrentIndex(index);
-                      setSelectedMedia(images[index]);
+                      setSelectedMedia(images[index] || null);
                     }}
                     className={`w-2 h-2 rounded-full transition-colors ${
                       index === currentIndex ? 'bg-white' : 'bg-white bg-opacity-50'

@@ -20,13 +20,13 @@ interface FileUploadProps {
   className?: string;
 }
 
-export default function FileUpload({ 
-  onUpload, 
-  onRemove, 
+export default function FileUpload({
+  onUpload,
+  onRemove: _onRemove,
   accept = 'image/*,video/*',
   maxSize = 10 * 1024 * 1024, // 10MB
   multiple = false,
-  className = ''
+  className = '',
 }: FileUploadProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -46,7 +46,7 @@ export default function FileUpload({
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     const files = Array.from(e.dataTransfer.files);
     if (files.length > 0) {
       handleFiles(files);
@@ -97,7 +97,7 @@ export default function FileUpload({
 
         const response = await fetch('/api/upload', {
           method: 'POST',
-          body: formData
+          body: formData,
         });
 
         if (!response.ok) {
@@ -112,7 +112,6 @@ export default function FileUpload({
       setUploadProgress(100);
 
       onUpload(result.file);
-      
     } catch (error) {
       console.error('Upload error:', error);
       alert(`Upload failed: ${(error as Error).message}`);
@@ -130,16 +129,12 @@ export default function FileUpload({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  const isImage = (type: string) => type.startsWith('image/');
-  const isVideo = (type: string) => type.startsWith('video/');
 
   return (
     <div className={`w-full ${className}`}>
       <div
         className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
-          isDragging
-            ? 'border-brand bg-brand/5'
-            : 'border-neutral-300 hover:border-brand/50'
+          isDragging ? 'border-brand bg-brand/5' : 'border-neutral-300 hover:border-brand/50'
         } ${uploading ? 'pointer-events-none opacity-50' : ''}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -162,7 +157,7 @@ export default function FileUpload({
             <div>
               <p className="text-sm font-medium text-neutral-700">Uploading...</p>
               <div className="w-full bg-neutral-200 rounded-full h-2 mt-2">
-                <div 
+                <div
                   className="bg-brand h-2 rounded-full transition-all duration-300"
                   style={{ width: `${uploadProgress}%` }}
                 ></div>
@@ -173,7 +168,12 @@ export default function FileUpload({
           <div className="space-y-4">
             <div className="w-12 h-12 mx-auto text-neutral-400">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
               </svg>
             </div>
             <div>
@@ -222,11 +222,7 @@ export function MediaPreview({ file, onRemove, className = '' }: MediaPreviewPro
     <div className={`relative group ${className}`}>
       <div className="aspect-video bg-neutral-100 rounded-lg overflow-hidden">
         {isImageFile ? (
-          <img
-            src={file.url}
-            alt={file.name}
-            className="w-full h-full object-cover"
-          />
+          <img src={file.url} alt={file.name} className="w-full h-full object-cover" />
         ) : isVideoFile ? (
           <video
             src={file.url}
@@ -239,7 +235,12 @@ export function MediaPreview({ file, onRemove, className = '' }: MediaPreviewPro
             <div className="text-center">
               <div className="w-8 h-8 mx-auto text-neutral-400 mb-2">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
                 </svg>
               </div>
               <p className="text-xs text-neutral-500">{file.name}</p>
@@ -247,15 +248,25 @@ export function MediaPreview({ file, onRemove, className = '' }: MediaPreviewPro
           </div>
         )}
       </div>
-      
+
       <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 space-y-2">
           <button
             onClick={() => window.open(file.url, '_blank')}
             className="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-colors"
           >
-            <svg className="w-4 h-4 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            <svg
+              className="w-4 h-4 text-neutral-800"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
             </svg>
           </button>
           {onRemove && (
@@ -263,8 +274,18 @@ export function MediaPreview({ file, onRemove, className = '' }: MediaPreviewPro
               onClick={() => onRemove(file.id)}
               className="w-8 h-8 bg-red-500 bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-colors"
             >
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              <svg
+                className="w-4 h-4 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
               </svg>
             </button>
           )}

@@ -8,7 +8,7 @@ interface LoginFormProps {
 export default function LoginForm({ onLogin }: LoginFormProps) {
   const [credentials, setCredentials] = useState({
     username: '',
-    password: ''
+    password: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -21,8 +21,10 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    if (credentials.username === ADMIN_CREDENTIALS.username && 
-        credentials.password === ADMIN_CREDENTIALS.password) {
+    if (
+      credentials.username === ADMIN_CREDENTIALS.username &&
+      credentials.password === ADMIN_CREDENTIALS.password
+    ) {
       // Store auth token in localStorage
       setAuthenticated(true);
       onLogin(true);
@@ -36,7 +38,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -48,7 +50,11 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-brand" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"/>
+                <path
+                  fillRule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clipRule="evenodd"
+                />
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-white mb-2">Admin Access</h1>
@@ -97,11 +103,13 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-xs text-brand-light">
-              Default credentials: {ADMIN_CREDENTIALS.username} / {ADMIN_CREDENTIALS.password}
-            </p>
-          </div>
+          {import.meta.env.DEV && (
+            <div className="mt-6 text-center">
+              <p className="text-xs text-brand-light">
+                Dev mode - Username: {ADMIN_CREDENTIALS.username}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

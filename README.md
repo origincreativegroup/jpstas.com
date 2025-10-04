@@ -33,6 +33,18 @@ pnpm dev # http://localhost:5173
 - Update nav links, add projects in `src/pages/Portfolio.tsx`.
 - Tailwind config in `tailwind.config.ts`, global styles in `src/index.css`.
 
+## Media Hosting with Cloudflare
+
+This portfolio uses **Cloudflare Stream** for videos and **Cloudflare Images** for optimized image delivery.
+
+**Features**:
+- Automatic video transcoding and adaptive streaming
+- Image optimization (WebP/AVIF) and resizing
+- Global CDN delivery for fast loading
+- Built-in analytics and security
+
+**Setup**: See [CLOUDFLARE_SETUP.md](./CLOUDFLARE_SETUP.md) for detailed configuration instructions.
+
 ## Contact Form Notes
 
 This starter includes a **Pages Function** at `/functions/submit-contact.ts`
@@ -43,10 +55,49 @@ To wire up email or notifications:
 - **Webhook**: forward to Slack/Discord/Make/Zapier endpoint.
 - **R2/KV**: store submissions (requires binding in Pages → Settings → Functions).
 
+## Security Configuration
+
+### Environment Variables
+
+Create a `.env` file (already gitignored) with your admin credentials:
+
+```bash
+VITE_ADMIN_USERNAME=admin
+VITE_ADMIN_PASSWORD=your_secure_password_here
+```
+
+In **Cloudflare Pages → Settings → Environment variables**, add:
+
+**Client-side** (prefix with `VITE_`):
+- `VITE_ADMIN_USERNAME`
+- `VITE_ADMIN_PASSWORD`
+
+**Server-side** (Pages Functions):
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_STREAM_TOKEN`
+- `CLOUDFLARE_IMAGES_TOKEN`
+
+### Security Headers
+
+Add these headers in **Cloudflare Pages → Settings → Functions**:
+
+```
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+```
+
+For stricter CSP, add in **Custom domains → SSL/TLS → Transform Rules**:
+
+```
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:
+```
+
 ## Production Checklist
 
 - Replace footer links (LinkedIn, GitHub).
 - Add your PDF resume at `/public/John_P_Stas_Resume.pdf` or update the link.
 - Fill actual projects and images.
 - Set up Analytics (Cloudflare Web Analytics) if desired.
-- Add security headers in Pages → Settings if you want stricter CSP.
+- **Set environment variables for admin authentication** (see Security Configuration above).

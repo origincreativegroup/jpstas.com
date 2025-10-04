@@ -6,7 +6,8 @@ export const mockProjects = [
     id: '1',
     title: 'In‑House Print Studio Build',
     role: 'Designer • Ops Lead',
-    summary: 'HP Latex 315 print workflow, vehicle wraps, apparel—training seasonal staff and saving costs.',
+    summary:
+      'HP Latex 315 print workflow, vehicle wraps, apparel—training seasonal staff and saving costs.',
     tags: ['Design', 'Ops', 'Large Format'],
     type: 'case-study',
     featured: true,
@@ -16,30 +17,37 @@ export const mockProjects = [
         url: '/images/placeholder.svg',
         alt: 'Print studio setup',
         caption: 'HP Latex 315 printer in action',
-        type: 'image'
+        type: 'image' as const,
       },
       {
-        id: '2', 
+        id: '2',
         url: '/images/placeholder.svg',
         alt: 'Vehicle wrap process',
         caption: 'Large format vehicle wrap installation',
-        type: 'image'
-      }
+        type: 'image' as const,
+      },
     ],
     content: {
-      challenge: 'Needed to establish an in-house print studio to reduce outsourcing costs and improve turnaround times.',
-      solution: 'Designed and implemented a complete print workflow using HP Latex 315, including training protocols for seasonal staff.',
+      challenge:
+        'Needed to establish an in-house print studio to reduce outsourcing costs and improve turnaround times.',
+      solution:
+        'Designed and implemented a complete print workflow using HP Latex 315, including training protocols for seasonal staff.',
       results: 'Reduced print costs by 40% and improved delivery times by 60%.',
       process: [
         'Research and equipment selection',
         'Workflow design and optimization',
         'Staff training and documentation',
-        'Quality control implementation'
+        'Quality control implementation',
       ],
-      technologies: ['HP Latex 315', 'Adobe Creative Suite', 'RIP Software', 'Large Format Printing']
+      technologies: [
+        'HP Latex 315',
+        'Adobe Creative Suite',
+        'RIP Software',
+        'Large Format Printing',
+      ],
     },
     createdAt: '2024-01-15',
-    updatedAt: '2024-01-15'
+    updatedAt: '2024-01-15',
   },
   {
     id: '2',
@@ -55,31 +63,33 @@ export const mockProjects = [
         url: '/images/placeholder.svg',
         alt: 'E-commerce homepage',
         caption: 'Clean, modern e-commerce interface',
-        type: 'image'
+        type: 'image' as const,
       },
       {
         id: '4',
-        url: '/images/placeholder.svg', 
+        url: '/images/placeholder.svg',
         alt: 'Product catalog view',
         caption: 'Intuitive product browsing experience',
-        type: 'image'
-      }
+        type: 'image' as const,
+      },
     ],
     content: {
-      challenge: 'Caribbean Pools needed a digital presence to capture early-buy customers before peak season.',
-      solution: 'Built a custom e-commerce platform with streamlined checkout and mobile-first design.',
+      challenge:
+        'Caribbean Pools needed a digital presence to capture early-buy customers before peak season.',
+      solution:
+        'Built a custom e-commerce platform with streamlined checkout and mobile-first design.',
       results: 'Generated over $100k in net revenue in the first year with 85% mobile traffic.',
       process: [
         'User research and competitive analysis',
         'Wireframing and prototyping',
         'Frontend development with React',
         'Backend integration and testing',
-        'Launch and performance optimization'
+        'Launch and performance optimization',
       ],
-      technologies: ['React', 'Node.js', 'Stripe', 'MongoDB', 'AWS']
+      technologies: ['React', 'Node.js', 'Stripe', 'MongoDB', 'AWS'],
     },
     createdAt: '2024-02-10',
-    updatedAt: '2024-02-10'
+    updatedAt: '2024-02-10',
   },
   {
     id: '3',
@@ -95,25 +105,28 @@ export const mockProjects = [
         url: '/images/placeholder.svg',
         alt: 'PortfolioForge interface',
         caption: 'Block-based editor interface',
-        type: 'image'
-      }
+        type: 'image' as const,
+      },
     ],
     content: {
-      challenge: 'Creative professionals struggle to present their work in compelling narratives that resonate with clients.',
-      solution: 'Developed an AI-powered platform that helps creatives build structured portfolio narratives using drag-and-drop blocks.',
-      results: 'Prototype achieved 70% user engagement rate in beta testing with 50+ creative professionals.',
+      challenge:
+        'Creative professionals struggle to present their work in compelling narratives that resonate with clients.',
+      solution:
+        'Developed an AI-powered platform that helps creatives build structured portfolio narratives using drag-and-drop blocks.',
+      results:
+        'Prototype achieved 70% user engagement rate in beta testing with 50+ creative professionals.',
       process: [
         'Market research and user interviews',
         'AI model training for content suggestions',
         'Block-based editor development',
         'User testing and iteration',
-        'Beta launch and feedback collection'
+        'Beta launch and feedback collection',
       ],
-      technologies: ['React', 'TypeScript', 'OpenAI API', 'Framer Motion', 'Supabase']
+      technologies: ['React', 'TypeScript', 'OpenAI API', 'Framer Motion', 'Supabase'],
     },
     createdAt: '2024-03-05',
-    updatedAt: '2024-03-05'
-  }
+    updatedAt: '2024-03-05',
+  },
 ];
 
 export const mockApi = {
@@ -126,7 +139,7 @@ export const mockApi = {
   async uploadFile(file: File) {
     // Simulate upload delay
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     // Generate mock response
     const mockFile = {
       id: Date.now().toString(),
@@ -135,7 +148,7 @@ export const mockApi = {
       url: URL.createObjectURL(file), // Use object URL for preview
       size: file.size,
       type: file.type,
-      uploadedAt: new Date().toISOString()
+      uploadedAt: new Date().toISOString(),
     };
 
     return { success: true, file: mockFile };
@@ -146,5 +159,5 @@ export const mockApi = {
     await new Promise(resolve => setTimeout(resolve, 500));
     console.log('Project saved:', projectData);
     return { success: true, id: projectData.id };
-  }
+  },
 };
