@@ -33,6 +33,73 @@ export default function FileUpload({
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const uploadFile = useCallback(
+    async (file: File) => {
+      setUploading(true);
+      setUploadProgress(0);
+
+      try {
+        // Simulate progress
+        const progressInterval = setInterval(() => {
+          setUploadProgress(prev => Math.min(prev + 10, 90));
+        }, 100);
+
+        let result;
+        if (import.meta.env.DEV) {
+          // Use mock API in development
+          result = await mockApi.uploadFile(file);
+        } else {
+          // Use real API in production
+          const formData = new FormData();
+          formData.append('file', file);
+
+          const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Upload failed');
+          }
+
+          result = await response.json();
+        }
+
+        clearInterval(progressInterval);
+        setUploadProgress(100);
+
+        onUpload(result.file);
+      } catch (error) {
+        console.error('Upload error:', error);
+        alert(`Upload failed: ${(error as Error).message}`);
+      } finally {
+        setUploading(false);
+        setUploadProgress(0);
+      }
+    },
+    [onUpload]
+  );
+
+  const handleFiles = useCallback(
+    async (files: File[]) => {
+      if (!multiple && files.length > 1) {
+        alert('Please select only one file');
+        return;
+      }
+
+      for (const file of files) {
+        if (file.size > maxSize) {
+          alert(`File ${file.name} is too large. Maximum size is ${formatFileSize(maxSize)}`);
+          continue;
+        }
+
+        await uploadFile(file);
+      }
+    },
+    [multiple, maxSize, uploadFile]
+  );
+
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(true);
@@ -43,83 +110,28 @@ export default function FileUpload({
     setIsDragging(false);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      setIsDragging(false);
 
-    const files = Array.from(e.dataTransfer.files);
-    if (files.length > 0) {
-      handleFiles(files);
-    }
-  }, []);
-
-  const handleFileInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (files.length > 0) {
-      handleFiles(files);
-    }
-  }, []);
-
-  const handleFiles = async (files: File[]) => {
-    if (!multiple && files.length > 1) {
-      alert('Please select only one file');
-      return;
-    }
-
-    for (const file of files) {
-      if (file.size > maxSize) {
-        alert(`File ${file.name} is too large. Maximum size is ${formatFileSize(maxSize)}`);
-        continue;
+      const files = Array.from(e.dataTransfer.files);
+      if (files.length > 0) {
+        handleFiles(files);
       }
+    },
+    [handleFiles]
+  );
 
-      await uploadFile(file);
-    }
-  };
-
-  const uploadFile = async (file: File) => {
-    setUploading(true);
-    setUploadProgress(0);
-
-    try {
-      // Simulate progress
-      const progressInterval = setInterval(() => {
-        setUploadProgress(prev => Math.min(prev + 10, 90));
-      }, 100);
-
-      let result;
-      if (import.meta.env.DEV) {
-        // Use mock API in development
-        result = await mockApi.uploadFile(file);
-      } else {
-        // Use real API in production
-        const formData = new FormData();
-        formData.append('file', file);
-
-        const response = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || 'Upload failed');
-        }
-
-        result = await response.json();
+  const handleFileInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = Array.from(e.target.files || []);
+      if (files.length > 0) {
+        handleFiles(files);
       }
-
-      clearInterval(progressInterval);
-      setUploadProgress(100);
-
-      onUpload(result.file);
-    } catch (error) {
-      console.error('Upload error:', error);
-      alert(`Upload failed: ${(error as Error).message}`);
-    } finally {
-      setUploading(false);
-      setUploadProgress(0);
-    }
-  };
+    },
+    [handleFiles]
+  );
 
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return '0 Bytes';

@@ -166,33 +166,97 @@ export const onRequestPost: PagesFunction = async (context) => {
 };
 
 export const onRequestDelete: PagesFunction = async (context) => {
-  const { request } = context;
+  const { request, env } = context;
   const url = new URL(request.url);
-  const filename = url.searchParams.get('filename');
-  
-  if (!filename) {
-    return new Response(JSON.stringify({ error: 'Filename required' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' }
-    });
+  const fileId = url.searchParams.get('id');
+  const fileType = url.searchParams.get('type'); // 'image' or 'video'
+
+  if (!fileId || !fileType) {
+    return new Response(
+      JSON.stringify({ error: 'File ID and type are required' }),
+      {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   try {
-    // In a real implementation, you would delete from cloud storage
-    console.log('File delete:', filename);
-    
-    return new Response(JSON.stringify({
-      success: true,
-      message: 'File deleted successfully'
-    }), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    const CLOUDFLARE_ACCOUNT_ID = env.CLOUDFLARE_ACCOUNT_ID;
+
+    if (fileType === 'video') {
+      // Delete from Cloudflare Stream
+      const CLOUDFLARE_STREAM_TOKEN = env.CLOUDFLARE_STREAM_TOKEN;
+
+      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_STREAM_TOKEN) {
+        throw new Error('Cloudflare Stream credentials not configured');
+      }
+
+      const streamResponse = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/stream/${fileId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${CLOUDFLARE_STREAM_TOKEN}`,
+          },
+        }
+      );
+
+      const streamData = await streamResponse.json();
+
+      if (!streamResponse.ok || !streamData.success) {
+        throw new Error(streamData.errors?.[0]?.message || 'Stream delete failed');
+      }
+
+      console.log('Stream video deleted:', fileId);
+    } else if (fileType === 'image') {
+      // Delete from Cloudflare Images
+      const CLOUDFLARE_IMAGES_TOKEN = env.CLOUDFLARE_IMAGES_TOKEN;
+
+      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_IMAGES_TOKEN) {
+        throw new Error('Cloudflare Images credentials not configured');
+      }
+
+      const imageResponse = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/images/v1/${fileId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${CLOUDFLARE_IMAGES_TOKEN}`,
+          },
+        }
+      );
+
+      const imageData = await imageResponse.json();
+
+      if (!imageResponse.ok || !imageData.success) {
+        throw new Error(imageData.errors?.[0]?.message || 'Image delete failed');
+      }
+
+      console.log('Image deleted:', fileId);
+    } else {
+      throw new Error('Invalid file type. Must be "image" or "video"');
+    }
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: 'File deleted successfully from Cloudflare',
+      }),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   } catch (error) {
-    return new Response(JSON.stringify({ 
-      error: 'Delete failed: ' + (error as Error).message 
-    }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    console.error('Delete error:', error);
+    return new Response(
+      JSON.stringify({
+        error: 'Delete failed: ' + (error as Error).message,
+      }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 };

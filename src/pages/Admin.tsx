@@ -149,6 +149,12 @@ export default function Admin() {
             >
               View Site
             </NavLink>
+            <NavLink
+              to="/admin/media"
+              className="px-4 py-2 text-sm border border-neutral-300 rounded-lg hover:bg-neutral-100"
+            >
+              Media Library
+            </NavLink>
             <button
               onClick={() => setShowAddForm(true)}
               className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700"
