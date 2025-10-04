@@ -71,7 +71,7 @@ export const defaultAboutContent: ContentWrapper<AboutPageContent> = {
         type: 'text',
         title: 'Who I Am',
         content:
-          '<p>I'm a creative technologist who bridges the gap between design and development. With 8+ years of experience, I've built everything from e-commerce platforms to in-house print studios.</p><p>My approach combines strategic thinking with hands-on execution, whether that's coding a React application or training a team on new workflows.</p>',
+          "<p>I'm a creative technologist who bridges the gap between design and development. With 8+ years of experience, I've built everything from e-commerce platforms to in-house print studios.</p><p>My approach combines strategic thinking with hands-on execution, whether that's coding a React application or training a team on new workflows.</p>",
         order: 1,
       },
       {
