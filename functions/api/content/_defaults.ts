@@ -141,7 +141,7 @@ export const defaultContactContent: ContentWrapper<ContactPageContent> = {
   content: {
     hero: {
       title: 'Get In Touch',
-      subtitle: 'Let's build something great together',
+      subtitle: "Let's build something great together",
     },
     contactInfo: [
       {
@@ -175,7 +175,7 @@ export const defaultContactContent: ContentWrapper<ContactPageContent> = {
     formSettings: {
       enabled: true,
       submitEndpoint: '/api/contact',
-      successMessage: 'Thanks for reaching out! I'll get back to you soon.',
+      successMessage: "Thanks for reaching out! I'll get back to you soon.",
       errorMessage: 'Something went wrong. Please try again or email me directly.',
     },
   },
