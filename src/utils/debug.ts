@@ -66,7 +66,7 @@ const EMOJI: Record<Category, string> = {
  */
 function getTimestamp(): string {
   const now = new Date();
-  return now.toISOString().split('T')[1].slice(0, -1);
+  return now.toISOString().split('T')[1]?.slice(0, -1) || '';
 }
 
 /**

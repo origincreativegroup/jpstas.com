@@ -42,7 +42,7 @@ export function useMediaUpload(options: UseMediaUploadOptions = {}) {
           prev.map(q => (q.id === item.id ? { ...q, status: 'uploading' as const } : q))
         );
 
-        let result;
+        let result: { file?: any };
         if (import.meta.env.DEV) {
           // Mock upload with progress simulation
           result = await mockApi.uploadFile(item.file);

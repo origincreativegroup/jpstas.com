@@ -13,7 +13,6 @@ export default function MediaLibraryEnhanced() {
     loading,
     error,
     addMedia,
-    updateMedia,
     removeMedia,
     refreshMedia,
     toggleFavorite,
@@ -40,7 +39,7 @@ export default function MediaLibraryEnhanced() {
       addMedia(file);
       toast.success(`Uploaded ${file.name}`);
     },
-    onUploadError: (file, error) => {
+    onUploadError: (file) => {
       toast.error(`Failed to upload ${file.name}`);
     },
     onQueueComplete: () => {
@@ -237,7 +236,10 @@ export default function MediaLibraryEnhanced() {
         const end = Math.max(lastIndex, currentIndex);
 
         for (let i = start; i <= end; i++) {
-          newSelection.add(filteredMedia[i].id);
+          const item = filteredMedia[i];
+          if (item) {
+            newSelection.add(item.id);
+          }
         }
 
         debug.info('Range selection completed', {
@@ -761,9 +763,12 @@ export default function MediaLibraryEnhanced() {
                   <input
                     type="checkbox"
                     checked={selectedMedia.has(file.id)}
-                    onChange={e => toggleSelect(file.id, e.shiftKey)}
+                    onChange={() => {}}
                     className="w-5 h-5 text-brand focus:ring-brand border-neutral-300 rounded"
-                    onClick={e => e.stopPropagation()}
+                    onClick={e => {
+                      e.stopPropagation();
+                      toggleSelect(file.id, e.shiftKey);
+                    }}
                   />
                 </div>
 
@@ -838,7 +843,8 @@ export default function MediaLibraryEnhanced() {
                       <input
                         type="checkbox"
                         checked={selectedMedia.has(file.id)}
-                        onChange={e => toggleSelect(file.id, e.shiftKey)}
+                        onChange={() => {}}
+                        onClick={e => toggleSelect(file.id, e.shiftKey)}
                         className="w-4 h-4 text-brand focus:ring-brand border-neutral-300 rounded"
                       />
                     </td>

@@ -51,7 +51,9 @@ export default function BulkOperations({
       });
 
       for (const id of selectedIds) {
-        await onUpdate([id], updates[id]);
+        if (updates[id]) {
+          await onUpdate([id], updates[id]);
+        }
       }
 
       setTags('');
@@ -83,7 +85,9 @@ export default function BulkOperations({
       });
 
       for (const id of selectedIds) {
-        await onUpdate([id], updates[id]);
+        if (updates[id]) {
+          await onUpdate([id], updates[id]);
+        }
       }
 
       setCollections('');
