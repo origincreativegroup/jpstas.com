@@ -34,10 +34,10 @@ export const onRequestPost: PagesFunction = async (context) => {
     if (isVideo) {
       // Upload to Cloudflare Stream
       const CLOUDFLARE_ACCOUNT_ID = env.CLOUDFLARE_ACCOUNT_ID;
-      const CLOUDFLARE_STREAM_TOKEN = env.CLOUDFLARE_STREAM_TOKEN;
+      const CLOUDFLARE_API_TOKEN = env.CLOUDFLARE_API_TOKEN || env.CLOUDFLARE_STREAM_TOKEN;
 
-      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_STREAM_TOKEN) {
-        throw new Error('Cloudflare Stream credentials not configured');
+      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
+        throw new Error('Cloudflare credentials not configured');
       }
 
       const streamFormData = new FormData();
@@ -55,7 +55,7 @@ export const onRequestPost: PagesFunction = async (context) => {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${CLOUDFLARE_STREAM_TOKEN}`,
+            Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
           },
           body: streamFormData,
         }
@@ -87,10 +87,10 @@ export const onRequestPost: PagesFunction = async (context) => {
     } else {
       // Upload to Cloudflare Images
       const CLOUDFLARE_ACCOUNT_ID = env.CLOUDFLARE_ACCOUNT_ID;
-      const CLOUDFLARE_IMAGES_TOKEN = env.CLOUDFLARE_IMAGES_TOKEN;
+      const CLOUDFLARE_API_TOKEN = env.CLOUDFLARE_API_TOKEN || env.CLOUDFLARE_IMAGES_TOKEN;
 
-      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_IMAGES_TOKEN) {
-        throw new Error('Cloudflare Images credentials not configured');
+      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
+        throw new Error('Cloudflare credentials not configured');
       }
 
       const imageFormData = new FormData();
@@ -105,7 +105,7 @@ export const onRequestPost: PagesFunction = async (context) => {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${CLOUDFLARE_IMAGES_TOKEN}`,
+            Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
           },
           body: imageFormData,
         }
@@ -186,10 +186,10 @@ export const onRequestDelete: PagesFunction = async (context) => {
 
     if (fileType === 'video') {
       // Delete from Cloudflare Stream
-      const CLOUDFLARE_STREAM_TOKEN = env.CLOUDFLARE_STREAM_TOKEN;
+      const CLOUDFLARE_API_TOKEN = env.CLOUDFLARE_API_TOKEN || env.CLOUDFLARE_STREAM_TOKEN;
 
-      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_STREAM_TOKEN) {
-        throw new Error('Cloudflare Stream credentials not configured');
+      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
+        throw new Error('Cloudflare credentials not configured');
       }
 
       const streamResponse = await fetch(
@@ -197,7 +197,7 @@ export const onRequestDelete: PagesFunction = async (context) => {
         {
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${CLOUDFLARE_STREAM_TOKEN}`,
+            Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
           },
         }
       );
@@ -211,10 +211,10 @@ export const onRequestDelete: PagesFunction = async (context) => {
       console.log('Stream video deleted:', fileId);
     } else if (fileType === 'image') {
       // Delete from Cloudflare Images
-      const CLOUDFLARE_IMAGES_TOKEN = env.CLOUDFLARE_IMAGES_TOKEN;
+      const CLOUDFLARE_API_TOKEN = env.CLOUDFLARE_API_TOKEN || env.CLOUDFLARE_IMAGES_TOKEN;
 
-      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_IMAGES_TOKEN) {
-        throw new Error('Cloudflare Images credentials not configured');
+      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_API_TOKEN) {
+        throw new Error('Cloudflare credentials not configured');
       }
 
       const imageResponse = await fetch(
@@ -222,7 +222,7 @@ export const onRequestDelete: PagesFunction = async (context) => {
         {
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${CLOUDFLARE_IMAGES_TOKEN}`,
+            Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
           },
         }
       );
