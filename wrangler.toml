@@ -13,13 +13,13 @@ compatibility_date = "2024-01-01"
 
 [[kv_namespaces]]
 binding = "CONTENT_KV"
-id = "REPLACE_WITH_CONTENT_KV_NAMESPACE_ID"
-preview_id = "REPLACE_WITH_CONTENT_KV_PREVIEW_ID"
+id = "b75bcab3b9df4e639518196d8dc0353d"
+preview_id = "670588b8fc774796b5571b00857732d5"
 
 [[kv_namespaces]]
 binding = "MEDIA_KV"
-id = "REPLACE_WITH_MEDIA_KV_NAMESPACE_ID"
-preview_id = "REPLACE_WITH_MEDIA_KV_PREVIEW_ID"
+id = "94ff64faa5bc4d45aa27bafa0c260a07"
+preview_id = "812a537c49664d4e86e87a3a690c6bed"
 
 # Environment Variables
 # Set these in Cloudflare Pages dashboard under Settings > Environment Variables:
