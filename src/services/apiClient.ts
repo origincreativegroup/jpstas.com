@@ -319,7 +319,7 @@ const realApi = {
       headers: {}, // Let fetch set Content-Type for FormData
     });
 
-    return response.data?.file!;
+    return response.data?.file || null;
   },
 
   async saveProject(project: Project): Promise<{ id: string }> {
@@ -328,7 +328,7 @@ const realApi = {
       body: JSON.stringify({ type: 'project', data: project }),
     });
 
-    return response.data!;
+    return response.data || { id: '' };
   },
 
   async updateMedia(id: string, updates: Partial<MediaFile>): Promise<MediaFile> {
@@ -337,7 +337,7 @@ const realApi = {
       body: JSON.stringify(updates),
     });
 
-    return response.data?.media!;
+    return response.data?.media || null;
   },
 
   async deleteMedia(id: string): Promise<void> {

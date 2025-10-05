@@ -13,13 +13,14 @@
  * This endpoint will be removed in a future version.
  */
 
-export const onRequestGet: PagesFunction = async (context) => {
-  const { request, env } = context;
+export const onRequestGet: PagesFunction = async context => {
+  const { request } = context;
   const url = new URL(request.url);
   const contentType = url.searchParams.get('type') || 'all';
 
-  console.warn('[DEPRECATED] Using legacy /api/content endpoint. Please migrate to /api/content/{type}');
-  
+  console.warn(
+    '[DEPRECATED] Using legacy /api/content endpoint. Please migrate to /api/content/{type}'
+  );
   try {
     // In a real implementation, you'd fetch from a database
     // For now, we'll use a simple JSON structure
@@ -39,15 +40,15 @@ export const onRequestGet: PagesFunction = async (context) => {
               url: '/images/placeholder.svg',
               alt: 'Print studio setup',
               caption: 'HP Latex 315 printer in action',
-              type: 'image'
+              type: 'image',
             },
             {
-              id: '2', 
+              id: '2',
               url: '/images/placeholder.svg',
               alt: 'Vehicle wrap process',
               caption: 'Large format vehicle wrap installation',
-              type: 'image'
-            }
+              type: 'image',
+            },
           ],
           content: {
             challenge: 'Needed to establish an in-house print studio to reduce outsourcing costs and improve turnaround times.',
@@ -57,12 +58,17 @@ export const onRequestGet: PagesFunction = async (context) => {
               'Research and equipment selection',
               'Workflow design and optimization',
               'Staff training and documentation',
-              'Quality control implementation'
+              'Quality control implementation',
             ],
-            technologies: ['HP Latex 315', 'Adobe Creative Suite', 'RIP Software', 'Large Format Printing']
+            technologies: [
+              'HP Latex 315',
+              'Adobe Creative Suite',
+              'RIP Software',
+              'Large Format Printing',
+            ],
           },
           createdAt: '2024-01-15',
-          updatedAt: '2024-01-15'
+          updatedAt: '2024-01-15',
         },
         {
           id: '2',
