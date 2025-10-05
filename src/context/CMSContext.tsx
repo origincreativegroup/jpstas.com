@@ -346,12 +346,18 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const uploadHeroImage = useCallback(async (file: File): Promise<string> => {
     debug.cms.upload('Uploading hero image', { fileName: file.name, fileSize: file.size });
     const uploadedFile = await api.uploadFile(file);
+    if (!uploadedFile) {
+      throw new Error('Failed to upload hero image');
+    }
     return uploadedFile.url;
   }, []);
 
   const uploadHeadshot = useCallback(async (file: File): Promise<string> => {
     debug.cms.upload('Uploading headshot', { fileName: file.name, fileSize: file.size });
     const uploadedFile = await api.uploadFile(file);
+    if (!uploadedFile) {
+      throw new Error('Failed to upload headshot');
+    }
     return uploadedFile.url;
   }, []);
 

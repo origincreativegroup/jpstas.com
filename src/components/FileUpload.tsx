@@ -86,6 +86,10 @@ export default function FileUpload({
         setUploadProgress(100);
 
         // Convert MediaFile to UploadedFile
+        if (!mediaFile) {
+          throw new Error('Upload failed - no file returned');
+        }
+        
         const uploadedFile: UploadedFile = {
           id: mediaFile.id,
           name: mediaFile.name,
