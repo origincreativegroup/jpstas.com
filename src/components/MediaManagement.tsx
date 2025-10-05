@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useMedia } from '@/context/MediaContext';
 import EnhancedFileUpload from './EnhancedFileUpload';
+import LazyMedia from './LazyMedia';
 import { useToast } from '@/context/ToastContext';
 
 const MediaManagement: React.FC = () => {
@@ -240,11 +241,15 @@ const MediaManagement: React.FC = () => {
             >
               {/* File Preview */}
               <div className="aspect-square bg-neutral-100 flex items-center justify-center">
-                {file.type.startsWith('image/') ? (
-                  <img
-                    src={file.url}
+                {file.type.startsWith('image/') || file.type.startsWith('video/') ? (
+                  <LazyMedia
+                    mediaFile={file}
+                    className="w-full h-full"
                     alt={file.alt || file.name}
-                    className="w-full h-full object-cover"
+                    controls={false}
+                    showThumbnail={true}
+                    threshold={0.1}
+                    rootMargin="50px"
                   />
                 ) : (
                   <div className="text-4xl">{getFileIcon(file.type)}</div>

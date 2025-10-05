@@ -1,34 +1,23 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
-import { useToast } from '@/context/ToastContext';
+import React, { useState, useRef, useCallback } from 'react';
 import { useMedia } from '@/context/MediaContext';
+import { useToast } from '@/context/ToastContext';
 import { debug } from '@/utils/debug';
+import { validateFile } from '@/config/environment';
+import { cloudflareStream } from '@/services/cloudflareStream';
 
-interface UploadedFile {
-  id: string;
-  name: string;
-  filename: string;
-  url: string;
-  size: number;
-  type: string;
-  uploadedAt: string;
-  progress?: number;
-  status?: 'pending' | 'uploading' | 'completed' | 'error';
-  error?: string;
-}
-
-interface UploadQueueItem {
-  file: File;
-  id: string;
+interface UploadProgress {
+  fileId: string;
+  fileName: string;
   progress: number;
-  status: 'pending' | 'uploading' | 'completed' | 'error';
+  status: 'uploading' | 'processing' | 'completed' | 'error';
   error?: string;
-  retryCount: number;
+  isVideo?: boolean;
+  streamId?: string;
 }
 
 interface EnhancedFileUploadProps {
-  onUpload: (file: UploadedFile) => void;
-  onBatchUpload?: (files: UploadedFile[]) => void;
-  onRemove?: (fileId: string) => void;
+  onUpload?: (files: any[]) => void;
+  onUploadComplete?: () => void;
   accept?: string;
   maxSize?: number;
   multiple?: boolean;
@@ -36,191 +25,159 @@ interface EnhancedFileUploadProps {
   className?: string;
   showProgress?: boolean;
   autoUpload?: boolean;
-  dragAndDrop?: boolean;
-  showPreview?: boolean;
-  allowRetry?: boolean;
-  maxRetries?: number;
+  enableVideoStream?: boolean;
 }
 
 export default function EnhancedFileUpload({
   onUpload,
-  onRemove: _onRemove,
+  onUploadComplete,
   accept = 'image/*,video/*',
-  maxSize = 100 * 1024 * 1024, // 100MB (increased for Cloudflare Stream)
-  multiple = false,
+  maxSize = 100 * 1024 * 1024, // 100MB for videos
+  multiple = true,
   maxFiles = 10,
   className = '',
   showProgress = true,
   autoUpload = true,
-  dragAndDrop = true,
-  allowRetry = true,
-  maxRetries = 3,
+  enableVideoStream = true,
 }: EnhancedFileUploadProps) {
-  const { showToast } = useToast();
-  const { uploadFile: uploadToGlobalMedia } = useMedia();
   const [isDragging, setIsDragging] = useState(false);
-  const [uploadQueue, setUploadQueue] = useState<UploadQueueItem[]>([]);
-  const [uploading, setUploading] = useState(false);
-  const [uploadStats, setUploadStats] = useState({
-    total: 0,
-    completed: 0,
-    failed: 0,
-    inProgress: 0,
-  });
+  const [uploadQueue, setUploadQueue] = useState<File[]>([]);
+  const [uploadProgress, setUploadProgress] = useState<Map<string, UploadProgress>>(new Map());
+  const [uploadErrors, setUploadErrors] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { uploadFile, uploadVideo, uploadImage } = useMedia();
+  const toast = useToast();
 
-  // Update upload stats
-  useEffect(() => {
-    const stats = uploadQueue.reduce(
-      (acc, item) => {
-        acc.total++;
-        if (item.status === 'completed') acc.completed++;
-        else if (item.status === 'error') acc.failed++;
-        else if (item.status === 'uploading') acc.inProgress++;
-        return acc;
-      },
-      { total: 0, completed: 0, failed: 0, inProgress: 0 }
-    );
-    setUploadStats(stats);
-  }, [uploadQueue]);
+  const updateProgress = useCallback((fileId: string, progress: Partial<UploadProgress>) => {
+    setUploadProgress(prev => {
+      const newMap = new Map(prev);
+      const current = newMap.get(fileId) || {
+        fileId,
+        fileName: '',
+        progress: 0,
+        status: 'uploading' as const,
+      };
+      newMap.set(fileId, { ...current, ...progress });
+      return newMap;
+    });
+  }, []);
 
-  const uploadFile = useCallback(
-    async (queueItem: UploadQueueItem): Promise<UploadedFile> => {
-      debug.upload.start('Starting file upload', {
-        name: queueItem.file.name,
-        size: queueItem.file.size,
-        type: queueItem.file.type,
+  const uploadFileWithProgress = useCallback(
+    async (file: File) => {
+      const fileId = `${file.name}-${Date.now()}`;
+      
+      debug.upload.start('Starting enhanced file upload', {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        isVideo: file.type.startsWith('video/'),
       });
-      debug.perf.start(`upload:${queueItem.file.name}`);
 
-      // Update status to uploading
-      setUploadQueue(prev =>
-        prev.map(item =>
-          item.id === queueItem.id ? { ...item, status: 'uploading', progress: 0 } : item
-        )
-      );
+      // Initialize progress
+      updateProgress(fileId, {
+        fileName: file.name,
+        progress: 0,
+        status: 'uploading',
+        isVideo: file.type.startsWith('video/'),
+      });
 
       try {
-        // Simulate progress updates
+        // Validate file
+        const validation = validateFile(file);
+        if (!validation.valid) {
+          throw new Error(validation.error);
+        }
+
+        // Simulate upload progress
         const progressInterval = setInterval(() => {
-          setUploadQueue(prev =>
-            prev.map(item => {
-              if (item.id === queueItem.id && item.status === 'uploading') {
-                const newProgress = Math.min(item.progress + Math.random() * 20, 90);
-                return { ...item, progress: newProgress };
-              }
-              return item;
-            })
-          );
+          updateProgress(fileId, {
+            progress: Math.min(Math.random() * 90, 90),
+          });
         }, 200);
 
-        let result;
-        if (import.meta.env.DEV) {
-          debug.info('Using global media context for upload (dev mode)', {
-            file: queueItem.file.name,
+        let mediaFile;
+
+        // Determine upload method
+        if (file.type.startsWith('video/') && enableVideoStream && cloudflareStream.shouldUseStream(file)) {
+          debug.upload.start('Using Cloudflare Stream for video upload', {
+            fileName: file.name,
+            fileSize: file.size,
           });
-          // Use global media context for upload
-          const mediaFile = await uploadToGlobalMedia(queueItem.file);
-          result = {
-            success: true,
-            file: {
-              id: mediaFile.id,
-              name: mediaFile.name,
-              filename: mediaFile.filename,
-              url: mediaFile.url,
-              size: mediaFile.size,
-              type: mediaFile.type,
-              uploadedAt: mediaFile.uploadedAt || mediaFile.createdAt,
-            },
-          };
+
+          updateProgress(fileId, { status: 'processing' });
+          mediaFile = await uploadVideo(file);
+          
+          // Get stream ID for progress tracking
+          const streamId = mediaFile.cloudflare?.streamId;
+          if (streamId) {
+            updateProgress(fileId, { streamId });
+          }
+        } else if (file.type.startsWith('image/')) {
+          debug.upload.start('Using standard image upload', {
+            fileName: file.name,
+            fileSize: file.size,
+          });
+          mediaFile = await uploadImage(file);
         } else {
-          // Use global media context for production upload
-          const mediaFile = await uploadToGlobalMedia(queueItem.file);
-          result = {
-            success: true,
-            file: {
-              id: mediaFile.id,
-              name: mediaFile.name,
-              filename: mediaFile.filename,
-              url: mediaFile.url,
-              size: mediaFile.size,
-              type: mediaFile.type,
-              uploadedAt: mediaFile.uploadedAt || mediaFile.createdAt,
-            },
-          };
+          debug.upload.start('Using standard file upload', {
+            fileName: file.name,
+            fileSize: file.size,
+          });
+          mediaFile = await uploadFile(file);
         }
 
         clearInterval(progressInterval);
-
-        // Update to completed
-        setUploadQueue(prev =>
-          prev.map(item =>
-            item.id === queueItem.id ? { ...item, status: 'completed', progress: 100 } : item
-          )
-        );
-
-        debug.upload.complete('File uploaded successfully', {
-          fileName: queueItem.file.name,
-          fileId: result.file?.id,
-          url: result.file?.url,
-        });
-
-        const uploadedFile: UploadedFile = {
-          ...result.file,
+        updateProgress(fileId, {
           progress: 100,
           status: 'completed',
-        };
-
-        onUpload(uploadedFile);
-        showToast(`Uploaded ${queueItem.file.name}`, 'success');
-        debug.perf.end(`upload:${queueItem.file.name}`);
-        return uploadedFile;
-      } catch (error) {
-        debug.upload.error('File upload failed', error as Error, {
-          fileName: queueItem.file.name,
-          fileSize: queueItem.file.size,
-          retryCount: queueItem.retryCount,
         });
 
-        // Update to error status
-        setUploadQueue(prev =>
-          prev.map(item =>
-            item.id === queueItem.id
-              ? {
-                  ...item,
-                  status: 'error',
-                  error: (error as Error).message,
-                }
-              : item
-          )
-        );
+        debug.upload.complete('File uploaded successfully', {
+          fileName: file.name,
+          fileId: mediaFile.id,
+          url: mediaFile.url,
+          isVideo: file.type.startsWith('video/'),
+        });
 
-        showToast(`Upload failed: ${(error as Error).message}`, 'error');
-        debug.perf.end(`upload:${queueItem.file.name}`);
+        toast.success(`${file.name} uploaded successfully`);
+        return mediaFile;
+      } catch (error) {
+        debug.upload.error('File upload failed', error as Error, {
+          fileName: file.name,
+          fileSize: file.size,
+        });
+
+        const errorMessage = error instanceof Error ? error.message : 'Upload failed';
+        updateProgress(fileId, {
+          status: 'error',
+          error: errorMessage,
+        });
+
+        toast.error(`Upload failed: ${errorMessage}`);
         throw error;
       }
     },
-    [onUpload, showToast]
+    [updateProgress, uploadFile, uploadVideo, uploadImage, toast, enableVideoStream]
   );
 
   const handleFiles = useCallback(
     async (files: File[]) => {
-      debug.file.validate('Validating files', {
+      debug.file.validate('Validating files for enhanced upload', {
         fileCount: files.length,
-        multiple: multiple,
-        maxSize: maxSize,
-        accept: accept,
-        maxFiles: maxFiles,
+        multiple,
+        maxSize,
+        accept,
+        maxFiles,
       });
 
       // Validate file count
       if (!multiple && files.length > 1) {
-        showToast('Please select only one file', 'warning');
+        toast.warning('Please select only one file');
         return;
       }
 
       if (files.length > maxFiles) {
-        showToast(`Maximum ${maxFiles} files allowed`, 'error');
+        toast.error(`Maximum ${maxFiles} files allowed`);
         return;
       }
 
@@ -229,102 +186,78 @@ export default function EnhancedFileUpload({
       const errors: string[] = [];
 
       for (const file of files) {
-        if (file.size > maxSize) {
-          const error = `File ${file.name} is too large. Maximum size is ${formatFileSize(maxSize)}`;
+        const validation = validateFile(file);
+        if (!validation.valid) {
+          const error = `File ${file.name}: ${validation.error}`;
           errors.push(error);
           continue;
         }
 
-        // Check file type
-        if (accept !== '*/*') {
-          const acceptedTypes = accept.split(',').map(type => type.trim());
-          const fileType = file.type;
-          const isAccepted = acceptedTypes.some(acceptedType => {
-            if (acceptedType.endsWith('/*')) {
-              return fileType.startsWith(acceptedType.slice(0, -1));
-            }
-            return fileType === acceptedType;
-          });
-
-          if (!isAccepted) {
-            const error = `File ${file.name} is not an accepted type. Accepted: ${accept}`;
-            errors.push(error);
-            continue;
-          }
+        // Check file size
+        if (file.size > maxSize) {
+          const error = `File ${file.name}: Size exceeds maximum allowed size of ${Math.round(maxSize / (1024 * 1024))}MB`;
+          errors.push(error);
+          continue;
         }
 
         validFiles.push(file);
       }
 
       if (errors.length > 0) {
-        errors.forEach(error => showToast(error, 'error'));
+        setUploadErrors(errors);
+        errors.forEach(error => toast.error(error));
       }
 
       if (validFiles.length === 0) {
         return;
       }
 
-      // Add files to queue
-      const newQueueItems: UploadQueueItem[] = validFiles.map(file => ({
-        file,
-        id: `queue_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        progress: 0,
-        status: 'pending' as const,
-        retryCount: 0,
-      }));
-
-      setUploadQueue(prev => [...prev, ...newQueueItems]);
-
       if (autoUpload) {
         // Upload files immediately
-        setUploading(true);
-        for (const item of newQueueItems) {
+        const uploadedFiles = [];
+        for (const file of validFiles) {
           try {
-            await uploadFile(item);
+            const result = await uploadFileWithProgress(file);
+            uploadedFiles.push(result);
           } catch (error) {
             console.error('Upload error:', error);
           }
         }
-        setUploading(false);
+
+        if (uploadedFiles.length > 0) {
+          onUpload?.(uploadedFiles);
+          onUploadComplete?.();
+        }
       } else {
-        showToast(`${validFiles.length} file(s) added to upload queue`, 'info');
+        // Add to queue for manual upload
+        setUploadQueue(prev => [...prev, ...validFiles]);
+        toast.info(`${validFiles.length} file(s) added to upload queue`);
       }
     },
-    [multiple, maxSize, maxFiles, uploadFile, showToast, accept, autoUpload]
+    [multiple, maxSize, maxFiles, uploadFileWithProgress, toast, accept, autoUpload, onUpload, onUploadComplete]
   );
 
-  const handleDragOver = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-      if (dragAndDrop) {
-        setIsDragging(true);
-      }
-    },
-    [dragAndDrop]
-  );
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  }, []);
 
-  const handleDragLeave = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-      if (dragAndDrop) {
-        setIsDragging(false);
-      }
-    },
-    [dragAndDrop]
-  );
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  }, []);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
-      if (dragAndDrop) {
-        setIsDragging(false);
-        const files = Array.from(e.dataTransfer.files);
-        if (files.length > 0) {
-          handleFiles(files);
-        }
+      setIsDragging(false);
+
+      const files = Array.from(e.dataTransfer.files);
+      if (files.length > 0) {
+        handleFiles(files);
       }
     },
-    [handleFiles, dragAndDrop]
+    [handleFiles]
   );
 
   const handleFileInput = useCallback(
@@ -337,37 +270,38 @@ export default function EnhancedFileUpload({
     [handleFiles]
   );
 
-  const retryUpload = useCallback(
-    async (queueItem: UploadQueueItem) => {
-      if (queueItem.retryCount >= maxRetries) {
-        showToast('Maximum retry attempts reached', 'error');
-        return;
-      }
+  const handleBatchUpload = useCallback(async () => {
+    if (uploadQueue.length === 0) return;
 
-      const updatedItem = {
-        ...queueItem,
-        retryCount: queueItem.retryCount + 1,
-        status: 'pending' as const,
-        error: undefined,
-      };
-
-      setUploadQueue(prev => prev.map(item => (item.id === queueItem.id ? updatedItem : item)));
-
+    const uploadedFiles = [];
+    for (const file of uploadQueue) {
       try {
-        await uploadFile(updatedItem);
+        const result = await uploadFileWithProgress(file);
+        uploadedFiles.push(result);
       } catch (error) {
-        console.error('Retry upload error:', error);
+        console.error('Upload error:', error);
       }
-    },
-    [uploadFile, maxRetries, showToast]
-  );
+    }
 
-  const removeFromQueue = useCallback((id: string) => {
-    setUploadQueue(prev => prev.filter(item => item.id !== id));
+    if (uploadedFiles.length > 0) {
+      onUpload?.(uploadedFiles);
+      onUploadComplete?.();
+    }
+
+    setUploadQueue([]);
+  }, [uploadQueue, uploadFileWithProgress, onUpload, onUploadComplete]);
+
+  const removeFromQueue = useCallback((index: number) => {
+    setUploadQueue(prev => prev.filter((_, i) => i !== index));
   }, []);
 
   const clearQueue = useCallback(() => {
     setUploadQueue([]);
+    setUploadErrors([]);
+  }, []);
+
+  const clearProgress = useCallback(() => {
+    setUploadProgress(new Map());
   }, []);
 
   const formatFileSize = (bytes: number) => {
@@ -378,39 +312,45 @@ export default function EnhancedFileUpload({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (status: UploadProgress['status']) => {
     switch (status) {
+      case 'uploading':
+        return '⏳';
+      case 'processing':
+        return '🔄';
       case 'completed':
         return '✅';
       case 'error':
         return '❌';
-      case 'uploading':
-        return '⏳';
       default:
-        return '⏸️';
+        return '📁';
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: UploadProgress['status']) => {
     switch (status) {
+      case 'uploading':
+        return 'text-blue-600';
+      case 'processing':
+        return 'text-yellow-600';
       case 'completed':
         return 'text-green-600';
       case 'error':
         return 'text-red-600';
-      case 'uploading':
-        return 'text-blue-600';
       default:
         return 'text-gray-600';
     }
   };
 
+  const isUploading = Array.from(uploadProgress.values()).some(p => p.status === 'uploading' || p.status === 'processing');
+  const hasCompleted = Array.from(uploadProgress.values()).some(p => p.status === 'completed');
+
   return (
     <div className={`w-full ${className}`}>
-      {/* Upload Area */}
       <div
         className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
           isDragging ? 'border-brand bg-brand/5' : 'border-neutral-300 hover:border-brand/50'
-        } ${uploading ? 'pointer-events-none opacity-50' : ''}`}
+        } ${isUploading ? 'pointer-events-none opacity-50' : ''}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -424,79 +364,110 @@ export default function EnhancedFileUpload({
           className="hidden"
         />
 
-        {uploading ? (
-          <div className="space-y-4">
-            <div className="w-12 h-12 mx-auto">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand"></div>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-neutral-700">Uploading files...</p>
-              <p className="text-xs text-neutral-500 mt-1">
-                {uploadStats.completed} of {uploadStats.total} completed
-              </p>
-            </div>
+        <div className="space-y-4">
+          <div className="w-12 h-12 mx-auto text-neutral-400">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+              />
+            </svg>
           </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="w-12 h-12 mx-auto text-neutral-400">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                />
-              </svg>
-            </div>
-            <div>
-              <p className="text-lg font-medium text-neutral-700">
-                {isDragging ? 'Drop files here' : 'Upload files'}
-              </p>
-              <p className="text-sm text-neutral-500 mt-1">
-                {dragAndDrop
-                  ? 'Drag and drop files here, or click to select'
-                  : 'Click to select files'}
-              </p>
-              <p className="text-xs text-neutral-400 mt-2">
-                Max size: {formatFileSize(maxSize)} •{' '}
-                {multiple ? `Max ${maxFiles} files` : 'Single file'} • {accept}
-              </p>
-            </div>
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700 transition-colors"
-            >
-              Choose Files
-            </button>
+          <div>
+            <p className="text-lg font-medium text-neutral-700">
+              {isDragging ? 'Drop files here' : 'Upload files'}
+            </p>
+            <p className="text-sm text-neutral-500 mt-1">
+              Drag and drop files here, or click to select
+            </p>
+            <p className="text-xs text-neutral-400 mt-2">
+              Max size: {formatFileSize(maxSize)} •{' '}
+              {multiple ? `Max ${maxFiles} files` : 'Single file'} • Images and videos supported
+              {enableVideoStream && ' • Videos will use Cloudflare Stream'}
+            </p>
           </div>
-        )}
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700 transition-colors"
+          >
+            Choose Files
+          </button>
+        </div>
       </div>
 
+      {/* Upload Progress */}
+      {showProgress && uploadProgress.size > 0 && (
+        <div className="mt-6 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-neutral-700">Upload Progress</h3>
+            <div className="flex gap-2">
+              {hasCompleted && (
+                <button
+                  onClick={clearProgress}
+                  className="px-3 py-1 text-sm border border-neutral-300 rounded hover:bg-neutral-100"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-2 max-h-60 overflow-y-auto">
+            {Array.from(uploadProgress.values()).map(progress => (
+              <div
+                key={progress.fileId}
+                className="flex items-center gap-3 p-3 bg-neutral-50 rounded border"
+              >
+                <div className="text-lg">{getStatusIcon(progress.status)}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-sm font-medium text-neutral-700 truncate">
+                      {progress.fileName}
+                    </p>
+                    <span className={`text-xs font-medium ${getStatusColor(progress.status)}`}>
+                      {progress.status}
+                    </span>
+                  </div>
+                  <div className="w-full bg-neutral-200 rounded-full h-2">
+                    <div
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        progress.status === 'error' ? 'bg-red-500' : 'bg-brand'
+                      }`}
+                      style={{ width: `${progress.progress}%` }}
+                    />
+                  </div>
+                  {progress.error && (
+                    <p className="text-xs text-red-600 mt-1">{progress.error}</p>
+                  )}
+                  {progress.isVideo && progress.streamId && (
+                    <p className="text-xs text-blue-600 mt-1">
+                      Stream ID: {progress.streamId}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Upload Queue */}
-      {uploadQueue.length > 0 && (
-        <div className="mt-6 space-y-4">
+      {!autoUpload && uploadQueue.length > 0 && (
+        <div className="mt-4 space-y-3">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-neutral-700">
               Upload Queue ({uploadQueue.length} files)
             </h3>
             <div className="flex gap-2">
-              {!autoUpload && (
-                <button
-                  onClick={() => {
-                    setUploading(true);
-                    uploadQueue.forEach(item => {
-                      if (item.status === 'pending') {
-                        uploadFile(item);
-                      }
-                    });
-                    setUploading(false);
-                  }}
-                  disabled={uploading}
-                  className="px-3 py-1 text-sm bg-brand text-white rounded hover:bg-purple-700 disabled:opacity-50"
-                >
-                  Upload All
-                </button>
-              )}
+              <button
+                onClick={handleBatchUpload}
+                disabled={isUploading}
+                className="px-3 py-1 text-sm bg-brand text-white rounded hover:bg-purple-700 disabled:opacity-50"
+              >
+                Upload All
+              </button>
               <button
                 onClick={clearQueue}
                 className="px-3 py-1 text-sm border border-neutral-300 rounded hover:bg-neutral-100"
@@ -506,26 +477,15 @@ export default function EnhancedFileUpload({
             </div>
           </div>
 
-          {/* Progress Bar */}
-          {showProgress && uploadStats.total > 0 && (
-            <div className="w-full bg-neutral-200 rounded-full h-2">
+          <div className="space-y-2 max-h-40 overflow-y-auto">
+            {uploadQueue.map((file, index) => (
               <div
-                className="bg-brand h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(uploadStats.completed / uploadStats.total) * 100}%` }}
-              ></div>
-            </div>
-          )}
-
-          {/* Queue Items */}
-          <div className="space-y-2 max-h-60 overflow-y-auto">
-            {uploadQueue.map(item => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between p-3 bg-neutral-50 rounded border"
+                key={index}
+                className="flex items-center justify-between p-2 bg-neutral-50 rounded border"
               >
-                <div className="flex items-center gap-3 flex-1">
+                <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-neutral-200 rounded flex items-center justify-center">
-                    {item.file.type.startsWith('image/') ? (
+                    {file.type.startsWith('image/') ? (
                       <svg
                         className="w-4 h-4 text-neutral-600"
                         fill="none"
@@ -555,53 +515,41 @@ export default function EnhancedFileUpload({
                       </svg>
                     )}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-neutral-700 truncate">
-                      {item.file.name}
+                  <div>
+                    <p className="text-sm font-medium text-neutral-700 truncate max-w-xs">
+                      {file.name}
                     </p>
-                    <p className="text-xs text-neutral-500">{formatFileSize(item.file.size)}</p>
-                    {item.error && <p className="text-xs text-red-600 mt-1">{item.error}</p>}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className={`text-sm ${getStatusColor(item.status)}`}>
-                      {getStatusIcon(item.status)}
-                    </span>
-                    {showProgress && item.status === 'uploading' && (
-                      <div className="w-16 bg-neutral-200 rounded-full h-1">
-                        <div
-                          className="bg-brand h-1 rounded-full transition-all duration-300"
-                          style={{ width: `${item.progress}%` }}
-                        ></div>
-                      </div>
-                    )}
+                    <p className="text-xs text-neutral-500">{formatFileSize(file.size)}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  {item.status === 'error' && allowRetry && item.retryCount < maxRetries && (
-                    <button
-                      onClick={() => retryUpload(item)}
-                      className="px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700"
-                    >
-                      Retry ({maxRetries - item.retryCount} left)
-                    </button>
-                  )}
-                  <button
-                    onClick={() => removeFromQueue(item.id)}
-                    className="p-1 text-neutral-400 hover:text-red-600"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
+                <button
+                  onClick={() => removeFromQueue(index)}
+                  className="p-1 text-neutral-400 hover:text-red-600"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Upload Errors */}
+      {uploadErrors.length > 0 && (
+        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded">
+          <h4 className="text-sm font-medium text-red-800 mb-2">Upload Errors:</h4>
+          <ul className="text-xs text-red-700 space-y-1">
+            {uploadErrors.map((error, index) => (
+              <li key={index}>• {error}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

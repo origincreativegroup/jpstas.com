@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useMedia } from '@/context/MediaContext';
 import FileUpload from '@/components/FileUpload';
+import EnhancedFileUpload from '@/components/EnhancedFileUpload';
+import VideoPlayer from '@/components/VideoPlayer';
+import LazyMedia from '@/components/LazyMedia';
 import { LoadingPage } from '@/components/LoadingSpinner';
 import Navigation from '@/components/Navigation';
 
@@ -217,7 +220,14 @@ export default function MediaLibrary() {
 
           {/* Upload Section */}
           <div className="mb-8">
-            <FileUpload onUpload={handleUpload} multiple={true} />
+            <EnhancedFileUpload 
+              onUpload={(files) => {
+                files.forEach(file => handleUpload(file));
+              }}
+              multiple={true}
+              enableVideoStream={true}
+              showProgress={true}
+            />
           </div>
 
           {/* Enhanced Toolbar */}
@@ -467,15 +477,15 @@ export default function MediaLibrary() {
                 >
                   {/* Preview */}
                   <div className="aspect-video bg-neutral-100">
-                    {file.type.startsWith('image/') ? (
-                      <img src={file.url} alt={file.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <video
-                        src={file.url}
-                        className="w-full h-full object-cover"
-                        preload="metadata"
-                      />
-                    )}
+                    <LazyMedia
+                      mediaFile={file}
+                      className="w-full h-full"
+                      alt={file.name}
+                      controls={false}
+                      showThumbnail={true}
+                      threshold={0.1}
+                      rootMargin="100px"
+                    />
                   </div>
 
                   {/* Overlay Actions */}
@@ -736,19 +746,41 @@ export default function MediaLibrary() {
                     alt={previewMedia.name}
                     className="max-w-full max-h-[90vh] object-contain rounded-lg"
                   />
-                ) : (
-                  <video
-                    src={previewMedia.url}
-                    className="max-w-full max-h-[90vh] object-contain rounded-lg"
-                    controls
-                    autoPlay
+                ) : previewMedia.type.startsWith('video/') ? (
+                  <VideoPlayer
+                    mediaFile={previewMedia}
+                    className="max-w-full max-h-[90vh]"
+                    controls={true}
+                    autoplay={true}
+                    showThumbnail={true}
                   />
+                ) : (
+                  <div className="max-w-full max-h-[90vh] bg-white rounded-lg p-8 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto text-neutral-400 mb-4">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-lg font-medium text-neutral-900">{previewMedia.name}</p>
+                    </div>
+                  </div>
                 )}
                 <div className="mt-4 text-white text-center">
                   <p className="font-medium">{previewMedia.name}</p>
                   <p className="text-sm text-neutral-300">
                     {formatFileSize(previewMedia.size)} • {formatDate(previewMedia.uploadedAt)}
                   </p>
+                  {previewMedia.cloudflare?.streamId && (
+                    <p className="text-xs text-blue-300 mt-1">
+                      Stream ID: {previewMedia.cloudflare.streamId}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
