@@ -12,6 +12,7 @@ interface VideoPlayerProps {
   onPlay?: () => void;
   onPause?: () => void;
   onEnded?: () => void;
+  onError?: (error: Error) => void;
 }
 
 export default function VideoPlayer({
@@ -25,6 +26,7 @@ export default function VideoPlayer({
   onPlay,
   onPause,
   onEnded,
+  onError,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +34,7 @@ export default function VideoPlayer({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -134,13 +136,15 @@ export default function VideoPlayer({
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
 
-    if (!isFullscreen) {
+    if (!document.fullscreenElement) {
       if (containerRef.current.requestFullscreen) {
         containerRef.current.requestFullscreen();
+        setIsFullscreen(true);
       }
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
+        setIsFullscreen(false);
       }
     }
   };
@@ -213,6 +217,7 @@ export default function VideoPlayer({
         preload="metadata"
         onClick={togglePlay}
         onLoadStart={() => setIsLoading(true)}
+        onError={() => onError?.(new Error('Failed to load video'))}
       />
 
       {/* Loading indicator */}
@@ -311,6 +316,7 @@ export default function VideoPlayer({
           muted={muted}
           preload="metadata"
           onLoadStart={() => setIsLoading(true)}
+          onError={() => onError?.(new Error('Failed to load video'))}
         />
       )}
     </div>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useMedia } from '@/context/MediaContext';
-import FileUpload from '@/components/FileUpload';
 import EnhancedFileUpload from '@/components/EnhancedFileUpload';
 import VideoPlayer from '@/components/VideoPlayer';
 import LazyMedia from '@/components/LazyMedia';

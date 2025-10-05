@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useMedia } from '@/context/MediaContext';
 import VideoPlayer from '@/components/VideoPlayer';
 import { MediaFile } from '@/types/media';

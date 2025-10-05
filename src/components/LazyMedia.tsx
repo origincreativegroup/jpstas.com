@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { MediaFile } from '@/types/media';
 import VideoPlayer from '@/components/VideoPlayer';
 
@@ -21,7 +21,7 @@ interface LazyMediaProps {
   showThumbnail?: boolean;
 }
 
-export default function LazyMedia({
+function LazyMedia({
   mediaFile,
   className = '',
   placeholder,
@@ -37,7 +37,7 @@ export default function LazyMedia({
   loop = false,
   showThumbnail = true,
 }: LazyMediaProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -88,8 +88,8 @@ export default function LazyMedia({
   // Intersection Observer callback
   const handleIntersection = useCallback(
     (entries: IntersectionObserverEntry[]) => {
-      const [entry] = entries;
-      if (entry.isIntersecting && !isInView) {
+      const entry = entries[0];
+      if (entry && entry.isIntersecting && !isInView) {
         setIsInView(true);
         setIsLoading(true);
       }
@@ -318,10 +318,10 @@ function LazyVideo({
     onLoad?.();
   };
 
-  const handleVideoError = () => {
+  const handleVideoError = useCallback(() => {
     setVideoError(true);
     onError?.(new Error('Failed to load video'));
-  };
+  }, [onError]);
 
   if (videoError) {
     return (
@@ -357,6 +357,7 @@ function LazyVideo({
         showThumbnail={showThumbnail}
         onPlay={handleVideoLoad}
         onEnded={handleVideoLoad}
+        onError={handleVideoError}
         className={`w-full h-full transition-opacity duration-300 ${
           videoLoaded ? 'opacity-100' : 'opacity-0'
         }`}
@@ -378,8 +379,9 @@ export function useLazyLoading(
     if (!elementRef.current) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        const entry = entries[0];
+        if (entry && entry.isIntersecting) {
           setIsInView(true);
           observer.disconnect();
         }
