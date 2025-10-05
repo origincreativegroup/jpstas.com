@@ -312,7 +312,7 @@ const realApi = {
     return response.data?.media || [];
   },
 
-  async uploadFile(file: File): Promise<MediaFile> {
+  async uploadFile(file: File): Promise<MediaFile | null> {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -334,7 +334,7 @@ const realApi = {
     return response.data || { id: '' };
   },
 
-  async updateMedia(id: string, updates: Partial<MediaFile>): Promise<MediaFile> {
+  async updateMedia(id: string, updates: Partial<MediaFile>): Promise<MediaFile | null> {
     const response = await apiRequest<{ media: MediaFile }>(`/media/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(updates),
