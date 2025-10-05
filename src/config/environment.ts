@@ -30,7 +30,7 @@ const developmentConfig: EnvironmentConfig = {
 const productionConfig: EnvironmentConfig = {
   isDevelopment: false,
   isProduction: true,
-  apiBaseUrl: 'https://jpstas.com/api',
+  apiBaseUrl: 'https://backend-fragrant-haze-7389.fly.dev/api',
   enableDebug: false,
   enableMockApi: false,
   enableAnalytics: true,

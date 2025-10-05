@@ -14,6 +14,7 @@ import mediaRoutes from './routes/media.js';
 import contentRoutes from './routes/content.js';
 import analyticsRoutes from './routes/analytics.js';
 import skillsRoutes from './routes/skills.js';
+import migrateRoutes from './routes/migrate.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
@@ -85,6 +86,7 @@ app.use('/api/media', mediaRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/skills', skillsRoutes);
+app.use('/api/migrate', migrateRoutes);
 
 // API documentation endpoint
 app.get('/api', (req, res) => {
