@@ -26,7 +26,7 @@ class GoogleAnalytics {
   private measurementId: string;
   private isInitialized: boolean = false;
 
-  constructor(measurementId: string) {
+  constructor(measurementId: string = 'G-XS4GNG3KQN') {
     this.measurementId = measurementId;
   }
 
