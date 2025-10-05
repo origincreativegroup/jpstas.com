@@ -72,6 +72,10 @@ export function MediaProvider({ children }: { children: ReactNode }) {
       // Update on backend
       const updatedFile = await api.updateMedia(id, updates);
 
+      if (!updatedFile) {
+        throw new Error('Update failed - no file returned');
+      }
+
       // Update with server response
       setMedia(prev => prev.map(m => (m.id === id ? updatedFile : m)));
 
@@ -383,6 +387,10 @@ export function MediaProvider({ children }: { children: ReactNode }) {
         // Use existing API for images
         const mediaFile = await api.uploadFile(file);
 
+        if (!mediaFile) {
+          throw new Error('Upload failed - no file returned');
+        }
+
         // Add to local state
         addMedia(mediaFile);
 
@@ -426,6 +434,9 @@ export function MediaProvider({ children }: { children: ReactNode }) {
         } else {
           // Use existing API for other file types
           const mediaFile = await api.uploadFile(file);
+          if (!mediaFile) {
+            throw new Error('Upload failed - no file returned');
+          }
           addMedia(mediaFile);
           return mediaFile;
         }

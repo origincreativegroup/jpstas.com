@@ -406,7 +406,8 @@ export const handleApiError = (error: unknown): string => {
 // Batch operations
 export const batchUpload = async (files: File[]): Promise<MediaFile[]> => {
   const uploadPromises = files.map(file => uploadFile(file));
-  return Promise.all(uploadPromises);
+  const results = await Promise.all(uploadPromises);
+  return results.filter((file): file is MediaFile => file !== null);
 };
 
 export const batchDelete = async (ids: string[]): Promise<void> => {
