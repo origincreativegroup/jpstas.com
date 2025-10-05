@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useCMS } from '@/context/CMSContext';
 import Navigation from '../components/Navigation';
+import { SEO } from '../components/SEO';
 
 export default function Contact() {
   const { pageContent, fetchPageContent, loading } = useCMS();
@@ -33,6 +34,10 @@ export default function Contact() {
   if (loading) {
     return (
       <>
+        <SEO
+          title="Contact"
+          description="Get in touch with John P. Stas. Let's collaborate on your next project."
+        />
         <Navigation />
         <section className="relative min-h-screen bg-brand text-white">
           <div className="diagonal-stripes absolute inset-0 opacity-5"></div>

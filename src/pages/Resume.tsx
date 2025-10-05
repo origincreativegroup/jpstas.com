@@ -1,8 +1,14 @@
 import Navigation from '../components/Navigation';
+import { SEO } from '../components/SEO';
 
 export default function Resume() {
   return (
     <>
+      <SEO
+        title="Resume"
+        description="Professional resume and CV of John P. Stas - Creative Technologist with experience in full-stack development, design, and process innovation."
+        keywords="resume, cv, experience, skills, employment history"
+      />
       <Navigation />
       <section className="relative min-h-screen bg-brand text-white">
         <div className="diagonal-stripes absolute inset-0 opacity-5"></div>

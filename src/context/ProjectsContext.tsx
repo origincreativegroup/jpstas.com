@@ -1,4 +1,12 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useMemo,
+  useCallback,
+} from 'react';
 import { apiClient, Project } from '../services/api';
 
 interface ProjectsContextType {
@@ -28,9 +36,13 @@ export const ProjectsProvider: React.FC<ProjectsProviderProps> = ({ children }) 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const featuredProjects = projects.filter(project => project.featured);
+  // Memoize featured projects to avoid recalculation on every render
+  const featuredProjects = useMemo(
+    () => projects.filter(project => project.featured),
+    [projects]
+  );
 
-  const getProjects = async (params?: any): Promise<void> => {
+  const getProjects = useCallback(async (params?: any): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
@@ -44,13 +56,12 @@ export const ProjectsProvider: React.FC<ProjectsProviderProps> = ({ children }) 
       }
     } catch (error) {
       setError('Network error');
-      console.error('Failed to fetch projects:', error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const getProject = async (slug: string): Promise<Project | null> => {
+  const getProject = useCallback(async (slug: string): Promise<Project | null> => {
     try {
       const response = await apiClient.getProject(slug);
 
@@ -62,12 +73,11 @@ export const ProjectsProvider: React.FC<ProjectsProviderProps> = ({ children }) 
       }
     } catch (error) {
       setError('Network error');
-      console.error('Failed to fetch project:', error);
       return null;
     }
-  };
+  }, []);
 
-  const createProject = async (
+  const createProject = useCallback(async (
     project: Partial<Project>
   ): Promise<{ success: boolean; error?: string }> => {
     try {
@@ -83,9 +93,9 @@ export const ProjectsProvider: React.FC<ProjectsProviderProps> = ({ children }) 
     } catch (error) {
       return { success: false, error: 'Network error' };
     }
-  };
+  }, []);
 
-  const updateProject = async (
+  const updateProject = useCallback(async (
     id: string,
     updates: Partial<Project>
   ): Promise<{ success: boolean; error?: string }> => {
@@ -104,9 +114,9 @@ export const ProjectsProvider: React.FC<ProjectsProviderProps> = ({ children }) 
     } catch (error) {
       return { success: false, error: 'Network error' };
     }
-  };
+  }, []);
 
-  const deleteProject = async (id: string): Promise<{ success: boolean; error?: string }> => {
+  const deleteProject = useCallback(async (id: string): Promise<{ success: boolean; error?: string }> => {
     try {
       const response = await apiClient.deleteProject(id);
 
@@ -120,29 +130,44 @@ export const ProjectsProvider: React.FC<ProjectsProviderProps> = ({ children }) 
     } catch (error) {
       return { success: false, error: 'Network error' };
     }
-  };
+  }, []);
 
-  const refreshProjects = async (): Promise<void> => {
+  const refreshProjects = useCallback(async (): Promise<void> => {
     await getProjects();
-  };
+  }, [getProjects]);
 
   // Load projects on mount
   useEffect(() => {
     getProjects();
-  }, []);
+  }, [getProjects]);
 
-  const value: ProjectsContextType = {
-    projects,
-    isLoading,
-    error,
-    featuredProjects,
-    getProjects,
-    getProject,
-    createProject,
-    updateProject,
-    deleteProject,
-    refreshProjects,
-  };
+  // Memoize context value to prevent unnecessary re-renders
+  const value: ProjectsContextType = useMemo(
+    () => ({
+      projects,
+      isLoading,
+      error,
+      featuredProjects,
+      getProjects,
+      getProject,
+      createProject,
+      updateProject,
+      deleteProject,
+      refreshProjects,
+    }),
+    [
+      projects,
+      isLoading,
+      error,
+      featuredProjects,
+      getProjects,
+      getProject,
+      createProject,
+      updateProject,
+      deleteProject,
+      refreshProjects,
+    ]
+  );
 
   return <ProjectsContext.Provider value={value}>{children}</ProjectsContext.Provider>;
 };

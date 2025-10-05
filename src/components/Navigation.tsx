@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useRoutePreload } from '../hooks/useRoutePreload';
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { preloadRoute } = useRoutePreload();
 
   // Handle scroll for sticky header effect
   useEffect(() => {
@@ -42,11 +44,10 @@ export default function Navigation() {
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/portfolio', label: 'Work' },
+    { to: '/portfolio', label: 'Portfolio' },
     { to: '/about', label: 'About' },
     { to: '/resume', label: 'Resume' },
-    { to: '/saas-demo', label: 'SaaS Editor' },
-    { to: '/workshop/contact', label: 'Contact' },
+    { to: '/contact', label: 'Contact' },
   ];
 
   const handleLinkClick = () => {
@@ -75,6 +76,7 @@ export default function Navigation() {
               <NavLink
                 key={link.to}
                 to={link.to}
+                onMouseEnter={() => preloadRoute(link.to)}
                 className={({ isActive }) =>
                   isActive
                     ? 'font-semibold text-accent'

@@ -41,7 +41,6 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
       }
     } catch (error) {
       setError('Network error');
-      console.error('Failed to fetch content sections:', error);
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +58,6 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
       }
     } catch (error) {
       setError('Network error');
-      console.error('Failed to fetch content section:', error);
       return null;
     }
   };

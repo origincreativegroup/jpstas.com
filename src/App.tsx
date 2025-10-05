@@ -1,79 +1,131 @@
-import { Routes, Route } from 'react-router-dom';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import { SimpleAuthProvider } from './context/SimpleAuthContext';
-import { ProjectsProvider } from './context/ProjectsContext';
-import { ContentProvider } from './context/ContentContext';
-import { CMSProvider } from './context/CMSContext';
-import { AnalyticsProvider } from './components/AnalyticsProvider';
-import BootSequence from './components/experience/BootSequence';
-import WorkshopHub from './pages/WorkshopHub';
-import DesignBench from './sections/DesignBench';
-import DevelopmentDesk from './sections/DevelopmentDesk';
-import InnovationBay from './sections/InnovationBay';
-import StoryForge from './sections/StoryForge';
-import SkillConsole from './sections/SkillConsole';
-import PortalContact from './sections/PortalContact';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Portfolio from './pages/Portfolio';
-import Resume from './pages/Resume';
-import Admin from './pages/Admin';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import SaaSDemo from './pages/SaaSDemo';
-import NotFound from './pages/NotFound';
+import { lazy } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { NavigationTransitionProvider } from './components/NavigationTransition';
+import { SuspenseErrorBoundary } from './components/SuspenseErrorBoundary';
+import { PageTransition } from './components/PageTransition';
+
+// Lazy load core portfolio pages
+const Home = lazy(() => import('./pages/Home'));
+const Portfolio = lazy(() => import('./pages/Portfolio'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Resume = lazy(() => import('./pages/Resume'));
+// Media & Admin pages (hidden from public navigation)
+const MediaLibrary = lazy(() => import('./pages/MediaLibrary'));
+const Admin = lazy(() => import('./pages/Admin'));
+const SignIn = lazy(() => import('./pages/SignIn'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Enhanced loading fallback component with skeleton
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-brand">
+    <div className="flex flex-col items-center space-y-4">
+      <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+      <div className="text-white text-lg font-medium">Loading...</div>
+    </div>
+  </div>
+);
 
 export default function App() {
+  const location = useLocation();
+
   return (
-    <ErrorBoundary>
-      <SimpleAuthProvider>
-        <AnalyticsProvider>
-          <CMSProvider>
-            <ProjectsProvider>
-              <ContentProvider>
-                <div className="min-h-screen">
-                  <Routes>
-                    {/* Boot Sequence - Default Entry Point */}
-                    <Route path="/" element={<BootSequence />} />
+    <NavigationTransitionProvider>
+      <div className="min-h-screen">
+        <SuspenseErrorBoundary fallback={<PageLoader />}>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              {/* Core Portfolio Pages */}
+              <Route
+                path="/"
+                element={
+                  <PageTransition>
+                    <Home />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/portfolio"
+                element={
+                  <PageTransition>
+                    <Portfolio />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <PageTransition>
+                    <About />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <PageTransition>
+                    <Contact />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/resume"
+                element={
+                  <PageTransition>
+                    <Resume />
+                  </PageTransition>
+                }
+              />
 
-                    {/* Workshop Hub */}
-                    <Route path="/workshop" element={<WorkshopHub />} />
+              {/* Admin & Media Routes (Hidden from public) */}
+              <Route
+                path="/media"
+                element={
+                  <PageTransition>
+                    <MediaLibrary />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <PageTransition>
+                    <Admin />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/auth/signin"
+                element={
+                  <PageTransition>
+                    <SignIn />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/auth/signup"
+                element={
+                  <PageTransition>
+                    <SignUp />
+                  </PageTransition>
+                }
+              />
 
-                    {/* Workshop Sections */}
-                    <Route path="/workshop/design" element={<DesignBench />} />
-                    <Route path="/workshop/development" element={<DevelopmentDesk />} />
-                    <Route path="/workshop/innovation" element={<InnovationBay />} />
-                    <Route path="/workshop/story" element={<StoryForge />} />
-                    <Route path="/workshop/skills" element={<SkillConsole />} />
-                    <Route path="/workshop/contact" element={<PortalContact />} />
-
-                    {/* Authentication Routes */}
-                    <Route path="/auth/signin" element={<SignIn />} />
-                    <Route path="/auth/signup" element={<SignUp />} />
-
-                    {/* Admin Panel */}
-                    <Route path="/admin" element={<Admin />} />
-
-                    {/* SaaS Demo */}
-                    <Route path="/saas-demo" element={<SaaSDemo />} />
-
-                    {/* Legacy Routes (for backward compatibility) */}
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/portfolio" element={<Portfolio />} />
-                    <Route path="/resume" element={<Resume />} />
-
-                    {/* 404 */}
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </div>
-              </ContentProvider>
-            </ProjectsProvider>
-          </CMSProvider>
-        </AnalyticsProvider>
-      </SimpleAuthProvider>
-    </ErrorBoundary>
+              {/* 404 Not Found */}
+              <Route
+                path="*"
+                element={
+                  <PageTransition>
+                    <NotFound />
+                  </PageTransition>
+                }
+              />
+            </Routes>
+          </AnimatePresence>
+        </SuspenseErrorBoundary>
+      </div>
+    </NavigationTransitionProvider>
   );
 }

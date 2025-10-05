@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useCMS } from '@/context/CMSContext';
 import Navigation from '../components/Navigation';
+import { SEO } from '../components/SEO';
 
 export default function About() {
   const { pageContent, fetchPageContent, loading } = useCMS();
@@ -14,6 +15,10 @@ export default function About() {
   if (loading) {
     return (
       <>
+        <SEO
+          title="About"
+          description="Learn about John P. Stas - Creative Technologist, Designer, and Process Innovator."
+        />
         <Navigation />
         <section className="relative min-h-screen bg-brand text-white">
           <div className="diagonal-stripes absolute inset-0 opacity-5"></div>
