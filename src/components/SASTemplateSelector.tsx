@@ -8,7 +8,10 @@ interface SASTemplateSelectorProps {
   onCancel: () => void;
 }
 
-export default function SASTemplateSelector({ onSelectTemplate, onCancel }: SASTemplateSelectorProps) {
+export default function SASTemplateSelector({
+  onSelectTemplate,
+  onCancel,
+}: SASTemplateSelectorProps) {
   const [templates, setTemplates] = useState<ProjectTemplate[]>([]);
   const [selectedType, setSelectedType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,18 +35,35 @@ export default function SASTemplateSelector({ onSelectTemplate, onCancel }: SAST
 
   const filteredTemplates = templates.filter(template => {
     const matchesType = selectedType === 'all' || template.category === selectedType;
-    const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         template.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      template.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesType && matchesSearch;
   });
 
   const templateTypes = [
     { id: 'all', label: 'All Templates', count: templates.length },
-    { id: 'portfolio', label: 'Portfolio', count: templates.filter(t => t.category === 'portfolio').length },
-    { id: 'case-study', label: 'Case Study', count: templates.filter(t => t.category === 'case-study').length },
-    { id: 'showcase', label: 'Showcase', count: templates.filter(t => t.category === 'showcase').length },
-    { id: 'gallery', label: 'Gallery', count: templates.filter(t => t.category === 'gallery').length },
-    { id: 'blog', label: 'Blog', count: templates.filter(t => t.category === 'blog').length }
+    {
+      id: 'portfolio',
+      label: 'Portfolio',
+      count: templates.filter(t => t.category === 'portfolio').length,
+    },
+    {
+      id: 'case-study',
+      label: 'Case Study',
+      count: templates.filter(t => t.category === 'case-study').length,
+    },
+    {
+      id: 'showcase',
+      label: 'Showcase',
+      count: templates.filter(t => t.category === 'showcase').length,
+    },
+    {
+      id: 'gallery',
+      label: 'Gallery',
+      count: templates.filter(t => t.category === 'gallery').length,
+    },
+    { id: 'blog', label: 'Blog', count: templates.filter(t => t.category === 'blog').length },
   ];
 
   if (loading) {
@@ -69,7 +89,7 @@ export default function SASTemplateSelector({ onSelectTemplate, onCancel }: SAST
             type="text"
             placeholder="Search templates..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={e => setSearchQuery(e.target.value)}
             className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
@@ -136,7 +156,7 @@ export default function SASTemplateSelector({ onSelectTemplate, onCancel }: SAST
                 </span>
               </div>
               <p className="text-neutral-600 text-sm mb-3">{template.description}</p>
-              
+
               <div className="flex items-center justify-between text-xs text-neutral-500">
                 <span>Difficulty: {template.metadata.difficulty}</span>
                 <span>{template.metadata.estimatedTime} min</span>
@@ -144,10 +164,7 @@ export default function SASTemplateSelector({ onSelectTemplate, onCancel }: SAST
 
               <div className="mt-3 flex flex-wrap gap-1">
                 {template.metadata.tags.slice(0, 3).map(tag => (
-                  <span
-                    key={tag}
-                    className="px-2 py-1 bg-accent/10 text-accent text-xs rounded"
-                  >
+                  <span key={tag} className="px-2 py-1 bg-accent/10 text-accent text-xs rounded">
                     {tag}
                   </span>
                 ))}

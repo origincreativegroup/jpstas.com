@@ -25,7 +25,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+
     // Call custom error handler if provided
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
@@ -63,11 +63,9 @@ export class ErrorBoundary extends Component<Props, State> {
                 />
               </svg>
             </div>
-            
-            <h1 className="text-xl font-semibold text-neutral-800 mb-2">
-              Something went wrong
-            </h1>
-            
+
+            <h1 className="text-xl font-semibold text-neutral-800 mb-2">Something went wrong</h1>
+
             <p className="text-neutral-600 mb-6">
               We're sorry, but something unexpected happened. Please try refreshing the page.
             </p>
@@ -100,7 +98,7 @@ export class ErrorBoundary extends Component<Props, State> {
               >
                 Try Again
               </button>
-              
+
               <button
                 onClick={() => window.location.reload()}
                 className="w-full px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors"
@@ -121,7 +119,7 @@ export class ErrorBoundary extends Component<Props, State> {
 export const useErrorHandler = () => {
   const handleError = (error: Error, errorInfo?: string) => {
     console.error('Error caught by useErrorHandler:', error, errorInfo);
-    
+
     if (config.enableErrorReporting) {
       // Example: send to error reporting service
       // errorReportingService.captureException(error, { extra: errorInfo });
@@ -143,6 +141,6 @@ export const withErrorBoundary = <P extends object>(
   );
 
   WrappedComponent.displayName = `withErrorBoundary(${Component.displayName || Component.name})`;
-  
+
   return WrappedComponent;
 };

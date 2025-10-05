@@ -43,7 +43,7 @@ class GoogleAnalytics {
 
       // Initialize dataLayer and gtag
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function(...args: any[]) {
+      window.gtag = function (...args: any[]) {
         window.dataLayer.push(args);
       };
 
@@ -111,7 +111,11 @@ class GoogleAnalytics {
   }
 
   // Track portfolio interactions
-  public trackPortfolioInteraction(projectId: string, action: string, details?: Record<string, any>): void {
+  public trackPortfolioInteraction(
+    projectId: string,
+    action: string,
+    details?: Record<string, any>
+  ): void {
     this.trackEvent({
       action,
       category: 'portfolio',
@@ -124,7 +128,11 @@ class GoogleAnalytics {
   }
 
   // Track workshop interactions
-  public trackWorkshopInteraction(section: string, action: string, details?: Record<string, any>): void {
+  public trackWorkshopInteraction(
+    section: string,
+    action: string,
+    details?: Record<string, any>
+  ): void {
     this.trackEvent({
       action,
       category: 'workshop',
@@ -146,7 +154,11 @@ class GoogleAnalytics {
   }
 
   // Track form submissions
-  public trackFormSubmission(formName: string, success: boolean, details?: Record<string, any>): void {
+  public trackFormSubmission(
+    formName: string,
+    success: boolean,
+    details?: Record<string, any>
+  ): void {
     this.trackEvent({
       action: success ? 'form_submit_success' : 'form_submit_error',
       category: 'form',

@@ -1,7 +1,7 @@
 // Media library CRUD endpoints
 // Uses Cloudflare KV to store media metadata
 
-export const onRequestGet: PagesFunction = async (context) => {
+export const onRequestGet: PagesFunction = async context => {
   const { env } = context;
 
   try {
@@ -55,7 +55,7 @@ export const onRequestGet: PagesFunction = async (context) => {
   }
 };
 
-export const onRequestPost: PagesFunction = async (context) => {
+export const onRequestPost: PagesFunction = async context => {
   const { request, env } = context;
 
   try {
@@ -63,13 +63,10 @@ export const onRequestPost: PagesFunction = async (context) => {
     const mediaFile = data.file;
 
     if (!mediaFile || !mediaFile.id) {
-      return new Response(
-        JSON.stringify({ error: 'Invalid media file data' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new Response(JSON.stringify({ error: 'Invalid media file data' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // In development, skip KV storage
@@ -118,7 +115,7 @@ export const onRequestPost: PagesFunction = async (context) => {
   }
 };
 
-export const onRequestPatch: PagesFunction = async (context) => {
+export const onRequestPatch: PagesFunction = async context => {
   const { request, env } = context;
   const url = new URL(request.url);
   const segments = url.pathname.split('/');
@@ -128,13 +125,10 @@ export const onRequestPatch: PagesFunction = async (context) => {
     const updates = await request.json();
 
     if (!id || id === 'media') {
-      return new Response(
-        JSON.stringify({ error: 'Media ID required' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new Response(JSON.stringify({ error: 'Media ID required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // In development, return success without persistence
@@ -153,13 +147,10 @@ export const onRequestPatch: PagesFunction = async (context) => {
     // Get current media data
     const currentMedia = await env.MEDIA_KV.get(`media:${id}`, 'json');
     if (!currentMedia) {
-      return new Response(
-        JSON.stringify({ error: 'Media not found' }),
-        {
-          status: 404,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new Response(JSON.stringify({ error: 'Media not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // Merge updates
@@ -196,19 +187,16 @@ export const onRequestPatch: PagesFunction = async (context) => {
   }
 };
 
-export const onRequestDelete: PagesFunction = async (context) => {
+export const onRequestDelete: PagesFunction = async context => {
   const { request, env } = context;
   const url = new URL(request.url);
   const id = url.searchParams.get('id');
 
   if (!id) {
-    return new Response(
-      JSON.stringify({ error: 'Media ID required' }),
-      {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return new Response(JSON.stringify({ error: 'Media ID required' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   try {

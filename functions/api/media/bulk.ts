@@ -1,29 +1,23 @@
 // Bulk media operations endpoint
 
-export const onRequestPatch: PagesFunction = async (context) => {
+export const onRequestPatch: PagesFunction = async context => {
   const { request, env } = context;
 
   try {
     const { ids, updates } = await request.json();
 
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
-      return new Response(
-        JSON.stringify({ error: 'Media IDs array required' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new Response(JSON.stringify({ error: 'Media IDs array required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     if (!updates || typeof updates !== 'object') {
-      return new Response(
-        JSON.stringify({ error: 'Updates object required' }),
-        {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new Response(JSON.stringify({ error: 'Updates object required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // In development, return success without persistence

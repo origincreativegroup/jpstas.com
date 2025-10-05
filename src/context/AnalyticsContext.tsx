@@ -26,12 +26,18 @@ interface AnalyticsContextType {
   loading: boolean;
   error: string | null;
   trackView: (projectId: string, metadata?: Record<string, any>) => Promise<void>;
-  trackInteraction: (projectId: string, type: string, metadata?: Record<string, any>) => Promise<void>;
+  trackInteraction: (
+    projectId: string,
+    type: string,
+    metadata?: Record<string, any>
+  ) => Promise<void>;
   getProjectAnalytics: (projectId: string) => ProjectAnalytics | undefined;
   getAnalyticsData: (projectId: string) => AnalyticsData | undefined;
   refreshAnalytics: () => Promise<void>;
   getTopProjects: (limit?: number) => AnalyticsData[];
-  getRecentActivity: (limit?: number) => Array<{ projectId: string; type: string; timestamp: string; metadata?: any }>;
+  getRecentActivity: (
+    limit?: number
+  ) => Array<{ projectId: string; type: string; timestamp: string; metadata?: any }>;
   exportAnalytics: (projectId?: string) => Promise<string>;
 }
 
@@ -56,7 +62,7 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
 
   const trackView = useCallback(async (projectId: string, metadata?: Record<string, any>) => {
     debug.analytics.track('Tracking view', { projectId, metadata });
-    
+
     try {
       const viewData = {
         id: `view_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -70,19 +76,21 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
       if (import.meta.env.DEV) {
         // Mock tracking in development
         debug.info('Mock analytics tracking (dev mode)', { projectId, viewData });
-        setAnalytics(prev => prev.map(data => 
-          data.projectId === projectId 
-            ? {
-                ...data,
-                analytics: {
-                  ...data.analytics,
-                  views: data.analytics.views + 1,
-                  lastViewed: viewData.timestamp,
-                },
-                views: [...data.views, viewData],
-              }
-            : data
-        ));
+        setAnalytics(prev =>
+          prev.map(data =>
+            data.projectId === projectId
+              ? {
+                  ...data,
+                  analytics: {
+                    ...data.analytics,
+                    views: data.analytics.views + 1,
+                    lastViewed: viewData.timestamp,
+                  },
+                  views: [...data.views, viewData],
+                }
+              : data
+          )
+        );
       } else {
         // Real API call
         const response = await fetch('/api/analytics/track', {
@@ -103,61 +111,74 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     }
   }, []);
 
-  const trackInteraction = useCallback(async (projectId: string, type: string, metadata?: Record<string, any>) => {
-    debug.analytics.track('Tracking interaction', { projectId, type, metadata });
-    
-    try {
-      const interactionData = {
-        id: `interaction_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        type: type as any,
-        timestamp: new Date().toISOString(),
-        metadata,
-      };
+  const trackInteraction = useCallback(
+    async (projectId: string, type: string, metadata?: Record<string, any>) => {
+      debug.analytics.track('Tracking interaction', { projectId, type, metadata });
 
-      if (import.meta.env.DEV) {
-        // Mock tracking in development
-        debug.info('Mock analytics tracking (dev mode)', { projectId, interactionData });
-        setAnalytics(prev => prev.map(data => 
-          data.projectId === projectId 
-            ? {
-                ...data,
-                analytics: {
-                  ...data.analytics,
-                  [type === 'like' ? 'likes' : type === 'share' ? 'shares' : 'views']: 
-                    (data.analytics[type === 'like' ? 'likes' : type === 'share' ? 'shares' : 'views'] || 0) + 1,
-                },
-                interactions: [...data.interactions, interactionData],
-              }
-            : data
-        ));
-      } else {
-        // Real API call
-        const response = await fetch('/api/analytics/track', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ projectId, type, data: interactionData }),
-        });
+      try {
+        const interactionData = {
+          id: `interaction_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          type: type as any,
+          timestamp: new Date().toISOString(),
+          metadata,
+        };
 
-        if (!response.ok) {
-          throw new Error('Failed to track interaction');
+        if (import.meta.env.DEV) {
+          // Mock tracking in development
+          debug.info('Mock analytics tracking (dev mode)', { projectId, interactionData });
+          setAnalytics(prev =>
+            prev.map(data =>
+              data.projectId === projectId
+                ? {
+                    ...data,
+                    analytics: {
+                      ...data.analytics,
+                      [type === 'like' ? 'likes' : type === 'share' ? 'shares' : 'views']:
+                        (data.analytics[
+                          type === 'like' ? 'likes' : type === 'share' ? 'shares' : 'views'
+                        ] || 0) + 1,
+                    },
+                    interactions: [...data.interactions, interactionData],
+                  }
+                : data
+            )
+          );
+        } else {
+          // Real API call
+          const response = await fetch('/api/analytics/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ projectId, type, data: interactionData }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to track interaction');
+          }
         }
+
+        debug.analytics.complete('Interaction tracked successfully', { projectId, type });
+      } catch (err) {
+        debug.analytics.error('Failed to track interaction', err as Error, { projectId, type });
+        setError((err as Error).message);
       }
+    },
+    []
+  );
 
-      debug.analytics.complete('Interaction tracked successfully', { projectId, type });
-    } catch (err) {
-      debug.analytics.error('Failed to track interaction', err as Error, { projectId, type });
-      setError((err as Error).message);
-    }
-  }, []);
+  const getProjectAnalytics = useCallback(
+    (projectId: string): ProjectAnalytics | undefined => {
+      const data = analytics.find(a => a.projectId === projectId);
+      return data?.analytics;
+    },
+    [analytics]
+  );
 
-  const getProjectAnalytics = useCallback((projectId: string): ProjectAnalytics | undefined => {
-    const data = analytics.find(a => a.projectId === projectId);
-    return data?.analytics;
-  }, [analytics]);
-
-  const getAnalyticsData = useCallback((projectId: string): AnalyticsData | undefined => {
-    return analytics.find(a => a.projectId === projectId);
-  }, [analytics]);
+  const getAnalyticsData = useCallback(
+    (projectId: string): AnalyticsData | undefined => {
+      return analytics.find(a => a.projectId === projectId);
+    },
+    [analytics]
+  );
 
   const refreshAnalytics = useCallback(async (): Promise<void> => {
     debug.analytics.fetch('Refreshing analytics data');
@@ -246,58 +267,72 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     }
   }, [analytics.length]);
 
-  const getTopProjects = useCallback((limit = 10): AnalyticsData[] => {
-    return analytics
-      .sort((a, b) => b.analytics.views - a.analytics.views)
-      .slice(0, limit);
-  }, [analytics]);
+  const getTopProjects = useCallback(
+    (limit = 10): AnalyticsData[] => {
+      return analytics.sort((a, b) => b.analytics.views - a.analytics.views).slice(0, limit);
+    },
+    [analytics]
+  );
 
-  const getRecentActivity = useCallback((limit = 20) => {
-    const allActivities: Array<{ projectId: string; type: string; timestamp: string; metadata?: any }> = [];
-    
-    analytics.forEach(data => {
-      data.views.forEach(view => {
-        allActivities.push({
-          projectId: data.projectId,
-          type: 'view',
-          timestamp: view.timestamp,
-          metadata: { referrer: view.referrer, device: view.device },
+  const getRecentActivity = useCallback(
+    (limit = 20) => {
+      const allActivities: Array<{
+        projectId: string;
+        type: string;
+        timestamp: string;
+        metadata?: any;
+      }> = [];
+
+      analytics.forEach(data => {
+        data.views.forEach(view => {
+          allActivities.push({
+            projectId: data.projectId,
+            type: 'view',
+            timestamp: view.timestamp,
+            metadata: { referrer: view.referrer, device: view.device },
+          });
+        });
+
+        data.interactions.forEach(interaction => {
+          allActivities.push({
+            projectId: data.projectId,
+            type: interaction.type,
+            timestamp: interaction.timestamp,
+            metadata: interaction.metadata,
+          });
         });
       });
-      
-      data.interactions.forEach(interaction => {
-        allActivities.push({
-          projectId: data.projectId,
-          type: interaction.type,
-          timestamp: interaction.timestamp,
-          metadata: interaction.metadata,
+
+      return allActivities
+        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+        .slice(0, limit);
+    },
+    [analytics]
+  );
+
+  const exportAnalytics = useCallback(
+    async (projectId?: string): Promise<string> => {
+      debug.analytics.export('Exporting analytics data', { projectId });
+
+      try {
+        const dataToExport = projectId
+          ? analytics.filter(a => a.projectId === projectId)
+          : analytics;
+
+        const csv = convertToCSV(dataToExport);
+        debug.analytics.complete('Analytics exported successfully', {
+          projectId,
+          recordCount: dataToExport.length,
         });
-      });
-    });
-
-    return allActivities
-      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-      .slice(0, limit);
-  }, [analytics]);
-
-  const exportAnalytics = useCallback(async (projectId?: string): Promise<string> => {
-    debug.analytics.export('Exporting analytics data', { projectId });
-    
-    try {
-      const dataToExport = projectId 
-        ? analytics.filter(a => a.projectId === projectId)
-        : analytics;
-
-
-      const csv = convertToCSV(dataToExport);
-      debug.analytics.complete('Analytics exported successfully', { projectId, recordCount: dataToExport.length });
-      return csv;
-    } catch (err) {
-      debug.analytics.error('Failed to export analytics', err as Error, { projectId });
-      setError((err as Error).message);
-      throw err;
-    }
-  }, [analytics]);
+        return csv;
+      } catch (err) {
+        debug.analytics.error('Failed to export analytics', err as Error, { projectId });
+        setError((err as Error).message);
+        throw err;
+      }
+    },
+    [analytics]
+  );
 
   const convertToCSV = (data: AnalyticsData[]): string => {
     const headers = ['Project ID', 'Views', 'Likes', 'Shares', 'Engagement Rate', 'Last Viewed'];
@@ -327,9 +362,5 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     exportAnalytics,
   };
 
-  return (
-    <AnalyticsContext.Provider value={value}>
-      {children}
-    </AnalyticsContext.Provider>
-  );
+  return <AnalyticsContext.Provider value={value}>{children}</AnalyticsContext.Provider>;
 }

@@ -8,10 +8,7 @@ interface VersionHistoryProps {
   onRestoreVersion?: (version: ProjectVersion) => void;
 }
 
-const VersionHistory: React.FC<VersionHistoryProps> = ({
-  projectId,
-  onRestoreVersion
-}) => {
+const VersionHistory: React.FC<VersionHistoryProps> = ({ projectId, onRestoreVersion }) => {
   const [versions, setVersions] = useState<ProjectVersion[]>([]);
   const [selectedVersion, setSelectedVersion] = useState<ProjectVersion | null>(null);
   const [loading, setLoading] = useState(true);
@@ -84,12 +81,13 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
     const date = new Date(dateString);
     const now = new Date();
     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    
+
     if (diffInHours < 1) {
       return 'Just now';
     } else if (diffInHours < 24) {
       return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
-    } else if (diffInHours < 168) { // 7 days
+    } else if (diffInHours < 168) {
+      // 7 days
       const days = Math.floor(diffInHours / 24);
       return `${days} day${days > 1 ? 's' : ''} ago`;
     } else {
@@ -189,7 +187,7 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
                   )}
                   {version.changes && version.changes.length > 0 && (
                     <button
-                      onClick={(e) => {
+                      onClick={e => {
                         e.stopPropagation();
                         setShowChanges(!showChanges);
                       }}
@@ -201,7 +199,7 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
                 </div>
                 {index !== 0 && (
                   <button
-                    onClick={(e) => {
+                    onClick={e => {
                       e.stopPropagation();
                       handleRestoreVersion(version);
                     }}
@@ -230,7 +228,9 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center space-x-2 mb-1">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getChangeTypeColor(change.type)}`}>
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getChangeTypeColor(change.type)}`}
+                              >
                                 {change.type}
                               </span>
                               <span className="text-xs text-neutral-500">{change.section}</span>
@@ -239,7 +239,7 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
                             <p className="text-xs text-neutral-500">
                               {formatDate(change.timestamp)} by {change.userId}
                             </p>
-                            
+
                             {/* Show before/after if available */}
                             {(change.before || change.after) && (
                               <div className="mt-2 space-y-1">
@@ -247,7 +247,9 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
                                   <div className="text-xs">
                                     <span className="font-medium text-red-600">Before:</span>
                                     <span className="ml-2 text-neutral-600 line-through">
-                                      {typeof change.before === 'string' ? change.before : JSON.stringify(change.before)}
+                                      {typeof change.before === 'string'
+                                        ? change.before
+                                        : JSON.stringify(change.before)}
                                     </span>
                                   </div>
                                 )}
@@ -255,7 +257,9 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
                                   <div className="text-xs">
                                     <span className="font-medium text-green-600">After:</span>
                                     <span className="ml-2 text-neutral-600">
-                                      {typeof change.after === 'string' ? change.after : JSON.stringify(change.after)}
+                                      {typeof change.after === 'string'
+                                        ? change.after
+                                        : JSON.stringify(change.after)}
                                     </span>
                                   </div>
                                 )}
@@ -298,7 +302,8 @@ const VersionHistory: React.FC<VersionHistoryProps> = ({
                 {versions.reduce((acc, version) => {
                   const changes = version.changes?.length || 0;
                   return changes > acc ? changes : acc;
-                }, 0)} changes
+                }, 0)}{' '}
+                changes
               </span>
             </div>
           </div>

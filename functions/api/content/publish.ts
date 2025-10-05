@@ -22,7 +22,7 @@ const CONTENT_KEYS: Record<ContentType, { published: string; draft: string }> = 
  * POST /api/content/publish
  * Publishes draft content by copying it to the published key
  */
-export const onRequestPost: PagesFunction = async (context) => {
+export const onRequestPost: PagesFunction = async context => {
   const { request, env } = context;
 
   try {

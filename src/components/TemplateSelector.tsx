@@ -12,8 +12,9 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
 
   const filteredTemplates = PROJECT_TEMPLATES.filter(template => {
     const matchesType = selectedType === 'all' || template.type === selectedType;
-    const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         template.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      template.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesType && matchesSearch;
   });
 
@@ -33,14 +34,21 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold text-neutral-900">Choose Project Template</h2>
-              <p className="text-neutral-600 mt-1">Select a template to get started with pre-filled fields</p>
+              <p className="text-neutral-600 mt-1">
+                Select a template to get started with pre-filled fields
+              </p>
             </div>
             <button
               onClick={onCancel}
               className="p-2 text-neutral-400 hover:text-neutral-600 transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -55,7 +63,7 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
                 type="text"
                 placeholder="Search templates..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
               />
             </div>
@@ -90,7 +98,7 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
                 className="bg-white border border-neutral-200 rounded-xl p-6 hover:shadow-lg hover:border-brand/50 transition-all cursor-pointer group"
               >
                 <div className="flex items-start gap-4">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl"
                     style={{ backgroundColor: `${template.color}20`, color: template.color }}
                   >
@@ -100,20 +108,38 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
                     <h3 className="text-lg font-semibold text-neutral-900 group-hover:text-brand transition-colors">
                       {template.name}
                     </h3>
-                    <p className="text-neutral-600 text-sm mt-1">
-                      {template.description}
-                    </p>
-                    
+                    <p className="text-neutral-600 text-sm mt-1">{template.description}</p>
+
                     <div className="flex items-center gap-4 mt-3 text-xs text-neutral-500">
                       <span className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                         {template.metadata.estimatedTime}
                       </span>
                       <span className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                         {template.metadata.difficulty}
                       </span>
@@ -146,8 +172,18 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
                     </span>
                     <button className="text-brand hover:text-purple-700 text-sm font-medium flex items-center gap-1">
                       Use Template
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
                       </svg>
                     </button>
                   </div>
@@ -160,7 +196,12 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
             <div className="text-center py-12">
               <div className="w-16 h-16 mx-auto text-neutral-400 mb-4">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-neutral-900 mb-2">No templates found</h3>
@@ -173,7 +214,8 @@ export default function TemplateSelector({ onSelectTemplate, onCancel }: Templat
         <div className="p-6 border-t border-neutral-200 bg-neutral-50">
           <div className="flex items-center justify-between">
             <p className="text-sm text-neutral-500">
-              {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} available
+              {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''}{' '}
+              available
             </p>
             <button
               onClick={onCancel}

@@ -16,7 +16,7 @@ const DRAFT_KEY = 'content:contact:draft';
  * GET /api/content/contact
  * Fetches the published contact page content
  */
-export const onRequestGet: PagesFunction = async (context) => {
+export const onRequestGet: PagesFunction = async context => {
   const { env } = context;
 
   try {
@@ -71,7 +71,7 @@ export const onRequestGet: PagesFunction = async (context) => {
  * PATCH /api/content/contact
  * Updates the contact page content (saves as draft)
  */
-export const onRequestPatch: PagesFunction = async (context) => {
+export const onRequestPatch: PagesFunction = async context => {
   const { request, env } = context;
 
   try {

@@ -240,7 +240,8 @@ export default function BulkOperations({
                   ))}
                   {selectedMedia.length > 3 && (
                     <p className="text-xs text-neutral-500">
-                      +{selectedMedia.length - 3} more file{selectedMedia.length - 3 !== 1 ? 's' : ''}
+                      +{selectedMedia.length - 3} more file
+                      {selectedMedia.length - 3 !== 1 ? 's' : ''}
                     </p>
                   )}
                 </div>
@@ -288,7 +289,8 @@ export default function BulkOperations({
                             {col}
                           </span>
                         ))}
-                        {(!file.metadata?.collections || file.metadata.collections.length === 0) && (
+                        {(!file.metadata?.collections ||
+                          file.metadata.collections.length === 0) && (
                           <span className="text-xs text-neutral-400">No collections</span>
                         )}
                       </div>
@@ -296,7 +298,8 @@ export default function BulkOperations({
                   ))}
                   {selectedMedia.length > 3 && (
                     <p className="text-xs text-neutral-500">
-                      +{selectedMedia.length - 3} more file{selectedMedia.length - 3 !== 1 ? 's' : ''}
+                      +{selectedMedia.length - 3} more file
+                      {selectedMedia.length - 3 !== 1 ? 's' : ''}
                     </p>
                   )}
                 </div>

@@ -29,7 +29,7 @@ export default function Admin() {
               Logout
             </button>
           </div>
-          
+
           {/* Navigation Tabs */}
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8">
@@ -37,7 +37,7 @@ export default function Admin() {
                 { id: 'projects', name: 'Projects', component: ProjectManagement },
                 { id: 'media', name: 'Media', component: MediaManagement },
                 { id: 'workshop', name: 'Workshop', component: WorkshopManagement },
-              ].map((tab) => (
+              ].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}

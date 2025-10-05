@@ -121,9 +121,9 @@ export class ProjectImportExport {
       project.content.metrics?.join('; ') || '',
     ]);
 
-    return [headers, ...rows].map(row => 
-      row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')
-    ).join('\n');
+    return [headers, ...rows]
+      .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+      .join('\n');
   }
 
   /**
@@ -150,7 +150,9 @@ export class ProjectImportExport {
 
       // Validate export version
       if (data.version !== this.EXPORT_VERSION) {
-        result.warnings.push(`Export version ${data.version} may not be compatible with current version ${this.EXPORT_VERSION}`);
+        result.warnings.push(
+          `Export version ${data.version} may not be compatible with current version ${this.EXPORT_VERSION}`
+        );
       }
 
       // Validate data structure
@@ -193,7 +195,6 @@ export class ProjectImportExport {
           result.errors.push(`Failed to import media: ${(error as Error).message}`);
         }
       }
-
     } catch (error) {
       result.success = false;
       result.errors.push(`Failed to parse import data: ${(error as Error).message}`);
@@ -264,7 +265,11 @@ export class ProjectImportExport {
   /**
    * Download data as file
    */
-  static downloadFile(data: string | Blob, filename: string, mimeType: string = 'application/json') {
+  static downloadFile(
+    data: string | Blob,
+    filename: string,
+    mimeType: string = 'application/json'
+  ) {
     const blob = data instanceof Blob ? data : new Blob([data], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -282,7 +287,7 @@ export class ProjectImportExport {
   static readFile(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         const result = e.target?.result;
         if (typeof result === 'string') {
           resolve(result);

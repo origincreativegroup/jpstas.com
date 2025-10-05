@@ -12,15 +12,7 @@
  */
 
 type LogLevel = 'log' | 'info' | 'warn' | 'error' | 'debug';
-type Category =
-  | 'media'
-  | 'content'
-  | 'upload'
-  | 'api'
-  | 'state'
-  | 'file'
-  | 'component'
-  | 'general';
+type Category = 'media' | 'content' | 'upload' | 'api' | 'state' | 'file' | 'component' | 'general';
 
 interface DebugConfig {
   enabled: boolean;
@@ -152,7 +144,8 @@ export const debug = {
     delete: (message: string, data?: any) => log('media', 'info', message, data),
     update: (message: string, data?: any) => log('media', 'info', message, data),
     select: (message: string, data?: any) => log('media', 'debug', message, data),
-    error: (message: string, error: Error, data?: any) => log('media', 'error', message, data, error),
+    error: (message: string, error: Error, data?: any) =>
+      log('media', 'error', message, data, error),
     warn: (message: string, data?: any) => log('media', 'warn', message, data),
   },
 
@@ -171,7 +164,8 @@ export const debug = {
     update: (message: string, data?: any) => log('content', 'info', message, data),
     publish: (message: string, data?: any) => log('content', 'info', message, data),
     upload: (message: string, data?: any) => log('upload', 'info', message, data),
-    error: (message: string, error: Error, data?: any) => log('content', 'error', message, data, error),
+    error: (message: string, error: Error, data?: any) =>
+      log('content', 'error', message, data, error),
   },
 
   // Analytics operations
@@ -181,7 +175,8 @@ export const debug = {
     fetch: (message: string, data?: any) => log('general', 'info', message, data),
     complete: (message: string, data?: any) => log('general', 'info', message, data),
     export: (message: string, data?: any) => log('general', 'info', message, data),
-    error: (message: string, error: Error, data?: any) => log('general', 'error', message, data, error),
+    error: (message: string, error: Error, data?: any) =>
+      log('general', 'error', message, data, error),
   },
 
   // Upload operations
@@ -201,7 +196,8 @@ export const debug = {
     delete: (message: string, data?: any) => log('content', 'info', message, data),
     publish: (message: string, data?: any) => log('content', 'info', message, data),
     complete: (message: string, data?: any) => log('content', 'info', message, data),
-    error: (message: string, error: Error, data?: any) => log('content', 'error', message, data, error),
+    error: (message: string, error: Error, data?: any) =>
+      log('content', 'error', message, data, error),
   },
 
   // API requests
@@ -223,7 +219,8 @@ export const debug = {
   file: {
     read: (message: string, data?: any) => log('file', 'debug', message, data),
     validate: (message: string, data?: any) => log('file', 'debug', message, data),
-    error: (message: string, error: Error, data?: any) => log('file', 'error', message, data, error),
+    error: (message: string, error: Error, data?: any) =>
+      log('file', 'error', message, data, error),
   },
 
   // Component lifecycle
@@ -273,10 +270,7 @@ export const debug = {
 /**
  * Network request interceptor for debugging
  */
-export function debugFetch(
-  url: string,
-  options?: RequestInit
-): Promise<Response> {
+export function debugFetch(url: string, options?: RequestInit): Promise<Response> {
   const method = options?.method || 'GET';
   const requestId = Math.random().toString(36).substring(7);
 

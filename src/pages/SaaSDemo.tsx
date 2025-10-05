@@ -14,7 +14,7 @@ const SaaSDemo: React.FC = () => {
       description: 'A clean, modern portfolio template perfect for showcasing your work',
       image: '/templates/portfolio-showcase-preview.jpg',
       features: ['Hero Section', 'Project Gallery', 'Testimonials', 'Contact Form'],
-      category: 'Portfolio'
+      category: 'Portfolio',
     },
     {
       id: 'case-study-detailed',
@@ -22,7 +22,7 @@ const SaaSDemo: React.FC = () => {
       description: 'A comprehensive template for detailed project case studies',
       image: '/templates/case-study-preview.jpg',
       features: ['Project Overview', 'Process Timeline', 'Results & Metrics', 'Lessons Learned'],
-      category: 'Case Study'
+      category: 'Case Study',
     },
     {
       id: 'creative-showcase',
@@ -30,7 +30,7 @@ const SaaSDemo: React.FC = () => {
       description: 'An artistic template for creative professionals and agencies',
       image: '/templates/creative-showcase-preview.jpg',
       features: ['Visual Gallery', 'Interactive Elements', 'Brand Story', 'Portfolio Grid'],
-      category: 'Showcase'
+      category: 'Showcase',
     },
     {
       id: 'minimal-portfolio',
@@ -38,48 +38,48 @@ const SaaSDemo: React.FC = () => {
       description: 'A clean, minimal design focused on content and typography',
       image: '/templates/minimal-portfolio-preview.jpg',
       features: ['Typography Focus', 'Clean Layout', 'Subtle Animations', 'Mobile First'],
-      category: 'Portfolio'
-    }
+      category: 'Portfolio',
+    },
   ];
 
   const features = [
     {
       icon: '🎨',
       title: 'Visual Editor',
-      description: 'Drag-and-drop interface with live preview and real-time editing'
+      description: 'Drag-and-drop interface with live preview and real-time editing',
     },
     {
       icon: '🖼️',
       title: 'Media Integration',
-      description: 'Seamless integration with global media library and drag-and-drop functionality'
+      description: 'Seamless integration with global media library and drag-and-drop functionality',
     },
     {
       icon: '👥',
       title: 'Real-time Collaboration',
-      description: 'Invite team members, leave comments, and collaborate in real-time'
+      description: 'Invite team members, leave comments, and collaborate in real-time',
     },
     {
       icon: '📚',
       title: 'Version Control',
-      description: 'Automatic versioning, change tracking, and rollback capabilities'
+      description: 'Automatic versioning, change tracking, and rollback capabilities',
     },
     {
       icon: '📤',
       title: 'Export & Import',
-      description: 'Export to multiple formats and import existing projects'
+      description: 'Export to multiple formats and import existing projects',
     },
     {
       icon: '🎯',
       title: 'Template System',
-      description: 'Pre-built templates and custom template creation'
-    }
+      description: 'Pre-built templates and custom template creation',
+    },
   ];
 
   const stats = [
     { label: 'Templates Available', value: '12+' },
     { label: 'Section Types', value: '7' },
     { label: 'Export Formats', value: '4' },
-    { label: 'Collaboration Features', value: 'Unlimited' }
+    { label: 'Collaboration Features', value: 'Unlimited' },
   ];
 
   return (
@@ -128,8 +128,8 @@ const SaaSDemo: React.FC = () => {
               <span className="block text-accent">Portfolio Projects</span>
             </h2>
             <p className="text-xl text-brand-light mb-8 max-w-3xl mx-auto">
-              The most advanced portfolio project editor with real-time collaboration, 
-              version control, and seamless media integration.
+              The most advanced portfolio project editor with real-time collaboration, version
+              control, and seamless media integration.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -310,7 +310,7 @@ const SaaSDemo: React.FC = () => {
       {showEditor && (
         <SaaSProjectEditor
           onClose={() => setShowEditor(false)}
-          onSave={(project) => {
+          onSave={project => {
             console.log('Project saved:', project);
             setShowEditor(false);
           }}
@@ -330,7 +330,12 @@ const SaaSDemo: React.FC = () => {
                 className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
@@ -348,21 +353,32 @@ const SaaSDemo: React.FC = () => {
                 <div>
                   <h4 className="font-semibold text-lg mb-3">Template Features</h4>
                   <ul className="space-y-2">
-                    {demos.find(d => d.id === selectedDemo)?.features.map((feature, index) => (
-                      <li key={index} className="flex items-center space-x-2">
-                        <span className="w-2 h-2 bg-accent rounded-full"></span>
-                        <span className="text-neutral-700">{feature}</span>
-                      </li>
-                    ))}
+                    {demos
+                      .find(d => d.id === selectedDemo)
+                      ?.features.map((feature, index) => (
+                        <li key={index} className="flex items-center space-x-2">
+                          <span className="w-2 h-2 bg-accent rounded-full"></span>
+                          <span className="text-neutral-700">{feature}</span>
+                        </li>
+                      ))}
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg mb-3">Template Details</h4>
                   <div className="space-y-2 text-sm text-neutral-600">
-                    <p><span className="font-medium">Category:</span> {demos.find(d => d.id === selectedDemo)?.category}</p>
-                    <p><span className="font-medium">Difficulty:</span> Intermediate</p>
-                    <p><span className="font-medium">Estimated Time:</span> 30-60 minutes</p>
-                    <p><span className="font-medium">Responsive:</span> Yes</p>
+                    <p>
+                      <span className="font-medium">Category:</span>{' '}
+                      {demos.find(d => d.id === selectedDemo)?.category}
+                    </p>
+                    <p>
+                      <span className="font-medium">Difficulty:</span> Intermediate
+                    </p>
+                    <p>
+                      <span className="font-medium">Estimated Time:</span> 30-60 minutes
+                    </p>
+                    <p>
+                      <span className="font-medium">Responsive:</span> Yes
+                    </p>
                   </div>
                 </div>
               </div>

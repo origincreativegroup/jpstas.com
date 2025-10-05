@@ -203,7 +203,12 @@ export default function MediaPicker({
                       }`}
                       title="Grid view"
                     >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -221,7 +226,12 @@ export default function MediaPicker({
                       }`}
                       title="List view"
                     >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -301,7 +311,11 @@ export default function MediaPicker({
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <video src={file.url} className="w-full h-full object-cover" preload="metadata" />
+                          <video
+                            src={file.url}
+                            className="w-full h-full object-cover"
+                            preload="metadata"
+                          />
                         )}
                       </div>
                       <div className="absolute top-2 left-2">
@@ -314,7 +328,10 @@ export default function MediaPicker({
                         />
                       </div>
                       <div className="p-2 bg-white border-t border-neutral-200">
-                        <p className="text-xs font-medium text-neutral-900 truncate" title={file.name}>
+                        <p
+                          className="text-xs font-medium text-neutral-900 truncate"
+                          title={file.name}
+                        >
                           {file.name}
                         </p>
                       </div>
@@ -347,11 +364,17 @@ export default function MediaPicker({
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <video src={file.url} className="w-full h-full object-cover" preload="metadata" />
+                            <video
+                              src={file.url}
+                              className="w-full h-full object-cover"
+                              preload="metadata"
+                            />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-neutral-900 truncate">{file.name}</p>
+                          <p className="text-sm font-medium text-neutral-900 truncate">
+                            {file.name}
+                          </p>
                           <p className="text-xs text-neutral-500">
                             {file.type.startsWith('image/') ? 'Image' : 'Video'} •{' '}
                             {(file.size / 1024 / 1024).toFixed(2)} MB
@@ -374,7 +397,13 @@ export default function MediaPicker({
                 <input
                   type="file"
                   id="file-upload"
-                  accept={accept === 'images' ? 'image/*' : accept === 'videos' ? 'video/*' : 'image/*,video/*'}
+                  accept={
+                    accept === 'images'
+                      ? 'image/*'
+                      : accept === 'videos'
+                        ? 'video/*'
+                        : 'image/*,video/*'
+                  }
                   multiple
                   onChange={handleFileInput}
                   className="hidden"
@@ -390,7 +419,9 @@ export default function MediaPicker({
                   </svg>
                 </div>
                 <p className="text-lg font-medium text-neutral-700 mb-2">Upload files</p>
-                <p className="text-sm text-neutral-500 mb-4">Drag and drop files here, or click to select</p>
+                <p className="text-sm text-neutral-500 mb-4">
+                  Drag and drop files here, or click to select
+                </p>
                 <button
                   onClick={() => document.getElementById('file-upload')?.click()}
                   className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700 transition-colors"
@@ -409,7 +440,9 @@ export default function MediaPicker({
                       className="flex items-center gap-3 p-3 bg-neutral-50 rounded-lg border border-neutral-200"
                     >
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-neutral-900 truncate">{item.file.name}</p>
+                        <p className="text-sm font-medium text-neutral-900 truncate">
+                          {item.file.name}
+                        </p>
                         <div className="flex items-center gap-2 mt-1">
                           <div className="flex-1 h-1.5 bg-neutral-200 rounded-full overflow-hidden">
                             <div
@@ -417,8 +450,8 @@ export default function MediaPicker({
                                 item.status === 'completed'
                                   ? 'bg-green-500'
                                   : item.status === 'failed'
-                                  ? 'bg-red-500'
-                                  : 'bg-brand'
+                                    ? 'bg-red-500'
+                                    : 'bg-brand'
                               }`}
                               style={{ width: `${item.progress}%` }}
                             />

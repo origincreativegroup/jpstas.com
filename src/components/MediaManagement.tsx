@@ -14,15 +14,19 @@ const MediaManagement: React.FC = () => {
   const { showToast } = useToast();
 
   const filteredMedia = media.filter(file => {
-    const matchesFilter = filter === 'all' || 
+    const matchesFilter =
+      filter === 'all' ||
       (filter === 'images' && file.type.startsWith('image/')) ||
       (filter === 'videos' && file.type.startsWith('video/')) ||
-      (filter === 'documents' && !file.type.startsWith('image/') && !file.type.startsWith('video/'));
-    
-    const matchesSearch = file.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (filter === 'documents' &&
+        !file.type.startsWith('image/') &&
+        !file.type.startsWith('video/'));
+
+    const matchesSearch =
+      file.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       file.alt?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       file.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+
     return matchesFilter && matchesSearch;
   });
 
@@ -36,9 +40,9 @@ const MediaManagement: React.FC = () => {
 
   const handleBulkDelete = async () => {
     if (selectedMedia.size === 0) return;
-    
+
     if (!confirm(`Are you sure you want to delete ${selectedMedia.size} files?`)) return;
-    
+
     try {
       await bulkDelete(Array.from(selectedMedia));
       setSelectedMedia(new Set());
@@ -51,7 +55,7 @@ const MediaManagement: React.FC = () => {
 
   const handleDelete = async (fileId: string) => {
     if (!confirm('Are you sure you want to delete this file?')) return;
-    
+
     try {
       await removeMedia(fileId);
       showToast('File deleted successfully', 'success');
@@ -109,15 +113,25 @@ const MediaManagement: React.FC = () => {
           <div className="flex-1">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  className="h-5 w-5 text-neutral-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
               </div>
               <input
                 type="text"
                 placeholder="Search media..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
               />
             </div>
@@ -125,7 +139,7 @@ const MediaManagement: React.FC = () => {
 
           {/* Filters */}
           <div className="flex gap-2">
-            {(['all', 'images', 'videos', 'documents'] as const).map((filterType) => (
+            {(['all', 'images', 'videos', 'documents'] as const).map(filterType => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}
@@ -145,21 +159,35 @@ const MediaManagement: React.FC = () => {
             <button
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-md transition-colors ${
-                viewMode === 'grid' ? 'bg-white shadow-sm text-brand' : 'text-neutral-600 hover:text-neutral-800'
+                viewMode === 'grid'
+                  ? 'bg-white shadow-sm text-brand'
+                  : 'text-neutral-600 hover:text-neutral-800'
               }`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                />
               </svg>
             </button>
             <button
               onClick={() => setViewMode('list')}
               className={`p-2 rounded-md transition-colors ${
-                viewMode === 'list' ? 'bg-white shadow-sm text-brand' : 'text-neutral-600 hover:text-neutral-800'
+                viewMode === 'list'
+                  ? 'bg-white shadow-sm text-brand'
+                  : 'text-neutral-600 hover:text-neutral-800'
               }`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                />
               </svg>
             </button>
           </div>
@@ -192,7 +220,7 @@ const MediaManagement: React.FC = () => {
       {/* Media Grid/List */}
       {viewMode === 'grid' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {filteredMedia.map((file) => (
+          {filteredMedia.map(file => (
             <motion.div
               key={file.id}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -228,9 +256,7 @@ const MediaManagement: React.FC = () => {
                 <h3 className="font-medium text-sm text-brand truncate" title={file.name}>
                   {file.name}
                 </h3>
-                <p className="text-xs text-neutral-500 mt-1">
-                  {formatFileSize(file.size)}
-                </p>
+                <p className="text-xs text-neutral-500 mt-1">{formatFileSize(file.size)}</p>
                 {file.alt && (
                   <p className="text-xs text-neutral-400 mt-1 truncate" title={file.alt}>
                     {file.alt}
@@ -241,14 +267,19 @@ const MediaManagement: React.FC = () => {
               {/* Actions */}
               <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
-                  onClick={(e) => {
+                  onClick={e => {
                     e.stopPropagation();
                     handleDelete(file.id);
                   }}
                   className="p-1 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
                 >
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
@@ -264,7 +295,9 @@ const MediaManagement: React.FC = () => {
                   <th className="px-6 py-3 text-left">
                     <input
                       type="checkbox"
-                      checked={selectedMedia.size === filteredMedia.length && filteredMedia.length > 0}
+                      checked={
+                        selectedMedia.size === filteredMedia.length && filteredMedia.length > 0
+                      }
                       onChange={handleSelectAll}
                       className="rounded border-neutral-300 text-accent focus:ring-accent"
                     />
@@ -287,7 +320,7 @@ const MediaManagement: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-200">
-                {filteredMedia.map((file) => (
+                {filteredMedia.map(file => (
                   <tr key={file.id} className="hover:bg-neutral-50">
                     <td className="px-6 py-4">
                       <input
@@ -310,15 +343,11 @@ const MediaManagement: React.FC = () => {
                         <span className="text-lg mr-3">{getFileIcon(file.type)}</span>
                         <div>
                           <div className="text-sm font-medium text-brand">{file.name}</div>
-                          {file.alt && (
-                            <div className="text-sm text-neutral-500">{file.alt}</div>
-                          )}
+                          {file.alt && <div className="text-sm text-neutral-500">{file.alt}</div>}
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-neutral-500">
-                      {file.type}
-                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-500">{file.type}</td>
                     <td className="px-6 py-4 text-sm text-neutral-500">
                       {formatFileSize(file.size)}
                     </td>
@@ -331,16 +360,36 @@ const MediaManagement: React.FC = () => {
                           onClick={() => {}}
                           className="p-1 text-neutral-400 hover:text-neutral-600 transition-colors"
                         >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                            />
                           </svg>
                         </button>
                         <button
                           onClick={() => handleDelete(file.id)}
                           className="p-1 text-neutral-400 hover:text-red-600 transition-colors"
                         >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
                           </svg>
                         </button>
                       </div>
@@ -358,7 +407,9 @@ const MediaManagement: React.FC = () => {
           <div className="text-6xl mb-4">📁</div>
           <h3 className="text-lg font-medium text-neutral-900 mb-2">No media found</h3>
           <p className="text-neutral-600 mb-4">
-            {searchQuery ? 'Try adjusting your search terms' : 'Upload your first media files to get started'}
+            {searchQuery
+              ? 'Try adjusting your search terms'
+              : 'Upload your first media files to get started'}
           </p>
           <button
             onClick={() => setShowUpload(true)}
@@ -381,7 +432,12 @@ const MediaManagement: React.FC = () => {
                   className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>

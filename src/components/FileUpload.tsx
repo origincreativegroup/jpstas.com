@@ -105,7 +105,7 @@ export default function FileUpload({
         onUpload(uploadedFile);
         toast.success(`Uploaded ${file.name}`);
         debug.perf.end(`upload:${file.name}`);
-        
+
         return uploadedFile;
       } catch (error) {
         debug.upload.error('File upload failed', error as Error, {
@@ -113,7 +113,7 @@ export default function FileUpload({
           fileSize: file.size,
         });
         debug.perf.end(`upload:${file.name}`);
-        
+
         const errorMessage = handleApiError(error);
         toast.error(`Upload failed: ${errorMessage}`);
         throw error;
@@ -147,11 +147,10 @@ export default function FileUpload({
       }
 
       if (files.length > maxFiles) {
-        debug.file.error(
-          'Too many files selected',
-          new Error('File limit exceeded'),
-          { fileCount: files.length, maxFiles }
-        );
+        debug.file.error('Too many files selected', new Error('File limit exceeded'), {
+          fileCount: files.length,
+          maxFiles,
+        });
         toast.error(`Maximum ${maxFiles} files allowed`);
         return;
       }
@@ -165,15 +164,11 @@ export default function FileUpload({
         if (!validation.valid) {
           const error = `File ${file.name}: ${validation.error}`;
           errors.push(error);
-          debug.file.error(
-            'File validation failed',
-            new Error(validation.error!),
-            {
-              fileName: file.name,
-              fileSize: file.size,
-              fileType: file.type,
-            }
-          );
+          debug.file.error('File validation failed', new Error(validation.error!), {
+            fileName: file.name,
+            fileSize: file.size,
+            fileType: file.type,
+          });
           continue;
         }
 
@@ -271,7 +266,7 @@ export default function FileUpload({
     for (let i = 0; i < uploadQueue.length; i++) {
       const file = uploadQueue[i];
       if (!file) continue;
-      
+
       try {
         const result = await uploadFile(file);
         uploadedFiles.push(result);
@@ -367,7 +362,8 @@ export default function FileUpload({
                 Drag and drop files here, or click to select
               </p>
               <p className="text-xs text-neutral-400 mt-2">
-                Max size: {formatFileSize(maxSize)} • {multiple ? `Max ${maxFiles} files` : 'Single file'} • Images and videos supported
+                Max size: {formatFileSize(maxSize)} •{' '}
+                {multiple ? `Max ${maxFiles} files` : 'Single file'} • Images and videos supported
               </p>
             </div>
             <button
@@ -403,24 +399,49 @@ export default function FileUpload({
               </button>
             </div>
           </div>
-          
+
           <div className="space-y-2 max-h-40 overflow-y-auto">
             {uploadQueue.map((file, index) => (
-              <div key={index} className="flex items-center justify-between p-2 bg-neutral-50 rounded border">
+              <div
+                key={index}
+                className="flex items-center justify-between p-2 bg-neutral-50 rounded border"
+              >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-neutral-200 rounded flex items-center justify-center">
                     {file.type.startsWith('image/') ? (
-                      <svg className="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <svg
+                        className="w-4 h-4 text-neutral-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                     ) : (
-                      <svg className="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      <svg
+                        className="w-4 h-4 text-neutral-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        />
                       </svg>
                     )}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-neutral-700 truncate max-w-xs">{file.name}</p>
+                    <p className="text-sm font-medium text-neutral-700 truncate max-w-xs">
+                      {file.name}
+                    </p>
                     <p className="text-xs text-neutral-500">{formatFileSize(file.size)}</p>
                   </div>
                 </div>
@@ -429,7 +450,12 @@ export default function FileUpload({
                   className="p-1 text-neutral-400 hover:text-red-600"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>

@@ -6,8 +6,16 @@ interface AnalyticsContextType {
   trackEvent: (event: any) => void;
   trackPageView: (event: any) => void;
   trackEngagement: (action: string, details?: Record<string, any>) => void;
-  trackPortfolioInteraction: (projectId: string, action: string, details?: Record<string, any>) => void;
-  trackWorkshopInteraction: (section: string, action: string, details?: Record<string, any>) => void;
+  trackPortfolioInteraction: (
+    projectId: string,
+    action: string,
+    details?: Record<string, any>
+  ) => void;
+  trackWorkshopInteraction: (
+    section: string,
+    action: string,
+    details?: Record<string, any>
+  ) => void;
   trackAdminAction: (action: string, details?: Record<string, any>) => void;
   trackFormSubmission: (formName: string, success: boolean, details?: Record<string, any>) => void;
   trackDownload: (fileName: string, fileType: string, fileSize?: number) => void;
@@ -46,11 +54,7 @@ export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({ children }
     trackConversion: analytics.trackConversion.bind(analytics),
   };
 
-  return (
-    <AnalyticsContext.Provider value={contextValue}>
-      {children}
-    </AnalyticsContext.Provider>
-  );
+  return <AnalyticsContext.Provider value={contextValue}>{children}</AnalyticsContext.Provider>;
 };
 
 export const useAnalytics = (): AnalyticsContextType => {

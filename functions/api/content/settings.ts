@@ -16,7 +16,7 @@ const DRAFT_KEY = 'content:settings:draft';
  * GET /api/content/settings
  * Fetches the published global settings
  */
-export const onRequestGet: PagesFunction = async (context) => {
+export const onRequestGet: PagesFunction = async context => {
   const { env } = context;
 
   try {
@@ -71,7 +71,7 @@ export const onRequestGet: PagesFunction = async (context) => {
  * PATCH /api/content/settings
  * Updates the global settings (saves as draft)
  */
-export const onRequestPatch: PagesFunction = async (context) => {
+export const onRequestPatch: PagesFunction = async context => {
   const { request, env } = context;
 
   try {

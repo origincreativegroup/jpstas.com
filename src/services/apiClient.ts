@@ -35,12 +35,12 @@ async function apiRequest<T = any>(
   options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
   const url = getApiUrl(endpoint);
-  
+
   envLog.debug(`API Request: ${options.method || 'GET'} ${url}`, options);
 
   const defaultHeaders = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    Accept: 'application/json',
   };
 
   const requestOptions: RequestInit = {
@@ -52,9 +52,7 @@ async function apiRequest<T = any>(
   };
 
   try {
-    const response = await withTimeout(
-      retryWithBackoff(() => fetch(url, requestOptions))
-    );
+    const response = await withTimeout(retryWithBackoff(() => fetch(url, requestOptions)));
 
     envLog.debug(`API Response: ${response.status} ${response.statusText}`);
 
@@ -66,7 +64,7 @@ async function apiRequest<T = any>(
       } catch {
         // If we can't parse the error response, use the status text
       }
-      
+
       throw new ApiClientError(errorMessage, response.status, response);
     }
 
@@ -79,12 +77,9 @@ async function apiRequest<T = any>(
     if (error instanceof ApiClientError) {
       throw error;
     }
-    
+
     envLog.error('API Request failed:', error);
-    throw new ApiClientError(
-      error instanceof Error ? error.message : 'Unknown error occurred',
-      0
-    );
+    throw new ApiClientError(error instanceof Error ? error.message : 'Unknown error occurred', 0);
   }
 }
 
@@ -97,7 +92,8 @@ const mockApi = {
         id: '1',
         title: 'In‑House Print Studio Build',
         role: 'Designer • Ops Lead',
-        summary: 'HP Latex 315 print workflow, vehicle wraps, apparel—training seasonal staff and saving costs.',
+        summary:
+          'HP Latex 315 print workflow, vehicle wraps, apparel—training seasonal staff and saving costs.',
         tags: ['Design', 'Ops', 'Large Format'],
         type: 'case-study',
         featured: true,
@@ -111,8 +107,10 @@ const mockApi = {
           },
         ],
         content: {
-          challenge: 'Needed to establish an in-house print studio to reduce outsourcing costs and improve turnaround times.',
-          solution: 'Designed and implemented a complete print workflow using HP Latex 315, including training protocols for seasonal staff.',
+          challenge:
+            'Needed to establish an in-house print studio to reduce outsourcing costs and improve turnaround times.',
+          solution:
+            'Designed and implemented a complete print workflow using HP Latex 315, including training protocols for seasonal staff.',
           results: 'Reduced print costs by 40% and improved delivery times by 60%.',
           process: [
             'Research and equipment selection',
@@ -120,7 +118,12 @@ const mockApi = {
             'Staff training and documentation',
             'Quality control implementation',
           ],
-          technologies: ['HP Latex 315', 'Adobe Creative Suite', 'RIP Software', 'Large Format Printing'],
+          technologies: [
+            'HP Latex 315',
+            'Adobe Creative Suite',
+            'RIP Software',
+            'Large Format Printing',
+          ],
         },
         createdAt: '2024-01-15',
         updatedAt: '2024-01-15',
@@ -153,7 +156,7 @@ const mockApi = {
 
   async uploadFile(file: File): Promise<MediaFile> {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const mockFile: MediaFile = {
       id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       name: file.name,
@@ -195,7 +198,7 @@ const mockApi = {
   async getPageContent(page: string): Promise<PageContent> {
     await new Promise(resolve => setTimeout(resolve, 200));
     envLog.debug('Mock: Get page content', { page });
-    
+
     // Return mock page content based on page type
     const mockContent: PageContent = {
       id: `${page}-content`,
@@ -208,14 +211,14 @@ const mockApi = {
       lastUpdated: new Date().toISOString(),
       published: true,
     };
-    
+
     return mockContent;
   },
 
   async updatePageContent(page: string, content: Partial<PageContent>): Promise<PageContent> {
     await new Promise(resolve => setTimeout(resolve, 300));
     envLog.debug('Mock: Update page content', { page, content });
-    
+
     const updatedContent: PageContent = {
       id: `${page}-content`,
       page: page as any,
@@ -228,14 +231,14 @@ const mockApi = {
       ...content,
       lastUpdated: new Date().toISOString(),
     };
-    
+
     return updatedContent;
   },
 
   async publishPageContent(page: string): Promise<PageContent> {
     await new Promise(resolve => setTimeout(resolve, 200));
     envLog.debug('Mock: Publish page content', { page });
-    
+
     const publishedContent: PageContent = {
       id: `${page}-content`,
       page: page as any,
@@ -247,14 +250,14 @@ const mockApi = {
       published: true,
       lastUpdated: new Date().toISOString(),
     };
-    
+
     return publishedContent;
   },
 
   async getCMSSettings(): Promise<CMSSettings> {
     await new Promise(resolve => setTimeout(resolve, 200));
     envLog.debug('Mock: Get CMS settings');
-    
+
     const mockSettings: CMSSettings = {
       siteName: 'John P. Stas',
       siteDescription: 'Creative Technologist, Designer, & Process Innovator',
@@ -269,14 +272,14 @@ const mockApi = {
         github: 'https://github.com/johnpstas',
       },
     };
-    
+
     return mockSettings;
   },
 
   async updateCMSSettings(settings: Partial<CMSSettings>): Promise<CMSSettings> {
     await new Promise(resolve => setTimeout(resolve, 300));
     envLog.debug('Mock: Update CMS settings', { settings });
-    
+
     const updatedSettings: CMSSettings = {
       siteName: 'John P. Stas',
       siteDescription: 'Creative Technologist, Designer, & Process Innovator',
@@ -292,7 +295,7 @@ const mockApi = {
       },
       ...settings,
     };
-    
+
     return updatedSettings;
   },
 };
@@ -352,13 +355,13 @@ const realApi = {
     return response.data!;
   },
 
-      async updatePageContent(page: string, content: Partial<PageContent>): Promise<PageContent> {
-        const response = await apiRequest<PageContent>(`/cms/pages/${page}`, {
-          method: 'PATCH',
-          body: JSON.stringify(content),
-        });
-        return response.data!;
-      },
+  async updatePageContent(page: string, content: Partial<PageContent>): Promise<PageContent> {
+    const response = await apiRequest<PageContent>(`/cms/pages/${page}`, {
+      method: 'PATCH',
+      body: JSON.stringify(content),
+    });
+    return response.data!;
+  },
 
   async publishPageContent(page: string): Promise<PageContent> {
     const response = await apiRequest<PageContent>(`/cms/pages/${page}/publish`, {
@@ -372,38 +375,31 @@ const realApi = {
     return response.data!;
   },
 
-      async updateCMSSettings(settings: Partial<CMSSettings>): Promise<CMSSettings> {
-        const response = await apiRequest<CMSSettings>('/cms/settings', {
-          method: 'PATCH',
-          body: JSON.stringify(settings),
-        });
-        return response.data!;
-      },
+  async updateCMSSettings(settings: Partial<CMSSettings>): Promise<CMSSettings> {
+    const response = await apiRequest<CMSSettings>('/cms/settings', {
+      method: 'PATCH',
+      body: JSON.stringify(settings),
+    });
+    return response.data!;
+  },
 };
 
 // Export the appropriate API based on environment
 export const api = config.enableMockApi ? mockApi : realApi;
 
 // Export individual functions for easier use
-export const {
-  getProjects,
-  getMedia,
-  uploadFile,
-  saveProject,
-  updateMedia,
-  deleteMedia,
-} = api;
+export const { getProjects, getMedia, uploadFile, saveProject, updateMedia, deleteMedia } = api;
 
 // Utility functions
 export const handleApiError = (error: unknown): string => {
   if (error instanceof ApiClientError) {
     return error.message;
   }
-  
+
   if (error instanceof Error) {
     return error.message;
   }
-  
+
   return 'An unknown error occurred';
 };
 

@@ -22,7 +22,14 @@ const developmentConfig: EnvironmentConfig = {
   enableAnalytics: false,
   enableErrorReporting: false,
   maxFileSize: 10 * 1024 * 1024, // 10MB
-  allowedFileTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm'],
+  allowedFileTypes: [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'image/webp',
+    'video/mp4',
+    'video/webm',
+  ],
   retryAttempts: 3,
   timeoutMs: 30000, // 30 seconds
 };
@@ -36,7 +43,14 @@ const productionConfig: EnvironmentConfig = {
   enableAnalytics: true,
   enableErrorReporting: true,
   maxFileSize: 50 * 1024 * 1024, // 50MB
-  allowedFileTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm'],
+  allowedFileTypes: [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'image/webp',
+    'video/mp4',
+    'video/webm',
+  ],
   retryAttempts: 5,
   timeoutMs: 60000, // 60 seconds
 };
@@ -54,7 +68,9 @@ export const shouldEnableDebug = () => config.enableDebug;
 
 // API URL helpers
 export const getApiUrl = (endpoint: string) => {
-  const baseUrl = config.apiBaseUrl.endsWith('/') ? config.apiBaseUrl.slice(0, -1) : config.apiBaseUrl;
+  const baseUrl = config.apiBaseUrl.endsWith('/')
+    ? config.apiBaseUrl.slice(0, -1)
+    : config.apiBaseUrl;
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   return `${baseUrl}${cleanEndpoint}`;
 };
@@ -75,14 +91,14 @@ export const validateFile = (file: File): { valid: boolean; error?: string } => 
       error: `File size exceeds maximum allowed size of ${Math.round(config.maxFileSize / 1024 / 1024)}MB`,
     };
   }
-  
+
   if (!validateFileType(file)) {
     return {
       valid: false,
       error: `File type ${file.type} is not supported. Allowed types: ${config.allowedFileTypes.join(', ')}`,
     };
   }
-  
+
   return { valid: true };
 };
 
@@ -93,23 +109,23 @@ export const retryWithBackoff = async <T>(
   baseDelay: number = 1000
 ): Promise<T> => {
   let lastError: Error;
-  
+
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       return await fn();
     } catch (error) {
       lastError = error as Error;
-      
+
       if (attempt === maxAttempts) {
         throw lastError;
       }
-      
+
       // Exponential backoff: 1s, 2s, 4s, 8s, etc.
       const delay = baseDelay * Math.pow(2, attempt - 1);
       await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
-  
+
   throw lastError!;
 };
 

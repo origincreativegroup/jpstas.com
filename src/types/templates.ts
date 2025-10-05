@@ -53,17 +53,17 @@ export const PROJECT_TEMPLATES: ProjectTemplate[] = [
         'Planning and Strategy',
         'Design and Prototyping',
         'Development and Testing',
-        'Launch and Optimization'
+        'Launch and Optimization',
       ],
       technologies: ['Technology 1', 'Technology 2', 'Technology 3'],
-      metrics: ['Metric 1', 'Metric 2', 'Metric 3']
+      metrics: ['Metric 1', 'Metric 2', 'Metric 3'],
     },
     metadata: {
       category: 'Professional',
       difficulty: 'intermediate',
       estimatedTime: '2-3 hours',
-      requiredFields: ['title', 'role', 'summary', 'challenge', 'solution', 'results']
-    }
+      requiredFields: ['title', 'role', 'summary', 'challenge', 'solution', 'results'],
+    },
   },
   {
     id: 'portfolio-piece-template',
@@ -86,17 +86,17 @@ export const PROJECT_TEMPLATES: ProjectTemplate[] = [
         'Research and Inspiration',
         'Sketching and Planning',
         'Creation and Iteration',
-        'Finalization and Presentation'
+        'Finalization and Presentation',
       ],
       technologies: ['Tool 1', 'Tool 2', 'Medium'],
-      deliverables: ['Final Artwork', 'Process Documentation', 'Behind-the-Scenes']
+      deliverables: ['Final Artwork', 'Process Documentation', 'Behind-the-Scenes'],
     },
     metadata: {
       category: 'Creative',
       difficulty: 'beginner',
       estimatedTime: '1-2 hours',
-      requiredFields: ['title', 'role', 'summary']
-    }
+      requiredFields: ['title', 'role', 'summary'],
+    },
   },
   {
     id: 'client-work-template',
@@ -111,7 +111,7 @@ export const PROJECT_TEMPLATES: ProjectTemplate[] = [
       summary: 'Overview of the client project and your contribution',
       tags: ['Client Work', 'Business', 'Professional'],
       featured: true,
-      challenge: 'What was the client\'s business challenge or goal?',
+      challenge: "What was the client's business challenge or goal?",
       solution: 'How did you solve their problem? What was your approach?',
       results: 'What were the business results? Include ROI, client satisfaction, etc.',
       process: [
@@ -119,7 +119,7 @@ export const PROJECT_TEMPLATES: ProjectTemplate[] = [
         'Requirements Analysis',
         'Proposal and Planning',
         'Execution and Delivery',
-        'Review and Handoff'
+        'Review and Handoff',
       ],
       technologies: ['Technology Stack'],
       client: 'Client Company Name',
@@ -127,14 +127,14 @@ export const PROJECT_TEMPLATES: ProjectTemplate[] = [
       budget: 'Project Budget Range',
       team: ['Team Member 1', 'Team Member 2'],
       deliverables: ['Deliverable 1', 'Deliverable 2'],
-      metrics: ['Business Metric 1', 'Client Satisfaction', 'ROI']
+      metrics: ['Business Metric 1', 'Client Satisfaction', 'ROI'],
     },
     metadata: {
       category: 'Professional',
       difficulty: 'advanced',
       estimatedTime: '3-4 hours',
-      requiredFields: ['title', 'role', 'summary', 'client', 'challenge', 'solution', 'results']
-    }
+      requiredFields: ['title', 'role', 'summary', 'client', 'challenge', 'solution', 'results'],
+    },
   },
   {
     id: 'personal-project-template',
@@ -157,19 +157,19 @@ export const PROJECT_TEMPLATES: ProjectTemplate[] = [
         'Learning and Research',
         'Building and Iterating',
         'Testing and Refining',
-        'Documentation and Sharing'
+        'Documentation and Sharing',
       ],
       technologies: ['New Technology 1', 'New Technology 2'],
       timeline: 'Development Time',
-      deliverables: ['Working Prototype', 'Documentation', 'Code Repository']
+      deliverables: ['Working Prototype', 'Documentation', 'Code Repository'],
     },
     metadata: {
       category: 'Personal',
       difficulty: 'beginner',
       estimatedTime: '1-2 hours',
-      requiredFields: ['title', 'role', 'summary']
-    }
-  }
+      requiredFields: ['title', 'role', 'summary'],
+    },
+  },
 ];
 
 export function getTemplateById(id: string): ProjectTemplate | undefined {

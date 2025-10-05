@@ -103,7 +103,7 @@ const NodeMesh: React.FC<NodeMeshProps> = ({ isActive }) => {
         {connections.map((connection, index) => {
           const fromNode = nodes.find(n => n.id === connection.from);
           const toNode = nodes.find(n => n.id === connection.to);
-          
+
           if (!fromNode || !toNode) return null;
 
           return (
@@ -190,7 +190,7 @@ const NodeMesh: React.FC<NodeMeshProps> = ({ isActive }) => {
         transition={{
           duration: 3,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
         style={{
           left: '50%',
@@ -199,7 +199,7 @@ const NodeMesh: React.FC<NodeMeshProps> = ({ isActive }) => {
           backgroundColor: '#D4A848',
         }}
       />
-      
+
       {/* Secondary Pulse */}
       <motion.div
         className="absolute w-3 h-3 rounded-full"
@@ -210,7 +210,7 @@ const NodeMesh: React.FC<NodeMeshProps> = ({ isActive }) => {
         transition={{
           duration: 2.5,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: 'easeInOut',
           delay: 0.5,
         }}
         style={{

@@ -61,14 +61,16 @@ export function DraftProvider({ children }: DraftProviderProps) {
         updatedAt: new Date().toISOString(),
         status: 'draft',
         templateId: project.templateId,
-        versions: [{
-          id: `version_${Date.now()}`,
-          version: '1.0.0',
-          createdAt: new Date().toISOString(),
-          createdBy: 'current_user',
-          changes: ['Initial draft created'],
-          status: 'draft'
-        }]
+        versions: [
+          {
+            id: `version_${Date.now()}`,
+            version: '1.0.0',
+            createdAt: new Date().toISOString(),
+            createdBy: 'current_user',
+            changes: ['Initial draft created'],
+            status: 'draft',
+          },
+        ],
       };
 
       if (import.meta.env.DEV) {
@@ -102,48 +104,51 @@ export function DraftProvider({ children }: DraftProviderProps) {
     }
   }, []);
 
-  const updateDraft = useCallback(async (id: string, updates: Partial<ProjectDraft>): Promise<void> => {
-    debug.content.update('Updating draft', { id, updates });
-    debug.perf.start(`updateDraft:${id}`);
+  const updateDraft = useCallback(
+    async (id: string, updates: Partial<ProjectDraft>): Promise<void> => {
+      debug.content.update('Updating draft', { id, updates });
+      debug.perf.start(`updateDraft:${id}`);
 
-    try {
-      const updatedDraft = {
-        ...updates,
-        updatedAt: new Date().toISOString(),
-      };
+      try {
+        const updatedDraft = {
+          ...updates,
+          updatedAt: new Date().toISOString(),
+        };
 
-      if (import.meta.env.DEV) {
-        // Mock API in development
-        debug.info('Mock update draft (dev mode)', { id, updates });
-        setDrafts(prev => prev.map(draft => 
-          draft.id === id ? { ...draft, ...updatedDraft } : draft
-        ));
-      } else {
-        // Real API call
-        const response = await fetch(`/api/drafts/${id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updatedDraft),
-        });
+        if (import.meta.env.DEV) {
+          // Mock API in development
+          debug.info('Mock update draft (dev mode)', { id, updates });
+          setDrafts(prev =>
+            prev.map(draft => (draft.id === id ? { ...draft, ...updatedDraft } : draft))
+          );
+        } else {
+          // Real API call
+          const response = await fetch(`/api/drafts/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedDraft),
+          });
 
-        if (!response.ok) {
-          throw new Error('Failed to update draft');
+          if (!response.ok) {
+            throw new Error('Failed to update draft');
+          }
+
+          setDrafts(prev =>
+            prev.map(draft => (draft.id === id ? { ...draft, ...updatedDraft } : draft))
+          );
         }
 
-        setDrafts(prev => prev.map(draft => 
-          draft.id === id ? { ...draft, ...updatedDraft } : draft
-        ));
+        debug.draft.complete('Draft updated successfully', { id });
+        debug.perf.end(`updateDraft:${id}`);
+      } catch (err) {
+        debug.draft.error('Failed to update draft', err as Error, { id });
+        debug.perf.end(`updateDraft:${id}`);
+        setError((err as Error).message);
+        throw err;
       }
-
-      debug.draft.complete('Draft updated successfully', { id });
-      debug.perf.end(`updateDraft:${id}`);
-    } catch (err) {
-      debug.draft.error('Failed to update draft', err as Error, { id });
-      debug.perf.end(`updateDraft:${id}`);
-      setError((err as Error).message);
-      throw err;
-    }
-  }, []);
+    },
+    []
+  );
 
   const deleteDraft = useCallback(async (id: string): Promise<void> => {
     debug.draft.delete('Deleting draft', { id });
@@ -177,119 +182,130 @@ export function DraftProvider({ children }: DraftProviderProps) {
     }
   }, []);
 
-  const publishDraft = useCallback(async (id: string): Promise<Project> => {
-    debug.content.publish('Publishing draft', { id });
-    debug.perf.start(`publishDraft:${id}`);
+  const publishDraft = useCallback(
+    async (id: string): Promise<Project> => {
+      debug.content.publish('Publishing draft', { id });
+      debug.perf.start(`publishDraft:${id}`);
 
-    try {
-      const draft = drafts.find(d => d.id === id);
-      if (!draft) {
-        throw new Error('Draft not found');
-      }
-
-      const publishedProject: Project = {
-        ...draft,
-        status: 'published',
-        publishedAt: new Date().toISOString(),
-        analytics: {
-          views: 0,
-          likes: 0,
-          shares: 0,
-        }
-      };
-
-      if (import.meta.env.DEV) {
-        // Mock API in development
-        debug.info('Mock publish draft (dev mode)', { id });
-        // In a real app, this would call the projects API
-        setDrafts(prev => prev.filter(d => d.id !== id));
-      } else {
-        // Real API call
-        const response = await fetch('/api/projects', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(publishedProject),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to publish draft');
+      try {
+        const draft = drafts.find(d => d.id === id);
+        if (!draft) {
+          throw new Error('Draft not found');
         }
 
-        setDrafts(prev => prev.filter(d => d.id !== id));
+        const publishedProject: Project = {
+          ...draft,
+          status: 'published',
+          publishedAt: new Date().toISOString(),
+          analytics: {
+            views: 0,
+            likes: 0,
+            shares: 0,
+          },
+        };
+
+        if (import.meta.env.DEV) {
+          // Mock API in development
+          debug.info('Mock publish draft (dev mode)', { id });
+          // In a real app, this would call the projects API
+          setDrafts(prev => prev.filter(d => d.id !== id));
+        } else {
+          // Real API call
+          const response = await fetch('/api/projects', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(publishedProject),
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to publish draft');
+          }
+
+          setDrafts(prev => prev.filter(d => d.id !== id));
+        }
+
+        debug.draft.complete('Draft published successfully', { id });
+        debug.perf.end(`publishDraft:${id}`);
+        return publishedProject;
+      } catch (err) {
+        debug.draft.error('Failed to publish draft', err as Error, { id });
+        debug.perf.end(`publishDraft:${id}`);
+        setError((err as Error).message);
+        throw err;
       }
+    },
+    [drafts]
+  );
 
-      debug.draft.complete('Draft published successfully', { id });
-      debug.perf.end(`publishDraft:${id}`);
-      return publishedProject;
-    } catch (err) {
-      debug.draft.error('Failed to publish draft', err as Error, { id });
-      debug.perf.end(`publishDraft:${id}`);
-      setError((err as Error).message);
-      throw err;
-    }
-  }, [drafts]);
+  const duplicateDraft = useCallback(
+    async (id: string): Promise<ProjectDraft> => {
+      debug.draft.create('Duplicating draft', { id });
+      debug.perf.start(`duplicateDraft:${id}`);
 
-  const duplicateDraft = useCallback(async (id: string): Promise<ProjectDraft> => {
-    debug.draft.create('Duplicating draft', { id });
-    debug.perf.start(`duplicateDraft:${id}`);
+      try {
+        const originalDraft = drafts.find(d => d.id === id);
+        if (!originalDraft) {
+          throw new Error('Draft not found');
+        }
 
-    try {
-      const originalDraft = drafts.find(d => d.id === id);
-      if (!originalDraft) {
-        throw new Error('Draft not found');
-      }
-
-      const duplicatedDraft: ProjectDraft = {
-        ...originalDraft,
-        id: `draft_${Date.now()}`,
-        title: `${originalDraft.title} (Copy)`,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        status: 'draft',
-        versions: [{
-          id: `version_${Date.now()}`,
-          version: '1.0.0',
+        const duplicatedDraft: ProjectDraft = {
+          ...originalDraft,
+          id: `draft_${Date.now()}`,
+          title: `${originalDraft.title} (Copy)`,
           createdAt: new Date().toISOString(),
-          createdBy: 'current_user',
-          changes: ['Duplicated from existing draft'],
-          status: 'draft'
-        }]
-      };
+          updatedAt: new Date().toISOString(),
+          status: 'draft',
+          versions: [
+            {
+              id: `version_${Date.now()}`,
+              version: '1.0.0',
+              createdAt: new Date().toISOString(),
+              createdBy: 'current_user',
+              changes: ['Duplicated from existing draft'],
+              status: 'draft',
+            },
+          ],
+        };
 
-      if (import.meta.env.DEV) {
-        // Mock API in development
-        debug.info('Mock duplicate draft (dev mode)', { id, newId: duplicatedDraft.id });
-        setDrafts(prev => [...prev, duplicatedDraft]);
-      } else {
-        // Real API call
-        const response = await fetch('/api/drafts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(duplicatedDraft),
-        });
+        if (import.meta.env.DEV) {
+          // Mock API in development
+          debug.info('Mock duplicate draft (dev mode)', { id, newId: duplicatedDraft.id });
+          setDrafts(prev => [...prev, duplicatedDraft]);
+        } else {
+          // Real API call
+          const response = await fetch('/api/drafts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(duplicatedDraft),
+          });
 
-        if (!response.ok) {
-          throw new Error('Failed to duplicate draft');
+          if (!response.ok) {
+            throw new Error('Failed to duplicate draft');
+          }
+
+          const createdDraft = await response.json();
+          setDrafts(prev => [...prev, createdDraft]);
         }
 
-        const createdDraft = await response.json();
-        setDrafts(prev => [...prev, createdDraft]);
+        debug.draft.complete('Draft duplicated successfully', { id, newId: duplicatedDraft.id });
+        debug.perf.end(`duplicateDraft:${id}`);
+        return duplicatedDraft;
+      } catch (err) {
+        debug.draft.error('Failed to duplicate draft', err as Error, { id });
+        debug.perf.end(`duplicateDraft:${id}`);
+        setError((err as Error).message);
+        throw err;
       }
+    },
+    [drafts]
+  );
 
-      debug.draft.complete('Draft duplicated successfully', { id, newId: duplicatedDraft.id });
-      debug.perf.end(`duplicateDraft:${id}`);
-      return duplicatedDraft;
-    } catch (err) {
-      debug.draft.error('Failed to duplicate draft', err as Error, { id });
-      debug.perf.end(`duplicateDraft:${id}`);
-      setError((err as Error).message);
-      throw err;
-    }
-  }, [drafts]);
-
-  const getDraftById = useCallback((id: string): ProjectDraft | undefined => {
-    return drafts.find(draft => draft.id === id);
-  }, [drafts]);
+  const getDraftById = useCallback(
+    (id: string): ProjectDraft | undefined => {
+      return drafts.find(draft => draft.id === id);
+    },
+    [drafts]
+  );
 
   const refreshDrafts = useCallback(async (): Promise<void> => {
     debug.content.fetch('Refreshing drafts');
@@ -322,15 +338,17 @@ export function DraftProvider({ children }: DraftProviderProps) {
             updatedAt: new Date().toISOString(),
             status: 'draft',
             templateId: 'case-study-template',
-            versions: [{
-              id: 'version_1',
-              version: '1.2.0',
-              createdAt: new Date().toISOString(),
-              createdBy: 'current_user',
-              changes: ['Updated results section', 'Added new screenshots'],
-              status: 'draft'
-            }]
-          }
+            versions: [
+              {
+                id: 'version_1',
+                version: '1.2.0',
+                createdAt: new Date().toISOString(),
+                createdBy: 'current_user',
+                changes: ['Updated results section', 'Added new screenshots'],
+                status: 'draft',
+              },
+            ],
+          },
         ];
         setDrafts(mockDrafts);
       } else {
@@ -354,29 +372,35 @@ export function DraftProvider({ children }: DraftProviderProps) {
     }
   }, [drafts.length]);
 
-  const getDraftHistory = useCallback((projectId: string): ProjectVersion[] => {
-    const draft = drafts.find(d => d.id === projectId);
-    return draft?.versions || [];
-  }, [drafts]);
+  const getDraftHistory = useCallback(
+    (projectId: string): ProjectVersion[] => {
+      const draft = drafts.find(d => d.id === projectId);
+      return draft?.versions || [];
+    },
+    [drafts]
+  );
 
-  const restoreVersion = useCallback(async (projectId: string, versionId: string): Promise<void> => {
-    debug.content.update('Restoring version', { projectId, versionId });
-    debug.perf.start(`restoreVersion:${projectId}:${versionId}`);
+  const restoreVersion = useCallback(
+    async (projectId: string, versionId: string): Promise<void> => {
+      debug.content.update('Restoring version', { projectId, versionId });
+      debug.perf.start(`restoreVersion:${projectId}:${versionId}`);
 
-    try {
-      // This would typically fetch the version data and restore it
-      // For now, just log the action
-      debug.info('Mock restore version (dev mode)', { projectId, versionId });
-      
-      debug.draft.complete('Version restored successfully', { projectId, versionId });
-      debug.perf.end(`restoreVersion:${projectId}:${versionId}`);
-    } catch (err) {
-      debug.draft.error('Failed to restore version', err as Error, { projectId, versionId });
-      debug.perf.end(`restoreVersion:${projectId}:${versionId}`);
-      setError((err as Error).message);
-      throw err;
-    }
-  }, []);
+      try {
+        // This would typically fetch the version data and restore it
+        // For now, just log the action
+        debug.info('Mock restore version (dev mode)', { projectId, versionId });
+
+        debug.draft.complete('Version restored successfully', { projectId, versionId });
+        debug.perf.end(`restoreVersion:${projectId}:${versionId}`);
+      } catch (err) {
+        debug.draft.error('Failed to restore version', err as Error, { projectId, versionId });
+        debug.perf.end(`restoreVersion:${projectId}:${versionId}`);
+        setError((err as Error).message);
+        throw err;
+      }
+    },
+    []
+  );
 
   const value: DraftContextType = {
     drafts,
@@ -393,9 +417,5 @@ export function DraftProvider({ children }: DraftProviderProps) {
     restoreVersion,
   };
 
-  return (
-    <DraftContext.Provider value={value}>
-      {children}
-    </DraftContext.Provider>
-  );
+  return <DraftContext.Provider value={value}>{children}</DraftContext.Provider>;
 }

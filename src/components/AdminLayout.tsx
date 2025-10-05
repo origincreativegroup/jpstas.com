@@ -86,50 +86,50 @@ const AdminLayout: React.FC = () => {
       id: 'dashboard',
       title: 'Dashboard',
       icon: '📊',
-      description: 'Overview and analytics'
+      description: 'Overview and analytics',
     },
     {
       id: 'projects',
       title: 'Portfolio Projects',
       icon: '💼',
-      description: 'Manage portfolio projects'
+      description: 'Manage portfolio projects',
     },
     {
       id: 'saas-editor',
       title: 'SaaS Project Editor',
       icon: '🚀',
-      description: 'Advanced project editor with templates'
+      description: 'Advanced project editor with templates',
     },
     {
       id: 'media',
       title: 'Media Library',
       icon: '🖼️',
-      description: 'Upload and manage media'
+      description: 'Upload and manage media',
     },
     {
       id: 'content',
       title: 'Page Content',
       icon: '📝',
-      description: 'Edit page content and CMS'
+      description: 'Edit page content and CMS',
     },
     {
       id: 'workshop',
       title: 'Workshop Sections',
       icon: '🔧',
-      description: 'Manage workshop tools and processes'
+      description: 'Manage workshop tools and processes',
     },
     {
       id: 'analytics',
       title: 'Analytics',
       icon: '📈',
-      description: 'View detailed analytics'
+      description: 'View detailed analytics',
     },
     {
       id: 'import-export',
       title: 'Import/Export',
       icon: '📤',
-      description: 'Backup and restore data'
-    }
+      description: 'Backup and restore data',
+    },
   ];
 
   const renderContent = () => {
@@ -160,93 +160,98 @@ const AdminLayout: React.FC = () => {
       <div className="min-h-screen bg-neutral-50">
         {/* Header */}
         <header className="bg-white border-b border-neutral-200 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg hover:bg-neutral-100 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            <div className="flex items-center space-x-3">
-              <div className="h-8 w-8 bg-accent rounded-lg flex items-center justify-center">
-                <span className="text-brand font-bold text-sm">JP</span>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-brand">Admin Portal</h1>
-                <p className="text-sm text-neutral-600">Portfolio Management</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="p-2 rounded-lg hover:bg-neutral-100 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+              <div className="flex items-center space-x-3">
+                <div className="h-8 w-8 bg-accent rounded-lg flex items-center justify-center">
+                  <span className="text-brand font-bold text-sm">JP</span>
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-brand">Admin Portal</h1>
+                  <p className="text-sm text-neutral-600">Portfolio Management</p>
+                </div>
               </div>
             </div>
+
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => navigate('/')}
+                className="px-4 py-2 text-sm border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors"
+              >
+                View Site
+              </button>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           </div>
-          
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => navigate('/')}
-              className="px-4 py-2 text-sm border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors"
-            >
-              View Site
-            </button>
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-            >
-              Logout
-            </button>
-          </div>
+        </header>
+
+        <div className="flex">
+          {/* Sidebar */}
+          <AnimatePresence>
+            {sidebarOpen && (
+              <motion.aside
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: 280, opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white border-r border-neutral-200 overflow-hidden"
+              >
+                <nav className="p-6 space-y-2">
+                  {adminSections.map(section => (
+                    <button
+                      key={section.id}
+                      onClick={() => setActiveTab(section.id)}
+                      className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-colors ${
+                        activeTab === section.id
+                          ? 'bg-accent/10 text-accent border border-accent/20'
+                          : 'hover:bg-neutral-50 text-neutral-700'
+                      }`}
+                    >
+                      <span className="text-xl">{section.icon}</span>
+                      <div>
+                        <div className="font-medium">{section.title}</div>
+                        <div className="text-sm text-neutral-500">{section.description}</div>
+                      </div>
+                    </button>
+                  ))}
+                </nav>
+              </motion.aside>
+            )}
+          </AnimatePresence>
+
+          {/* Main Content */}
+          <main className="flex-1 p-6">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {renderContent()}
+              </motion.div>
+            </div>
+          </main>
         </div>
-      </header>
-
-      <div className="flex">
-        {/* Sidebar */}
-        <AnimatePresence>
-          {sidebarOpen && (
-            <motion.aside
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 280, opacity: 1 }}
-              exit={{ width: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white border-r border-neutral-200 overflow-hidden"
-            >
-              <nav className="p-6 space-y-2">
-                {adminSections.map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => setActiveTab(section.id)}
-                    className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-colors ${
-                      activeTab === section.id
-                        ? 'bg-accent/10 text-accent border border-accent/20'
-                        : 'hover:bg-neutral-50 text-neutral-700'
-                    }`}
-                  >
-                    <span className="text-xl">{section.icon}</span>
-                    <div>
-                      <div className="font-medium">{section.title}</div>
-                      <div className="text-sm text-neutral-500">{section.description}</div>
-                    </div>
-                  </button>
-                ))}
-              </nav>
-            </motion.aside>
-          )}
-        </AnimatePresence>
-
-        {/* Main Content */}
-        <main className="flex-1 p-6">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {renderContent()}
-            </motion.div>
-          </div>
-        </main>
       </div>
-    </div>
     </AnalyticsProvider>
   );
 };

@@ -6,10 +6,7 @@ interface ProjectPreviewProps {
   device?: 'mobile' | 'tablet' | 'desktop';
 }
 
-const ProjectPreview: React.FC<ProjectPreviewProps> = ({
-  project,
-  device = 'desktop'
-}) => {
+const ProjectPreview: React.FC<ProjectPreviewProps> = ({ project, device = 'desktop' }) => {
   const [selectedDevice, setSelectedDevice] = useState(device);
   const [zoom, setZoom] = useState(100);
 
@@ -32,9 +29,9 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
     const sectionStyle = {
       backgroundColor: section.content?.backgroundColor || 'transparent',
       color: section.content?.textColor || 'inherit',
-      padding: section.content?.padding ? 
-        `${section.content.padding.top}px ${section.content.padding.right}px ${section.content.padding.bottom}px ${section.content.padding.left}px` : 
-        '20px',
+      padding: section.content?.padding
+        ? `${section.content.padding.top}px ${section.content.padding.right}px ${section.content.padding.bottom}px ${section.content.padding.left}px`
+        : '20px',
       borderRadius: section.content?.borderRadius ? `${section.content.borderRadius}px` : '0px',
     };
 
@@ -70,15 +67,24 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
                   {section.content.description}
                 </p>
               )}
-              <div className={`grid gap-4 ${
-                section.content?.columns === 1 ? 'grid-cols-1' :
-                section.content?.columns === 2 ? 'grid-cols-2' :
-                section.content?.columns === 3 ? 'grid-cols-3' :
-                section.content?.columns === 4 ? 'grid-cols-4' :
-                'grid-cols-3'
-              }`}>
+              <div
+                className={`grid gap-4 ${
+                  section.content?.columns === 1
+                    ? 'grid-cols-1'
+                    : section.content?.columns === 2
+                      ? 'grid-cols-2'
+                      : section.content?.columns === 3
+                        ? 'grid-cols-3'
+                        : section.content?.columns === 4
+                          ? 'grid-cols-4'
+                          : 'grid-cols-3'
+                }`}
+              >
                 {[1, 2, 3, 4, 5, 6].map(i => (
-                  <div key={i} className="aspect-square bg-neutral-200 rounded-lg flex items-center justify-center">
+                  <div
+                    key={i}
+                    className="aspect-square bg-neutral-200 rounded-lg flex items-center justify-center"
+                  >
                     <span className="text-neutral-500">Image {i}</span>
                   </div>
                 ))}
@@ -91,13 +97,18 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
         return (
           <div key={section.id} style={sectionStyle} className="text-section">
             <div className="py-12">
-              <div 
+              <div
                 className="prose max-w-none"
                 style={{ textAlign: section.content?.alignment || 'left' }}
               >
-                <div dangerouslySetInnerHTML={{ 
-                  __html: (section.content?.text || 'Your text content goes here').replace(/\n/g, '<br>')
-                }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: (section.content?.text || 'Your text content goes here').replace(
+                      /\n/g,
+                      '<br>'
+                    ),
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -115,7 +126,7 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
                   <div className="text-center">
                     <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg className="w-8 h-8 text-brand" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
+                        <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
                     <p className="text-neutral-600">Video Player</p>
@@ -134,7 +145,10 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
             <div className="py-12">
               <div className="max-w-4xl mx-auto text-center">
                 <blockquote className="text-2xl font-medium mb-6">
-                  "{section.content?.quote || 'This is a sample testimonial quote that demonstrates how testimonials will look in your project.'}"
+                  "
+                  {section.content?.quote ||
+                    'This is a sample testimonial quote that demonstrates how testimonials will look in your project.'}
+                  "
                 </blockquote>
                 <div className="flex items-center justify-center space-x-4">
                   <div className="w-12 h-12 bg-neutral-300 rounded-full"></div>
@@ -159,18 +173,16 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
                 {section.content?.title || 'Statistics'}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {(section.content?.stats || [
-                  { label: 'Projects', value: '50+' },
-                  { label: 'Clients', value: '25+' },
-                  { label: 'Years', value: '5+' }
-                ]).map((stat: any, index: number) => (
+                {(
+                  section.content?.stats || [
+                    { label: 'Projects', value: '50+' },
+                    { label: 'Clients', value: '25+' },
+                    { label: 'Years', value: '5+' },
+                  ]
+                ).map((stat: any, index: number) => (
                   <div key={index} className="text-center">
-                    <div className="text-4xl font-bold text-accent mb-2">
-                      {stat.value || '0'}
-                    </div>
-                    <div className="text-neutral-600">
-                      {stat.label || 'Label'}
-                    </div>
+                    <div className="text-4xl font-bold text-accent mb-2">{stat.value || '0'}</div>
+                    <div className="text-neutral-600">{stat.label || 'Label'}</div>
                   </div>
                 ))}
               </div>
@@ -186,16 +198,32 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
                 {section.content?.title || 'Timeline'}
               </h2>
               <div className="max-w-4xl mx-auto">
-                {(section.content?.items || [
-                  { date: '2023', title: 'Project Launch', description: 'Successfully launched the project' },
-                  { date: '2022', title: 'Development', description: 'Completed development phase' },
-                  { date: '2021', title: 'Planning', description: 'Initial planning and research' }
-                ]).map((item: any, index: number) => (
+                {(
+                  section.content?.items || [
+                    {
+                      date: '2023',
+                      title: 'Project Launch',
+                      description: 'Successfully launched the project',
+                    },
+                    {
+                      date: '2022',
+                      title: 'Development',
+                      description: 'Completed development phase',
+                    },
+                    {
+                      date: '2021',
+                      title: 'Planning',
+                      description: 'Initial planning and research',
+                    },
+                  ]
+                ).map((item: any, index: number) => (
                   <div key={index} className="flex items-start space-x-4 mb-8">
                     <div className="w-4 h-4 bg-accent rounded-full mt-2 flex-shrink-0"></div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <span className="text-sm font-medium text-accent">{item.date || 'Date'}</span>
+                        <span className="text-sm font-medium text-accent">
+                          {item.date || 'Date'}
+                        </span>
                         <h3 className="text-lg font-semibold">{item.title || 'Title'}</h3>
                       </div>
                       <p className="text-neutral-600">{item.description || 'Description'}</p>
@@ -244,7 +272,12 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
               disabled={zoom >= 200}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
               </svg>
             </button>
           </div>
@@ -255,7 +288,7 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
           {[
             { id: 'mobile', label: 'Mobile', icon: '📱' },
             { id: 'tablet', label: 'Tablet', icon: '📱' },
-            { id: 'desktop', label: 'Desktop', icon: '💻' }
+            { id: 'desktop', label: 'Desktop', icon: '💻' },
           ].map(device => (
             <button
               key={device.id}
@@ -282,15 +315,15 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({
               width: `${dimensions.width * (zoom / 100)}px`,
               height: `${dimensions.height * (zoom / 100)}px`,
               transform: 'scale(1)',
-              transformOrigin: 'top center'
+              transformOrigin: 'top center',
             }}
           >
-            <div 
+            <div
               className="w-full h-full overflow-auto"
               style={{
                 backgroundColor: project.structure.theme.backgroundColor,
                 color: project.structure.theme.textColor,
-                fontFamily: project.structure.theme.fontFamily
+                fontFamily: project.structure.theme.fontFamily,
               }}
             >
               {project.content.sections

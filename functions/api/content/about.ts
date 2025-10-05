@@ -16,7 +16,7 @@ const DRAFT_KEY = 'content:about:draft';
  * GET /api/content/about
  * Fetches the published about page content
  */
-export const onRequestGet: PagesFunction = async (context) => {
+export const onRequestGet: PagesFunction = async context => {
   const { env } = context;
 
   try {
@@ -71,7 +71,7 @@ export const onRequestGet: PagesFunction = async (context) => {
  * PATCH /api/content/about
  * Updates the about page content (saves as draft)
  */
-export const onRequestPatch: PagesFunction = async (context) => {
+export const onRequestPatch: PagesFunction = async context => {
   const { request, env } = context;
 
   try {

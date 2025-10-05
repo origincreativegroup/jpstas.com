@@ -1,4 +1,4 @@
-export const onRequestPost: PagesFunction = async (context) => {
+export const onRequestPost: PagesFunction = async context => {
   const { request, env } = context;
 
   try {
@@ -165,20 +165,17 @@ export const onRequestPost: PagesFunction = async (context) => {
   }
 };
 
-export const onRequestDelete: PagesFunction = async (context) => {
+export const onRequestDelete: PagesFunction = async context => {
   const { request, env } = context;
   const url = new URL(request.url);
   const fileId = url.searchParams.get('id');
   const fileType = url.searchParams.get('type'); // 'image' or 'video'
 
   if (!fileId || !fileType) {
-    return new Response(
-      JSON.stringify({ error: 'File ID and type are required' }),
-      {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return new Response(JSON.stringify({ error: 'File ID and type are required' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   try {

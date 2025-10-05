@@ -81,7 +81,12 @@ function SortableMediaItem({
           title="Remove (Delete key)"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
@@ -202,9 +207,7 @@ export default function SortableMediaGrid({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h4 className="text-sm font-medium text-neutral-700">
-          Selected Media ({items.length})
-        </h4>
+        <h4 className="text-sm font-medium text-neutral-700">Selected Media ({items.length})</h4>
         <p className="text-xs text-neutral-500">
           Drag to reorder • Click to edit • Hover to remove
         </p>

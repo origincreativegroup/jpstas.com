@@ -7,7 +7,10 @@ interface ContentContextType {
   error: string | null;
   getSections: () => Promise<void>;
   getSection: (key: string) => Promise<ContentSection | null>;
-  updateSection: (key: string, section: Partial<ContentSection>) => Promise<{ success: boolean; error?: string }>;
+  updateSection: (
+    key: string,
+    section: Partial<ContentSection>
+  ) => Promise<{ success: boolean; error?: string }>;
   publishSection: (key: string) => Promise<{ success: boolean; error?: string }>;
   unpublishSection: (key: string) => Promise<{ success: boolean; error?: string }>;
   refreshSections: () => Promise<void>;
@@ -28,9 +31,9 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const response = await apiClient.getContentSections();
-      
+
       if (response.data) {
         setSections(response.data.sections);
       } else {
@@ -47,7 +50,7 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
   const getSection = async (key: string): Promise<ContentSection | null> => {
     try {
       const response = await apiClient.getContentSection(key);
-      
+
       if (response.data) {
         return response.data.section;
       } else {
@@ -61,15 +64,18 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
     }
   };
 
-  const updateSection = async (key: string, section: Partial<ContentSection>): Promise<{ success: boolean; error?: string }> => {
+  const updateSection = async (
+    key: string,
+    section: Partial<ContentSection>
+  ): Promise<{ success: boolean; error?: string }> => {
     try {
       const response = await apiClient.updateContentSection(key, section);
-      
+
       if (response.data) {
         // Update the section in the state
         setSections(prev => ({
           ...prev,
-          [key]: response.data!.section
+          [key]: response.data!.section,
         }));
         return { success: true };
       } else {
@@ -83,12 +89,12 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
   const publishSection = async (key: string): Promise<{ success: boolean; error?: string }> => {
     try {
       const response = await apiClient.publishContentSection(key);
-      
+
       if (response.data) {
         // Update the section in the state
         setSections(prev => ({
           ...prev,
-          [key]: response.data!.section
+          [key]: response.data!.section,
         }));
         return { success: true };
       } else {
@@ -105,17 +111,17 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          ...(apiClient.getToken() && { Authorization: `Bearer ${apiClient.getToken()}` })
-        }
+          ...(apiClient.getToken() && { Authorization: `Bearer ${apiClient.getToken()}` }),
+        },
       });
-      
+
       const data = await response.json();
-      
+
       if (response.ok) {
         // Update the section in the state
         setSections(prev => ({
           ...prev,
-          [key]: data.section
+          [key]: data.section,
         }));
         return { success: true };
       } else {
@@ -147,11 +153,7 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
     refreshSections,
   };
 
-  return (
-    <ContentContext.Provider value={value}>
-      {children}
-    </ContentContext.Provider>
-  );
+  return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;
 };
 
 export const useContent = (): ContentContextType => {

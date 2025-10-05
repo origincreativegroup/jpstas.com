@@ -13,18 +13,14 @@ interface SaaSMediaLibraryProps {
 const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
   project,
   onAddMedia,
-  onRemoveMedia
+  onRemoveMedia,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string>('all');
   const [selectedSection, setSelectedSection] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [draggedMedia, setDraggedMedia] = useState<MediaFile | null>(null);
-  const { 
-    media, 
-    loading, 
-    refreshMedia
-  } = useMedia();
+  const { media, loading, refreshMedia } = useMedia();
 
   // Refresh media when component mounts
   useEffect(() => {
@@ -33,13 +29,18 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
 
   // Filter media based on search and type
   const filteredMedia = media.filter(mediaFile => {
-    const matchesSearch = mediaFile.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         mediaFile.alt?.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = selectedType === 'all' || 
-                       (selectedType === 'image' && mediaFile.type.startsWith('image/')) ||
-                       (selectedType === 'video' && mediaFile.type.startsWith('video/')) ||
-                       (selectedType === 'audio' && mediaFile.type.startsWith('audio/')) ||
-                       (selectedType === 'document' && !mediaFile.type.startsWith('image/') && !mediaFile.type.startsWith('video/') && !mediaFile.type.startsWith('audio/'));
+    const matchesSearch =
+      mediaFile.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      mediaFile.alt?.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesType =
+      selectedType === 'all' ||
+      (selectedType === 'image' && mediaFile.type.startsWith('image/')) ||
+      (selectedType === 'video' && mediaFile.type.startsWith('video/')) ||
+      (selectedType === 'audio' && mediaFile.type.startsWith('audio/')) ||
+      (selectedType === 'document' &&
+        !mediaFile.type.startsWith('image/') &&
+        !mediaFile.type.startsWith('video/') &&
+        !mediaFile.type.startsWith('audio/'));
     return matchesSearch && matchesType;
   });
 
@@ -47,7 +48,7 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
   const projectSections = project.content.sections.map(section => ({
     id: section.id,
     title: section.title,
-    type: section.type
+    type: section.type,
   }));
 
   const handleDragStart = (e: React.DragEvent, mediaFile: MediaFile) => {
@@ -87,8 +88,8 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
   };
 
   const getMediaInSection = (sectionId: string) => {
-    return project.content.media.filter(mediaRef => 
-      mediaRef.position && (mediaRef.position as any).sectionId === sectionId
+    return project.content.media.filter(
+      mediaRef => mediaRef.position && (mediaRef.position as any).sectionId === sectionId
     );
   };
 
@@ -122,15 +123,15 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
             type="text"
             placeholder="Search media..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={e => setSearchQuery(e.target.value)}
             className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
-        
+
         <div className="flex space-x-2">
           <select
             value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
+            onChange={e => setSelectedType(e.target.value)}
             className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
           >
             <option value="all">All Types</option>
@@ -142,7 +143,7 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
 
           <select
             value={selectedSection}
-            onChange={(e) => setSelectedSection(e.target.value)}
+            onChange={e => setSelectedSection(e.target.value)}
             className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
           >
             <option value="all">All Sections</option>
@@ -157,29 +158,29 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
 
       {/* Project Sections */}
       <div className="space-y-4">
-        <h4 className="font-medium text-sm text-neutral-600 uppercase tracking-wide">Project Sections</h4>
+        <h4 className="font-medium text-sm text-neutral-600 uppercase tracking-wide">
+          Project Sections
+        </h4>
         {projectSections.map(section => {
           const sectionMedia = getMediaInSection(section.id);
           return (
             <div
               key={section.id}
               className="border border-neutral-200 rounded-lg p-3"
-              onDrop={(e) => handleDrop(e, section.id)}
+              onDrop={e => handleDrop(e, section.id)}
               onDragOver={handleDragOver}
             >
               <div className="flex items-center justify-between mb-2">
                 <h5 className="font-medium">{section.title}</h5>
-                <span className="text-xs text-neutral-500">
-                  {sectionMedia.length} media
-                </span>
+                <span className="text-xs text-neutral-500">{sectionMedia.length} media</span>
               </div>
-              
+
               {sectionMedia.length > 0 ? (
                 <div className="flex space-x-2 overflow-x-auto">
                   {sectionMedia.map(mediaRef => {
                     const mediaFile = media.find(m => m.id === mediaRef.mediaId);
                     if (!mediaFile) return null;
-                    
+
                     return (
                       <div key={mediaRef.id} className="flex-shrink-0 relative group">
                         <div className="w-16 h-16 bg-neutral-100 rounded-lg flex items-center justify-center overflow-hidden">
@@ -218,7 +219,7 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
         <h4 className="font-medium text-sm text-neutral-600 uppercase tracking-wide">
           Available Media ({filteredMedia.length})
         </h4>
-        
+
         {filteredMedia.length === 0 ? (
           <div className="text-center py-8 text-neutral-500">
             <div className="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -233,12 +234,10 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
               <motion.div
                 key={mediaFile.id}
                 draggable
-                onDragStart={(e) => handleDragStart(e as any, mediaFile)}
+                onDragStart={e => handleDragStart(e as any, mediaFile)}
                 onDragEnd={handleDragEnd}
                 className={`${
-                  viewMode === 'grid' 
-                    ? 'aspect-square' 
-                    : 'flex items-center space-x-3 p-3'
+                  viewMode === 'grid' ? 'aspect-square' : 'flex items-center space-x-3 p-3'
                 } border border-neutral-200 rounded-lg cursor-move hover:border-accent transition-colors group`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -310,15 +309,25 @@ const SaaSMediaLibrary: React.FC<SaaSMediaLibraryProps> = ({
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
         <div className="flex items-start space-x-2">
           <div className="flex-shrink-0">
-            <svg className="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="h-5 w-5 text-blue-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
           </div>
           <div>
             <h4 className="text-sm font-medium text-blue-800">Drag & Drop</h4>
             <p className="text-sm text-blue-700 mt-1">
-              Drag media from the library to any section to add it to your project. 
-              You can also click the "Add" button for quick addition.
+              Drag media from the library to any section to add it to your project. You can also
+              click the "Add" button for quick addition.
             </p>
           </div>
         </div>

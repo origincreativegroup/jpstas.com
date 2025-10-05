@@ -50,24 +50,27 @@ class CloudflareStreamService {
   }
 
   // Upload video to Cloudflare Stream
-  async uploadVideo(file: File, options?: {
-    name?: string;
-    requireSignedURLs?: boolean;
-    allowedOrigins?: string[];
-    watermark?: {
-      uid: string;
-      size: string;
-      opacity: number;
-      position: string;
-    };
-  }): Promise<CloudflareStreamUpload> {
+  async uploadVideo(
+    file: File,
+    options?: {
+      name?: string;
+      requireSignedURLs?: boolean;
+      allowedOrigins?: string[];
+      watermark?: {
+        uid: string;
+        size: string;
+        opacity: number;
+        position: string;
+      };
+    }
+  ): Promise<CloudflareStreamUpload> {
     if (!this.accountId || !this.apiToken) {
       throw new Error('Cloudflare credentials not configured');
     }
 
     const formData = new FormData();
     formData.append('file', file);
-    
+
     if (options?.name) {
       formData.append('name', options.name);
     }
@@ -84,14 +87,16 @@ class CloudflareStreamService {
     const response = await fetch(`${this.baseUrl}`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.apiToken}`,
+        Authorization: `Bearer ${this.apiToken}`,
       },
       body: formData,
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(`Cloudflare Stream upload failed: ${errorData.errors?.[0]?.message || 'Unknown error'}`);
+      throw new Error(
+        `Cloudflare Stream upload failed: ${errorData.errors?.[0]?.message || 'Unknown error'}`
+      );
     }
 
     const data: StreamUploadResponse = await response.json();
@@ -106,7 +111,7 @@ class CloudflareStreamService {
 
     const response = await fetch(`${this.baseUrl}/${uid}`, {
       headers: {
-        'Authorization': `Bearer ${this.apiToken}`,
+        Authorization: `Bearer ${this.apiToken}`,
       },
     });
 
@@ -128,27 +133,32 @@ class CloudflareStreamService {
     const response = await fetch(`${this.baseUrl}/${uid}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${this.apiToken}`,
+        Authorization: `Bearer ${this.apiToken}`,
       },
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(`Failed to delete video: ${errorData.errors?.[0]?.message || 'Unknown error'}`);
+      throw new Error(
+        `Failed to delete video: ${errorData.errors?.[0]?.message || 'Unknown error'}`
+      );
     }
   }
 
   // Get video embed URL
-  getEmbedUrl(uid: string, options?: {
-    autoplay?: boolean;
-    controls?: boolean;
-    loop?: boolean;
-    muted?: boolean;
-    startTime?: number;
-    endTime?: number;
-  }): string {
+  getEmbedUrl(
+    uid: string,
+    options?: {
+      autoplay?: boolean;
+      controls?: boolean;
+      loop?: boolean;
+      muted?: boolean;
+      startTime?: number;
+      endTime?: number;
+    }
+  ): string {
     const params = new URLSearchParams();
-    
+
     if (options?.autoplay) params.append('autoplay', 'true');
     if (options?.controls !== false) params.append('controls', 'true');
     if (options?.loop) params.append('loop', 'true');
@@ -161,14 +171,17 @@ class CloudflareStreamService {
   }
 
   // Get video thumbnail URL
-  getThumbnailUrl(uid: string, options?: {
-    time?: number;
-    width?: number;
-    height?: number;
-    fit?: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
-  }): string {
+  getThumbnailUrl(
+    uid: string,
+    options?: {
+      time?: number;
+      width?: number;
+      height?: number;
+      fit?: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
+    }
+  ): string {
     const params = new URLSearchParams();
-    
+
     if (options?.time) params.append('time', options.time.toString());
     if (options?.width) params.append('width', options.width.toString());
     if (options?.height) params.append('height', options.height.toString());
@@ -210,8 +223,12 @@ class CloudflareStreamService {
       createdAt: streamUpload.created,
       updatedAt: streamUpload.modified,
       uploadedAt: streamUpload.created,
-      status: streamUpload.status.state === 'ready' ? 'ready' : 
-              streamUpload.status.state === 'error' ? 'error' : 'processing',
+      status:
+        streamUpload.status.state === 'ready'
+          ? 'ready'
+          : streamUpload.status.state === 'error'
+            ? 'error'
+            : 'processing',
       error: streamUpload.status.errorReasonText,
       cloudflare: {
         type: 'stream',

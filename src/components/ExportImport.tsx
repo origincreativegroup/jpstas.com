@@ -7,10 +7,7 @@ interface ExportImportProps {
   onImport?: (project: ProjectDraft) => void;
 }
 
-const ExportImport: React.FC<ExportImportProps> = ({
-  project,
-  onImport
-}) => {
+const ExportImport: React.FC<ExportImportProps> = ({ project, onImport }) => {
   const [activeTab, setActiveTab] = useState<'export' | 'import'>('export');
   const [exportFormat, setExportFormat] = useState<'json' | 'html' | 'pdf' | 'zip'>('json');
   const [importFormat, setImportFormat] = useState<'json' | 'html' | 'zip'>('json');
@@ -36,7 +33,7 @@ const ExportImport: React.FC<ExportImportProps> = ({
       setLoading(true);
       const importData = await saasProjectService.importProject(file, importFormat);
       setImports(prev => [importData, ...prev]);
-      
+
       if (importData.status === 'completed' && importData.result) {
         onImport?.(importData.result);
       }
@@ -69,7 +66,6 @@ const ExportImport: React.FC<ExportImportProps> = ({
     }
   };
 
-
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -84,7 +80,7 @@ const ExportImport: React.FC<ExportImportProps> = ({
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
@@ -109,7 +105,7 @@ const ExportImport: React.FC<ExportImportProps> = ({
       <div className="flex space-x-1 border-b border-neutral-200">
         {[
           { id: 'export', label: 'Export', icon: '📤' },
-          { id: 'import', label: 'Import', icon: '📥' }
+          { id: 'import', label: 'Import', icon: '📥' },
         ].map(tab => (
           <button
             key={tab.id}
@@ -140,10 +136,22 @@ const ExportImport: React.FC<ExportImportProps> = ({
               <h4 className="font-medium">Choose Export Format</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { id: 'json', label: 'JSON Data', description: 'Raw project data for backup and migration' },
-                  { id: 'html', label: 'HTML Website', description: 'Static HTML website ready for deployment' },
+                  {
+                    id: 'json',
+                    label: 'JSON Data',
+                    description: 'Raw project data for backup and migration',
+                  },
+                  {
+                    id: 'html',
+                    label: 'HTML Website',
+                    description: 'Static HTML website ready for deployment',
+                  },
                   { id: 'pdf', label: 'PDF Document', description: 'Print-ready PDF document' },
-                  { id: 'zip', label: 'ZIP Package', description: 'Complete project package with assets' }
+                  {
+                    id: 'zip',
+                    label: 'ZIP Package',
+                    description: 'Complete project package with assets',
+                  },
                 ].map(format => (
                   <div
                     key={format.id}
@@ -191,16 +199,23 @@ const ExportImport: React.FC<ExportImportProps> = ({
               <h4 className="font-medium mb-4">Recent Exports</h4>
               <div className="space-y-2">
                 {exports.slice(0, 5).map(exportItem => (
-                  <div key={exportItem.id} className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg">
+                  <div
+                    key={exportItem.id}
+                    className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg"
+                  >
                     <div className="flex items-center space-x-3">
                       <span className="text-lg">{getFormatIcon(exportItem.format)}</span>
                       <div>
                         <p className="font-medium">{exportItem.format.toUpperCase()} Export</p>
-                        <p className="text-sm text-neutral-600">{formatDate(exportItem.createdAt)}</p>
+                        <p className="text-sm text-neutral-600">
+                          {formatDate(exportItem.createdAt)}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(exportItem.status)}`}>
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(exportItem.status)}`}
+                      >
                         {exportItem.status}
                       </span>
                       {exportItem.downloadUrl && (
@@ -237,7 +252,7 @@ const ExportImport: React.FC<ExportImportProps> = ({
                 {[
                   { id: 'json', label: 'JSON Data', description: 'Import from JSON project file' },
                   { id: 'html', label: 'HTML Website', description: 'Import from HTML file' },
-                  { id: 'zip', label: 'ZIP Package', description: 'Import from ZIP package' }
+                  { id: 'zip', label: 'ZIP Package', description: 'Import from ZIP package' },
                 ].map(format => (
                   <div
                     key={format.id}
@@ -293,23 +308,30 @@ const ExportImport: React.FC<ExportImportProps> = ({
               <h4 className="font-medium mb-4">Recent Imports</h4>
               <div className="space-y-2">
                 {imports.slice(0, 5).map(importItem => (
-                  <div key={importItem.id} className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg">
+                  <div
+                    key={importItem.id}
+                    className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg"
+                  >
                     <div className="flex items-center space-x-3">
                       <span className="text-lg">{getFormatIcon(importItem.format)}</span>
                       <div>
                         <p className="font-medium">{importItem.file.name}</p>
                         <p className="text-sm text-neutral-600">
-                          {formatFileSize(importItem.file.size)} • {formatDate(importItem.createdAt)}
+                          {formatFileSize(importItem.file.size)} •{' '}
+                          {formatDate(importItem.createdAt)}
                         </p>
                         {importItem.errors.length > 0 && (
                           <p className="text-sm text-red-600">
-                            {importItem.errors.length} error{importItem.errors.length !== 1 ? 's' : ''}
+                            {importItem.errors.length} error
+                            {importItem.errors.length !== 1 ? 's' : ''}
                           </p>
                         )}
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(importItem.status)}`}>
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(importItem.status)}`}
+                      >
                         {importItem.status}
                       </span>
                       {importItem.status === 'completed' && importItem.result && (

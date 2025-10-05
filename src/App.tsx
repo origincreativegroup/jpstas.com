@@ -31,38 +31,38 @@ export default function App() {
             <ProjectsProvider>
               <ContentProvider>
                 <div className="min-h-screen">
-              <Routes>
-            {/* Boot Sequence - Default Entry Point */}
-            <Route path="/" element={<BootSequence />} />
-            
-            {/* Workshop Hub */}
-            <Route path="/workshop" element={<WorkshopHub />} />
-            
-            {/* Workshop Sections */}
-            <Route path="/workshop/design" element={<DesignBench />} />
-            <Route path="/workshop/development" element={<DevelopmentDesk />} />
-            <Route path="/workshop/innovation" element={<InnovationBay />} />
-            <Route path="/workshop/story" element={<StoryForge />} />
-            <Route path="/workshop/skills" element={<SkillConsole />} />
-            <Route path="/workshop/contact" element={<PortalContact />} />
-            
-            {/* Admin Panel */}
-            <Route path="/admin" element={<Admin />} />
-            
-            {/* SaaS Demo */}
-            <Route path="/saas-demo" element={<SaaSDemo />} />
-            
-            {/* Legacy Routes (for backward compatibility) */}
-            <Route path="/home" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/resume" element={<Resume />} />
-            
-            {/* 404 */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+                  <Routes>
+                    {/* Boot Sequence - Default Entry Point */}
+                    <Route path="/" element={<BootSequence />} />
+
+                    {/* Workshop Hub */}
+                    <Route path="/workshop" element={<WorkshopHub />} />
+
+                    {/* Workshop Sections */}
+                    <Route path="/workshop/design" element={<DesignBench />} />
+                    <Route path="/workshop/development" element={<DevelopmentDesk />} />
+                    <Route path="/workshop/innovation" element={<InnovationBay />} />
+                    <Route path="/workshop/story" element={<StoryForge />} />
+                    <Route path="/workshop/skills" element={<SkillConsole />} />
+                    <Route path="/workshop/contact" element={<PortalContact />} />
+
+                    {/* Admin Panel */}
+                    <Route path="/admin" element={<Admin />} />
+
+                    {/* SaaS Demo */}
+                    <Route path="/saas-demo" element={<SaaSDemo />} />
+
+                    {/* Legacy Routes (for backward compatibility) */}
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/portfolio" element={<Portfolio />} />
+                    <Route path="/resume" element={<Resume />} />
+
+                    {/* 404 */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </div>
               </ContentProvider>
             </ProjectsProvider>
           </CMSProvider>

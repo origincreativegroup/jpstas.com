@@ -9,10 +9,10 @@ export const usePageTracking = () => {
 
   useEffect(() => {
     const currentPath = location.pathname;
-    
+
     // Don't track if it's the same path
     if (previousPath.current === currentPath) return;
-    
+
     // Determine content groups based on path
     let contentGroup1 = 'home';
     let contentGroup2 = '';
@@ -122,16 +122,19 @@ export const useClickTracking = () => {
     });
   }, []);
 
-  const trackLinkClick = useCallback((linkText: string, linkUrl: string, isExternal: boolean = false) => {
-    if (isExternal) {
-      analytics.trackExternalLink(linkUrl, linkText);
-    } else {
-      analytics.trackEngagement('internal_link_click', {
-        link_text: linkText,
-        link_url: linkUrl,
-      });
-    }
-  }, []);
+  const trackLinkClick = useCallback(
+    (linkText: string, linkUrl: string, isExternal: boolean = false) => {
+      if (isExternal) {
+        analytics.trackExternalLink(linkUrl, linkText);
+      } else {
+        analytics.trackEngagement('internal_link_click', {
+          link_text: linkText,
+          link_url: linkUrl,
+        });
+      }
+    },
+    []
+  );
 
   return {
     trackClick,
@@ -148,9 +151,12 @@ export const useFormTracking = () => {
     });
   }, []);
 
-  const trackFormSubmit = useCallback((formName: string, success: boolean, details?: Record<string, any>) => {
-    analytics.trackFormSubmission(formName, success, details);
-  }, []);
+  const trackFormSubmit = useCallback(
+    (formName: string, success: boolean, details?: Record<string, any>) => {
+      analytics.trackFormSubmission(formName, success, details);
+    },
+    []
+  );
 
   const trackFormFieldFocus = useCallback((formName: string, fieldName: string) => {
     analytics.trackEngagement('form_field_focus', {
@@ -174,9 +180,12 @@ export const usePortfolioTracking = () => {
     });
   }, []);
 
-  const trackProjectInteraction = useCallback((projectId: string, action: string, details?: Record<string, any>) => {
-    analytics.trackPortfolioInteraction(projectId, action, details);
-  }, []);
+  const trackProjectInteraction = useCallback(
+    (projectId: string, action: string, details?: Record<string, any>) => {
+      analytics.trackPortfolioInteraction(projectId, action, details);
+    },
+    []
+  );
 
   const trackProjectFilter = useCallback((filterType: string, filterValue: string) => {
     analytics.trackEngagement('portfolio_filter', {

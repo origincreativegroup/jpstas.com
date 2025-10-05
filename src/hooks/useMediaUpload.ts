@@ -50,9 +50,7 @@ export function useMediaUpload(options: UseMediaUploadOptions = {}) {
           // Simulate progress
           for (let i = 0; i <= 100; i += 10) {
             if (controller.signal.aborted) throw new Error('Upload cancelled');
-            setQueue(prev =>
-              prev.map(q => (q.id === item.id ? { ...q, progress: i } : q))
-            );
+            setQueue(prev => prev.map(q => (q.id === item.id ? { ...q, progress: i } : q)));
             await new Promise(resolve => setTimeout(resolve, 100));
           }
         } else {
@@ -66,9 +64,7 @@ export function useMediaUpload(options: UseMediaUploadOptions = {}) {
           xhr.upload.addEventListener('progress', e => {
             if (e.lengthComputable) {
               const progress = Math.round((e.loaded / e.total) * 100);
-              setQueue(prev =>
-                prev.map(q => (q.id === item.id ? { ...q, progress } : q))
-              );
+              setQueue(prev => prev.map(q => (q.id === item.id ? { ...q, progress } : q)));
             }
           });
 
@@ -126,9 +122,7 @@ export function useMediaUpload(options: UseMediaUploadOptions = {}) {
           // Failed permanently
           setQueue(prev =>
             prev.map(q =>
-              q.id === item.id
-                ? { ...q, status: 'failed' as const, error: err.message }
-                : q
+              q.id === item.id ? { ...q, status: 'failed' as const, error: err.message } : q
             )
           );
 
@@ -196,7 +190,9 @@ export function useMediaUpload(options: UseMediaUploadOptions = {}) {
   const retryFailed = useCallback(() => {
     setQueue(prev =>
       prev.map(q =>
-        q.status === 'failed' ? { ...q, status: 'pending', retryCount: 0, progress: 0, error: undefined } : q
+        q.status === 'failed'
+          ? { ...q, status: 'pending', retryCount: 0, progress: 0, error: undefined }
+          : q
       )
     );
     setTimeout(processQueue, 0);

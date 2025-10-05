@@ -1,12 +1,11 @@
-
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: '#282850', // Dark blue from resume
@@ -16,12 +15,12 @@ export default {
         'accent-dark': '#B8943A', // Darker golden yellow
         'neutral-warm': '#6B635B', // Dark brown/olive
         'text-primary': '#282850',
-        'text-secondary': '#6B635B'
+        'text-secondary': '#6B635B',
       },
       borderRadius: {
-        '2xl': '1.25rem'
-      }
-    }
+        '2xl': '1.25rem',
+      },
+    },
   },
-  plugins: [import('@tailwindcss/typography')]
-} satisfies Config
+  plugins: [import('@tailwindcss/typography')],
+} satisfies Config;

@@ -37,29 +37,29 @@ const PortalContact: React.FC = () => {
       value: 'johnpstas@gmail.com',
       href: 'mailto:johnpstas@gmail.com',
       icon: '📧',
-      description: 'Direct communication for projects and collaborations'
+      description: 'Direct communication for projects and collaborations',
     },
     {
       name: 'LinkedIn',
       value: 'linkedin.com/in/johnpstas',
       href: 'https://www.linkedin.com/in/johnpstas',
       icon: '💼',
-      description: 'Professional network and career opportunities'
+      description: 'Professional network and career opportunities',
     },
     {
       name: 'GitHub',
       value: 'github.com/johnpstas',
       href: 'https://github.com/johnpstas',
       icon: '💻',
-      description: 'Code repositories and open source contributions'
+      description: 'Code repositories and open source contributions',
     },
     {
       name: 'Phone',
       value: '219-319-9788',
       href: 'tel:2193199788',
       icon: '📱',
-      description: 'Voice calls for urgent matters'
-    }
+      description: 'Voice calls for urgent matters',
+    },
   ];
 
   return (
@@ -73,16 +73,19 @@ const PortalContact: React.FC = () => {
               className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Back to Workshop
             </button>
             <div className="h-6 w-px bg-neutral-700"></div>
             <h1 className="text-2xl font-bold">Contact</h1>
           </div>
-          <div className="text-sm text-neutral-400">
-            Connect & Collaborate
-          </div>
+          <div className="text-sm text-neutral-400">Connect & Collaborate</div>
         </div>
       </div>
 
@@ -98,7 +101,8 @@ const PortalContact: React.FC = () => {
             >
               <h2 className="text-3xl font-bold text-white mb-6">Let's Connect</h2>
               <p className="text-lg text-neutral-400 mb-8">
-                Ready to collaborate on your next project? I'm always excited to work on innovative solutions that push the boundaries of what's possible.
+                Ready to collaborate on your next project? I'm always excited to work on innovative
+                solutions that push the boundaries of what's possible.
               </p>
             </motion.div>
 
@@ -125,16 +129,24 @@ const PortalContact: React.FC = () => {
                         <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors mb-2">
                           {method.name}
                         </h3>
-                        <p className="text-purple-400 font-medium mb-2">
-                          {method.value}
-                        </p>
+                        <p className="text-purple-400 font-medium mb-2">{method.value}</p>
                         <p className="text-sm text-neutral-400 group-hover:text-neutral-300 transition-colors">
                           {method.description}
                         </p>
                       </div>
                       <div className="text-neutral-500 group-hover:text-purple-400 transition-colors">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -163,7 +175,12 @@ const PortalContact: React.FC = () => {
                     className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
                     </svg>
                     Download PDF
                   </a>
@@ -180,12 +197,10 @@ const PortalContact: React.FC = () => {
             className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-8"
           >
             <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
-            
+
             <form onSubmit={submit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-neutral-300 mb-2">
-                  Name
-                </label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Name</label>
                 <input
                   required
                   name="name"
@@ -195,9 +210,7 @@ const PortalContact: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-300 mb-2">
-                  Email
-                </label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Email</label>
                 <input
                   required
                   type="email"
@@ -208,9 +221,7 @@ const PortalContact: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-neutral-300 mb-2">
-                  Message
-                </label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Message</label>
                 <textarea
                   required
                   name="message"
@@ -247,7 +258,9 @@ const PortalContact: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg"
                 >
-                  <p className="text-red-400 font-medium">Something went wrong. Please try again.</p>
+                  <p className="text-red-400 font-medium">
+                    Something went wrong. Please try again.
+                  </p>
                 </motion.div>
               )}
             </form>
@@ -266,7 +279,12 @@ const PortalContact: React.FC = () => {
             className="px-8 py-4 bg-gradient-to-r from-purple-500/20 to-orange-500/20 border border-purple-400/30 text-purple-300 font-semibold rounded-xl hover:from-purple-500/30 hover:to-orange-500/30 hover:border-purple-400/50 transition-all duration-300 flex items-center gap-3 mx-auto"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
             </svg>
             Reboot Workshop
           </button>

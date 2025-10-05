@@ -7,12 +7,10 @@ interface SectionEditorProps {
   onClose: () => void;
 }
 
-const SectionEditor: React.FC<SectionEditorProps> = ({
-  section,
-  onUpdate,
-  onClose
-}) => {
-  const [activeTab, setActiveTab] = useState<'content' | 'style' | 'responsive' | 'animations'>('content');
+const SectionEditor: React.FC<SectionEditorProps> = ({ section, onUpdate, onClose }) => {
+  const [activeTab, setActiveTab] = useState<'content' | 'style' | 'responsive' | 'animations'>(
+    'content'
+  );
   const [content, setContent] = useState(section.content || {});
 
   useEffect(() => {
@@ -35,7 +33,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.headline || ''}
-                onChange={(e) => handleContentUpdate({ headline: e.target.value })}
+                onChange={e => handleContentUpdate({ headline: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter your headline"
               />
@@ -44,7 +42,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <label className="block text-sm font-medium mb-2">Subheadline</label>
               <textarea
                 value={content.subheadline || ''}
-                onChange={(e) => handleContentUpdate({ subheadline: e.target.value })}
+                onChange={e => handleContentUpdate({ subheadline: e.target.value })}
                 rows={3}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter your subheadline"
@@ -55,7 +53,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.ctaText || ''}
-                onChange={(e) => handleContentUpdate({ ctaText: e.target.value })}
+                onChange={e => handleContentUpdate({ ctaText: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="e.g., View Portfolio"
               />
@@ -65,7 +63,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="url"
                 value={content.ctaUrl || ''}
-                onChange={(e) => handleContentUpdate({ ctaUrl: e.target.value })}
+                onChange={e => handleContentUpdate({ ctaUrl: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="https://example.com"
               />
@@ -81,7 +79,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.title || ''}
-                onChange={(e) => handleContentUpdate({ title: e.target.value })}
+                onChange={e => handleContentUpdate({ title: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter gallery title"
               />
@@ -90,7 +88,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <label className="block text-sm font-medium mb-2">Gallery Description</label>
               <textarea
                 value={content.description || ''}
-                onChange={(e) => handleContentUpdate({ description: e.target.value })}
+                onChange={e => handleContentUpdate({ description: e.target.value })}
                 rows={3}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter gallery description"
@@ -100,7 +98,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <label className="block text-sm font-medium mb-2">Layout Type</label>
               <select
                 value={content.layout || 'grid'}
-                onChange={(e) => handleContentUpdate({ layout: e.target.value })}
+                onChange={e => handleContentUpdate({ layout: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 <option value="grid">Grid</option>
@@ -116,7 +114,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                 min="1"
                 max="6"
                 value={content.columns || 3}
-                onChange={(e) => handleContentUpdate({ columns: parseInt(e.target.value) })}
+                onChange={e => handleContentUpdate({ columns: parseInt(e.target.value) })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
@@ -130,7 +128,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <label className="block text-sm font-medium mb-2">Text Content</label>
               <textarea
                 value={content.text || ''}
-                onChange={(e) => handleContentUpdate({ text: e.target.value })}
+                onChange={e => handleContentUpdate({ text: e.target.value })}
                 rows={8}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter your text content"
@@ -140,7 +138,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <label className="block text-sm font-medium mb-2">Text Alignment</label>
               <select
                 value={content.alignment || 'left'}
-                onChange={(e) => handleContentUpdate({ alignment: e.target.value })}
+                onChange={e => handleContentUpdate({ alignment: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 <option value="left">Left</option>
@@ -160,7 +158,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="url"
                 value={content.videoUrl || ''}
-                onChange={(e) => handleContentUpdate({ videoUrl: e.target.value })}
+                onChange={e => handleContentUpdate({ videoUrl: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="https://youtube.com/watch?v=..."
               />
@@ -170,7 +168,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.title || ''}
-                onChange={(e) => handleContentUpdate({ title: e.target.value })}
+                onChange={e => handleContentUpdate({ title: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter video title"
               />
@@ -181,7 +179,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                 <input
                   type="checkbox"
                   checked={content.autoplay || false}
-                  onChange={(e) => handleContentUpdate({ autoplay: e.target.checked })}
+                  onChange={e => handleContentUpdate({ autoplay: e.target.checked })}
                   className="h-4 w-4 text-accent focus:ring-accent border-neutral-300 rounded"
                 />
                 <span className="text-sm text-neutral-700">Enable autoplay</span>
@@ -193,7 +191,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                 <input
                   type="checkbox"
                   checked={content.showControls !== false}
-                  onChange={(e) => handleContentUpdate({ showControls: e.target.checked })}
+                  onChange={e => handleContentUpdate({ showControls: e.target.checked })}
                   className="h-4 w-4 text-accent focus:ring-accent border-neutral-300 rounded"
                 />
                 <span className="text-sm text-neutral-700">Show video controls</span>
@@ -209,7 +207,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <label className="block text-sm font-medium mb-2">Quote</label>
               <textarea
                 value={content.quote || ''}
-                onChange={(e) => handleContentUpdate({ quote: e.target.value })}
+                onChange={e => handleContentUpdate({ quote: e.target.value })}
                 rows={4}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter testimonial quote"
@@ -220,7 +218,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.author || ''}
-                onChange={(e) => handleContentUpdate({ author: e.target.value })}
+                onChange={e => handleContentUpdate({ author: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter author name"
               />
@@ -230,7 +228,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.authorTitle || ''}
-                onChange={(e) => handleContentUpdate({ authorTitle: e.target.value })}
+                onChange={e => handleContentUpdate({ authorTitle: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter author title"
               />
@@ -240,7 +238,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.company || ''}
-                onChange={(e) => handleContentUpdate({ company: e.target.value })}
+                onChange={e => handleContentUpdate({ company: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter company name"
               />
@@ -256,7 +254,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.title || ''}
-                onChange={(e) => handleContentUpdate({ title: e.target.value })}
+                onChange={e => handleContentUpdate({ title: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter stats title"
               />
@@ -269,7 +267,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                     <input
                       type="text"
                       value={stat.label || ''}
-                      onChange={(e) => {
+                      onChange={e => {
                         const newStats = [...(content.stats || [])];
                         newStats[index] = { ...newStats[index], label: e.target.value };
                         handleContentUpdate({ stats: newStats });
@@ -280,7 +278,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                     <input
                       type="text"
                       value={stat.value || ''}
-                      onChange={(e) => {
+                      onChange={e => {
                         const newStats = [...(content.stats || [])];
                         newStats[index] = { ...newStats[index], value: e.target.value };
                         handleContentUpdate({ stats: newStats });
@@ -290,7 +288,9 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                     />
                     <button
                       onClick={() => {
-                        const newStats = (content.stats || []).filter((_: any, i: number) => i !== index);
+                        const newStats = (content.stats || []).filter(
+                          (_: any, i: number) => i !== index
+                        );
                         handleContentUpdate({ stats: newStats });
                       }}
                       className="px-2 py-2 text-red-600 hover:bg-red-50 rounded-lg"
@@ -321,7 +321,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="text"
                 value={content.title || ''}
-                onChange={(e) => handleContentUpdate({ title: e.target.value })}
+                onChange={e => handleContentUpdate({ title: e.target.value })}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Enter timeline title"
               />
@@ -335,7 +335,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                       <input
                         type="text"
                         value={item.date || ''}
-                        onChange={(e) => {
+                        onChange={e => {
                           const newItems = [...(content.items || [])];
                           newItems[index] = { ...newItems[index], date: e.target.value };
                           handleContentUpdate({ items: newItems });
@@ -346,7 +346,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                       <input
                         type="text"
                         value={item.title || ''}
-                        onChange={(e) => {
+                        onChange={e => {
                           const newItems = [...(content.items || [])];
                           newItems[index] = { ...newItems[index], title: e.target.value };
                           handleContentUpdate({ items: newItems });
@@ -357,7 +357,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                     </div>
                     <textarea
                       value={item.description || ''}
-                      onChange={(e) => {
+                      onChange={e => {
                         const newItems = [...(content.items || [])];
                         newItems[index] = { ...newItems[index], description: e.target.value };
                         handleContentUpdate({ items: newItems });
@@ -368,7 +368,9 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                     />
                     <button
                       onClick={() => {
-                        const newItems = (content.items || []).filter((_: any, i: number) => i !== index);
+                        const newItems = (content.items || []).filter(
+                          (_: any, i: number) => i !== index
+                        );
                         handleContentUpdate({ items: newItems });
                       }}
                       className="mt-2 px-2 py-1 text-red-600 hover:bg-red-50 rounded text-sm"
@@ -379,7 +381,10 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                 ))}
                 <button
                   onClick={() => {
-                    const newItems = [...(content.items || []), { date: '', title: '', description: '' }];
+                    const newItems = [
+                      ...(content.items || []),
+                      { date: '', title: '', description: '' },
+                    ];
                     handleContentUpdate({ items: newItems });
                   }}
                   className="w-full px-3 py-2 border-2 border-dashed border-neutral-300 rounded-lg text-neutral-600 hover:border-accent hover:text-accent transition-colors"
@@ -407,7 +412,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
         <input
           type="color"
           value={content.backgroundColor || '#ffffff'}
-          onChange={(e) => handleContentUpdate({ backgroundColor: e.target.value })}
+          onChange={e => handleContentUpdate({ backgroundColor: e.target.value })}
           className="w-full h-10 border border-neutral-300 rounded-lg"
         />
       </div>
@@ -416,7 +421,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
         <input
           type="color"
           value={content.textColor || '#000000'}
-          onChange={(e) => handleContentUpdate({ textColor: e.target.value })}
+          onChange={e => handleContentUpdate({ textColor: e.target.value })}
           className="w-full h-10 border border-neutral-300 rounded-lg"
         />
       </div>
@@ -426,36 +431,44 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
           <input
             type="number"
             value={content.padding?.top || 0}
-            onChange={(e) => handleContentUpdate({ 
-              padding: { ...content.padding, top: parseInt(e.target.value) || 0 }
-            })}
+            onChange={e =>
+              handleContentUpdate({
+                padding: { ...content.padding, top: parseInt(e.target.value) || 0 },
+              })
+            }
             className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             placeholder="Top"
           />
           <input
             type="number"
             value={content.padding?.bottom || 0}
-            onChange={(e) => handleContentUpdate({ 
-              padding: { ...content.padding, bottom: parseInt(e.target.value) || 0 }
-            })}
+            onChange={e =>
+              handleContentUpdate({
+                padding: { ...content.padding, bottom: parseInt(e.target.value) || 0 },
+              })
+            }
             className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             placeholder="Bottom"
           />
           <input
             type="number"
             value={content.padding?.left || 0}
-            onChange={(e) => handleContentUpdate({ 
-              padding: { ...content.padding, left: parseInt(e.target.value) || 0 }
-            })}
+            onChange={e =>
+              handleContentUpdate({
+                padding: { ...content.padding, left: parseInt(e.target.value) || 0 },
+              })
+            }
             className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             placeholder="Left"
           />
           <input
             type="number"
             value={content.padding?.right || 0}
-            onChange={(e) => handleContentUpdate({ 
-              padding: { ...content.padding, right: parseInt(e.target.value) || 0 }
-            })}
+            onChange={e =>
+              handleContentUpdate({
+                padding: { ...content.padding, right: parseInt(e.target.value) || 0 },
+              })
+            }
             className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             placeholder="Right"
           />
@@ -468,7 +481,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
           min="0"
           max="20"
           value={content.borderRadius || 0}
-          onChange={(e) => handleContentUpdate({ borderRadius: parseInt(e.target.value) })}
+          onChange={e => handleContentUpdate({ borderRadius: parseInt(e.target.value) })}
           className="w-full"
         />
         <div className="text-sm text-neutral-600 text-center">{content.borderRadius || 0}px</div>
@@ -486,15 +499,17 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               <input
                 type="checkbox"
                 checked={section.responsive[device as keyof typeof section.responsive].visible}
-                onChange={(e) => onUpdate({
-                  responsive: {
-                    ...section.responsive,
-                    [device]: {
-                      ...section.responsive[device as keyof typeof section.responsive],
-                      visible: e.target.checked
-                    }
-                  }
-                })}
+                onChange={e =>
+                  onUpdate({
+                    responsive: {
+                      ...section.responsive,
+                      [device]: {
+                        ...section.responsive[device as keyof typeof section.responsive],
+                        visible: e.target.checked,
+                      },
+                    },
+                  })
+                }
                 className="h-4 w-4 text-accent focus:ring-accent border-neutral-300 rounded"
               />
               <span className="text-sm text-neutral-700">Visible on {device}</span>
@@ -506,15 +521,17 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                 min="1"
                 max="6"
                 value={section.responsive[device as keyof typeof section.responsive].columns}
-                onChange={(e) => onUpdate({
-                  responsive: {
-                    ...section.responsive,
-                    [device]: {
-                      ...section.responsive[device as keyof typeof section.responsive],
-                      columns: parseInt(e.target.value) || 1
-                    }
-                  }
-                })}
+                onChange={e =>
+                  onUpdate({
+                    responsive: {
+                      ...section.responsive,
+                      [device]: {
+                        ...section.responsive[device as keyof typeof section.responsive],
+                        columns: parseInt(e.target.value) || 1,
+                      },
+                    },
+                  })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
@@ -525,15 +542,17 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
                 min="0"
                 max="100"
                 value={section.responsive[device as keyof typeof section.responsive].spacing}
-                onChange={(e) => onUpdate({
-                  responsive: {
-                    ...section.responsive,
-                    [device]: {
-                      ...section.responsive[device as keyof typeof section.responsive],
-                      spacing: parseInt(e.target.value) || 0
-                    }
-                  }
-                })}
+                onChange={e =>
+                  onUpdate({
+                    responsive: {
+                      ...section.responsive,
+                      [device]: {
+                        ...section.responsive[device as keyof typeof section.responsive],
+                        spacing: parseInt(e.target.value) || 0,
+                      },
+                    },
+                  })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
@@ -549,9 +568,11 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
         <label className="block text-sm font-medium mb-2">Animation Type</label>
         <select
           value={content.animation?.type || 'none'}
-          onChange={(e) => handleContentUpdate({ 
-            animation: { ...content.animation, type: e.target.value }
-          })}
+          onChange={e =>
+            handleContentUpdate({
+              animation: { ...content.animation, type: e.target.value },
+            })
+          }
           className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <option value="none">None</option>
@@ -571,9 +592,11 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               min="100"
               max="2000"
               value={content.animation?.duration || 500}
-              onChange={(e) => handleContentUpdate({ 
-                animation: { ...content.animation, duration: parseInt(e.target.value) || 500 }
-              })}
+              onChange={e =>
+                handleContentUpdate({
+                  animation: { ...content.animation, duration: parseInt(e.target.value) || 500 },
+                })
+              }
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </div>
@@ -584,9 +607,11 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
               min="0"
               max="1000"
               value={content.animation?.delay || 0}
-              onChange={(e) => handleContentUpdate({ 
-                animation: { ...content.animation, delay: parseInt(e.target.value) || 0 }
-              })}
+              onChange={e =>
+                handleContentUpdate({
+                  animation: { ...content.animation, delay: parseInt(e.target.value) || 0 },
+                })
+              }
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             />
           </div>
@@ -603,12 +628,14 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
           <h3 className="text-lg font-semibold">{section.title}</h3>
           <p className="text-sm text-neutral-600 capitalize">{section.type} Section</p>
         </div>
-        <button
-          onClick={onClose}
-          className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
-        >
+        <button onClick={onClose} className="p-2 hover:bg-neutral-100 rounded-lg transition-colors">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
@@ -620,7 +647,7 @@ const SectionEditor: React.FC<SectionEditorProps> = ({
             { id: 'content', label: 'Content', icon: '📝' },
             { id: 'style', label: 'Style', icon: '🎨' },
             { id: 'responsive', label: 'Responsive', icon: '📱' },
-            { id: 'animations', label: 'Animations', icon: '✨' }
+            { id: 'animations', label: 'Animations', icon: '✨' },
           ].map(tab => (
             <button
               key={tab.id}

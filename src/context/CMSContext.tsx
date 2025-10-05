@@ -1,5 +1,19 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
-import { PageContent, CMSSettings, HeroSection, AboutSection, ContactSection, PortfolioSection } from '@/types/cms';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  ReactNode,
+  useEffect,
+} from 'react';
+import {
+  PageContent,
+  CMSSettings,
+  HeroSection,
+  AboutSection,
+  ContactSection,
+  PortfolioSection,
+} from '@/types/cms';
 import { api, handleApiError } from '@/services/apiClient';
 import { config } from '@/config/environment';
 import { debug } from '@/utils/debug';
@@ -10,26 +24,26 @@ interface CMSContextType {
   settings: CMSSettings | null;
   loading: boolean;
   error: string | null;
-  
+
   // Content Management
   fetchPageContent: (page: string) => Promise<void>;
   updatePageContent: (page: string, content: Partial<PageContent>) => Promise<void>;
   publishPageContent: (page: string) => Promise<void>;
-  
+
   // Settings Management
   fetchSettings: () => Promise<void>;
   updateSettings: (settings: Partial<CMSSettings>) => Promise<void>;
-  
+
   // Specific Section Updates
   updateHeroSection: (page: string, hero: HeroSection) => Promise<void>;
   updateAboutSection: (about: AboutSection) => Promise<void>;
   updateContactSection: (contact: ContactSection) => Promise<void>;
   updatePortfolioSection: (portfolio: PortfolioSection) => Promise<void>;
-  
+
   // Media Management
   uploadHeroImage: (file: File) => Promise<string>;
   uploadHeadshot: (file: File) => Promise<string>;
-  
+
   // Utilities
   getPageContent: (page: string) => PageContent | null;
   isPagePublished: (page: string) => boolean;
@@ -43,7 +57,8 @@ const defaultHeroSection: HeroSection = {
   id: 'hero-default',
   title: 'Creative Technologist, Designer, & Process Innovator',
   subtitle: 'Multidisciplinary • Creative Tech • SaaS',
-  description: 'I build bold, vector-clean experiences that bridge design, code, and operations. From in-house print studios to SaaS concepts, I ship systems that scale.',
+  description:
+    'I build bold, vector-clean experiences that bridge design, code, and operations. From in-house print studios to SaaS concepts, I ship systems that scale.',
   ctaPrimary: {
     text: 'View Work',
     link: '/portfolio',
@@ -58,8 +73,14 @@ const defaultAboutSection: AboutSection = {
   id: 'about-default',
   title: 'About Me',
   subtitle: 'Creative Technologist & Process Innovator',
-  bio: 'I\'m a creative technologist with 8+ years of experience building digital experiences that bridge design and development. I specialize in creating systems that are both beautiful and functional, scalable and user-friendly.',
-  skills: ['UI/UX Design', 'Frontend Development', 'Product Strategy', 'Team Leadership', 'Process Innovation'],
+  bio: "I'm a creative technologist with 8+ years of experience building digital experiences that bridge design and development. I specialize in creating systems that are both beautiful and functional, scalable and user-friendly.",
+  skills: [
+    'UI/UX Design',
+    'Frontend Development',
+    'Product Strategy',
+    'Team Leadership',
+    'Process Innovation',
+  ],
   experience: [
     {
       company: 'Caribbean Pools',
@@ -100,8 +121,9 @@ const defaultAboutSection: AboutSection = {
 const defaultContactSection: ContactSection = {
   id: 'contact-default',
   title: 'Get In Touch',
-  subtitle: 'Let\'s build something together',
-  description: 'I\'m open to creative tech roles and collaborations. Reach out to discuss your project or just say hello!',
+  subtitle: "Let's build something together",
+  description:
+    "I'm open to creative tech roles and collaborations. Reach out to discuss your project or just say hello!",
   contactInfo: {
     email: 'johnpstas@gmail.com',
     phone: '219-319-9788',
@@ -114,7 +136,12 @@ const defaultContactSection: ContactSection = {
     fields: [
       { name: 'name', type: 'text', required: true, placeholder: 'Your name' },
       { name: 'email', type: 'email', required: true, placeholder: 'your.email@example.com' },
-      { name: 'message', type: 'textarea', required: true, placeholder: 'Tell me about your project or idea...' },
+      {
+        name: 'message',
+        type: 'textarea',
+        required: true,
+        placeholder: 'Tell me about your project or idea...',
+      },
     ],
   },
 };
@@ -188,7 +215,9 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       if (config.enableMockApi) {
         // Mock update for development
-        setPageContent(prev => prev ? { ...prev, ...content, lastUpdated: new Date().toISOString() } : null);
+        setPageContent(prev =>
+          prev ? { ...prev, ...content, lastUpdated: new Date().toISOString() } : null
+        );
         debug.cms.update('Page content updated (mock)', { page, content });
       } else {
         const response = await api.updatePageContent(page, content);
@@ -214,7 +243,9 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       if (config.enableMockApi) {
         // Mock publish for development
-        setPageContent(prev => prev ? { ...prev, published: true, lastUpdated: new Date().toISOString() } : null);
+        setPageContent(prev =>
+          prev ? { ...prev, published: true, lastUpdated: new Date().toISOString() } : null
+        );
         debug.cms.publish('Page content published (mock)', { page });
       } else {
         const response = await api.publishPageContent(page);
@@ -265,7 +296,7 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     try {
       if (config.enableMockApi) {
         // Mock update for development
-        setSettings(prev => prev ? { ...prev, ...newSettings } : null);
+        setSettings(prev => (prev ? { ...prev, ...newSettings } : null));
         debug.cms.update('Settings updated (mock)', { settings: newSettings });
       } else {
         const response = await api.updateCMSSettings(newSettings);
@@ -283,21 +314,33 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, []);
 
   // Specific section updates
-  const updateHeroSection = useCallback(async (page: string, hero: HeroSection) => {
-    await updatePageContent(page, { hero });
-  }, [updatePageContent]);
+  const updateHeroSection = useCallback(
+    async (page: string, hero: HeroSection) => {
+      await updatePageContent(page, { hero });
+    },
+    [updatePageContent]
+  );
 
-  const updateAboutSection = useCallback(async (about: AboutSection) => {
-    await updatePageContent('about', { about });
-  }, [updatePageContent]);
+  const updateAboutSection = useCallback(
+    async (about: AboutSection) => {
+      await updatePageContent('about', { about });
+    },
+    [updatePageContent]
+  );
 
-  const updateContactSection = useCallback(async (contact: ContactSection) => {
-    await updatePageContent('contact', { contact });
-  }, [updatePageContent]);
+  const updateContactSection = useCallback(
+    async (contact: ContactSection) => {
+      await updatePageContent('contact', { contact });
+    },
+    [updatePageContent]
+  );
 
-  const updatePortfolioSection = useCallback(async (portfolio: PortfolioSection) => {
-    await updatePageContent('portfolio', { portfolio });
-  }, [updatePageContent]);
+  const updatePortfolioSection = useCallback(
+    async (portfolio: PortfolioSection) => {
+      await updatePageContent('portfolio', { portfolio });
+    },
+    [updatePageContent]
+  );
 
   // Media uploads
   const uploadHeroImage = useCallback(async (file: File): Promise<string> => {
@@ -313,14 +356,20 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, []);
 
   // Utilities
-  const getPageContent = useCallback((page: string) => {
-    return pageContent?.page === page ? pageContent : null;
-  }, [pageContent]);
+  const getPageContent = useCallback(
+    (page: string) => {
+      return pageContent?.page === page ? pageContent : null;
+    },
+    [pageContent]
+  );
 
-  const isPagePublished = useCallback((page: string) => {
-    const content = getPageContent(page);
-    return content?.published || false;
-  }, [getPageContent]);
+  const isPagePublished = useCallback(
+    (page: string) => {
+      const content = getPageContent(page);
+      return content?.published || false;
+    },
+    [getPageContent]
+  );
 
   const refreshContent = useCallback(async () => {
     if (pageContent) {

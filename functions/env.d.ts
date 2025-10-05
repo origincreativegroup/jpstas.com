@@ -46,7 +46,11 @@ declare global {
    * Cloudflare Pages Function context
    * Provides access to request, environment, params, and other utilities
    */
-  type EventContext<E = Env, P extends string = string, D = unknown> = import('@cloudflare/workers-types').EventContext<E, P, D>;
+  type EventContext<
+    E = Env,
+    P extends string = string,
+    D = unknown,
+  > = import('@cloudflare/workers-types').EventContext<E, P, D>;
 }
 
 export {};

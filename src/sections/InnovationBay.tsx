@@ -14,26 +14,29 @@ const InnovationBay: React.FC = () => {
     {
       id: 'fpv-drone',
       title: 'FPV Racing Drone',
-      description: 'Custom-built FPV racing drone with 3D printed frame and custom flight controller',
+      description:
+        'Custom-built FPV racing drone with 3D printed frame and custom flight controller',
       category: 'Hardware',
       status: 'Completed',
-      blueprint: 'fpv-drone-blueprint'
+      blueprint: 'fpv-drone-blueprint',
     },
     {
       id: '3d-printer',
       title: '3D Printer Modifications',
-      description: 'Enhanced Ender 3 with custom firmware, auto-leveling, and improved print quality',
+      description:
+        'Enhanced Ender 3 with custom firmware, auto-leveling, and improved print quality',
       category: 'Hardware',
       status: 'Active',
-      blueprint: '3d-printer-blueprint'
+      blueprint: '3d-printer-blueprint',
     },
     {
       id: 'iot-sensor',
       title: 'IoT Environmental Sensor',
-      description: 'ESP32-based sensor network for monitoring temperature, humidity, and air quality',
+      description:
+        'ESP32-based sensor network for monitoring temperature, humidity, and air quality',
       category: 'IoT',
       status: 'Prototype',
-      blueprint: 'iot-sensor-blueprint'
+      blueprint: 'iot-sensor-blueprint',
     },
     {
       id: 'cnc-router',
@@ -41,8 +44,8 @@ const InnovationBay: React.FC = () => {
       description: 'DIY CNC router for precision woodworking and prototyping',
       category: 'Hardware',
       status: 'Planning',
-      blueprint: 'cnc-router-blueprint'
-    }
+      blueprint: 'cnc-router-blueprint',
+    },
   ];
 
   const getStatusColor = (status: string) => {
@@ -71,50 +74,120 @@ const InnovationBay: React.FC = () => {
       {/* Grid Lines */}
       <defs>
         <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.3"/>
+          <path
+            d="M 20 0 L 0 0 0 20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            opacity="0.3"
+          />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#grid)" />
-      
+
       {/* Project-specific blueprints */}
       {projectId === 'fpv-drone' && (
         <>
-          <circle cx="100" cy="100" r="30" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <circle cx="300" cy="100" r="30" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <line x1="100" y1="100" x2="300" y2="100" strokeWidth="2"/>
-          <rect x="150" y="80" width="100" height="40" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <circle cx="200" cy="100" r="5" fill="currentColor"/>
+          <circle cx="100" cy="100" r="30" fill="none" stroke="currentColor" strokeWidth="2" />
+          <circle cx="300" cy="100" r="30" fill="none" stroke="currentColor" strokeWidth="2" />
+          <line x1="100" y1="100" x2="300" y2="100" strokeWidth="2" />
+          <rect
+            x="150"
+            y="80"
+            width="100"
+            height="40"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <circle cx="200" cy="100" r="5" fill="currentColor" />
         </>
       )}
-      
+
       {projectId === '3d-printer' && (
         <>
-          <rect x="50" y="50" width="300" height="100" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <rect x="70" y="70" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="1"/>
-          <rect x="150" y="70" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="1"/>
-          <rect x="230" y="70" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="1"/>
-          <circle cx="200" cy="100" r="3" fill="currentColor"/>
+          <rect
+            x="50"
+            y="50"
+            width="300"
+            height="100"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <rect
+            x="70"
+            y="70"
+            width="60"
+            height="60"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <rect
+            x="150"
+            y="70"
+            width="60"
+            height="60"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <rect
+            x="230"
+            y="70"
+            width="60"
+            height="60"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <circle cx="200" cy="100" r="3" fill="currentColor" />
         </>
       )}
-      
+
       {projectId === 'iot-sensor' && (
         <>
-          <rect x="100" y="80" width="200" height="40" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <circle cx="120" cy="100" r="8" fill="currentColor"/>
-          <circle cx="160" cy="100" r="8" fill="currentColor"/>
-          <circle cx="200" cy="100" r="8" fill="currentColor"/>
-          <circle cx="240" cy="100" r="8" fill="currentColor"/>
-          <circle cx="280" cy="100" r="8" fill="currentColor"/>
-          <path d="M 120 100 L 160 100 L 200 100 L 240 100 L 280 100" strokeWidth="1"/>
+          <rect
+            x="100"
+            y="80"
+            width="200"
+            height="40"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <circle cx="120" cy="100" r="8" fill="currentColor" />
+          <circle cx="160" cy="100" r="8" fill="currentColor" />
+          <circle cx="200" cy="100" r="8" fill="currentColor" />
+          <circle cx="240" cy="100" r="8" fill="currentColor" />
+          <circle cx="280" cy="100" r="8" fill="currentColor" />
+          <path d="M 120 100 L 160 100 L 200 100 L 240 100 L 280 100" strokeWidth="1" />
         </>
       )}
-      
+
       {projectId === 'cnc-router' && (
         <>
-          <rect x="50" y="50" width="300" height="100" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <rect x="70" y="70" width="260" height="60" fill="none" stroke="currentColor" strokeWidth="1"/>
-          <circle cx="200" cy="100" r="20" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <path d="M 180 100 L 220 100 M 200 80 L 200 120" strokeWidth="1"/>
+          <rect
+            x="50"
+            y="50"
+            width="300"
+            height="100"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <rect
+            x="70"
+            y="70"
+            width="260"
+            height="60"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <circle cx="200" cy="100" r="20" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M 180 100 L 220 100 M 200 80 L 200 120" strokeWidth="1" />
         </>
       )}
     </svg>
@@ -131,16 +204,19 @@ const InnovationBay: React.FC = () => {
               className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Back to Workshop
             </button>
             <div className="h-6 w-px bg-neutral-700"></div>
             <h1 className="text-2xl font-bold">Innovation Bay</h1>
           </div>
-          <div className="text-sm text-neutral-400">
-            Hardware & Prototyping Lab
-          </div>
+          <div className="text-sm text-neutral-400">Hardware & Prototyping Lab</div>
         </div>
       </div>
 
@@ -167,14 +243,14 @@ const InnovationBay: React.FC = () => {
                       {project.category}
                     </span>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}
+                  >
                     {project.status}
                   </span>
                 </div>
 
-                <div className="text-xs text-neutral-500">
-                  Blueprint: {project.blueprint}
-                </div>
+                <div className="text-xs text-neutral-500">Blueprint: {project.blueprint}</div>
               </motion.div>
             ))}
           </div>
@@ -184,7 +260,9 @@ const InnovationBay: React.FC = () => {
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
               <span className="text-neutral-400 text-sm">
-                {selectedProject ? `${selectedProject}-blueprint.dwg` : 'Select a project to view blueprint'}
+                {selectedProject
+                  ? `${selectedProject}-blueprint.dwg`
+                  : 'Select a project to view blueprint'}
               </span>
             </div>
 

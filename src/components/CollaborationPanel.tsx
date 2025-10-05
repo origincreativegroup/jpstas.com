@@ -28,7 +28,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
       if (project) {
         setCollaborators(project.collaborators || []);
       }
-      
+
       const projectComments = await saasProjectService.getComments(projectId);
       setComments(projectComments);
     } catch (error) {
@@ -47,7 +47,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
         email: inviteEmail,
         name: inviteEmail.split('@')[0] || 'User',
         role: inviteRole,
-        permissions: getPermissionsForRole(inviteRole)
+        permissions: getPermissionsForRole(inviteRole),
       };
 
       await saasProjectService.addCollaborator(projectId, newCollaborator);
@@ -76,7 +76,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
         userId: 'current-user',
         content: newComment.trim(),
         resolved: false,
-        replies: []
+        replies: [],
       });
       setNewComment('');
       loadCollaborationData();
@@ -168,7 +168,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
                   <input
                     type="email"
                     value={inviteEmail}
-                    onChange={(e) => setInviteEmail(e.target.value)}
+                    onChange={e => setInviteEmail(e.target.value)}
                     placeholder="colleague@example.com"
                     className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                   />
@@ -177,7 +177,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
                   <label className="block text-sm font-medium mb-1">Role</label>
                   <select
                     value={inviteRole}
-                    onChange={(e) => setInviteRole(e.target.value as any)}
+                    onChange={e => setInviteRole(e.target.value as any)}
                     className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                   >
                     <option value="editor">Editor - Can edit and comment</option>
@@ -216,7 +216,10 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
             </div>
           ) : (
             collaborators.map(collaborator => (
-              <div key={collaborator.id} className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg">
+              <div
+                key={collaborator.id}
+                className="flex items-center justify-between p-3 border border-neutral-200 rounded-lg"
+              >
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center">
                     <span className="text-sm font-medium">
@@ -229,7 +232,9 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(collaborator.role)}`}>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(collaborator.role)}`}
+                  >
                     <span className="mr-1">{getRoleIcon(collaborator.role)}</span>
                     {collaborator.role}
                   </span>
@@ -238,8 +243,18 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
                       onClick={() => handleRemoveCollaborator(collaborator.id)}
                       className="p-1 text-red-600 hover:bg-red-50 rounded transition-colors"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
                       </svg>
                     </button>
                   )}
@@ -258,7 +273,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
         <div className="mb-4">
           <textarea
             value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
+            onChange={e => setNewComment(e.target.value)}
             placeholder="Add a comment or feedback..."
             rows={3}
             className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent resize-none"
@@ -313,7 +328,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
                     )}
                   </div>
                 </div>
-                
+
                 {/* Replies */}
                 {comment.replies && comment.replies.length > 0 && (
                   <div className="ml-11 mt-3 space-y-2">
@@ -351,7 +366,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
               <p className="text-xs text-neutral-500">2 hours ago</p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-3 p-3 bg-neutral-50 rounded-lg">
             <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
               <span className="text-sm">👤</span>
@@ -361,7 +376,7 @@ const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ projectId }) =>
               <p className="text-xs text-neutral-500">1 day ago</p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-3 p-3 bg-neutral-50 rounded-lg">
             <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
               <span className="text-sm">💬</span>

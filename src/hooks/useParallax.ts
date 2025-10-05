@@ -33,7 +33,7 @@ export const useParallaxElement = (ref: React.RefObject<HTMLElement>, speed: num
 
     const element = ref.current;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+
     if (prefersReducedMotion) return;
 
     const handleScroll = () => {

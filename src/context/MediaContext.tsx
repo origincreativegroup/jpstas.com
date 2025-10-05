@@ -4,7 +4,6 @@ import { api, handleApiError } from '@/services/apiClient';
 import { cloudflareStream } from '@/services/cloudflareStream';
 import { MediaFile, MediaFilter } from '@/types/media';
 
-
 interface MediaContextType {
   media: MediaFile[];
   loading: boolean;
@@ -42,15 +41,18 @@ export function MediaProvider({ children }: { children: ReactNode }) {
       type: file.type,
       size: file.size,
     });
-    
+
     setMedia(prev => {
       // Check if file already exists to prevent duplicates
       const exists = prev.some(m => m.id === file.id);
       if (exists) {
-        debug.media.warn('File already exists, skipping duplicate', { id: file.id, name: file.name });
+        debug.media.warn('File already exists, skipping duplicate', {
+          id: file.id,
+          name: file.name,
+        });
         return prev;
       }
-      
+
       const updated = [file, ...prev];
       debug.state.update('Media state updated', { totalFiles: updated.length });
       return updated;
@@ -64,72 +66,69 @@ export function MediaProvider({ children }: { children: ReactNode }) {
     try {
       // Update locally first for optimistic UI
       setMedia(prev =>
-        prev.map(m =>
-          m.id === id ? { ...m, ...updates, updatedAt: new Date().toISOString() } : m
-        )
+        prev.map(m => (m.id === id ? { ...m, ...updates, updatedAt: new Date().toISOString() } : m))
       );
 
       // Update on backend
       const updatedFile = await api.updateMedia(id, updates);
-      
+
       // Update with server response
-      setMedia(prev =>
-        prev.map(m => m.id === id ? updatedFile : m)
-      );
+      setMedia(prev => prev.map(m => (m.id === id ? updatedFile : m)));
 
       debug.api.response(`PATCH /api/media/${id} - Success`, { id, updates });
       debug.perf.end(`updateMedia:${id}`);
     } catch (err) {
       debug.media.error('Failed to update media', err as Error, { id, updates });
       debug.perf.end(`updateMedia:${id}`);
-      
+
       // Revert local changes on error
-      setMedia(prev =>
-        prev.map(m => m.id === id ? { ...m, ...updates } : m)
-      );
-      
+      setMedia(prev => prev.map(m => (m.id === id ? { ...m, ...updates } : m)));
+
       const errorMessage = handleApiError(err);
       setError(errorMessage);
       throw new Error(errorMessage);
     }
   }, []);
 
-  const removeMedia = useCallback(async (id: string) => {
-    debug.media.delete('Removing media file', { id });
-    debug.perf.start(`removeMedia:${id}`);
+  const removeMedia = useCallback(
+    async (id: string) => {
+      debug.media.delete('Removing media file', { id });
+      debug.perf.start(`removeMedia:${id}`);
 
-    try {
-      // Get file from current state
-      const fileToDelete = media.find(m => m.id === id);
-      if (!fileToDelete) {
-        debug.media.error('File not found for deletion', new Error('File not found'), { id });
-        throw new Error('File not found');
-      }
+      try {
+        // Get file from current state
+        const fileToDelete = media.find(m => m.id === id);
+        if (!fileToDelete) {
+          debug.media.error('File not found for deletion', new Error('File not found'), { id });
+          throw new Error('File not found');
+        }
 
-      // Remove from backend
-      await api.deleteMedia(id);
+        // Remove from backend
+        await api.deleteMedia(id);
 
-      // Remove from local state
-      setMedia(prev => {
-        const updated = prev.filter(m => m.id !== id);
-        debug.state.update('Media removed from state', {
-          removedId: id,
-          totalFiles: updated.length,
+        // Remove from local state
+        setMedia(prev => {
+          const updated = prev.filter(m => m.id !== id);
+          debug.state.update('Media removed from state', {
+            removedId: id,
+            totalFiles: updated.length,
+          });
+          return updated;
         });
-        return updated;
-      });
 
-      debug.api.response(`DELETE /api/media - Success`, { id });
-      debug.perf.end(`removeMedia:${id}`);
-    } catch (err) {
-      debug.media.error('Failed to remove media', err as Error, { id });
-      debug.perf.end(`removeMedia:${id}`);
-      
-      const errorMessage = handleApiError(err);
-      setError(errorMessage);
-      throw new Error(errorMessage);
-    }
-  }, [media]);
+        debug.api.response(`DELETE /api/media - Success`, { id });
+        debug.perf.end(`removeMedia:${id}`);
+      } catch (err) {
+        debug.media.error('Failed to remove media', err as Error, { id });
+        debug.perf.end(`removeMedia:${id}`);
+
+        const errorMessage = handleApiError(err);
+        setError(errorMessage);
+        throw new Error(errorMessage);
+      }
+    },
+    [media]
+  );
 
   const refreshMedia = useCallback(async () => {
     debug.media.select('Refreshing media library');
@@ -140,7 +139,7 @@ export function MediaProvider({ children }: { children: ReactNode }) {
     try {
       const mediaFiles = await api.getMedia();
       setMedia(mediaFiles);
-      
+
       debug.state.update('Media library refreshed', {
         totalFiles: mediaFiles.length,
       });
@@ -148,7 +147,7 @@ export function MediaProvider({ children }: { children: ReactNode }) {
     } catch (err) {
       debug.media.error('Failed to refresh media', err as Error);
       debug.perf.end('refreshMedia');
-      
+
       const errorMessage = handleApiError(err);
       setError(errorMessage);
     } finally {
@@ -243,41 +242,36 @@ export function MediaProvider({ children }: { children: ReactNode }) {
     [media, updateMedia]
   );
 
-  const bulkUpdate = useCallback(
-    async (ids: string[], updates: Partial<MediaFile>) => {
-      debug.media.update('Bulk updating media files', { count: ids.length, updates });
-      debug.perf.start('bulkUpdate');
+  const bulkUpdate = useCallback(async (ids: string[], updates: Partial<MediaFile>) => {
+    debug.media.update('Bulk updating media files', { count: ids.length, updates });
+    debug.perf.start('bulkUpdate');
 
-      try {
-        // Update locally first for optimistic UI
-        setMedia(prev =>
-          prev.map(m =>
-            ids.includes(m.id) ? { ...m, ...updates, updatedAt: new Date().toISOString() } : m
-          )
-        );
+    try {
+      // Update locally first for optimistic UI
+      setMedia(prev =>
+        prev.map(m =>
+          ids.includes(m.id) ? { ...m, ...updates, updatedAt: new Date().toISOString() } : m
+        )
+      );
 
-        // Update each file individually (since we don't have a bulk endpoint yet)
-        const updatePromises = ids.map(id => api.updateMedia(id, updates));
-        await Promise.all(updatePromises);
+      // Update each file individually (since we don't have a bulk endpoint yet)
+      const updatePromises = ids.map(id => api.updateMedia(id, updates));
+      await Promise.all(updatePromises);
 
-        debug.api.response('Bulk update - Success', { count: ids.length });
-        debug.perf.end('bulkUpdate');
-      } catch (err) {
-        debug.media.error('Bulk update failed', err as Error, { count: ids.length });
-        debug.perf.end('bulkUpdate');
-        
-        // Revert local changes on error
-        setMedia(prev =>
-          prev.map(m => ids.includes(m.id) ? { ...m, ...updates } : m)
-        );
-        
-        const errorMessage = handleApiError(err);
-        setError(errorMessage);
-        throw new Error(errorMessage);
-      }
-    },
-    []
-  );
+      debug.api.response('Bulk update - Success', { count: ids.length });
+      debug.perf.end('bulkUpdate');
+    } catch (err) {
+      debug.media.error('Bulk update failed', err as Error, { count: ids.length });
+      debug.perf.end('bulkUpdate');
+
+      // Revert local changes on error
+      setMedia(prev => prev.map(m => (ids.includes(m.id) ? { ...m, ...updates } : m)));
+
+      const errorMessage = handleApiError(err);
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, []);
 
   const bulkDelete = useCallback(
     async (ids: string[]) => {
@@ -311,7 +305,7 @@ export function MediaProvider({ children }: { children: ReactNode }) {
       } catch (err) {
         debug.media.error('Bulk delete failed', err as Error, { count: ids.length });
         debug.perf.end('bulkDelete');
-        
+
         const errorMessage = handleApiError(err);
         setError(errorMessage);
         throw new Error(errorMessage);
@@ -321,122 +315,133 @@ export function MediaProvider({ children }: { children: ReactNode }) {
   );
 
   // Cloudflare Stream video upload
-  const uploadVideo = useCallback(async (file: File, options?: any): Promise<MediaFile> => {
-    debug.media.upload('Uploading video to Cloudflare Stream', { 
-      name: file.name, 
-      size: file.size, 
-      type: file.type 
-    });
-    debug.perf.start('uploadVideo');
-
-    try {
-      // Check if file should use Cloudflare Stream
-      if (!cloudflareStream.shouldUseStream(file)) {
-        throw new Error('File is not a supported video format for Cloudflare Stream');
-      }
-
-      // Check file size
-      if (file.size > cloudflareStream.getMaxFileSize()) {
-        throw new Error(`File size exceeds maximum allowed size of ${cloudflareStream.getMaxFileSize() / (1024 * 1024)}MB`);
-      }
-
-      // Upload to Cloudflare Stream
-      const streamUpload = await cloudflareStream.uploadVideo(file, options);
-      
-      // Convert to MediaFile
-      const mediaFile = cloudflareStream.convertToMediaFile(streamUpload, file);
-      
-      // Add to local state
-      addMedia(mediaFile);
-      
-      debug.media.upload('Video uploaded successfully', { 
-        id: mediaFile.id, 
-        streamId: streamUpload.uid,
-        status: streamUpload.status.state 
+  const uploadVideo = useCallback(
+    async (file: File, options?: any): Promise<MediaFile> => {
+      debug.media.upload('Uploading video to Cloudflare Stream', {
+        name: file.name,
+        size: file.size,
+        type: file.type,
       });
-      debug.perf.end('uploadVideo');
-      
-      return mediaFile;
-    } catch (err) {
-      debug.media.error('Video upload failed', err as Error, { 
-        name: file.name, 
-        size: file.size 
-      });
-      debug.perf.end('uploadVideo');
-      
-      const errorMessage = err instanceof Error ? err.message : 'Video upload failed';
-      setError(errorMessage);
-      throw new Error(errorMessage);
-    }
-  }, [addMedia]);
+      debug.perf.start('uploadVideo');
+
+      try {
+        // Check if file should use Cloudflare Stream
+        if (!cloudflareStream.shouldUseStream(file)) {
+          throw new Error('File is not a supported video format for Cloudflare Stream');
+        }
+
+        // Check file size
+        if (file.size > cloudflareStream.getMaxFileSize()) {
+          throw new Error(
+            `File size exceeds maximum allowed size of ${cloudflareStream.getMaxFileSize() / (1024 * 1024)}MB`
+          );
+        }
+
+        // Upload to Cloudflare Stream
+        const streamUpload = await cloudflareStream.uploadVideo(file, options);
+
+        // Convert to MediaFile
+        const mediaFile = cloudflareStream.convertToMediaFile(streamUpload, file);
+
+        // Add to local state
+        addMedia(mediaFile);
+
+        debug.media.upload('Video uploaded successfully', {
+          id: mediaFile.id,
+          streamId: streamUpload.uid,
+          status: streamUpload.status.state,
+        });
+        debug.perf.end('uploadVideo');
+
+        return mediaFile;
+      } catch (err) {
+        debug.media.error('Video upload failed', err as Error, {
+          name: file.name,
+          size: file.size,
+        });
+        debug.perf.end('uploadVideo');
+
+        const errorMessage = err instanceof Error ? err.message : 'Video upload failed';
+        setError(errorMessage);
+        throw new Error(errorMessage);
+      }
+    },
+    [addMedia]
+  );
 
   // Image upload (using existing API)
-  const uploadImage = useCallback(async (file: File): Promise<MediaFile> => {
-    debug.media.upload('Uploading image', { 
-      name: file.name, 
-      size: file.size, 
-      type: file.type 
-    });
-    debug.perf.start('uploadImage');
+  const uploadImage = useCallback(
+    async (file: File): Promise<MediaFile> => {
+      debug.media.upload('Uploading image', {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+      });
+      debug.perf.start('uploadImage');
 
-    try {
-      // Use existing API for images
-      const mediaFile = await api.uploadFile(file);
-      
-      // Add to local state
-      addMedia(mediaFile);
-      
-      debug.media.upload('Image uploaded successfully', { 
-        id: mediaFile.id, 
-        name: mediaFile.name 
-      });
-      debug.perf.end('uploadImage');
-      
-      return mediaFile;
-    } catch (err) {
-      debug.media.error('Image upload failed', err as Error, { 
-        name: file.name, 
-        size: file.size 
-      });
-      debug.perf.end('uploadImage');
-      
-      const errorMessage = handleApiError(err);
-      setError(errorMessage);
-      throw new Error(errorMessage);
-    }
-  }, [addMedia]);
+      try {
+        // Use existing API for images
+        const mediaFile = await api.uploadFile(file);
+
+        // Add to local state
+        addMedia(mediaFile);
+
+        debug.media.upload('Image uploaded successfully', {
+          id: mediaFile.id,
+          name: mediaFile.name,
+        });
+        debug.perf.end('uploadImage');
+
+        return mediaFile;
+      } catch (err) {
+        debug.media.error('Image upload failed', err as Error, {
+          name: file.name,
+          size: file.size,
+        });
+        debug.perf.end('uploadImage');
+
+        const errorMessage = handleApiError(err);
+        setError(errorMessage);
+        throw new Error(errorMessage);
+      }
+    },
+    [addMedia]
+  );
 
   // Generic file upload (auto-detect type)
-  const uploadFile = useCallback(async (file: File, options?: any): Promise<MediaFile> => {
-    debug.media.upload('Uploading file', { 
-      name: file.name, 
-      size: file.size, 
-      type: file.type 
-    });
-
-    try {
-      // Determine upload method based on file type
-      if (file.type.startsWith('video/') && cloudflareStream.shouldUseStream(file)) {
-        return await uploadVideo(file, options);
-      } else if (file.type.startsWith('image/')) {
-        return await uploadImage(file);
-      } else {
-        // Use existing API for other file types
-        const mediaFile = await api.uploadFile(file);
-        addMedia(mediaFile);
-        return mediaFile;
-      }
-    } catch (err) {
-      debug.media.error('File upload failed', err as Error, { 
-        name: file.name, 
-        size: file.size 
+  const uploadFile = useCallback(
+    async (file: File, options?: any): Promise<MediaFile> => {
+      debug.media.upload('Uploading file', {
+        name: file.name,
+        size: file.size,
+        type: file.type,
       });
-      
-      const errorMessage = err instanceof Error ? err.message : 'File upload failed';
-      setError(errorMessage);
-      throw new Error(errorMessage);
-    }
-  }, [uploadVideo, uploadImage, addMedia]);
+
+      try {
+        // Determine upload method based on file type
+        if (file.type.startsWith('video/') && cloudflareStream.shouldUseStream(file)) {
+          return await uploadVideo(file, options);
+        } else if (file.type.startsWith('image/')) {
+          return await uploadImage(file);
+        } else {
+          // Use existing API for other file types
+          const mediaFile = await api.uploadFile(file);
+          addMedia(mediaFile);
+          return mediaFile;
+        }
+      } catch (err) {
+        debug.media.error('File upload failed', err as Error, {
+          name: file.name,
+          size: file.size,
+        });
+
+        const errorMessage = err instanceof Error ? err.message : 'File upload failed';
+        setError(errorMessage);
+        throw new Error(errorMessage);
+      }
+    },
+    [uploadVideo, uploadImage, addMedia]
+  );
 
   // Get video embed URL
   const getVideoEmbedUrl = useCallback((streamId: string, options?: any): string => {

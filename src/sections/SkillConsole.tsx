@@ -53,16 +53,19 @@ const SkillConsole: React.FC = () => {
               className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Back to Workshop
             </button>
             <div className="h-6 w-px bg-neutral-700"></div>
             <h1 className="text-2xl font-bold">Skill Console</h1>
           </div>
-          <div className="text-sm text-neutral-400">
-            Interactive Skills Matrix
-          </div>
+          <div className="text-sm text-neutral-400">Interactive Skills Matrix</div>
         </div>
       </div>
 
@@ -101,7 +104,7 @@ const SkillConsole: React.FC = () => {
                               {skill.level}%
                             </span>
                           </div>
-                          
+
                           {/* Skill Bar */}
                           <div className="w-full bg-neutral-600 rounded-full h-2 mb-3 overflow-hidden">
                             <motion.div
@@ -111,7 +114,7 @@ const SkillConsole: React.FC = () => {
                               transition={{ duration: 1, delay: skillIndex * 0.1 }}
                             />
                           </div>
-                          
+
                           <p className="text-sm text-neutral-400 group-hover:text-neutral-300 transition-colors">
                             {skill.description}
                           </p>
@@ -133,7 +136,7 @@ const SkillConsole: React.FC = () => {
               className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-6 sticky top-24"
             >
               <h3 className="text-lg font-bold text-white mb-4">Skill Details</h3>
-              
+
               {hoveredSkill ? (
                 <motion.div
                   key={hoveredSkill}
@@ -142,24 +145,18 @@ const SkillConsole: React.FC = () => {
                   transition={{ duration: 0.3 }}
                   className="space-y-4"
                 >
-                  {skillGroups.map(group => 
+                  {skillGroups.map(group =>
                     group.skills
                       .filter(skill => skill.name === hoveredSkill)
                       .map(skill => (
                         <div key={skill.name}>
-                          <h4 className="text-lg font-semibold text-white mb-2">
-                            {skill.name}
-                          </h4>
-                          <div className="text-sm text-neutral-400 mb-4">
-                            {skill.description}
-                          </div>
+                          <h4 className="text-lg font-semibold text-white mb-2">{skill.name}</h4>
+                          <div className="text-sm text-neutral-400 mb-4">{skill.description}</div>
                           <div className="p-4 bg-purple-500/10 border border-purple-400/20 rounded-lg">
                             <div className="text-sm font-medium text-purple-300 mb-2">
                               Proof of Expertise
                             </div>
-                            <div className="text-xs text-neutral-300">
-                              {skill.proof}
-                            </div>
+                            <div className="text-xs text-neutral-300">{skill.proof}</div>
                           </div>
                         </div>
                       ))
@@ -168,9 +165,7 @@ const SkillConsole: React.FC = () => {
               ) : (
                 <div className="text-center py-12">
                   <div className="text-4xl mb-4">⚡</div>
-                  <div className="text-neutral-400 text-sm">
-                    Hover over a skill to view details
-                  </div>
+                  <div className="text-neutral-400 text-sm">Hover over a skill to view details</div>
                 </div>
               )}
             </motion.div>
@@ -193,17 +188,19 @@ const SkillConsole: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-neutral-400">Expert Level (90%+)</span>
                   <span className="text-sm font-bold text-green-400">
-                    {skillGroups
-                      .flatMap(group => group.skills)
-                      .filter(skill => skill.level >= 90).length}
+                    {
+                      skillGroups.flatMap(group => group.skills).filter(skill => skill.level >= 90)
+                        .length
+                    }
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-neutral-400">Advanced Level (80%+)</span>
                   <span className="text-sm font-bold text-blue-400">
-                    {skillGroups
-                      .flatMap(group => group.skills)
-                      .filter(skill => skill.level >= 80).length}
+                    {
+                      skillGroups.flatMap(group => group.skills).filter(skill => skill.level >= 80)
+                        .length
+                    }
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
@@ -213,8 +210,9 @@ const SkillConsole: React.FC = () => {
                       skillGroups
                         .flatMap(group => group.skills)
                         .reduce((sum, skill) => sum + skill.level, 0) /
-                      skillGroups.reduce((total, group) => total + group.skills.length, 0)
-                    )}%
+                        skillGroups.reduce((total, group) => total + group.skills.length, 0)
+                    )}
+                    %
                   </span>
                 </div>
               </div>

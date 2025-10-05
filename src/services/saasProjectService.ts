@@ -1,13 +1,13 @@
 // SaaS Portfolio Project Service
-import { 
-  ProjectDraft, 
-  ProjectTemplate, 
-  ProjectVersion, 
-  ProjectComment, 
-  ProjectExport, 
+import {
+  ProjectDraft,
+  ProjectTemplate,
+  ProjectVersion,
+  ProjectComment,
+  ProjectExport,
   ProjectImport,
   ChangeLog,
-  Collaborator
+  Collaborator,
 } from '@/types/saas';
 import { MediaFile } from '@/types/media';
 
@@ -19,7 +19,11 @@ class SaaSProjectService {
   }
 
   // Project Management
-  async createProject(template: ProjectTemplate, title: string, description: string): Promise<ProjectDraft> {
+  async createProject(
+    template: ProjectTemplate,
+    title: string,
+    description: string
+  ): Promise<ProjectDraft> {
     const project: ProjectDraft = {
       id: this.generateId(),
       title,
@@ -34,7 +38,7 @@ class SaaSProjectService {
           title,
           description,
           keywords: [],
-        }
+        },
       },
       metadata: {
         tags: [],
@@ -45,15 +49,15 @@ class SaaSProjectService {
         analytics: {
           trackViews: true,
           trackInteractions: true,
-          customEvents: []
-        }
+          customEvents: [],
+        },
       },
       collaborators: [],
       permissions: [],
       version: 1,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      lastModifiedBy: this.getCurrentUserId()
+      lastModifiedBy: this.getCurrentUserId(),
     };
 
     // In a real implementation, this would save to the backend
@@ -77,7 +81,7 @@ class SaaSProjectService {
       ...updates,
       version: project.version + 1,
       updatedAt: new Date().toISOString(),
-      lastModifiedBy: this.getCurrentUserId()
+      lastModifiedBy: this.getCurrentUserId(),
     };
 
     // Create version history
@@ -88,7 +92,7 @@ class SaaSProjectService {
       content: project.content,
       changes: this.generateChangeLog(project, updatedProject),
       createdAt: new Date().toISOString(),
-      createdBy: this.getCurrentUserId()
+      createdBy: this.getCurrentUserId(),
     });
 
     this.saveProjectToStorage(updatedProject);
@@ -117,20 +121,21 @@ class SaaSProjectService {
         projects = projects.filter(p => p.metadata.category === filters.category);
       }
       if (filters.tags && filters.tags.length > 0) {
-        projects = projects.filter(p => 
-          filters.tags!.some(tag => p.metadata.tags.includes(tag))
-        );
+        projects = projects.filter(p => filters.tags!.some(tag => p.metadata.tags.includes(tag)));
       }
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
-        projects = projects.filter(p => 
-          p.title.toLowerCase().includes(searchLower) ||
-          p.description.toLowerCase().includes(searchLower)
+        projects = projects.filter(
+          p =>
+            p.title.toLowerCase().includes(searchLower) ||
+            p.description.toLowerCase().includes(searchLower)
         );
       }
     }
 
-    return projects.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+    return projects.sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    );
   }
 
   // Template Management
@@ -145,7 +150,12 @@ class SaaSProjectService {
   }
 
   // Media Integration
-  async addMediaToProject(projectId: string, media: MediaFile, _sectionId: string, position?: { x: number; y: number }): Promise<void> {
+  async addMediaToProject(
+    projectId: string,
+    media: MediaFile,
+    _sectionId: string,
+    position?: { x: number; y: number }
+  ): Promise<void> {
     const project = await this.getProject(projectId);
     if (!project) {
       throw new Error('Project not found');
@@ -154,9 +164,13 @@ class SaaSProjectService {
     const mediaReference = {
       id: this.generateId(),
       mediaId: media.id,
-      type: media.type.startsWith('image/') ? 'image' as const : 
-            media.type.startsWith('video/') ? 'video' as const :
-            media.type.startsWith('audio/') ? 'audio' as const : 'document' as const,
+      type: media.type.startsWith('image/')
+        ? ('image' as const)
+        : media.type.startsWith('video/')
+          ? ('video' as const)
+          : media.type.startsWith('audio/')
+            ? ('audio' as const)
+            : ('document' as const),
       url: media.url,
       alt: media.alt || media.name,
       caption: media.caption || '',
@@ -165,15 +179,15 @@ class SaaSProjectService {
         height: media.metadata?.height,
         duration: media.metadata?.duration,
         fileSize: media.size,
-        format: media.type
+        format: media.type,
       },
       transformations: [],
       position: position ? { ...position, z: 0 } : { x: 0, y: 0, z: 0 },
       responsive: {
         mobile: { visible: true, columns: 1, spacing: 16 },
         tablet: { visible: true, columns: 2, spacing: 20 },
-        desktop: { visible: true, columns: 3, spacing: 24 }
-      }
+        desktop: { visible: true, columns: 3, spacing: 24 },
+      },
     };
 
     project.content.media.push(mediaReference);
@@ -191,11 +205,14 @@ class SaaSProjectService {
   }
 
   // Version Control
-  async createVersion(projectId: string, version: Omit<ProjectVersion, 'id' | 'projectId'>): Promise<ProjectVersion> {
+  async createVersion(
+    projectId: string,
+    version: Omit<ProjectVersion, 'id' | 'projectId'>
+  ): Promise<ProjectVersion> {
     const newVersion: ProjectVersion = {
       id: this.generateId(),
       projectId,
-      ...version
+      ...version,
     };
 
     const versions = this.getVersionsFromStorage();
@@ -227,7 +244,7 @@ class SaaSProjectService {
       content: version.content,
       version: project.version + 1,
       updatedAt: new Date().toISOString(),
-      lastModifiedBy: this.getCurrentUserId()
+      lastModifiedBy: this.getCurrentUserId(),
     };
 
     await this.updateProject(projectId, restoredProject);
@@ -235,7 +252,10 @@ class SaaSProjectService {
   }
 
   // Collaboration
-  async addCollaborator(projectId: string, collaborator: Omit<Collaborator, 'id' | 'invitedAt'>): Promise<void> {
+  async addCollaborator(
+    projectId: string,
+    collaborator: Omit<Collaborator, 'id' | 'invitedAt'>
+  ): Promise<void> {
     const project = await this.getProject(projectId);
     if (!project) {
       throw new Error('Project not found');
@@ -244,7 +264,7 @@ class SaaSProjectService {
     const newCollaborator: Collaborator = {
       id: this.generateId(),
       ...collaborator,
-      invitedAt: new Date().toISOString()
+      invitedAt: new Date().toISOString(),
     };
 
     project.collaborators.push(newCollaborator);
@@ -262,13 +282,16 @@ class SaaSProjectService {
   }
 
   // Comments
-  async addComment(projectId: string, comment: Omit<ProjectComment, 'id' | 'projectId' | 'createdAt' | 'updatedAt'>): Promise<ProjectComment> {
+  async addComment(
+    projectId: string,
+    comment: Omit<ProjectComment, 'id' | 'projectId' | 'createdAt' | 'updatedAt'>
+  ): Promise<ProjectComment> {
     const newComment: ProjectComment = {
       id: this.generateId(),
       projectId,
       ...comment,
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
     const comments = this.getCommentsFromStorage();
@@ -280,11 +303,16 @@ class SaaSProjectService {
 
   async getComments(projectId: string): Promise<ProjectComment[]> {
     const comments = this.getCommentsFromStorage();
-    return comments.filter(c => c.projectId === projectId).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    return comments
+      .filter(c => c.projectId === projectId)
+      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
   }
 
   // Export/Import
-  async exportProject(projectId: string, format: 'json' | 'html' | 'pdf' | 'zip'): Promise<ProjectExport> {
+  async exportProject(
+    projectId: string,
+    format: 'json' | 'html' | 'pdf' | 'zip'
+  ): Promise<ProjectExport> {
     const project = await this.getProject(projectId);
     if (!project) {
       throw new Error('Project not found');
@@ -297,7 +325,7 @@ class SaaSProjectService {
       status: 'processing',
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days
       createdAt: new Date().toISOString(),
-      createdBy: this.getCurrentUserId()
+      createdBy: this.getCurrentUserId(),
     };
 
     // In a real implementation, this would trigger a background job
@@ -321,7 +349,7 @@ class SaaSProjectService {
       status: 'processing',
       errors: [],
       createdAt: new Date().toISOString(),
-      createdBy: this.getCurrentUserId()
+      createdBy: this.getCurrentUserId(),
     };
 
     // In a real implementation, this would process the file
@@ -355,7 +383,8 @@ class SaaSProjectService {
     const changes = [];
     if (oldProject.title !== newProject.title) changes.push('Title updated');
     if (oldProject.description !== newProject.description) changes.push('Description updated');
-    if (oldProject.status !== newProject.status) changes.push(`Status changed to ${newProject.status}`);
+    if (oldProject.status !== newProject.status)
+      changes.push(`Status changed to ${newProject.status}`);
     return changes.join(', ') || 'Project updated';
   }
 
@@ -373,7 +402,7 @@ class SaaSProjectService {
         before: oldProject.title,
         after: newProject.title,
         timestamp,
-        userId
+        userId,
       });
     }
 
@@ -386,7 +415,7 @@ class SaaSProjectService {
         before: oldProject.description,
         after: newProject.description,
         timestamp,
-        userId
+        userId,
       });
     }
 
@@ -481,9 +510,9 @@ class SaaSProjectService {
               responsive: {
                 mobile: { visible: true, columns: 1, spacing: 16 },
                 tablet: { visible: true, columns: 1, spacing: 20 },
-                desktop: { visible: true, columns: 1, spacing: 24 }
+                desktop: { visible: true, columns: 1, spacing: 24 },
               },
-              animations: []
+              animations: [],
             },
             {
               id: 'gallery',
@@ -495,17 +524,17 @@ class SaaSProjectService {
               responsive: {
                 mobile: { visible: true, columns: 1, spacing: 16 },
                 tablet: { visible: true, columns: 2, spacing: 20 },
-                desktop: { visible: true, columns: 3, spacing: 24 }
+                desktop: { visible: true, columns: 3, spacing: 24 },
               },
-              animations: []
-            }
+              animations: [],
+            },
           ],
           layout: {
             type: 'single-column',
             spacing: 'normal',
             alignment: 'center',
             maxWidth: 1200,
-            padding: { top: 40, right: 20, bottom: 40, left: 20 }
+            padding: { top: 40, right: 20, bottom: 40, left: 20 },
           },
           theme: {
             primaryColor: '#3B82F6',
@@ -516,19 +545,19 @@ class SaaSProjectService {
             fontFamily: 'Inter',
             fontSize: 'medium',
             borderRadius: 'medium',
-            shadows: 'subtle'
+            shadows: 'subtle',
           },
-          interactions: []
+          interactions: [],
         },
         metadata: {
           author: 'SaaS Team',
           version: '1.0.0',
           tags: ['portfolio', 'modern', 'clean'],
           difficulty: 'beginner',
-          estimatedTime: 30
+          estimatedTime: 30,
         },
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
       },
       {
         id: 'case-study-detailed',
@@ -549,9 +578,9 @@ class SaaSProjectService {
               responsive: {
                 mobile: { visible: true, columns: 1, spacing: 16 },
                 tablet: { visible: true, columns: 1, spacing: 20 },
-                desktop: { visible: true, columns: 1, spacing: 24 }
+                desktop: { visible: true, columns: 1, spacing: 24 },
               },
-              animations: []
+              animations: [],
             },
             {
               id: 'challenge',
@@ -563,9 +592,9 @@ class SaaSProjectService {
               responsive: {
                 mobile: { visible: true, columns: 1, spacing: 16 },
                 tablet: { visible: true, columns: 1, spacing: 20 },
-                desktop: { visible: true, columns: 1, spacing: 24 }
+                desktop: { visible: true, columns: 1, spacing: 24 },
               },
-              animations: []
+              animations: [],
             },
             {
               id: 'solution',
@@ -577,9 +606,9 @@ class SaaSProjectService {
               responsive: {
                 mobile: { visible: true, columns: 1, spacing: 16 },
                 tablet: { visible: true, columns: 1, spacing: 20 },
-                desktop: { visible: true, columns: 1, spacing: 24 }
+                desktop: { visible: true, columns: 1, spacing: 24 },
               },
-              animations: []
+              animations: [],
             },
             {
               id: 'results',
@@ -591,17 +620,17 @@ class SaaSProjectService {
               responsive: {
                 mobile: { visible: true, columns: 1, spacing: 16 },
                 tablet: { visible: true, columns: 2, spacing: 20 },
-                desktop: { visible: true, columns: 3, spacing: 24 }
+                desktop: { visible: true, columns: 3, spacing: 24 },
               },
-              animations: []
-            }
+              animations: [],
+            },
           ],
           layout: {
             type: 'single-column',
             spacing: 'spacious',
             alignment: 'left',
             maxWidth: 800,
-            padding: { top: 60, right: 40, bottom: 60, left: 40 }
+            padding: { top: 60, right: 40, bottom: 60, left: 40 },
           },
           theme: {
             primaryColor: '#6366F1',
@@ -612,20 +641,20 @@ class SaaSProjectService {
             fontFamily: 'Inter',
             fontSize: 'medium',
             borderRadius: 'small',
-            shadows: 'medium'
+            shadows: 'medium',
           },
-          interactions: []
+          interactions: [],
         },
         metadata: {
           author: 'SaaS Team',
           version: '1.0.0',
           tags: ['case-study', 'detailed', 'professional'],
           difficulty: 'intermediate',
-          estimatedTime: 60
+          estimatedTime: 60,
         },
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      }
+        updatedAt: new Date().toISOString(),
+      },
     ];
   }
 }

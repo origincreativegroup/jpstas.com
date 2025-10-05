@@ -85,7 +85,8 @@ export function CloudflareVideoDirect({
   const id = extractVideoId(videoId);
   const domain = subdomain || DEFAULT_SUBDOMAIN;
   const videoUrl = `https://${domain}.cloudflarestream.com/${id}/manifest/video.m3u8`;
-  const posterUrl = poster || `https://${domain}.cloudflarestream.com/${id}/thumbnails/thumbnail.jpg`;
+  const posterUrl =
+    poster || `https://${domain}.cloudflarestream.com/${id}/thumbnails/thumbnail.jpg`;
 
   return (
     <video

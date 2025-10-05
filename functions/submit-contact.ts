@@ -1,5 +1,4 @@
-
-export const onRequestPost: PagesFunction = async (context) => {
+export const onRequestPost: PagesFunction = async context => {
   const formData = await context.request.formData();
   const name = formData.get('name');
   const email = formData.get('email');
@@ -9,6 +8,6 @@ export const onRequestPost: PagesFunction = async (context) => {
   console.log('Contact message:', { name, email, message });
 
   return new Response(JSON.stringify({ ok: true }), {
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   });
 };

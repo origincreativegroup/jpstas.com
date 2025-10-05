@@ -96,12 +96,9 @@ class ApiClient {
     this.token = localStorage.getItem('auth_token');
   }
 
-  private async request<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<ApiResponse<T>> {
+  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
     const url = `${this.baseURL}${endpoint}`;
-    
+
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       ...(options.headers as Record<string, string>),
@@ -161,7 +158,11 @@ class ApiClient {
     return response;
   }
 
-  async register(email: string, password: string, name: string): Promise<ApiResponse<AuthResponse>> {
+  async register(
+    email: string,
+    password: string,
+    name: string
+  ): Promise<ApiResponse<AuthResponse>> {
     const response = await this.request<AuthResponse>('/auth/register', {
       method: 'POST',
       body: JSON.stringify({ email, password, name }),
@@ -202,7 +203,7 @@ class ApiClient {
 
     const queryString = searchParams.toString();
     const endpoint = queryString ? `/projects?${queryString}` : '/projects';
-    
+
     return this.request<{ projects: Project[]; pagination: PaginationInfo }>(endpoint);
   }
 
@@ -217,7 +218,10 @@ class ApiClient {
     });
   }
 
-  async updateProject(id: string, updates: Partial<Project>): Promise<ApiResponse<{ project: Project }>> {
+  async updateProject(
+    id: string,
+    updates: Partial<Project>
+  ): Promise<ApiResponse<{ project: Project }>> {
     return this.request<{ project: Project }>(`/projects/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(updates),
@@ -248,18 +252,21 @@ class ApiClient {
 
     const queryString = searchParams.toString();
     const endpoint = queryString ? `/media?${queryString}` : '/media';
-    
+
     return this.request<{ media: any[]; pagination: PaginationInfo }>(endpoint);
   }
 
-  async uploadMedia(file: File, metadata?: {
-    project_id?: string;
-    alt_text?: string;
-    caption?: string;
-  }): Promise<ApiResponse<{ media: any }>> {
+  async uploadMedia(
+    file: File,
+    metadata?: {
+      project_id?: string;
+      alt_text?: string;
+      caption?: string;
+    }
+  ): Promise<ApiResponse<{ media: any }>> {
     const formData = new FormData();
     formData.append('file', file);
-    
+
     if (metadata) {
       Object.entries(metadata).forEach(([key, value]) => {
         if (value !== undefined) {
@@ -307,7 +314,10 @@ class ApiClient {
     return this.request<{ section: ContentSection }>(`/content/${key}`);
   }
 
-  async updateContentSection(key: string, section: Partial<ContentSection>): Promise<ApiResponse<{ section: ContentSection }>> {
+  async updateContentSection(
+    key: string,
+    section: Partial<ContentSection>
+  ): Promise<ApiResponse<{ section: ContentSection }>> {
     return this.request<{ section: ContentSection }>(`/content/${key}`, {
       method: 'PUT',
       body: JSON.stringify(section),
@@ -336,7 +346,7 @@ class ApiClient {
 
     const queryString = searchParams.toString();
     const endpoint = queryString ? `/skills?${queryString}` : '/skills';
-    
+
     return this.request<{ skills: Skill[] }>(endpoint);
   }
 
@@ -376,7 +386,7 @@ class ApiClient {
 
     const queryString = searchParams.toString();
     const endpoint = queryString ? `/analytics/dashboard?${queryString}` : '/analytics/dashboard';
-    
+
     return this.request<any>(endpoint);
   }
 }

@@ -16,14 +16,12 @@ interface SaaSProjectEditorProps {
   onClose?: () => void;
 }
 
-const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
-  projectId,
-  onSave,
-  onClose
-}) => {
+const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({ projectId, onSave, onClose }) => {
   const [project, setProject] = useState<ProjectDraft | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'design' | 'content' | 'media' | 'settings' | 'preview' | 'collaborate'>('design');
+  const [activeTab, setActiveTab] = useState<
+    'design' | 'content' | 'media' | 'settings' | 'preview' | 'collaborate'
+  >('design');
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [showTemplateSelector, setShowTemplateSelector] = useState(false);
   const [showMediaPicker, setShowMediaPicker] = useState(false);
@@ -51,7 +49,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
   const initializeEditor = async () => {
     try {
       setLoading(true);
-      
+
       if (projectId) {
         // Load existing project
         const existingProject = await saasProjectService.getProject(projectId);
@@ -74,7 +72,11 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
     }
   };
 
-  const handleCreateProject = async (template: ProjectTemplate, title: string, description: string) => {
+  const handleCreateProject = async (
+    template: ProjectTemplate,
+    title: string,
+    description: string
+  ) => {
     try {
       const newProject = await saasProjectService.createProject(template, title, description);
       setProject(newProject);
@@ -114,8 +116,8 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
       ...project,
       content: {
         ...project.content,
-        sections: updatedSections
-      }
+        sections: updatedSections,
+      },
     });
   };
 
@@ -123,12 +125,10 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
     if (!project) return;
 
     try {
-      await saasProjectService.addMediaToProject(
-        project.id,
-        mediaFile,
-        sectionId || 'global',
-        { x: 0, y: 0 }
-      );
+      await saasProjectService.addMediaToProject(project.id, mediaFile, sectionId || 'global', {
+        x: 0,
+        y: 0,
+      });
 
       // Refresh project data
       const updatedProject = await saasProjectService.getProject(project.id);
@@ -148,7 +148,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
 
     try {
       await saasProjectService.removeMediaFromProject(project.id, mediaReferenceId);
-      
+
       // Refresh project data
       const updatedProject = await saasProjectService.getProject(project.id);
       if (updatedProject) {
@@ -171,8 +171,8 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
         metadata: {
           ...project.metadata,
           published: true,
-          publishDate: new Date().toISOString()
-        }
+          publishDate: new Date().toISOString(),
+        },
       });
       setProject(updatedProject);
       showToast('Project published successfully', 'success');
@@ -198,9 +198,11 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
           <h2 className="text-2xl font-bold mb-4">Create New Project</h2>
-          <p className="text-neutral-600 mb-6">Choose a template to get started with your portfolio project.</p>
+          <p className="text-neutral-600 mb-6">
+            Choose a template to get started with your portfolio project.
+          </p>
           <SASTemplateSelector
-            onSelectTemplate={(template) => {
+            onSelectTemplate={template => {
               const title = prompt('Enter project title:') || 'Untitled Project';
               const description = prompt('Enter project description:') || '';
               handleCreateProject(template, title, description);
@@ -224,14 +226,16 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
             <div>
               <h2 className="text-xl font-semibold">{project.title}</h2>
               <p className="text-sm text-neutral-600">
-                {project.status === 'draft' ? 'Draft' : 
-                 project.status === 'published' ? 'Published' : 
-                 project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+                {project.status === 'draft'
+                  ? 'Draft'
+                  : project.status === 'published'
+                    ? 'Published'
+                    : project.status.charAt(0).toUpperCase() + project.status.slice(1)}
                 {saving && ' • Saving...'}
               </p>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setShowPreview(!showPreview)}
@@ -258,7 +262,12 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
               className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -275,7 +284,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                   { id: 'content', label: 'Content', icon: '📝' },
                   { id: 'media', label: 'Media', icon: '🖼️' },
                   { id: 'settings', label: 'Settings', icon: '⚙️' },
-                  { id: 'collaborate', label: 'Team', icon: '👥' }
+                  { id: 'collaborate', label: 'Team', icon: '👥' },
                 ].map(tab => (
                   <button
                     key={tab.id}
@@ -298,20 +307,22 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
               {activeTab === 'design' && (
                 <div className="space-y-4">
                   <h3 className="font-semibold text-lg">Design Settings</h3>
-                  
+
                   {/* Theme Configuration */}
                   <div className="space-y-3">
                     <label className="block text-sm font-medium">Primary Color</label>
                     <input
                       type="color"
                       value={project.structure.theme.primaryColor}
-                      onChange={(e) => setProject({
-                        ...project,
-                        structure: {
-                          ...project.structure,
-                          theme: { ...project.structure.theme, primaryColor: e.target.value }
-                        }
-                      })}
+                      onChange={e =>
+                        setProject({
+                          ...project,
+                          structure: {
+                            ...project.structure,
+                            theme: { ...project.structure.theme, primaryColor: e.target.value },
+                          },
+                        })
+                      }
                       className="w-full h-10 border border-neutral-300 rounded-lg"
                     />
                   </div>
@@ -320,13 +331,15 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                     <label className="block text-sm font-medium">Font Family</label>
                     <select
                       value={project.structure.theme.fontFamily}
-                      onChange={(e) => setProject({
-                        ...project,
-                        structure: {
-                          ...project.structure,
-                          theme: { ...project.structure.theme, fontFamily: e.target.value }
-                        }
-                      })}
+                      onChange={e =>
+                        setProject({
+                          ...project,
+                          structure: {
+                            ...project.structure,
+                            theme: { ...project.structure.theme, fontFamily: e.target.value },
+                          },
+                        })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                     >
                       <option value="Inter">Inter</option>
@@ -341,13 +354,15 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                     <label className="block text-sm font-medium">Layout Spacing</label>
                     <select
                       value={project.structure.layout.spacing}
-                      onChange={(e) => setProject({
-                        ...project,
-                        structure: {
-                          ...project.structure,
-                          layout: { ...project.structure.layout, spacing: e.target.value as any }
-                        }
-                      })}
+                      onChange={e =>
+                        setProject({
+                          ...project,
+                          structure: {
+                            ...project.structure,
+                            layout: { ...project.structure.layout, spacing: e.target.value as any },
+                          },
+                        })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                     >
                       <option value="compact">Compact</option>
@@ -388,9 +403,11 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                           </div>
                           <div className="flex items-center space-x-2">
                             <span className="text-xs text-neutral-500">#{index + 1}</span>
-                            <div className={`w-2 h-2 rounded-full ${
-                              section.visible ? 'bg-green-500' : 'bg-gray-400'
-                            }`} />
+                            <div
+                              className={`w-2 h-2 rounded-full ${
+                                section.visible ? 'bg-green-500' : 'bg-gray-400'
+                              }`}
+                            />
                           </div>
                         </div>
                       </div>
@@ -410,13 +427,13 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
               {activeTab === 'settings' && (
                 <div className="space-y-4">
                   <h3 className="font-semibold text-lg">Project Settings</h3>
-                  
+
                   <div className="space-y-3">
                     <label className="block text-sm font-medium">Project Title</label>
                     <input
                       type="text"
                       value={project.title}
-                      onChange={(e) => setProject({ ...project, title: e.target.value })}
+                      onChange={e => setProject({ ...project, title: e.target.value })}
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                     />
                   </div>
@@ -425,7 +442,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                     <label className="block text-sm font-medium">Description</label>
                     <textarea
                       value={project.description}
-                      onChange={(e) => setProject({ ...project, description: e.target.value })}
+                      onChange={e => setProject({ ...project, description: e.target.value })}
                       rows={3}
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                     />
@@ -435,7 +452,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                     <label className="block text-sm font-medium">Status</label>
                     <select
                       value={project.status}
-                      onChange={(e) => setProject({ ...project, status: e.target.value as any })}
+                      onChange={e => setProject({ ...project, status: e.target.value as any })}
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                     >
                       <option value="draft">Draft</option>
@@ -449,10 +466,12 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                     <label className="block text-sm font-medium">Visibility</label>
                     <select
                       value={project.metadata.visibility}
-                      onChange={(e) => setProject({
-                        ...project,
-                        metadata: { ...project.metadata, visibility: e.target.value as any }
-                      })}
+                      onChange={e =>
+                        setProject({
+                          ...project,
+                          metadata: { ...project.metadata, visibility: e.target.value as any },
+                        })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                     >
                       <option value="public">Public</option>
@@ -466,7 +485,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                       type="checkbox"
                       id="autoSave"
                       checked={autoSave}
-                      onChange={(e) => setAutoSave(e.target.checked)}
+                      onChange={e => setAutoSave(e.target.checked)}
                       className="h-4 w-4 text-accent focus:ring-accent border-neutral-300 rounded"
                     />
                     <label htmlFor="autoSave" className="text-sm text-neutral-700">
@@ -476,9 +495,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
                 </div>
               )}
 
-              {activeTab === 'collaborate' && (
-                <CollaborationPanel projectId={project.id} />
-              )}
+              {activeTab === 'collaborate' && <CollaborationPanel projectId={project.id} />}
             </div>
           </div>
 
@@ -487,19 +504,33 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
             {selectedSection ? (
               <SectionEditor
                 section={project.content.sections.find(s => s.id === selectedSection)!}
-                onUpdate={(updates) => handleSectionUpdate(selectedSection, updates)}
+                onUpdate={updates => handleSectionUpdate(selectedSection, updates)}
                 onClose={() => setSelectedSection(null)}
               />
             ) : (
               <div className="flex-1 flex items-center justify-center bg-neutral-50">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-neutral-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <svg
+                      className="w-8 h-8 text-neutral-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-neutral-900 mb-2">Select a Section to Edit</h3>
-                  <p className="text-neutral-600">Choose a content section from the sidebar to start editing</p>
+                  <h3 className="text-lg font-medium text-neutral-900 mb-2">
+                    Select a Section to Edit
+                  </h3>
+                  <p className="text-neutral-600">
+                    Choose a content section from the sidebar to start editing
+                  </p>
                 </div>
               </div>
             )}
@@ -517,7 +548,7 @@ const SaaSProjectEditor: React.FC<SaaSProjectEditorProps> = ({
       {/* Modals */}
       {showTemplateSelector && (
         <SASTemplateSelector
-          onSelectTemplate={(template) => {
+          onSelectTemplate={template => {
             const title = prompt('Enter project title:') || 'Untitled Project';
             const description = prompt('Enter project description:') || '';
             handleCreateProject(template, title, description);

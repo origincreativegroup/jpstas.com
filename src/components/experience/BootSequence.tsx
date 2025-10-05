@@ -17,7 +17,9 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
   const [showPortals, setShowPortals] = useState(false);
   const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; vx: number; vy: number }>>([]);
+  const [particles, setParticles] = useState<
+    Array<{ id: number; x: number; y: number; vx: number; vy: number }>
+  >([]);
   const navigate = useNavigate();
   const controls = useAnimation();
   const charIndexRef = useRef(0);
@@ -25,13 +27,13 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
 
   // Enhanced boot messages that reference actual projects
   const bootMessages = [
-    { text: "Initializing creative systems...", delay: 1000 },
-    { text: "Loading design architecture...", delay: 1200 },
-    { text: "Establishing development protocols...", delay: 1000 },
-    { text: "Calibrating innovation algorithms...", delay: 1500 },
-    { text: "Welcome to the Workshop of John Stas.", delay: 2000 },
-    { text: "Featured projects loaded successfully.", delay: 1500 },
-    { text: "Systems online. Ready for exploration.", delay: 1000 }
+    { text: 'Initializing creative systems...', delay: 1000 },
+    { text: 'Loading design architecture...', delay: 1200 },
+    { text: 'Establishing development protocols...', delay: 1000 },
+    { text: 'Calibrating innovation algorithms...', delay: 1500 },
+    { text: 'Welcome to the Workshop of John Stas.', delay: 2000 },
+    { text: 'Featured projects loaded successfully.', delay: 1500 },
+    { text: 'Systems online. Ready for exploration.', delay: 1000 },
   ];
 
   // Initialize particles with brand colors
@@ -69,14 +71,18 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
             content: {
               challenge: 'Migrate legacy e-commerce system',
               solution: 'Built custom platform with React and Node.js',
-              process: ['Full-stack development', 'Print studio integration', 'Performance optimization'],
+              process: [
+                'Full-stack development',
+                'Print studio integration',
+                'Performance optimization',
+              ],
               technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-              results: '40% increase in conversion rates, 60% faster load times'
+              results: '40% increase in conversion rates, 60% faster load times',
             },
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-            status: 'published'
-          }
+            status: 'published',
+          },
         ]);
       }
     };
@@ -86,13 +92,15 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
   // Animate particles
   useEffect(() => {
     const animateParticles = () => {
-      setParticles(prev => prev.map(particle => ({
-        ...particle,
-        x: particle.x + particle.vx,
-        y: particle.y + particle.vy,
-        vx: particle.x <= 0 || particle.x >= window.innerWidth ? -particle.vx : particle.vx,
-        vy: particle.y <= 0 || particle.y >= window.innerHeight ? -particle.vy : particle.vy,
-      })));
+      setParticles(prev =>
+        prev.map(particle => ({
+          ...particle,
+          x: particle.x + particle.vx,
+          y: particle.y + particle.vy,
+          vx: particle.x <= 0 || particle.x >= window.innerWidth ? -particle.vx : particle.vx,
+          vy: particle.y <= 0 || particle.y >= window.innerHeight ? -particle.vy : particle.vy,
+        }))
+      );
     };
 
     const interval = setInterval(animateParticles, 50);
@@ -105,13 +113,13 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
 
     const currentMessage = bootMessages[currentLine];
     if (!currentMessage) return;
-    
+
     // Clear any existing interval
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-    
+
     // Reset character index for new message
     charIndexRef.current = 0;
     setCurrentText('');
@@ -122,23 +130,22 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
         const newText = currentMessage.text.slice(0, charIndexRef.current + 1);
         setCurrentText(newText);
         charIndexRef.current++;
-        
+
         // Update progress as we type
         const typingProgress = charIndexRef.current / currentMessage.text.length;
         const totalProgress = ((currentLine + typingProgress) / bootMessages.length) * 100;
         setProgress(totalProgress);
-        
       } else {
         // Message complete
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
           intervalRef.current = null;
         }
-        
+
         // Update progress to show message complete
         const totalProgress = ((currentLine + 1) / bootMessages.length) * 100;
         setProgress(totalProgress);
-        
+
         // Wait for the delay before moving to next message
         setTimeout(() => {
           setCurrentLine(prev => prev + 1);
@@ -164,30 +171,33 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
           const projectInterval = setInterval(() => {
             setCurrentProjectIndex(prev => (prev + 1) % featuredProjects.length);
           }, 2000);
-          
-          setTimeout(() => {
-            clearInterval(projectInterval);
-            setIsComplete(true);
-            controls.start({
-              opacity: 0,
-              scale: 0.8,
-              transition: { duration: 1 }
-            });
-            setTimeout(() => {
-              if (onComplete) {
-                onComplete();
-              } else {
-                navigate('/workshop');
-              }
-            }, 1000);
-          }, featuredProjects.length * 2000 + 2000);
+
+          setTimeout(
+            () => {
+              clearInterval(projectInterval);
+              setIsComplete(true);
+              controls.start({
+                opacity: 0,
+                scale: 0.8,
+                transition: { duration: 1 },
+              });
+              setTimeout(() => {
+                if (onComplete) {
+                  onComplete();
+                } else {
+                  navigate('/workshop');
+                }
+              }, 1000);
+            },
+            featuredProjects.length * 2000 + 2000
+          );
         } else {
           setTimeout(() => {
             setIsComplete(true);
             controls.start({
               opacity: 0,
               scale: 0.8,
-              transition: { duration: 1 }
+              transition: { duration: 1 },
             });
             setTimeout(() => {
               if (onComplete) {
@@ -200,14 +210,22 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
         }
       }, 1000);
     }
-  }, [currentLine, bootMessages.length, isComplete, controls, navigate, onComplete, featuredProjects.length]);
+  }, [
+    currentLine,
+    bootMessages.length,
+    isComplete,
+    controls,
+    navigate,
+    onComplete,
+    featuredProjects.length,
+  ]);
 
   const handleSkip = () => {
     setIsComplete(true);
     controls.start({
       opacity: 0,
       scale: 0.8,
-      transition: { duration: 0.5 }
+      transition: { duration: 0.5 },
     });
     setTimeout(() => {
       if (onComplete) {
@@ -221,7 +239,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
   const currentProject = featuredProjects[currentProjectIndex];
 
   return (
-    <motion.div 
+    <motion.div
       className="fixed inset-0 bg-gradient-to-br from-brand via-brand-dark to-brand text-accent font-mono overflow-hidden"
       animate={controls}
     >
@@ -229,8 +247,8 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
       <div className="absolute inset-0 opacity-20">
         <div className="grid grid-cols-20 grid-rows-16 h-full">
           {Array.from({ length: 320 }).map((_, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               className="border border-accent/30"
               animate={{
                 opacity: [0.1, 0.4, 0.1],
@@ -247,7 +265,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
 
       {/* Floating Particles with brand colors */}
       <div className="absolute inset-0">
-        {particles.map((particle) => (
+        {particles.map(particle => (
           <motion.div
             key={particle.id}
             className="absolute w-1 h-1 bg-accent/70 rounded-full"
@@ -284,9 +302,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
               transition={{ duration: 0.5 }}
             />
           </div>
-          <span className="text-sm text-accent font-bold">
-            {Math.round(progress)}%
-          </span>
+          <span className="text-sm text-accent font-bold">{Math.round(progress)}%</span>
         </div>
       </div>
 
@@ -302,7 +318,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
         </div>
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
           className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full"
         />
       </div>
@@ -377,12 +393,8 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
                 className="bg-brand-dark/80 backdrop-blur-sm border border-accent/30 rounded-2xl p-8 text-center"
               >
                 <div className="text-4xl mb-4">🚀</div>
-                <h3 className="text-2xl font-bold text-accent mb-2">
-                  {currentProject.title}
-                </h3>
-                <p className="text-brand-light mb-4">
-                  {currentProject.summary}
-                </p>
+                <h3 className="text-2xl font-bold text-accent mb-2">{currentProject.title}</h3>
+                <p className="text-brand-light mb-4">{currentProject.summary}</p>
                 <div className="flex flex-wrap justify-center gap-2 mb-4">
                   {currentProject.tags.map((tag, index) => (
                     <span
@@ -419,23 +431,23 @@ const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
                 { name: 'Development', icon: '💻', color: 'from-blue-500 to-cyan-500' },
                 { name: 'Innovation', icon: '⚙️', color: 'from-purple-500 to-violet-500' },
                 { name: 'Process', icon: '🧠', color: 'from-emerald-500 to-teal-500' },
-                { name: 'Media', icon: '🎬', color: 'from-orange-500 to-amber-500' }
+                { name: 'Media', icon: '🎬', color: 'from-orange-500 to-amber-500' },
               ].map((portal, index) => (
                 <motion.div
                   key={portal.name}
                   initial={{ scale: 0, opacity: 0, y: 50 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
-                  transition={{ 
-                    delay: index * 0.2, 
+                  transition={{
+                    delay: index * 0.2,
                     duration: 0.8,
-                    type: "spring",
+                    type: 'spring',
                     stiffness: 200,
-                    damping: 20
+                    damping: 20,
                   }}
-                  whileHover={{ 
-                    scale: 1.1, 
+                  whileHover={{
+                    scale: 1.1,
                     y: -10,
-                    transition: { duration: 0.2 }
+                    transition: { duration: 0.2 },
                   }}
                   className={`w-20 h-20 bg-gradient-to-br ${portal.color} rounded-2xl flex flex-col items-center justify-center text-white shadow-2xl cursor-pointer hover:shadow-accent/25 transition-all duration-300`}
                 >

@@ -94,25 +94,31 @@ export default function EnhancedFileUpload({
       debug.perf.start(`upload:${queueItem.file.name}`);
 
       // Update status to uploading
-      setUploadQueue(prev => prev.map(item =>
-        item.id === queueItem.id ? { ...item, status: 'uploading', progress: 0 } : item
-      ));
+      setUploadQueue(prev =>
+        prev.map(item =>
+          item.id === queueItem.id ? { ...item, status: 'uploading', progress: 0 } : item
+        )
+      );
 
       try {
         // Simulate progress updates
         const progressInterval = setInterval(() => {
-          setUploadQueue(prev => prev.map(item => {
-            if (item.id === queueItem.id && item.status === 'uploading') {
-              const newProgress = Math.min(item.progress + Math.random() * 20, 90);
-              return { ...item, progress: newProgress };
-            }
-            return item;
-          }));
+          setUploadQueue(prev =>
+            prev.map(item => {
+              if (item.id === queueItem.id && item.status === 'uploading') {
+                const newProgress = Math.min(item.progress + Math.random() * 20, 90);
+                return { ...item, progress: newProgress };
+              }
+              return item;
+            })
+          );
         }, 200);
 
         let result;
         if (import.meta.env.DEV) {
-          debug.info('Using global media context for upload (dev mode)', { file: queueItem.file.name });
+          debug.info('Using global media context for upload (dev mode)', {
+            file: queueItem.file.name,
+          });
           // Use global media context for upload
           const mediaFile = await uploadToGlobalMedia(queueItem.file);
           result = {
@@ -125,7 +131,7 @@ export default function EnhancedFileUpload({
               size: mediaFile.size,
               type: mediaFile.type,
               uploadedAt: mediaFile.uploadedAt || mediaFile.createdAt,
-            }
+            },
           };
         } else {
           // Use global media context for production upload
@@ -140,16 +146,18 @@ export default function EnhancedFileUpload({
               size: mediaFile.size,
               type: mediaFile.type,
               uploadedAt: mediaFile.uploadedAt || mediaFile.createdAt,
-            }
+            },
           };
         }
 
         clearInterval(progressInterval);
 
         // Update to completed
-        setUploadQueue(prev => prev.map(item =>
-          item.id === queueItem.id ? { ...item, status: 'completed', progress: 100 } : item
-        ));
+        setUploadQueue(prev =>
+          prev.map(item =>
+            item.id === queueItem.id ? { ...item, status: 'completed', progress: 100 } : item
+          )
+        );
 
         debug.upload.complete('File uploaded successfully', {
           fileName: queueItem.file.name,
@@ -175,13 +183,17 @@ export default function EnhancedFileUpload({
         });
 
         // Update to error status
-        setUploadQueue(prev => prev.map(item =>
-          item.id === queueItem.id ? {
-            ...item,
-            status: 'error',
-            error: (error as Error).message,
-          } : item
-        ));
+        setUploadQueue(prev =>
+          prev.map(item =>
+            item.id === queueItem.id
+              ? {
+                  ...item,
+                  status: 'error',
+                  error: (error as Error).message,
+                }
+              : item
+          )
+        );
 
         showToast(`Upload failed: ${(error as Error).message}`, 'error');
         debug.perf.end(`upload:${queueItem.file.name}`);
@@ -281,19 +293,25 @@ export default function EnhancedFileUpload({
     [multiple, maxSize, maxFiles, uploadFile, showToast, accept, autoUpload]
   );
 
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    if (dragAndDrop) {
-      setIsDragging(true);
-    }
-  }, [dragAndDrop]);
+  const handleDragOver = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      if (dragAndDrop) {
+        setIsDragging(true);
+      }
+    },
+    [dragAndDrop]
+  );
 
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    if (dragAndDrop) {
-      setIsDragging(false);
-    }
-  }, [dragAndDrop]);
+  const handleDragLeave = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      if (dragAndDrop) {
+        setIsDragging(false);
+      }
+    },
+    [dragAndDrop]
+  );
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -319,29 +337,30 @@ export default function EnhancedFileUpload({
     [handleFiles]
   );
 
-  const retryUpload = useCallback(async (queueItem: UploadQueueItem) => {
-    if (queueItem.retryCount >= maxRetries) {
-      showToast('Maximum retry attempts reached', 'error');
-      return;
-    }
+  const retryUpload = useCallback(
+    async (queueItem: UploadQueueItem) => {
+      if (queueItem.retryCount >= maxRetries) {
+        showToast('Maximum retry attempts reached', 'error');
+        return;
+      }
 
-    const updatedItem = {
-      ...queueItem,
-      retryCount: queueItem.retryCount + 1,
-      status: 'pending' as const,
-      error: undefined,
-    };
+      const updatedItem = {
+        ...queueItem,
+        retryCount: queueItem.retryCount + 1,
+        status: 'pending' as const,
+        error: undefined,
+      };
 
-    setUploadQueue(prev => prev.map(item =>
-      item.id === queueItem.id ? updatedItem : item
-    ));
+      setUploadQueue(prev => prev.map(item => (item.id === queueItem.id ? updatedItem : item)));
 
-    try {
-      await uploadFile(updatedItem);
-    } catch (error) {
-      console.error('Retry upload error:', error);
-    }
-  }, [uploadFile, maxRetries, showToast]);
+      try {
+        await uploadFile(updatedItem);
+      } catch (error) {
+        console.error('Retry upload error:', error);
+      }
+    },
+    [uploadFile, maxRetries, showToast]
+  );
 
   const removeFromQueue = useCallback((id: string) => {
     setUploadQueue(prev => prev.filter(item => item.id !== id));
@@ -434,10 +453,13 @@ export default function EnhancedFileUpload({
                 {isDragging ? 'Drop files here' : 'Upload files'}
               </p>
               <p className="text-sm text-neutral-500 mt-1">
-                {dragAndDrop ? 'Drag and drop files here, or click to select' : 'Click to select files'}
+                {dragAndDrop
+                  ? 'Drag and drop files here, or click to select'
+                  : 'Click to select files'}
               </p>
               <p className="text-xs text-neutral-400 mt-2">
-                Max size: {formatFileSize(maxSize)} • {multiple ? `Max ${maxFiles} files` : 'Single file'} • {accept}
+                Max size: {formatFileSize(maxSize)} •{' '}
+                {multiple ? `Max ${maxFiles} files` : 'Single file'} • {accept}
               </p>
             </div>
             <button
@@ -496,26 +518,49 @@ export default function EnhancedFileUpload({
 
           {/* Queue Items */}
           <div className="space-y-2 max-h-60 overflow-y-auto">
-            {uploadQueue.map((item) => (
-              <div key={item.id} className="flex items-center justify-between p-3 bg-neutral-50 rounded border">
+            {uploadQueue.map(item => (
+              <div
+                key={item.id}
+                className="flex items-center justify-between p-3 bg-neutral-50 rounded border"
+              >
                 <div className="flex items-center gap-3 flex-1">
                   <div className="w-8 h-8 bg-neutral-200 rounded flex items-center justify-center">
                     {item.file.type.startsWith('image/') ? (
-                      <svg className="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <svg
+                        className="w-4 h-4 text-neutral-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                     ) : (
-                      <svg className="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      <svg
+                        className="w-4 h-4 text-neutral-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        />
                       </svg>
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-neutral-700 truncate">{item.file.name}</p>
+                    <p className="text-sm font-medium text-neutral-700 truncate">
+                      {item.file.name}
+                    </p>
                     <p className="text-xs text-neutral-500">{formatFileSize(item.file.size)}</p>
-                    {item.error && (
-                      <p className="text-xs text-red-600 mt-1">{item.error}</p>
-                    )}
+                    {item.error && <p className="text-xs text-red-600 mt-1">{item.error}</p>}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`text-sm ${getStatusColor(item.status)}`}>
@@ -545,7 +590,12 @@ export default function EnhancedFileUpload({
                     className="p-1 text-neutral-400 hover:text-red-600"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>

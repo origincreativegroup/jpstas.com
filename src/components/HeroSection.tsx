@@ -124,9 +124,7 @@ export default function HeroSection({ content, className = '' }: HeroSectionProp
       )}
 
       {/* Diagonal Stripes Pattern (if no media) */}
-      {!media && (
-        <div className="diagonal-stripes absolute inset-0 opacity-5 z-0"></div>
-      )}
+      {!media && <div className="diagonal-stripes absolute inset-0 opacity-5 z-0"></div>}
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 w-full">
@@ -139,9 +137,7 @@ export default function HeroSection({ content, className = '' }: HeroSectionProp
                   {badge}
                 </div>
               )}
-              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                {heading}
-              </h1>
+              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">{heading}</h1>
               {subheading && (
                 <h2 className="text-2xl md:text-3xl font-bold text-accent mb-6">{subheading}</h2>
               )}

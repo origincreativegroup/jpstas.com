@@ -44,7 +44,7 @@ interface WorkshopContentEditorProps {
 const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
   content,
   onSave,
-  onClose
+  onClose,
 }) => {
   const [formData, setFormData] = useState<WorkshopContent>({
     id: '',
@@ -57,14 +57,16 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       features: [],
       tools: [],
       processes: [],
-      resources: []
+      resources: [],
     },
     active: true,
     order: 0,
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   });
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'tools' | 'processes' | 'resources'>('overview');
+  const [activeTab, setActiveTab] = useState<
+    'overview' | 'features' | 'tools' | 'processes' | 'resources'
+  >('overview');
   const [saving, setSaving] = useState(false);
   const { showToast } = useToast();
 
@@ -79,7 +81,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       setSaving(true);
       const updatedContent = {
         ...formData,
-        updatedAt: new Date().toISOString()
+        updatedAt: new Date().toISOString(),
       };
       await onSave(updatedContent);
       showToast('Content saved successfully', 'success');
@@ -96,11 +98,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       ...prev,
       content: {
         ...prev.content,
-        features: [
-          ...prev.content.features,
-          { title: '', description: '', icon: '✨' }
-        ]
-      }
+        features: [...prev.content.features, { title: '', description: '', icon: '✨' }],
+      },
     }));
   };
 
@@ -111,8 +110,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
         ...prev.content,
         features: prev.content.features.map((feature, i) =>
           i === index ? { ...feature, [field]: value } : feature
-        )
-      }
+        ),
+      },
     }));
   };
 
@@ -121,8 +120,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       ...prev,
       content: {
         ...prev.content,
-        features: prev.content.features.filter((_, i) => i !== index)
-      }
+        features: prev.content.features.filter((_, i) => i !== index),
+      },
     }));
   };
 
@@ -131,11 +130,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       ...prev,
       content: {
         ...prev.content,
-        tools: [
-          ...prev.content.tools,
-          { name: '', description: '', category: 'General' }
-        ]
-      }
+        tools: [...prev.content.tools, { name: '', description: '', category: 'General' }],
+      },
     }));
   };
 
@@ -146,8 +142,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
         ...prev.content,
         tools: prev.content.tools.map((tool, i) =>
           i === index ? { ...tool, [field]: value } : tool
-        )
-      }
+        ),
+      },
     }));
   };
 
@@ -156,8 +152,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       ...prev,
       content: {
         ...prev.content,
-        tools: prev.content.tools.filter((_, i) => i !== index)
-      }
+        tools: prev.content.tools.filter((_, i) => i !== index),
+      },
     }));
   };
 
@@ -168,9 +164,9 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
         ...prev.content,
         processes: [
           ...prev.content.processes,
-          { step: prev.content.processes.length + 1, title: '', description: '' }
-        ]
-      }
+          { step: prev.content.processes.length + 1, title: '', description: '' },
+        ],
+      },
     }));
   };
 
@@ -181,8 +177,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
         ...prev.content,
         processes: prev.content.processes.map((process, i) =>
           i === index ? { ...process, [field]: value } : process
-        )
-      }
+        ),
+      },
     }));
   };
 
@@ -191,8 +187,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       ...prev,
       content: {
         ...prev.content,
-        processes: prev.content.processes.filter((_, i) => i !== index)
-      }
+        processes: prev.content.processes.filter((_, i) => i !== index),
+      },
     }));
   };
 
@@ -201,11 +197,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       ...prev,
       content: {
         ...prev.content,
-        resources: [
-          ...prev.content.resources,
-          { title: '', url: '', type: 'article' as const }
-        ]
-      }
+        resources: [...prev.content.resources, { title: '', url: '', type: 'article' as const }],
+      },
     }));
   };
 
@@ -216,8 +209,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
         ...prev.content,
         resources: prev.content.resources.map((resource, i) =>
           i === index ? { ...resource, [field]: value } : resource
-        )
-      }
+        ),
+      },
     }));
   };
 
@@ -226,8 +219,8 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
       ...prev,
       content: {
         ...prev.content,
-        resources: prev.content.resources.filter((_, i) => i !== index)
-      }
+        resources: prev.content.resources.filter((_, i) => i !== index),
+      },
     }));
   };
 
@@ -236,7 +229,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
     { id: 'features', label: 'Features', icon: '✨' },
     { id: 'tools', label: 'Tools', icon: '🛠️' },
     { id: 'processes', label: 'Processes', icon: '🔄' },
-    { id: 'resources', label: 'Resources', icon: '📚' }
+    { id: 'resources', label: 'Resources', icon: '📚' },
   ];
 
   return (
@@ -245,7 +238,9 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
         {/* Header */}
         <div className="p-6 border-b border-neutral-200 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className={`w-12 h-12 bg-gradient-to-r ${formData.color} rounded-lg flex items-center justify-center text-2xl`}>
+            <div
+              className={`w-12 h-12 bg-gradient-to-r ${formData.color} rounded-lg flex items-center justify-center text-2xl`}
+            >
               {formData.icon}
             </div>
             <div>
@@ -258,7 +253,12 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
             className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -272,7 +272,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   placeholder="Enter section title"
                 />
@@ -282,7 +282,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                 <label className="block text-sm font-medium mb-2">Description</label>
                 <textarea
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, description: e.target.value }))}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   rows={3}
                   placeholder="Brief description"
@@ -294,7 +294,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                 <input
                   type="text"
                   value={formData.icon}
-                  onChange={(e) => setFormData(prev => ({ ...prev, icon: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, icon: e.target.value }))}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   placeholder="🔧"
                 />
@@ -304,7 +304,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                 <label className="block text-sm font-medium mb-2">Color Gradient</label>
                 <select
                   value={formData.color}
-                  onChange={(e) => setFormData(prev => ({ ...prev, color: e.target.value }))}
+                  onChange={e => setFormData(prev => ({ ...prev, color: e.target.value }))}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                 >
                   <option value="from-blue-500 to-cyan-500">Blue to Cyan</option>
@@ -321,7 +321,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                   type="checkbox"
                   id="active"
                   checked={formData.active}
-                  onChange={(e) => setFormData(prev => ({ ...prev, active: e.target.checked }))}
+                  onChange={e => setFormData(prev => ({ ...prev, active: e.target.checked }))}
                   className="h-4 w-4 text-accent focus:ring-accent border-neutral-300 rounded"
                 />
                 <label htmlFor="active" className="ml-2 text-sm text-neutral-700">
@@ -361,10 +361,12 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                     <label className="block text-sm font-medium mb-2">Overview</label>
                     <textarea
                       value={formData.content.overview}
-                      onChange={(e) => setFormData(prev => ({
-                        ...prev,
-                        content: { ...prev.content, overview: e.target.value }
-                      }))}
+                      onChange={e =>
+                        setFormData(prev => ({
+                          ...prev,
+                          content: { ...prev.content, overview: e.target.value },
+                        }))
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                       rows={8}
                       placeholder="Detailed overview of this workshop section..."
@@ -394,8 +396,18 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             onClick={() => removeFeature(index)}
                             className="text-red-600 hover:text-red-700"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                         </div>
@@ -405,7 +417,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <input
                               type="text"
                               value={feature.icon}
-                              onChange={(e) => updateFeature(index, 'icon', e.target.value)}
+                              onChange={e => updateFeature(index, 'icon', e.target.value)}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                               placeholder="✨"
                             />
@@ -415,7 +427,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <input
                               type="text"
                               value={feature.title}
-                              onChange={(e) => updateFeature(index, 'title', e.target.value)}
+                              onChange={e => updateFeature(index, 'title', e.target.value)}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                               placeholder="Feature title"
                             />
@@ -425,7 +437,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                           <label className="block text-sm font-medium mb-1">Description</label>
                           <textarea
                             value={feature.description}
-                            onChange={(e) => updateFeature(index, 'description', e.target.value)}
+                            onChange={e => updateFeature(index, 'description', e.target.value)}
                             className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                             rows={3}
                             placeholder="Feature description"
@@ -458,8 +470,18 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             onClick={() => removeTool(index)}
                             className="text-red-600 hover:text-red-700"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                         </div>
@@ -469,7 +491,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <input
                               type="text"
                               value={tool.name}
-                              onChange={(e) => updateTool(index, 'name', e.target.value)}
+                              onChange={e => updateTool(index, 'name', e.target.value)}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                               placeholder="Tool name"
                             />
@@ -479,7 +501,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <input
                               type="text"
                               value={tool.category}
-                              onChange={(e) => updateTool(index, 'category', e.target.value)}
+                              onChange={e => updateTool(index, 'category', e.target.value)}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                               placeholder="Category"
                             />
@@ -489,7 +511,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                           <label className="block text-sm font-medium mb-1">Description</label>
                           <textarea
                             value={tool.description}
-                            onChange={(e) => updateTool(index, 'description', e.target.value)}
+                            onChange={e => updateTool(index, 'description', e.target.value)}
                             className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                             rows={3}
                             placeholder="Tool description"
@@ -522,8 +544,18 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             onClick={() => removeProcess(index)}
                             className="text-red-600 hover:text-red-700"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                         </div>
@@ -533,7 +565,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <input
                               type="number"
                               value={process.step}
-                              onChange={(e) => updateProcess(index, 'step', parseInt(e.target.value))}
+                              onChange={e => updateProcess(index, 'step', parseInt(e.target.value))}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                               min="1"
                             />
@@ -543,7 +575,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <input
                               type="text"
                               value={process.title}
-                              onChange={(e) => updateProcess(index, 'title', e.target.value)}
+                              onChange={e => updateProcess(index, 'title', e.target.value)}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                               placeholder="Process step title"
                             />
@@ -553,7 +585,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                           <label className="block text-sm font-medium mb-1">Description</label>
                           <textarea
                             value={process.description}
-                            onChange={(e) => updateProcess(index, 'description', e.target.value)}
+                            onChange={e => updateProcess(index, 'description', e.target.value)}
                             className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                             rows={3}
                             placeholder="Process step description"
@@ -586,8 +618,18 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             onClick={() => removeResource(index)}
                             className="text-red-600 hover:text-red-700"
                           >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <svg
+                              className="w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
                             </svg>
                           </button>
                         </div>
@@ -596,7 +638,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <label className="block text-sm font-medium mb-1">Type</label>
                             <select
                               value={resource.type}
-                              onChange={(e) => updateResource(index, 'type', e.target.value)}
+                              onChange={e => updateResource(index, 'type', e.target.value)}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                             >
                               <option value="article">Article</option>
@@ -610,7 +652,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                             <input
                               type="text"
                               value={resource.title}
-                              onChange={(e) => updateResource(index, 'title', e.target.value)}
+                              onChange={e => updateResource(index, 'title', e.target.value)}
                               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                               placeholder="Resource title"
                             />
@@ -621,7 +663,7 @@ const WorkshopContentEditor: React.FC<WorkshopContentEditorProps> = ({
                           <input
                             type="url"
                             value={resource.url}
-                            onChange={(e) => updateResource(index, 'url', e.target.value)}
+                            onChange={e => updateResource(index, 'url', e.target.value)}
                             className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                             placeholder="https://example.com"
                           />

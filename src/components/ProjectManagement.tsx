@@ -30,7 +30,7 @@ const ProjectManagement: React.FC = () => {
 
   const handleDelete = async (projectId: string) => {
     if (!confirm('Are you sure you want to delete this project?')) return;
-    
+
     try {
       // In a real app, this would make an API call
       setProjects(projects.filter(p => p.id !== projectId));
@@ -45,7 +45,7 @@ const ProjectManagement: React.FC = () => {
     try {
       const updatedProject = { ...project, featured: !project.featured };
       // In a real app, this would make an API call
-      setProjects(projects.map(p => p.id === project.id ? updatedProject : p));
+      setProjects(projects.map(p => (p.id === project.id ? updatedProject : p)));
       showToast(`Project ${updatedProject.featured ? 'featured' : 'unfeatured'}`, 'success');
     } catch (error) {
       console.error('Failed to update project:', error);
@@ -54,15 +54,17 @@ const ProjectManagement: React.FC = () => {
   };
 
   const filteredProjects = projects.filter(project => {
-    const matchesFilter = filter === 'all' || 
+    const matchesFilter =
+      filter === 'all' ||
       (filter === 'featured' && project.featured) ||
       (filter === 'published' && project.status === 'published') ||
       (filter === 'draft' && project.status === 'draft');
-    
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+
     return matchesFilter && matchesSearch;
   });
 
@@ -96,21 +98,31 @@ const ProjectManagement: React.FC = () => {
           <div className="flex-1">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  className="h-5 w-5 text-neutral-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
               </div>
               <input
                 type="text"
                 placeholder="Search projects..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
               />
             </div>
           </div>
           <div className="flex gap-2">
-            {(['all', 'featured', 'published', 'draft'] as const).map((filterType) => (
+            {(['all', 'featured', 'published', 'draft'] as const).map(filterType => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}
@@ -129,7 +141,7 @@ const ProjectManagement: React.FC = () => {
 
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProjects.map((project) => (
+        {filteredProjects.map(project => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
@@ -146,9 +158,13 @@ const ProjectManagement: React.FC = () => {
                 />
               ) : (
                 <div className="text-4xl opacity-50">
-                  {project.tags.includes('E-commerce') ? '🛒' : 
-                   project.tags.includes('Design') ? '🎨' : 
-                   project.tags.includes('Development') ? '💻' : '⚡'}
+                  {project.tags.includes('E-commerce')
+                    ? '🛒'
+                    : project.tags.includes('Design')
+                      ? '🎨'
+                      : project.tags.includes('Development')
+                        ? '💻'
+                        : '⚡'}
                 </div>
               )}
             </div>
@@ -166,11 +182,13 @@ const ProjectManagement: React.FC = () => {
                       Featured
                     </span>
                   )}
-                  <span className={`px-2 py-1 text-xs rounded-full font-medium ${
-                    project.status === 'published' 
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-yellow-100 text-yellow-800'
-                  }`}>
+                  <span
+                    className={`px-2 py-1 text-xs rounded-full font-medium ${
+                      project.status === 'published'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}
+                  >
                     {project.status}
                   </span>
                 </div>
@@ -179,7 +197,7 @@ const ProjectManagement: React.FC = () => {
               <p className="text-sm text-neutral-700 mb-4 line-clamp-2">{project.summary}</p>
 
               <div className="flex flex-wrap gap-1 mb-4">
-                {project.tags.slice(0, 3).map((tag) => (
+                {project.tags.slice(0, 3).map(tag => (
                   <span
                     key={tag}
                     className="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md"
@@ -218,7 +236,12 @@ const ProjectManagement: React.FC = () => {
                     title="Edit project"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
                     </svg>
                   </button>
                   <button
@@ -227,7 +250,12 @@ const ProjectManagement: React.FC = () => {
                     title="Delete project"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -242,7 +270,9 @@ const ProjectManagement: React.FC = () => {
           <div className="text-6xl mb-4">📝</div>
           <h3 className="text-lg font-medium text-neutral-900 mb-2">No projects found</h3>
           <p className="text-neutral-600 mb-4">
-            {searchQuery ? 'Try adjusting your search terms' : 'Get started by creating your first project'}
+            {searchQuery
+              ? 'Try adjusting your search terms'
+              : 'Get started by creating your first project'}
           </p>
           <button
             onClick={() => {}}

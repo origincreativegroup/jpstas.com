@@ -47,14 +47,14 @@ export async function loadProjects(): Promise<Project[]> {
     // In a real implementation, this would dynamically import all .md files
     // For now, we'll use static imports
     const projectModules = await Promise.all([
-      import('../content/projects/caribbean-pools-ecommerce.md?raw')
+      import('../content/projects/caribbean-pools-ecommerce.md?raw'),
     ]);
 
     return projectModules.map((module, index) => {
       const content = module.default;
       const frontMatter = extractFrontMatter(content);
       const markdown = content.replace(/^---[\s\S]*?---\n/, '');
-      
+
       return {
         id: `project-${index}`,
         title: frontMatter.title || 'Untitled Project',
@@ -65,7 +65,7 @@ export async function loadProjects(): Promise<Project[]> {
         thumbnail: frontMatter.thumbnail || '',
         gallery: Array.isArray(frontMatter.gallery) ? frontMatter.gallery : [],
         content: parsePCSI(markdown),
-        html: marked(markdown) as string
+        html: marked(markdown) as string,
       };
     });
   } catch (error) {
@@ -111,13 +111,13 @@ function extractFrontMatter(content: string): Record<string, any> {
 
   const frontMatter = frontMatterMatch[1];
   if (!frontMatter) return {};
-  
+
   const result: Record<string, any> = {};
 
   frontMatter.split('\n').forEach(line => {
     const trimmedLine = line.trim();
     if (!trimmedLine) return;
-    
+
     const colonIndex = trimmedLine.indexOf(':');
     if (colonIndex === -1) return;
 
@@ -125,8 +125,10 @@ function extractFrontMatter(content: string): Record<string, any> {
     let value = trimmedLine.slice(colonIndex + 1).trim();
 
     // Remove quotes if present
-    if ((value.startsWith('"') && value.endsWith('"')) || 
-        (value.startsWith("'") && value.endsWith("'"))) {
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
       value = value.slice(1, -1);
     }
 
@@ -155,14 +157,14 @@ function parsePCSI(markdown: string): Project['content'] {
     problem: '',
     challenge: '',
     solution: '',
-    impact: ''
+    impact: '',
   };
 
   sections.forEach(section => {
     const lines = section.split('\n');
     const firstLine = lines[0];
     if (!firstLine) return;
-    
+
     const title = firstLine.replace(/^#+\s*/, '').toLowerCase();
     const content = lines.slice(1).join('\n').trim();
 
@@ -183,7 +185,10 @@ function parsePCSI(markdown: string): Project['content'] {
         result.technicalDetails = content;
         break;
       case 'key features':
-        result.keyFeatures = content.split('\n').filter(line => line.trim().startsWith('-')).map(line => line.replace(/^-\s*/, ''));
+        result.keyFeatures = content
+          .split('\n')
+          .filter(line => line.trim().startsWith('-'))
+          .map(line => line.replace(/^-\s*/, ''));
         break;
       case 'lessons learned':
         result.lessonsLearned = content;

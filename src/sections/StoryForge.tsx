@@ -24,26 +24,26 @@ const StoryForge: React.FC = () => {
       year: '2014',
       title: 'The Beginning',
       description: 'Started Computer Science at Indiana University',
-      icon: '🎓'
+      icon: '🎓',
     },
     {
       year: '2018',
       title: 'First Steps',
       description: 'Graduated and entered the startup world',
-      icon: '🚀'
+      icon: '🚀',
     },
     {
       year: '2020',
       title: 'The Pivot',
       description: 'Joined Caribbean Pools as Creative Director',
-      icon: '🎨'
+      icon: '🎨',
     },
     {
       year: '2023',
       title: 'The Workshop',
       description: 'Launched independent creative technology consultancy',
-      icon: '🔧'
-    }
+      icon: '🔧',
+    },
   ];
 
   if (loading) {
@@ -65,16 +65,19 @@ const StoryForge: React.FC = () => {
               className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Back to Workshop
             </button>
             <div className="h-6 w-px bg-neutral-700"></div>
             <h1 className="text-2xl font-bold">Story Forge</h1>
           </div>
-          <div className="text-sm text-neutral-400">
-            Narrative & Creative Writing
-          </div>
+          <div className="text-sm text-neutral-400">Narrative & Creative Writing</div>
         </div>
       </div>
 
@@ -89,10 +92,7 @@ const StoryForge: React.FC = () => {
               transition={{ duration: 0.6 }}
               className="prose prose-lg prose-invert max-w-none"
             >
-              <div 
-                dangerouslySetInnerHTML={{ __html: bio }}
-                className="space-y-6"
-              />
+              <div dangerouslySetInnerHTML={{ __html: bio }} className="space-y-6" />
             </motion.div>
           </div>
 
@@ -118,7 +118,7 @@ const StoryForge: React.FC = () => {
                     {index < milestones.length - 1 && (
                       <div className="absolute left-6 top-12 w-px h-16 bg-gradient-to-b from-purple-400/50 to-orange-400/50"></div>
                     )}
-                    
+
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 bg-gradient-to-r from-purple-500/20 to-orange-500/20 rounded-full flex items-center justify-center text-xl">
                         {milestone.icon}
@@ -127,12 +127,8 @@ const StoryForge: React.FC = () => {
                         <div className="text-sm font-bold text-purple-300 mb-1">
                           {milestone.year}
                         </div>
-                        <div className="text-white font-medium mb-1">
-                          {milestone.title}
-                        </div>
-                        <div className="text-neutral-400 text-sm">
-                          {milestone.description}
-                        </div>
+                        <div className="text-white font-medium mb-1">{milestone.title}</div>
+                        <div className="text-neutral-400 text-sm">{milestone.description}</div>
                       </div>
                     </div>
                   </motion.div>
@@ -154,19 +150,21 @@ const StoryForge: React.FC = () => {
                     Design + Code = Magic
                   </div>
                   <div className="text-xs text-neutral-400">
-                    The best solutions come from understanding both creative and technical constraints.
+                    The best solutions come from understanding both creative and technical
+                    constraints.
                   </div>
                 </div>
-                
+
                 <div className="p-4 bg-orange-500/10 border border-orange-400/20 rounded-lg">
                   <div className="text-sm font-medium text-orange-300 mb-2">
                     Process Over Perfection
                   </div>
                   <div className="text-xs text-neutral-400">
-                    Building systems that can adapt and improve is more valuable than perfect first attempts.
+                    Building systems that can adapt and improve is more valuable than perfect first
+                    attempts.
                   </div>
                 </div>
-                
+
                 <div className="p-4 bg-blue-500/10 border border-blue-400/20 rounded-lg">
                   <div className="text-sm font-medium text-blue-300 mb-2">
                     Human-Centered Innovation
@@ -198,7 +196,7 @@ const StoryForge: React.FC = () => {
                 Raw ideas and stream-of-consciousness writing to capture the essence of the story.
               </p>
             </div>
-            
+
             <div className="text-center">
               <div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
                 🔄
@@ -208,7 +206,7 @@ const StoryForge: React.FC = () => {
                 Iterative editing to improve clarity, flow, and impact of the narrative.
               </p>
             </div>
-            
+
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
                 ✨

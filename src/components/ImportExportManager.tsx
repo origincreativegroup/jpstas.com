@@ -75,13 +75,15 @@ export default function ImportExportManager({
 
       // Read file
       const fileData = await ProjectImportExport.readFile(file);
-      
+
       // Import data
       const result = await ProjectImportExport.importProjects(fileData, importOptions);
       setImportResult(result);
 
       if (result.success) {
-        toast.success(`Import completed: ${result.imported.projects} projects, ${result.imported.drafts} drafts, ${result.imported.media} media files`);
+        toast.success(
+          `Import completed: ${result.imported.projects} projects, ${result.imported.drafts} drafts, ${result.imported.media} media files`
+        );
         onImportComplete?.(result);
       } else {
         toast.error(`Import failed: ${result.errors.join(', ')}`);
@@ -90,7 +92,6 @@ export default function ImportExportManager({
       if (result.warnings.length > 0) {
         result.warnings.forEach(warning => toast.warning(warning));
       }
-
     } catch (error) {
       toast.error(`Import failed: ${(error as Error).message}`);
     } finally {
@@ -133,13 +134,23 @@ export default function ImportExportManager({
         <p className="text-sm text-neutral-600 mb-4">
           Export your portfolio data for backup or migration purposes.
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="border border-neutral-200 rounded-lg p-4">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <svg
+                  className="w-5 h-5 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
                 </svg>
               </div>
               <div>
@@ -165,7 +176,12 @@ export default function ImportExportManager({
               ) : (
                 <>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
                   </svg>
                   Export JSON
                 </>
@@ -176,8 +192,18 @@ export default function ImportExportManager({
           <div className="border border-neutral-200 rounded-lg p-4">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <svg
+                  className="w-5 h-5 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
                 </svg>
               </div>
               <div>
@@ -203,7 +229,12 @@ export default function ImportExportManager({
               ) : (
                 <>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
                   </svg>
                   Export CSV
                 </>
@@ -219,13 +250,18 @@ export default function ImportExportManager({
         <p className="text-sm text-neutral-600 mb-4">
           Import portfolio data from a backup file or migrate from another system.
         </p>
-        
+
         <button
           onClick={openImportModal}
           className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+            />
           </svg>
           Import Data
         </button>
@@ -244,7 +280,12 @@ export default function ImportExportManager({
                   className="p-2 text-neutral-400 hover:text-neutral-600 transition-colors"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
@@ -265,7 +306,12 @@ export default function ImportExportManager({
                     />
                     <div className="w-12 h-12 mx-auto text-neutral-400 mb-4">
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                        />
                       </svg>
                     </div>
                     <p className="text-lg font-medium text-neutral-700 mb-2">Select Import File</p>
@@ -284,17 +330,19 @@ export default function ImportExportManager({
                   {/* Import Options */}
                   <div className="space-y-4">
                     <h4 className="font-medium text-neutral-900">Import Options</h4>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-neutral-700 mb-2">
                         Merge Strategy
                       </label>
                       <select
                         value={importOptions.mergeStrategy}
-                        onChange={(e) => setImportOptions(prev => ({
-                          ...prev,
-                          mergeStrategy: e.target.value as any
-                        }))}
+                        onChange={e =>
+                          setImportOptions(prev => ({
+                            ...prev,
+                            mergeStrategy: e.target.value as any,
+                          }))
+                        }
                         className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent"
                       >
                         <option value="replace">Replace all data</option>
@@ -308,10 +356,12 @@ export default function ImportExportManager({
                         <input
                           type="checkbox"
                           checked={importOptions.includeDrafts}
-                          onChange={(e) => setImportOptions(prev => ({
-                            ...prev,
-                            includeDrafts: e.target.checked
-                          }))}
+                          onChange={e =>
+                            setImportOptions(prev => ({
+                              ...prev,
+                              includeDrafts: e.target.checked,
+                            }))
+                          }
                           className="h-4 w-4 text-brand focus:ring-brand border-neutral-300 rounded"
                         />
                         <span className="ml-2 text-sm text-neutral-700">Include drafts</span>
@@ -321,10 +371,12 @@ export default function ImportExportManager({
                         <input
                           type="checkbox"
                           checked={importOptions.includeMedia}
-                          onChange={(e) => setImportOptions(prev => ({
-                            ...prev,
-                            includeMedia: e.target.checked
-                          }))}
+                          onChange={e =>
+                            setImportOptions(prev => ({
+                              ...prev,
+                              includeMedia: e.target.checked,
+                            }))
+                          }
                           className="h-4 w-4 text-brand focus:ring-brand border-neutral-300 rounded"
                         />
                         <span className="ml-2 text-sm text-neutral-700">Include media files</span>
@@ -334,13 +386,17 @@ export default function ImportExportManager({
                         <input
                           type="checkbox"
                           checked={importOptions.validateData}
-                          onChange={(e) => setImportOptions(prev => ({
-                            ...prev,
-                            validateData: e.target.checked
-                          }))}
+                          onChange={e =>
+                            setImportOptions(prev => ({
+                              ...prev,
+                              validateData: e.target.checked,
+                            }))
+                          }
                           className="h-4 w-4 text-brand focus:ring-brand border-neutral-300 rounded"
                         />
-                        <span className="ml-2 text-sm text-neutral-700">Validate data before import</span>
+                        <span className="ml-2 text-sm text-neutral-700">
+                          Validate data before import
+                        </span>
                       </label>
                     </div>
                   </div>
@@ -348,26 +404,51 @@ export default function ImportExportManager({
               ) : (
                 /* Import Results */
                 <div className="space-y-4">
-                  <div className={`p-4 rounded-lg ${importResult.success ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
+                  <div
+                    className={`p-4 rounded-lg ${importResult.success ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}
+                  >
                     <div className="flex items-center gap-2 mb-2">
                       {importResult.success ? (
-                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        <svg
+                          className="w-5 h-5 text-green-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
                         </svg>
                       ) : (
-                        <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        <svg
+                          className="w-5 h-5 text-red-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
                         </svg>
                       )}
-                      <h3 className={`font-medium ${importResult.success ? 'text-green-800' : 'text-red-800'}`}>
+                      <h3
+                        className={`font-medium ${importResult.success ? 'text-green-800' : 'text-red-800'}`}
+                      >
                         Import {importResult.success ? 'Successful' : 'Failed'}
                       </h3>
                     </div>
-                    <p className={`text-sm ${importResult.success ? 'text-green-700' : 'text-red-700'}`}>
-                      {importResult.success 
+                    <p
+                      className={`text-sm ${importResult.success ? 'text-green-700' : 'text-red-700'}`}
+                    >
+                      {importResult.success
                         ? `Successfully imported ${importResult.imported.projects} projects, ${importResult.imported.drafts} drafts, and ${importResult.imported.media} media files.`
-                        : `Import failed with ${importResult.errors.length} errors.`
-                      }
+                        : `Import failed with ${importResult.errors.length} errors.`}
                     </p>
                   </div>
 

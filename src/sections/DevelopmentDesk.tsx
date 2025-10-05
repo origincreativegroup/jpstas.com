@@ -18,7 +18,7 @@ const DevelopmentDesk: React.FC = () => {
       tech: ['React', 'TypeScript', 'Cloudflare Pages', 'Tailwind CSS'],
       status: 'Live',
       url: 'https://jpstas.com',
-      terminal: 'portfolio-terminal'
+      terminal: 'portfolio-terminal',
     },
     {
       id: 'ecommerce-platform',
@@ -27,7 +27,7 @@ const DevelopmentDesk: React.FC = () => {
       tech: ['Node.js', 'React', 'PostgreSQL', 'AWS'],
       status: 'Production',
       url: 'https://caribbeanpools.com',
-      terminal: 'ecommerce-terminal'
+      terminal: 'ecommerce-terminal',
     },
     {
       id: 'design-system',
@@ -36,7 +36,7 @@ const DevelopmentDesk: React.FC = () => {
       tech: ['Storybook', 'React', 'TypeScript', 'Figma'],
       status: 'Maintained',
       url: 'https://design.jpstas.com',
-      terminal: 'design-system-terminal'
+      terminal: 'design-system-terminal',
     },
     {
       id: 'api-gateway',
@@ -45,8 +45,8 @@ const DevelopmentDesk: React.FC = () => {
       tech: ['Node.js', 'Express', 'Redis', 'Docker'],
       status: 'Production',
       url: 'https://api.jpstas.com',
-      terminal: 'api-gateway-terminal'
-    }
+      terminal: 'api-gateway-terminal',
+    },
   ];
 
   const getStatusColor = (status: string) => {
@@ -73,16 +73,19 @@ const DevelopmentDesk: React.FC = () => {
               className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Back to Workshop
             </button>
             <div className="h-6 w-px bg-neutral-700"></div>
             <h1 className="text-2xl font-bold">Development Desk</h1>
           </div>
-          <div className="text-sm text-neutral-400">
-            {projects.length} active projects
-          </div>
+          <div className="text-sm text-neutral-400">{projects.length} active projects</div>
         </div>
       </div>
 
@@ -106,7 +109,9 @@ const DevelopmentDesk: React.FC = () => {
                     <h3 className="text-lg font-bold text-white mb-2">{project.title}</h3>
                     <p className="text-neutral-400 text-sm">{project.description}</p>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}
+                  >
                     {project.status}
                   </span>
                 </div>
@@ -128,7 +133,7 @@ const DevelopmentDesk: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={e => e.stopPropagation()}
                   >
                     View Source →
                   </a>
@@ -157,45 +162,27 @@ const DevelopmentDesk: React.FC = () => {
                   <div className="text-green-400">
                     <span className="text-neutral-500">$</span> npm run dev
                   </div>
-                  <div className="text-neutral-300">
-                    Starting development server...
-                  </div>
-                  <div className="text-green-400">
-                    ✓ Server running on http://localhost:3000
-                  </div>
-                  <div className="text-blue-400">
-                    ✓ Hot reload enabled
-                  </div>
-                  <div className="text-yellow-400">
-                    ⚠ Building for production...
-                  </div>
-                  <div className="text-green-400">
-                    ✓ Build completed successfully
-                  </div>
+                  <div className="text-neutral-300">Starting development server...</div>
+                  <div className="text-green-400">✓ Server running on http://localhost:3000</div>
+                  <div className="text-blue-400">✓ Hot reload enabled</div>
+                  <div className="text-yellow-400">⚠ Building for production...</div>
+                  <div className="text-green-400">✓ Build completed successfully</div>
                   <div className="text-neutral-300">
                     <span className="text-neutral-500">$</span> git status
                   </div>
-                  <div className="text-neutral-300">
-                    On branch main
-                  </div>
+                  <div className="text-neutral-300">On branch main</div>
                   <div className="text-green-400">
                     Your branch is up to date with 'origin/main'.
                   </div>
                   <div className="text-neutral-300">
                     <span className="text-neutral-500">$</span> npm test
                   </div>
-                  <div className="text-green-400">
-                    ✓ All tests passing
-                  </div>
+                  <div className="text-green-400">✓ All tests passing</div>
                   <div className="text-neutral-300">
                     <span className="text-neutral-500">$</span> npm run build
                   </div>
-                  <div className="text-green-400">
-                    ✓ Build optimized for production
-                  </div>
-                  <div className="text-blue-400">
-                    ✓ Lighthouse score: 95+
-                  </div>
+                  <div className="text-green-400">✓ Build optimized for production</div>
+                  <div className="text-blue-400">✓ Lighthouse score: 95+</div>
                   <div className="text-neutral-300">
                     <span className="text-neutral-500">$</span> _
                   </div>

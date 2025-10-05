@@ -18,7 +18,7 @@ const SectionPanel: React.FC<SectionPanelProps> = ({
   icon,
   route,
   index,
-  viewMode = 'grid'
+  viewMode = 'grid',
 }) => {
   const navigate = useNavigate();
 
@@ -61,15 +61,18 @@ const SectionPanel: React.FC<SectionPanelProps> = ({
               <h3 className="text-lg font-semibold text-indigo-900 group-hover:text-amber-600 transition-colors duration-200">
                 {title}
               </h3>
-              <p className="text-indigo-600 text-sm mt-1 line-clamp-2">
-                {description}
-              </p>
+              <p className="text-indigo-600 text-sm mt-1 line-clamp-2">{description}</p>
             </div>
 
             {/* Arrow */}
             <div className="flex-shrink-0 text-indigo-400 group-hover:text-amber-500 transition-colors duration-200">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </div>
           </div>
@@ -83,9 +86,9 @@ const SectionPanel: React.FC<SectionPanelProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      whileHover={{ 
+      whileHover={{
         y: -4,
-        transition: { duration: 0.2 }
+        transition: { duration: 0.2 },
       }}
       whileTap={{ scale: 0.98 }}
       className="group"
@@ -125,7 +128,12 @@ const SectionPanel: React.FC<SectionPanelProps> = ({
             </span>
             <div className="text-indigo-400 group-hover:text-amber-500 transition-colors duration-200">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </div>
           </div>
