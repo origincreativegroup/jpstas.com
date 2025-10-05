@@ -3,6 +3,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { AuthProvider } from './context/AuthContext';
 import { ProjectsProvider } from './context/ProjectsContext';
 import { ContentProvider } from './context/ContentContext';
+import { CMSProvider } from './context/CMSContext';
 import { AnalyticsProvider } from './components/AnalyticsProvider';
 import BootSequence from './components/experience/BootSequence';
 import WorkshopHub from './pages/WorkshopHub';
@@ -26,9 +27,10 @@ export default function App() {
     <ErrorBoundary>
       <AuthProvider>
         <AnalyticsProvider>
-          <ProjectsProvider>
-            <ContentProvider>
-              <div className="min-h-screen">
+          <CMSProvider>
+            <ProjectsProvider>
+              <ContentProvider>
+                <div className="min-h-screen">
               <Routes>
             {/* Boot Sequence - Default Entry Point */}
             <Route path="/" element={<BootSequence />} />
@@ -61,8 +63,9 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
-            </ContentProvider>
-          </ProjectsProvider>
+              </ContentProvider>
+            </ProjectsProvider>
+          </CMSProvider>
         </AnalyticsProvider>
       </AuthProvider>
     </ErrorBoundary>
