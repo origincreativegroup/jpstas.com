@@ -1,16 +1,29 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import LoginForm from '../components/LoginForm';
+import { useSimpleAuth } from '../context/SimpleAuthContext';
+import { useNavigate } from 'react-router-dom';
 import ProjectManagement from '../components/ProjectManagement';
 import MediaManagement from '../components/MediaManagement';
 import WorkshopManagement from '../components/WorkshopManagement';
 
 export default function Admin() {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, user, signOut, isLoading } = useSimpleAuth();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'projects' | 'media' | 'workshop'>('projects');
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-2 border-brand border-t-transparent"></div>
+          <p className="text-gray-600 font-medium">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
-    return <LoginForm />;
+    navigate('/auth/signin');
+    return null;
   }
 
   return (
@@ -23,7 +36,7 @@ export default function Admin() {
               <p className="text-gray-600">Welcome back, {user?.name}</p>
             </div>
             <button
-              onClick={logout}
+              onClick={signOut}
               className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
             >
               Logout

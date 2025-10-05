@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { AuthProvider } from './context/AuthContext';
+import { SimpleAuthProvider } from './context/SimpleAuthContext';
 import { ProjectsProvider } from './context/ProjectsContext';
 import { ContentProvider } from './context/ContentContext';
 import { CMSProvider } from './context/CMSContext';
@@ -19,13 +19,15 @@ import Contact from './pages/Contact';
 import Portfolio from './pages/Portfolio';
 import Resume from './pages/Resume';
 import Admin from './pages/Admin';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import SaaSDemo from './pages/SaaSDemo';
 import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
+      <SimpleAuthProvider>
         <AnalyticsProvider>
           <CMSProvider>
             <ProjectsProvider>
@@ -45,6 +47,10 @@ export default function App() {
                     <Route path="/workshop/story" element={<StoryForge />} />
                     <Route path="/workshop/skills" element={<SkillConsole />} />
                     <Route path="/workshop/contact" element={<PortalContact />} />
+
+                    {/* Authentication Routes */}
+                    <Route path="/auth/signin" element={<SignIn />} />
+                    <Route path="/auth/signup" element={<SignUp />} />
 
                     {/* Admin Panel */}
                     <Route path="/admin" element={<Admin />} />
@@ -67,7 +73,7 @@ export default function App() {
             </ProjectsProvider>
           </CMSProvider>
         </AnalyticsProvider>
-      </AuthProvider>
+      </SimpleAuthProvider>
     </ErrorBoundary>
   );
 }
