@@ -11,6 +11,7 @@
     "migrate:up": "node database/migrate.js up",
     "migrate:down": "node database/migrate.js down",
     "migrate:prod": "node scripts/run-migrations.js",
+    "create-admin": "node scripts/create-admin-user.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint src/",
