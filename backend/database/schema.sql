@@ -132,6 +132,23 @@ CREATE TABLE api_keys (
     UNIQUE(user_id, service, key_name)
 );
 
+-- Templates table for portfolio templates
+CREATE TABLE templates (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(50) NOT NULL CHECK (category IN ('case-study', 'project-showcase', 'experiment', 'blog-post', 'landing-page')),
+    thumbnail TEXT,
+    sections JSONB NOT NULL,
+    default_settings JSONB DEFAULT '{}',
+    is_custom BOOLEAN DEFAULT false,
+    is_public BOOLEAN DEFAULT false,
+    usage_count INTEGER DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Indexes for performance
 CREATE INDEX idx_projects_user_id ON projects(user_id);
 CREATE INDEX idx_projects_status ON projects(status);
@@ -144,6 +161,9 @@ CREATE INDEX idx_analytics_events_created_at ON analytics_events(created_at);
 CREATE INDEX idx_analytics_events_event_type ON analytics_events(event_type);
 CREATE INDEX idx_content_sections_user_key ON content_sections(user_id, section_key);
 CREATE INDEX idx_skills_user_id ON skills(user_id);
+CREATE INDEX idx_templates_user_id ON templates(user_id);
+CREATE INDEX idx_templates_category ON templates(category);
+CREATE INDEX idx_templates_is_public ON templates(is_public);
 
 -- Full-text search indexes
 CREATE INDEX idx_projects_search ON projects USING gin(to_tsvector('english', title || ' ' || summary || ' ' || description));
@@ -164,3 +184,4 @@ CREATE TRIGGER update_media_updated_at BEFORE UPDATE ON media FOR EACH ROW EXECU
 CREATE TRIGGER update_content_sections_updated_at BEFORE UPDATE ON content_sections FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_skills_updated_at BEFORE UPDATE ON skills FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_api_keys_updated_at BEFORE UPDATE ON api_keys FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+CREATE TRIGGER update_templates_updated_at BEFORE UPDATE ON templates FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

@@ -16,11 +16,13 @@ import analyticsRoutes from './routes/analytics.js';
 import skillsRoutes from './routes/skills.js';
 import migrateRoutes from './routes/migrate.js';
 import adminRoutes from './routes/admin.js';
+import templatesRoutes from './routes/templates.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
 import { logger } from './middleware/logger.js';
 import { validateApiKey } from './middleware/auth.js';
+import { assignRequestId } from './middleware/requestId.js';
 
 // Load environment variables
 dotenv.config();
@@ -58,7 +60,8 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Request-Id'],
+  exposedHeaders: ['X-Request-Id']
 }));
 
 // Compression
@@ -77,7 +80,8 @@ const limiter = rateLimit({
 
 app.use('/api/', limiter);
 
-// Body parsing middleware
+// Request ID and body parsing middleware
+app.use(assignRequestId);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -106,6 +110,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/skills', skillsRoutes);
 app.use('/api/migrate', migrateRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/templates', templatesRoutes);
 
 // API documentation endpoint
 app.get('/api', (req, res) => {
@@ -119,7 +124,8 @@ app.get('/api', (req, res) => {
       media: '/api/media',
       content: '/api/content',
       analytics: '/api/analytics',
-      skills: '/api/skills'
+      skills: '/api/skills',
+      templates: '/api/templates'
     },
     documentation: 'https://github.com/jpstas/jpstas.com'
   });

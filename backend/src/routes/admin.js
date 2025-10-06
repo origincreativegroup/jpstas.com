@@ -1,11 +1,12 @@
 import express from 'express';
 import { Client } from 'pg';
 import bcrypt from 'bcryptjs';
+import { authenticateToken, requireAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Create admin user endpoint (should be protected in production)
-router.post('/create-admin', async (req, res) => {
+router.post('/create-admin', authenticateToken, requireAdmin, async (req, res) => {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
@@ -71,3 +72,53 @@ router.post('/create-admin', async (req, res) => {
 });
 
 export default router;
+// Diagnostics route: returns environment and connectivity details (admin-only)
+router.get('/diagnostics', authenticateToken, requireAdmin, async (req, res) => {
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  });
+
+  const startedAt = Date.now();
+  let dbOk = false;
+  let dbLatencyMs = 0;
+  let nowRow = null;
+
+  try {
+    await client.connect();
+    const t0 = Date.now();
+    const result = await client.query('SELECT NOW() as now');
+    dbLatencyMs = Date.now() - t0;
+    dbOk = true;
+    nowRow = result.rows[0]?.now || null;
+  } catch (error) {
+    dbOk = false;
+  } finally {
+    try { await client.end(); } catch {}
+  }
+
+  res.setHeader('X-Request-Id', req.requestId || '');
+  res.json({
+    requestId: req.requestId,
+    uptimeSeconds: Math.round(process.uptime()),
+    nodeVersion: process.version,
+    env: process.env.NODE_ENV,
+    corsOrigins: (process.env.CORS_ORIGIN || '').split(',').filter(Boolean),
+    rateLimit: {
+      windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'),
+      max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100')
+    },
+    database: {
+      ok: dbOk,
+      latencyMs: dbLatencyMs,
+      now: nowRow,
+    },
+    process: {
+      pid: process.pid,
+      memory: process.memoryUsage(),
+      startedAt: new Date(Date.now() - Math.round(process.uptime() * 1000)).toISOString(),
+      checkedAt: new Date().toISOString(),
+      totalHandlingMs: Date.now() - startedAt
+    }
+  });
+});

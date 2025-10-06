@@ -14,6 +14,7 @@ const Resume = lazy(() => import('./pages/Resume'));
 // Media & Admin pages (hidden from public navigation)
 const MediaLibrary = lazy(() => import('./pages/MediaLibrary'));
 const Admin = lazy(() => import('./pages/Admin'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -93,6 +94,14 @@ export default function App() {
                 element={
                   <PageTransition>
                     <Admin />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <PageTransition>
+                    <AdminDashboard />
                   </PageTransition>
                 }
               />

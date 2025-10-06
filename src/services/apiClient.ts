@@ -1,5 +1,6 @@
 // Unified API client that handles both mock and real APIs
 import { config, getApiUrl, retryWithBackoff, withTimeout, envLog } from '@/config/environment';
+import { pushDebug } from '@/components/DebugOverlay';
 import { MediaFile } from '@/types/media';
 import { Project } from '@/types/project';
 import { PageContent, CMSSettings } from '@/types/cms';
@@ -54,7 +55,11 @@ async function apiRequest<T = any>(
   try {
     const response = await withTimeout(retryWithBackoff(() => fetch(url, requestOptions)));
 
-    envLog.debug(`API Response: ${response.status} ${response.statusText}`);
+    const responseRequestId = response.headers.get('X-Request-Id') || undefined;
+    envLog.debug(`API Response: ${response.status} ${response.statusText} ${responseRequestId ? `(req ${responseRequestId})` : ''}`);
+    if (responseRequestId) {
+      pushDebug('info', 'API response received', { endpoint, status: response.status, requestId: responseRequestId });
+    }
 
     if (!response.ok) {
       let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
@@ -65,7 +70,12 @@ async function apiRequest<T = any>(
         // If we can't parse the error response, use the status text
       }
 
-      throw new ApiClientError(errorMessage, response.status, response);
+      const err = new ApiClientError(errorMessage, response.status, response);
+      if (responseRequestId) {
+        (err as any).requestId = responseRequestId;
+      }
+      pushDebug('error', 'API error', { endpoint, status: response.status, error: errorMessage, requestId: responseRequestId });
+      throw err;
     }
 
     const data = await response.json();
@@ -75,10 +85,12 @@ async function apiRequest<T = any>(
     };
   } catch (error) {
     if (error instanceof ApiClientError) {
+      pushDebug('error', 'ApiClientError thrown', { endpoint, status: error.status, message: error.message, requestId: (error as any).requestId });
       throw error;
     }
 
     envLog.error('API Request failed:', error);
+    pushDebug('error', 'API Request failed', { endpoint, error: error instanceof Error ? error.message : String(error) });
     throw new ApiClientError(error instanceof Error ? error.message : 'Unknown error occurred', 0);
   }
 }

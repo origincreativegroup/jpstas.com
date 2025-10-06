@@ -3,6 +3,7 @@ import { Client } from 'pg';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { authenticateToken, requireAdmin } from '../middleware/auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,7 +11,7 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 // Simple migration endpoint (should be protected in production)
-router.post('/run', async (req, res) => {
+router.post('/run', authenticateToken, requireAdmin, async (req, res) => {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false

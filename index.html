@@ -20,5 +20,94 @@
   <body class="bg-neutral-50 text-neutral-900">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Secret Admin Access (Konami-style) -->
+    <style>
+      #secret-admin {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        background: white;
+        border-radius: 10px;
+        padding: 8px 12px;
+        box-shadow: 0 6px 18px rgba(0,0,0,.12);
+        transform: translateY(100%);
+        transition: transform .35s cubic-bezier(.2,.9,.3,1);
+        z-index: 9999;
+        font-family: Inter, sans-serif;
+      }
+      #secret-admin.show { transform: translateY(0); }
+      #secret-admin a {
+        text-decoration: none;
+        color: inherit;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      #secret-admin:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,.16);
+      }
+    </style>
+
+    <div id="secret-admin" aria-hidden="true">
+      <a id="secret-admin-link" href="/admin/dashboard" style="text-decoration:none;color:inherit;">🔐 Admin</a>
+    </div>
+
+    <script>
+    (function(){
+      // Custom secret sequence: NEXUS
+      const seq = ['n','e','x','u','s'];
+      let pos = 0;
+      let timeout;
+      
+      document.addEventListener('keydown', e => {
+        const k = e.key.toLowerCase();
+        
+        // Clear timeout on any key
+        clearTimeout(timeout);
+        
+        if (k === seq[pos]) {
+          pos++;
+          if (pos === seq.length) {
+            // Success! Show the admin link
+            const el = document.getElementById('secret-admin');
+            el.classList.add('show');
+            el.setAttribute('aria-hidden','false');
+            
+            // Add a subtle animation
+            el.style.animation = 'pulse 0.5s ease-in-out';
+            
+            // Reset position
+            pos = 0;
+            
+            // Log for dev feedback
+            console.log('🎉 Secret admin access revealed!');
+          } else {
+            // Reset after 2 seconds of inactivity
+            timeout = setTimeout(() => { pos = 0; }, 2000);
+          }
+        } else {
+          // If wrong key, check if it's the start of sequence
+          pos = (k === seq[0]) ? 1 : 0;
+          if (pos === 1) {
+            timeout = setTimeout(() => { pos = 0; }, 2000);
+          }
+        }
+      });
+      
+      // Optional: Hide again if clicked elsewhere
+      document.addEventListener('click', e => {
+        const el = document.getElementById('secret-admin');
+        if (el.classList.contains('show') && !el.contains(e.target)) {
+          // Don't hide immediately, wait a bit
+          setTimeout(() => {
+            if (!el.matches(':hover')) {
+              el.classList.remove('show');
+              el.setAttribute('aria-hidden','true');
+            }
+          }, 3000);
+        }
+      });
+    })();
+    </script>
   </body>
 </html>

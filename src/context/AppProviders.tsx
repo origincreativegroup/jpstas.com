@@ -8,6 +8,7 @@ import { ProjectsProvider } from './ProjectsContext';
 import { ContentProvider } from './ContentContext';
 import { MediaProvider } from './MediaContext';
 import { ToastProvider } from './ToastContext';
+import { DebugOverlay } from '@/components/DebugOverlay';
 
 interface AppProvidersProps {
   children: ReactNode;
@@ -29,6 +30,7 @@ export function AppProviders({ children }: AppProvidersProps) {
                   <ProjectsProvider>
                     <AnalyticsProvider>
                       {children}
+                      <DebugOverlay />
                     </AnalyticsProvider>
                   </ProjectsProvider>
                 </CMSProvider>

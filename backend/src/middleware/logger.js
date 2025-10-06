@@ -14,9 +14,8 @@ export const logger = (req, res, next) => {
     userId: req.user?.id
   });
 
-  // Override res.end to log response
-  const originalEnd = res.end;
-  res.end = function(chunk, encoding) {
+  // Log on response finish event to avoid interfering with res.end
+  res.on('finish', () => {
     const duration = Date.now() - start;
     
     winstonLogger.info({
@@ -28,9 +27,7 @@ export const logger = (req, res, next) => {
       ip: req.ip,
       userId: req.user?.id
     });
-
-    originalEnd.call(this, chunk, encoding);
-  };
+  });
 
   next();
 };

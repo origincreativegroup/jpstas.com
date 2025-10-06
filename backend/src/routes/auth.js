@@ -205,4 +205,18 @@ router.post('/refresh', authenticateToken, asyncHandler(async (req, res) => {
   });
 }));
 
+// Verify token endpoint
+router.get('/verify', authenticateToken, asyncHandler(async (req, res) => {
+  // If we got here, token is valid
+  res.json({
+    valid: true,
+    user: {
+      id: req.user.id,
+      email: req.user.email,
+      name: req.user.name,
+      role: req.user.role,
+    },
+  });
+}));
+
 export default router;
