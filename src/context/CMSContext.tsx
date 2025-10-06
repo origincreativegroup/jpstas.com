@@ -13,6 +13,7 @@ import {
   AboutSection,
   ContactSection,
   PortfolioSection,
+  ResumeSection,
 } from '@/types/cms';
 import { api, handleApiError } from '@/services/apiClient';
 import { config } from '@/config/environment';
@@ -56,7 +57,7 @@ const CMSContext = createContext<CMSContextType | undefined>(undefined);
 const defaultHeroSection: HeroSection = {
   id: 'hero-default',
   title: 'Creative Technologist, Designer, & Process Innovator',
-  subtitle: 'Multidisciplinary • Creative Tech • SaaS',
+  subtitle: 'Multidisciplinary • Creative Tech • Product Designer',
   description:
     'I build bold, vector-clean experiences that bridge design, code, and operations. From in-house print studios to SaaS concepts, I ship systems that scale.',
   ctaPrimary: {
@@ -146,6 +147,20 @@ const defaultContactSection: ContactSection = {
   },
 };
 
+const defaultResumeSection: ResumeSection = {
+  id: 'resume-default',
+  summary:
+    'Creative Technologist with 8+ years bridging design and development. I ship production systems with clean visuals and strong UX.',
+  experience: [
+    { company: 'Caribbean Pools', role: 'Creative Director', period: '2020 - Present', description: 'Lead cross‑channel design and dev initiatives.' },
+    { company: 'Freelance', role: 'Designer & Developer', period: '2018 - 2020', description: 'Web apps, brand systems, and performance work.' },
+  ],
+  education: [
+    { institution: 'Indiana University', degree: 'B.S. Computer Science', period: '2014 - 2018' },
+  ],
+  skills: ['React', 'TypeScript', 'Node', 'Design Systems', 'Tailwind', 'PostgreSQL'],
+};
+
 const defaultSettings: CMSSettings = {
   siteName: 'John P. Stas',
   siteDescription: 'Creative Technologist, Designer, & Process Innovator',
@@ -182,6 +197,7 @@ export const CMSProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           hero: page === 'home' ? defaultHeroSection : undefined,
           about: page === 'about' ? defaultAboutSection : undefined,
           contact: page === 'contact' ? defaultContactSection : undefined,
+          resume: page === 'resume' ? defaultResumeSection : undefined,
           seo: {
             title: `${page.charAt(0).toUpperCase() + page.slice(1)} - John P. Stas`,
             description: `John P. Stas - ${page} page`,

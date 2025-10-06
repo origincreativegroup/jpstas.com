@@ -6,9 +6,10 @@ import { debug } from '@/utils/debug';
 
 interface CMSAdminProps {
   onClose: () => void;
+  initialTab?: 'home' | 'about' | 'contact' | 'settings' | 'resume';
 }
 
-export default function CMSAdmin({ onClose }: CMSAdminProps) {
+export default function CMSAdmin({ onClose, initialTab }: CMSAdminProps) {
   const {
     pageContent,
     settings,
@@ -22,7 +23,7 @@ export default function CMSAdmin({ onClose }: CMSAdminProps) {
     uploadHeadshot,
   } = useCMS();
 
-  const [activeTab, setActiveTab] = useState<'home' | 'about' | 'contact' | 'settings'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'about' | 'contact' | 'settings' | 'resume'>(initialTab || 'home');
   const [editingContent, setEditingContent] = useState<Partial<PageContent>>({});
   const [editingSettings, setEditingSettings] = useState<Partial<CMSSettings>>({});
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -505,7 +506,7 @@ export default function CMSAdmin({ onClose }: CMSAdminProps) {
         {/* Tabs */}
         <div className="px-6 py-4 border-b border-neutral-200">
           <div className="flex space-x-1">
-            {(['home', 'about', 'contact', 'settings'] as const).map(tab => (
+            {(['home', 'about', 'resume', 'contact', 'settings'] as const).map(tab => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -532,6 +533,12 @@ export default function CMSAdmin({ onClose }: CMSAdminProps) {
           {activeTab === 'home' && renderHeroSection()}
           {activeTab === 'about' && renderAboutSection()}
           {activeTab === 'contact' && renderContactSection()}
+          {activeTab === 'resume' && (
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-neutral-800">Resume</h3>
+              <p className="text-neutral-600">Resume editing is available in the CMS API; default mock content is loaded in development.</p>
+            </div>
+          )}
           {activeTab === 'settings' && renderSettings()}
         </div>
 

@@ -78,6 +78,25 @@ export interface ContactSection {
   };
 }
 
+export interface ResumeSection {
+  id: string;
+  summary: string;
+  experience: Array<{
+    company: string;
+    role: string;
+    period: string;
+    description?: string;
+    achievements?: string[];
+  }>;
+  education: Array<{
+    institution: string;
+    degree: string;
+    period: string;
+    description?: string;
+  }>;
+  skills: string[];
+}
+
 export interface PortfolioSection {
   id: string;
   title: string;
@@ -98,6 +117,7 @@ export interface PageContent {
   hero?: HeroSection;
   about?: AboutSection;
   contact?: ContactSection;
+  resume?: ResumeSection;
   portfolio?: PortfolioSection;
   seo: {
     title: string;

@@ -1,39 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Project } from '@/types/project';
-import { mockApi } from '@/utils/mockApi';
+import type { Project } from '@/services/api';
 import { useToast } from '@/context/ToastContext';
+import { useProjects } from '@/context/ProjectsContext';
+import ProjectFormModal from './ProjectFormModal';
 
 const ProjectManagement: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { projects, isLoading, getProjects, deleteProject, updateProject, createProject } = useProjects();
+  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState<'all' | 'featured' | 'published' | 'draft'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const { showToast } = useToast();
+  const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  const fetchProjects = async () => {
-    try {
+    (async () => {
       setLoading(true);
-      const data = await mockApi.getProjects();
-      setProjects(data);
-    } catch (error) {
-      console.error('Failed to fetch projects:', error);
-      showToast('Failed to fetch projects', 'error');
-    } finally {
+      await getProjects();
       setLoading(false);
-    }
-  };
+    })();
+  }, [getProjects]);
+
+  const currentEditing = projects.find(p => p.id === editingId) as any;
 
   const handleDelete = async (projectId: string) => {
     if (!confirm('Are you sure you want to delete this project?')) return;
 
     try {
-      // In a real app, this would make an API call
-      setProjects(projects.filter(p => p.id !== projectId));
+      const res = await deleteProject(projectId);
+      if (!res.success) throw new Error(res.error);
       showToast('Project deleted successfully', 'success');
     } catch (error) {
       console.error('Failed to delete project:', error);
@@ -43,32 +39,60 @@ const ProjectManagement: React.FC = () => {
 
   const handleToggleFeatured = async (project: Project) => {
     try {
-      const updatedProject = { ...project, featured: !project.featured };
-      // In a real app, this would make an API call
-      setProjects(projects.map(p => (p.id === project.id ? updatedProject : p)));
-      showToast(`Project ${updatedProject.featured ? 'featured' : 'unfeatured'}`, 'success');
+      const res = await updateProject(project.id, { featured: !project.featured } as any);
+      if (!res.success) throw new Error(res.error);
+      showToast(`Project ${project.featured ? 'unfeatured' : 'featured'}`, 'success');
     } catch (error) {
       console.error('Failed to update project:', error);
       showToast('Failed to update project', 'error');
     }
   };
 
+  const handleCreate = async (values: any) => {
+    try {
+      const res = await createProject(values);
+      if (!res.success) throw new Error(res.error);
+      setShowForm(false);
+      showToast('Project created successfully', 'success');
+    } catch (e) {
+      showToast('Failed to create project', 'error');
+    }
+  };
+
+  const handleEdit = async (values: any) => {
+    if (!editingId) return;
+    try {
+      const res = await updateProject(editingId, values);
+      if (!res.success) throw new Error(res.error);
+      setEditingId(null);
+      setShowForm(false);
+      showToast('Project updated', 'success');
+    } catch (e) {
+      showToast('Failed to update project', 'error');
+    }
+  };
+
   const filteredProjects = projects.filter(project => {
+    const status = (project.status as any) || 'draft';
+    const tags = (project.tags as any) || [];
+    const summary = (project.summary as any) || '';
+
     const matchesFilter =
       filter === 'all' ||
       (filter === 'featured' && project.featured) ||
-      (filter === 'published' && project.status === 'published') ||
-      (filter === 'draft' && project.status === 'draft');
+      (filter === 'published' && status === 'published') ||
+      (filter === 'draft' && status === 'draft');
 
+    const q = searchQuery.toLowerCase();
     const matchesSearch =
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      (project.title || '').toLowerCase().includes(q) ||
+      summary.toLowerCase().includes(q) ||
+      tags.some((tag: string) => (tag || '').toLowerCase().includes(q));
 
     return matchesFilter && matchesSearch;
   });
 
-  if (loading) {
+  if (loading || isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-8 w-8 border-2 border-accent border-t-transparent"></div>
@@ -85,7 +109,7 @@ const ProjectManagement: React.FC = () => {
           <p className="text-neutral-600">Manage your portfolio projects and case studies</p>
         </div>
         <button
-          onClick={() => {}}
+          onClick={() => { setEditingId(null); setShowForm(true); }}
           className="px-4 py-2 bg-accent text-brand rounded-lg hover:bg-accent-dark transition-colors font-medium"
         >
           Add New Project
@@ -150,22 +174,14 @@ const ProjectManagement: React.FC = () => {
           >
             {/* Project Image */}
             <div className="h-48 bg-gradient-to-br from-accent/20 to-brand/20 flex items-center justify-center">
-              {project.images && project.images.length > 0 ? (
+              {project.images && (project.images as any).length > 0 ? (
                 <img
-                  src={project.images[0]?.url}
-                  alt={project.images[0]?.alt}
+                  src={(project.images as any)[0]?.url}
+                  alt={(project.images as any)[0]?.alt}
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="text-4xl opacity-50">
-                  {project.tags.includes('E-commerce')
-                    ? '🛒'
-                    : project.tags.includes('Design')
-                      ? '🎨'
-                      : project.tags.includes('Development')
-                        ? '💻'
-                        : '⚡'}
-                </div>
+                <div className="text-4xl opacity-50">⚡</div>
               )}
             </div>
 
@@ -174,7 +190,7 @@ const ProjectManagement: React.FC = () => {
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                   <h3 className="font-bold text-lg text-brand mb-1">{project.title}</h3>
-                  <p className="text-sm text-neutral-600 mb-2">{project.role}</p>
+                  <p className="text-sm text-neutral-600 mb-2">{(project as any).role || ''}</p>
                 </div>
                 <div className="flex items-center space-x-2">
                   {project.featured && (
@@ -184,20 +200,20 @@ const ProjectManagement: React.FC = () => {
                   )}
                   <span
                     className={`px-2 py-1 text-xs rounded-full font-medium ${
-                      project.status === 'published'
+                      ((project.status as any) === 'published')
                         ? 'bg-green-100 text-green-800'
                         : 'bg-yellow-100 text-yellow-800'
                     }`}
                   >
-                    {project.status}
+                    {(project.status as any)}
                   </span>
                 </div>
               </div>
 
-              <p className="text-sm text-neutral-700 mb-4 line-clamp-2">{project.summary}</p>
+              <p className="text-sm text-neutral-700 mb-4 line-clamp-2">{(project.summary as any) || ''}</p>
 
               <div className="flex flex-wrap gap-1 mb-4">
-                {project.tags.slice(0, 3).map(tag => (
+                {((project.tags as any) || []).slice(0, 3).map((tag: string) => (
                   <span
                     key={tag}
                     className="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md"
@@ -205,16 +221,16 @@ const ProjectManagement: React.FC = () => {
                     {tag}
                   </span>
                 ))}
-                {project.tags.length > 3 && (
+                {(((project.tags as any) || []).length > 3) && (
                   <span className="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-md">
-                    +{project.tags.length - 3}
+                    +{((project.tags as any) || []).length - 3}
                   </span>
                 )}
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="text-xs text-neutral-500">
-                  {new Date(project.createdAt).toLocaleDateString()}
+                  {new Date((project as any).created_at || Date.now()).toLocaleDateString()}
                 </div>
                 <div className="flex items-center space-x-2">
                   <button
@@ -231,7 +247,7 @@ const ProjectManagement: React.FC = () => {
                     </svg>
                   </button>
                   <button
-                    onClick={() => {}}
+                    onClick={() => { setEditingId(project.id as string); setShowForm(true); }}
                     className="p-2 bg-neutral-100 text-neutral-600 rounded-lg hover:bg-neutral-200 transition-colors"
                     title="Edit project"
                   >
@@ -245,7 +261,7 @@ const ProjectManagement: React.FC = () => {
                     </svg>
                   </button>
                   <button
-                    onClick={() => handleDelete(project.id)}
+                    onClick={() => handleDelete(project.id as string)}
                     className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
                     title="Delete project"
                   >
@@ -275,12 +291,20 @@ const ProjectManagement: React.FC = () => {
               : 'Get started by creating your first project'}
           </p>
           <button
-            onClick={() => {}}
+            onClick={() => { setEditingId(null); setShowForm(true); }}
             className="px-4 py-2 bg-accent text-brand rounded-lg hover:bg-accent-dark transition-colors font-medium"
           >
             Add New Project
           </button>
         </div>
+      )}
+
+      {showForm && (
+        <ProjectFormModal
+          initial={currentEditing as any}
+          onSubmit={currentEditing ? handleEdit : handleCreate}
+          onClose={() => { setShowForm(false); setEditingId(null); }}
+        />
       )}
     </div>
   );
