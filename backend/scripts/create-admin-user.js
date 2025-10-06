@@ -18,9 +18,15 @@ async function createAdminUser() {
     await client.connect();
     console.log('✅ Connected to database');
 
-    const email = 'johnpstas@jpstas.com';
-    const password = 'qidban-wyzcAr-6wawjo';
-    const name = 'John P Stas';
+    // Get credentials from environment variables
+    const email = process.env.ADMIN_EMAIL || 'johnpstas@jpstas.com';
+    const password = process.env.ADMIN_PASSWORD;
+    const name = process.env.ADMIN_NAME || 'John P Stas';
+
+    if (!password) {
+      console.error('❌ ADMIN_PASSWORD environment variable is required');
+      process.exit(1);
+    }
 
     // Hash the password
     const saltRounds = 10;
