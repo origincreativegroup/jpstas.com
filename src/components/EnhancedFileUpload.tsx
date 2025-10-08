@@ -153,7 +153,21 @@ export default function EnhancedFileUpload({
           error: errorMessage,
         });
 
-        toast.error(`Upload failed: ${errorMessage}`);
+        // Provide more specific error messages based on error type
+        let userFriendlyMessage = errorMessage;
+        if (errorMessage.includes('credentials not configured')) {
+          userFriendlyMessage = 'Cloudflare service is not properly configured. Please contact support.';
+        } else if (errorMessage.includes('File size exceeds')) {
+          userFriendlyMessage = 'File is too large. Please choose a smaller file.';
+        } else if (errorMessage.includes('Invalid file type')) {
+          userFriendlyMessage = 'File type not supported. Please choose an image or video file.';
+        } else if (errorMessage.includes('network') || errorMessage.includes('fetch')) {
+          userFriendlyMessage = 'Network error. Please check your connection and try again.';
+        } else if (errorMessage.includes('failed after') && errorMessage.includes('attempts')) {
+          userFriendlyMessage = 'Upload failed after multiple attempts. Please try again later.';
+        }
+
+        toast.error(`Upload failed: ${userFriendlyMessage}`);
         throw error;
       }
     },

@@ -59,13 +59,13 @@ const defaultHeroSection: HeroSection = {
   title: 'Creative Technologist, Designer, & Process Innovator',
   subtitle: 'Multidisciplinary • Creative Tech • Product Designer',
   description:
-    'I build bold, vector-clean experiences that bridge design, code, and operations. From in-house print studios to SaaS concepts, I ship systems that scale.',
+    'I\'m a multidisciplinary Creative Technologist and Designer who bridges art, technology, and systems thinking. Over the past decade at Caribbean Pools, I transformed creative operations from the ground up—building an in-house print studio, launching an e-commerce platform, digitizing workflows, and leading the evolution of the company\'s brand across every touchpoint. My background is equal parts design and engineering mindset. I love designing beautiful things—but I\'m just as drawn to how processes work behind the scenes. That curiosity led me from Illustrator and Photoshop into code, automation, and AI tools, where I now build systems that make creative work smarter, faster, and more scalable. Today, I\'m focused on projects that sit at the intersection of design, product development, and innovation—where storytelling meets system-building. Whether it\'s branding a company, prototyping an app, or automating a creative workflow, my goal is the same: to bridge the gap between ideas and execution.',
   ctaPrimary: {
     text: 'View Work',
     link: '/portfolio',
   },
   ctaSecondary: {
-    text: 'Resume',
+    text: 'Download Resume',
     link: '/resume',
   },
 };
@@ -74,46 +74,65 @@ const defaultAboutSection: AboutSection = {
   id: 'about-default',
   title: 'About Me',
   subtitle: 'Creative Technologist & Process Innovator',
-  bio: "I'm a creative technologist with 8+ years of experience building digital experiences that bridge design and development. I specialize in creating systems that are both beautiful and functional, scalable and user-friendly.",
+  bio: "I'm a creative technologist with 8+ years of experience building digital experiences that bridge design, development, and business operations. I specialize in transforming complex challenges into scalable, efficient solutions—whether that's a $2M+ e-commerce platform, an automated print studio, or an AI-powered SaaS product. My multidisciplinary approach combines visual design, full-stack development, and process innovation to deliver measurable business impact. I believe great technology should feel invisible, amplifying human capabilities without getting in the way.",
   skills: [
-    'UI/UX Design',
-    'Frontend Development',
-    'Product Strategy',
-    'Team Leadership',
-    'Process Innovation',
+    'Full-Stack Development (React, TypeScript, Node.js)',
+    'UI/UX Design & Design Systems',
+    'Product Strategy & Management',
+    'Process Innovation & Automation',
+    'Team Leadership & Training',
+    'E-commerce & Digital Platforms',
+    'DevOps & Cloud Infrastructure',
+    'Print Production & Workflow Design',
   ],
   experience: [
     {
-      company: 'Caribbean Pools',
-      role: 'Creative Director',
-      period: '2020 - Present',
-      description: 'Leading design and development initiatives across digital and print media.',
-      current: true,
+      company: 'Caribbean Pools & Spas',
+      role: 'Business Development & Creative Lead',
+      period: '2014 - 2025',
+      description: 'Led digital transformation initiatives, built in-house print studio (40% cost reduction), launched $2M+ e-commerce platform, managed CRM migration, and drove 300% social media growth. Trained 15+ staff and created scalable systems across web, print, and operations.',
+      current: false,
     },
     {
-      company: 'Freelance',
-      role: 'Designer & Developer',
-      period: '2018 - 2020',
-      description: 'Working with startups and agencies on web and mobile projects.',
+      company: 'Origin Creative Group',
+      role: 'Proprietor / Designer',
+      period: '2013 - 2014',
+      description: 'Founded creative consultancy specializing in brand identity and digital design. Worked with startups and established businesses on web, print, and multimedia projects.',
+    },
+    {
+      company: 'Halo Ventures',
+      role: 'Director of Operations',
+      period: '2012 - 2013',
+      description: 'Managed operations and led process improvements for technology ventures. Developed systems and workflows for early-stage companies.',
     },
   ],
   education: [
     {
       institution: 'Indiana University',
-      degree: 'Bachelor of Science in Computer Science',
-      period: '2014 - 2018',
-      description: 'Focus on software engineering and human-computer interaction.',
+      degree: 'BA, Visual Communications',
+      period: '2008 - 2012',
+      description: 'Herron School of Art & Design. Focused on visual communications, design thinking, and digital media.',
     },
   ],
   achievements: [
     {
-      title: 'Built In-House Print Studio',
-      description: 'Reduced print costs by 40% and improved delivery times by 60%.',
+      title: 'E-commerce Platform: $2M+ Revenue',
+      description: 'Built full-stack e-commerce platform generating $2M+ in first year with 40% conversion increase and 60% faster page loads.',
       year: '2023',
     },
     {
-      title: 'E-commerce Platform Launch',
-      description: 'Generated over $100k in net revenue in the first year.',
+      title: 'Print Studio: 40% Cost Reduction',
+      description: 'Established in-house print studio reducing costs by $48k/year and improving delivery times by 60%.',
+      year: '2023',
+    },
+    {
+      title: 'Digital Transformation: 95% Paperless',
+      description: 'Led digital transformation converting 20+ paper processes to automated workflows, achieving 15-30% email CTR.',
+      year: '2022',
+    },
+    {
+      title: 'Social Media Growth: 2K to 15K',
+      description: 'Grew social media following by 650% with automated content pipeline and 300% engagement increase.',
       year: '2022',
     },
   ],
@@ -121,27 +140,28 @@ const defaultAboutSection: AboutSection = {
 
 const defaultContactSection: ContactSection = {
   id: 'contact-default',
-  title: 'Get In Touch',
-  subtitle: "Let's build something together",
+  title: 'Let\'s Build Something Great',
+  subtitle: "Open to Full-Time Roles & Strategic Collaborations",
   description:
-    "I'm open to creative tech roles and collaborations. Reach out to discuss your project or just say hello!",
+    "I'm seeking opportunities where I can drive innovation at the intersection of design, technology, and business. Whether you're looking for a creative technologist to lead digital transformation, build scalable products, or bridge design and engineering teams—let's talk. I'm particularly interested in roles that combine strategic thinking with hands-on execution.",
   contactInfo: {
     email: 'johnpstas@gmail.com',
     phone: '219-319-9788',
     website: 'https://jpstas.com',
     linkedin: 'https://www.linkedin.com/in/johnpstas',
-    location: 'Chicago, IL',
+    location: 'Chicago, IL (Open to Remote)',
   },
   formSettings: {
     enabled: true,
     fields: [
       { name: 'name', type: 'text', required: true, placeholder: 'Your name' },
       { name: 'email', type: 'email', required: true, placeholder: 'your.email@example.com' },
+      { name: 'company', type: 'text', required: false, placeholder: 'Company (optional)' },
       {
         name: 'message',
         type: 'textarea',
         required: true,
-        placeholder: 'Tell me about your project or idea...',
+        placeholder: 'Tell me about the role or project...',
       },
     ],
   },
@@ -150,15 +170,49 @@ const defaultContactSection: ContactSection = {
 const defaultResumeSection: ResumeSection = {
   id: 'resume-default',
   summary:
-    'Creative Technologist with 8+ years bridging design and development. I ship production systems with clean visuals and strong UX.',
+    'Multidisciplinary creative technologist with 8+ years transforming complex challenges into scalable solutions. Proven track record of driving measurable business impact through the intersection of design, development, and process innovation. Built $2M+ e-commerce platform, established cost-saving print studio, and led digital transformation initiatives. Expert in full-stack development, design systems, and operations optimization.',
   experience: [
-    { company: 'Caribbean Pools', role: 'Creative Director', period: '2020 - Present', description: 'Lead cross‑channel design and dev initiatives.' },
-    { company: 'Freelance', role: 'Designer & Developer', period: '2018 - 2020', description: 'Web apps, brand systems, and performance work.' },
+    { 
+      company: 'Caribbean Pools & Spas', 
+      role: 'Business Development & Creative Lead', 
+      period: '2014 - 2025', 
+      description: 'Led comprehensive digital transformation: Built $2M+ e-commerce platform (40% conversion increase), established in-house print studio ($48k annual savings), migrated CRM systems, converted 20+ paper processes to digital, grew social media 650% (2K to 15K followers). Managed cross-functional initiatives, trained 15+ staff, created scalable systems across web, print, and operations.' 
+    },
+    { 
+      company: 'Origin Creative Group', 
+      role: 'Proprietor / Designer', 
+      period: '2013 - 2014', 
+      description: 'Founded creative consultancy delivering brand identity, web design, and digital solutions for startups and established businesses. Specialized in bridging client vision with technical execution.' 
+    },
+    { 
+      company: 'Halo Ventures', 
+      role: 'Director of Operations', 
+      period: '2012 - 2013', 
+      description: 'Managed operations and process improvements for technology ventures. Developed operational systems and workflows for early-stage companies.' 
+    },
   ],
   education: [
-    { institution: 'Indiana University', degree: 'B.S. Computer Science', period: '2014 - 2018' },
+    { 
+      institution: 'Indiana University', 
+      degree: 'BA, Visual Communications', 
+      period: '2008 - 2012',
+      description: 'Herron School of Art & Design'
+    },
   ],
-  skills: ['React', 'TypeScript', 'Node', 'Design Systems', 'Tailwind', 'PostgreSQL'],
+  skills: [
+    'React', 
+    'TypeScript', 
+    'Node.js', 
+    'PostgreSQL', 
+    'Tailwind CSS',
+    'Design Systems', 
+    'UI/UX Design',
+    'AWS / Cloudflare',
+    'Adobe Creative Suite',
+    'Process Innovation',
+    'Team Leadership',
+    'E-commerce',
+  ],
 };
 
 const defaultSettings: CMSSettings = {

@@ -258,11 +258,39 @@ export function MediaProvider({ children }: { children: ReactNode }) {
         )
       );
 
-      // Update each file individually (since we don't have a bulk endpoint yet)
-      const updatePromises = ids.map(id => api.updateMedia(id, updates));
-      await Promise.all(updatePromises);
+      // Use bulk endpoint for better performance
+      const result = await api.bulkUpdateMedia(ids, updates);
 
-      debug.api.response('Bulk update - Success', { count: ids.length });
+      // Handle partial failures
+      if (result.errors && result.errors.length > 0) {
+        debug.media.warn('Bulk update had partial failures', { 
+          total: ids.length, 
+          errors: result.errors.length,
+          successful: result.results.length 
+        });
+        
+        // Revert failed items
+        const failedIds = result.errors.map(e => e.id);
+        setMedia(prev => prev.map(m => 
+          failedIds.includes(m.id) ? { ...m, ...updates } : m
+        ));
+
+        if (result.errors.length === ids.length) {
+          // All failed
+          const errorMessage = result.errors[0].error || 'All bulk updates failed';
+          setError(errorMessage);
+          throw new Error(errorMessage);
+        } else {
+          // Partial success - show warning but don't throw
+          setError(`Some updates failed: ${result.errors.length} of ${ids.length}`);
+        }
+      }
+
+      debug.api.response('Bulk update - Success', { 
+        count: ids.length, 
+        successful: result.results.length,
+        errors: result.errors?.length || 0 
+      });
       debug.perf.end('bulkUpdate');
     } catch (err) {
       debug.media.error('Bulk update failed', err as Error, { count: ids.length });
@@ -290,21 +318,54 @@ export function MediaProvider({ children }: { children: ReactNode }) {
           files: filesToDelete.map(f => ({ id: f.id, name: f.name, type: f.type })),
         });
 
-        // Delete each file from backend
-        const deletePromises = ids.map(id => api.deleteMedia(id));
-        await Promise.all(deletePromises);
+        // Use bulk endpoint for better performance
+        const result = await api.bulkDeleteMedia(ids);
 
-        // Remove from local state
-        setMedia(prev => {
-          const updated = prev.filter(m => !ids.includes(m.id));
-          debug.state.update('Bulk deleted from state', {
-            removedCount: ids.length,
-            totalFiles: updated.length,
+        // Handle partial failures
+        if (result.errors && result.errors.length > 0) {
+          debug.media.warn('Bulk delete had partial failures', { 
+            total: ids.length, 
+            errors: result.errors.length,
+            successful: result.results.length 
           });
-          return updated;
-        });
+          
+          // Only remove successfully deleted items from state
+          const successfulIds = result.results.map(r => r.id);
+          setMedia(prev => {
+            const updated = prev.filter(m => !successfulIds.includes(m.id));
+            debug.state.update('Partial bulk delete from state', {
+              removedCount: successfulIds.length,
+              totalFiles: updated.length,
+            });
+            return updated;
+          });
 
-        debug.api.response('Bulk delete - Success', { count: ids.length });
+          if (result.errors.length === ids.length) {
+            // All failed
+            const errorMessage = result.errors[0].error || 'All bulk deletes failed';
+            setError(errorMessage);
+            throw new Error(errorMessage);
+          } else {
+            // Partial success - show warning but don't throw
+            setError(`Some deletions failed: ${result.errors.length} of ${ids.length}`);
+          }
+        } else {
+          // All successful - remove all from state
+          setMedia(prev => {
+            const updated = prev.filter(m => !ids.includes(m.id));
+            debug.state.update('Bulk deleted from state', {
+              removedCount: ids.length,
+              totalFiles: updated.length,
+            });
+            return updated;
+          });
+        }
+
+        debug.api.response('Bulk delete - Success', { 
+          count: ids.length, 
+          successful: result.results.length,
+          errors: result.errors?.length || 0 
+        });
         debug.perf.end('bulkDelete');
       } catch (err) {
         debug.media.error('Bulk delete failed', err as Error, { count: ids.length });

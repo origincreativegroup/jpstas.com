@@ -17,6 +17,7 @@ const Admin = lazy(() => import('./pages/Admin'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
+const TemplateShowcase = lazy(() => import('./pages/TemplateShowcase'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Enhanced loading fallback component with skeleton
@@ -118,6 +119,14 @@ export default function App() {
                 element={
                   <PageTransition>
                     <SignUp />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/showcase"
+                element={
+                  <PageTransition>
+                    <TemplateShowcase />
                   </PageTransition>
                 }
               />

@@ -14,7 +14,6 @@ interface AdminAuthProps {
 export default function AdminAuth({ children }: AdminAuthProps) {
   const [isChecking, setIsChecking] = useState(true);
   const [isAuthed, setIsAuthed] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -67,11 +66,6 @@ function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
     setLoading(false);
   };
 
-  const handleQuickAccess = () => {
-    // For development - bypass login with a demo token
-    const demoToken = 'demo_admin_token_' + Date.now();
-    login('demo@jpstas.com', 'demo').then(() => onSuccess());
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50">

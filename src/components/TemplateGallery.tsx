@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ProjectTemplate, TemplateCategory } from '@/types/template';
 import { templateService } from '@/services/templateService';
 

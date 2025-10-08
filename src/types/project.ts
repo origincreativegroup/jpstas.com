@@ -13,6 +13,7 @@ export interface ProjectContent {
   results: string;
   process: string[];
   technologies: string[];
+  skills: string[];
   client?: string;
   timeline?: string;
   budget?: string;
@@ -45,9 +46,9 @@ export interface Project {
   role: string;
   summary: string;
   tags: string[];
-  type: 'case-study' | 'portfolio-piece' | 'client-work' | 'personal-project';
+  type: 'case-study' | 'project' | 'image' | 'video' | 'audio' | 'document';
   featured: boolean;
-  images: ProjectImage[];
+  images: ProjectImage[]; // Visuals: photo templates, social media templates, animated infographics
   content: ProjectContent;
   createdAt: string;
   updatedAt: string;

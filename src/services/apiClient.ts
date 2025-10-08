@@ -4,6 +4,14 @@ import { pushDebug } from '@/components/DebugOverlay';
 import { MediaFile } from '@/types/media';
 import { Project } from '@/types/project';
 import { PageContent, CMSSettings } from '@/types/cms';
+import {
+  UnifiedProject,
+  CreateProjectData,
+  UpdateProjectData,
+  ProjectFilters,
+  ProjectReference
+} from '@/types/unified-project';
+import { mockUnifiedApi } from './mockUnifiedApi';
 
 export interface ApiResponse<T = any> {
   success: boolean;
@@ -136,6 +144,7 @@ const mockApi = {
             'RIP Software',
             'Large Format Printing',
           ],
+          skills: ['Print Production', 'Workflow Management', 'Staff Training', 'Quality Control'],
         },
         createdAt: '2024-01-15',
         updatedAt: '2024-01-15',
@@ -310,6 +319,79 @@ const mockApi = {
 
     return updatedSettings;
   },
+
+  // UnifiedProject CRUD methods (delegated to mockUnifiedApi with localStorage)
+  async getUnifiedProjects(filters?: ProjectFilters): Promise<UnifiedProject[]> {
+    return mockUnifiedApi.getUnifiedProjects(filters);
+  },
+
+  async getUnifiedProject(id: string): Promise<UnifiedProject> {
+    return mockUnifiedApi.getUnifiedProject(id);
+  },
+
+  async createUnifiedProject(data: CreateProjectData): Promise<UnifiedProject> {
+    return mockUnifiedApi.createUnifiedProject(data);
+  },
+
+  async createUnifiedProjectFromTemplate(
+    templateId: string,
+    data: CreateProjectData
+  ): Promise<UnifiedProject> {
+    return mockUnifiedApi.createUnifiedProjectFromTemplate(templateId, data);
+  },
+
+  async updateUnifiedProject(id: string, updates: UpdateProjectData): Promise<UnifiedProject> {
+    return mockUnifiedApi.updateUnifiedProject(id, updates);
+  },
+
+  async deleteUnifiedProject(id: string): Promise<void> {
+    return mockUnifiedApi.deleteUnifiedProject(id);
+  },
+
+  async duplicateUnifiedProject(id: string): Promise<UnifiedProject> {
+    return mockUnifiedApi.duplicateUnifiedProject(id);
+  },
+
+  async reorderUnifiedProjects(projectIds: string[]): Promise<void> {
+    return mockUnifiedApi.reorderUnifiedProjects(projectIds);
+  },
+
+  async bulkUpdateUnifiedProjects(
+    ids: string[],
+    updates: UpdateProjectData
+  ): Promise<UnifiedProject[]> {
+    return mockUnifiedApi.bulkUpdateUnifiedProjects(ids, updates);
+  },
+
+  async getMediaUsage(mediaId: string): Promise<ProjectReference[]> {
+    return mockUnifiedApi.getMediaUsage(mediaId);
+  },
+
+  // Mock bulk operations (for development)
+  async bulkUpdateMedia(ids: string[], updates: Partial<MediaFile>): Promise<{ results: any[], errors?: any[] }> {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return {
+      results: ids.map(id => ({ id, success: true, updated: { ...updates, id } })),
+      errors: []
+    };
+  },
+
+  async bulkDeleteMedia(ids: string[]): Promise<{ results: any[], errors?: any[] }> {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return {
+      results: ids.map(id => ({ id, success: true })),
+      errors: []
+    };
+  },
+
+  async bulkGetMediaUsage(ids: string[]): Promise<{ [key: string]: ProjectReference[] }> {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const usageData: { [key: string]: ProjectReference[] } = {};
+    for (const id of ids) {
+      usageData[id] = await mockUnifiedApi.getMediaUsage(id);
+    }
+    return usageData;
+  },
 };
 
 // Real API implementations
@@ -394,13 +476,171 @@ const realApi = {
     });
     return response.data!;
   },
+
+  // UnifiedProject CRUD methods (real API)
+  async getUnifiedProjects(filters?: ProjectFilters): Promise<UnifiedProject[]> {
+    const queryParams = new URLSearchParams();
+    if (filters?.status && filters.status !== 'all') queryParams.append('status', filters.status);
+    if (filters?.featured !== undefined) queryParams.append('featured', String(filters.featured));
+    if (filters?.type) queryParams.append('type', filters.type);
+    if (filters?.templateId) queryParams.append('templateId', filters.templateId);
+    if (filters?.search) queryParams.append('search', filters.search);
+    if (filters?.orderBy) queryParams.append('orderBy', filters.orderBy);
+    if (filters?.orderDirection) queryParams.append('orderDirection', filters.orderDirection);
+    if (filters?.tags) filters.tags.forEach(tag => queryParams.append('tags', tag));
+
+    const response = await apiRequest<{ projects: UnifiedProject[] }>(
+      `/projects?${queryParams.toString()}`
+    );
+    return response.data?.projects || [];
+  },
+
+  async getUnifiedProject(id: string): Promise<UnifiedProject> {
+    const response = await apiRequest<{ project: UnifiedProject }>(`/projects/${id}`);
+    if (!response.data?.project) {
+      throw new ApiClientError('Project not found', 404);
+    }
+    return response.data.project;
+  },
+
+  async createUnifiedProject(data: CreateProjectData): Promise<UnifiedProject> {
+    const response = await apiRequest<{ project: UnifiedProject }>('/projects', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    if (!response.data?.project) {
+      throw new ApiClientError('Failed to create project', 500);
+    }
+    return response.data.project;
+  },
+
+  async createUnifiedProjectFromTemplate(
+    templateId: string,
+    data: CreateProjectData
+  ): Promise<UnifiedProject> {
+    const response = await apiRequest<{ project: UnifiedProject }>('/projects/from-template', {
+      method: 'POST',
+      body: JSON.stringify({ templateId, ...data }),
+    });
+    if (!response.data?.project) {
+      throw new ApiClientError('Failed to create project from template', 500);
+    }
+    return response.data.project;
+  },
+
+  async updateUnifiedProject(id: string, updates: UpdateProjectData): Promise<UnifiedProject> {
+    const response = await apiRequest<{ project: UnifiedProject }>(`/projects/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(updates),
+    });
+    if (!response.data?.project) {
+      throw new ApiClientError('Failed to update project', 500);
+    }
+    return response.data.project;
+  },
+
+  async deleteUnifiedProject(id: string): Promise<void> {
+    await apiRequest(`/projects/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  async duplicateUnifiedProject(id: string): Promise<UnifiedProject> {
+    const response = await apiRequest<{ project: UnifiedProject }>(`/projects/${id}/duplicate`, {
+      method: 'POST',
+    });
+    if (!response.data?.project) {
+      throw new ApiClientError('Failed to duplicate project', 500);
+    }
+    return response.data.project;
+  },
+
+  async reorderUnifiedProjects(projectIds: string[]): Promise<void> {
+    await apiRequest('/projects/reorder', {
+      method: 'POST',
+      body: JSON.stringify({ projectIds }),
+    });
+  },
+
+  async bulkUpdateUnifiedProjects(
+    ids: string[],
+    updates: UpdateProjectData
+  ): Promise<UnifiedProject[]> {
+    const response = await apiRequest<{ projects: UnifiedProject[] }>('/projects/bulk-update', {
+      method: 'PATCH',
+      body: JSON.stringify({ ids, updates }),
+    });
+    return response.data?.projects || [];
+  },
+
+  async getMediaUsage(mediaId: string): Promise<ProjectReference[]> {
+    const response = await apiRequest<{ usage: ProjectReference[] }>(`/media/${mediaId}/usage`);
+    return response.data?.usage || [];
+  },
+
+  // Bulk operations for improved performance
+  async bulkUpdateMedia(ids: string[], updates: Partial<MediaFile>): Promise<{ results: any[], errors?: any[] }> {
+    const response = await apiRequest<{ results: any[], errors?: any[] }>('/media/bulk', {
+      method: 'POST',
+      body: JSON.stringify({
+        operation: 'update',
+        ids,
+        updates,
+      }),
+    });
+    return response.data || { results: [], errors: [] };
+  },
+
+  async bulkDeleteMedia(ids: string[]): Promise<{ results: any[], errors?: any[] }> {
+    const response = await apiRequest<{ results: any[], errors?: any[] }>('/media/bulk', {
+      method: 'POST',
+      body: JSON.stringify({
+        operation: 'delete',
+        ids,
+      }),
+    });
+    return response.data || { results: [], errors: [] };
+  },
+
+  async bulkGetMediaUsage(ids: string[]): Promise<{ [key: string]: ProjectReference[] }> {
+    const response = await apiRequest<{ usageData: { [key: string]: ProjectReference[] } }>('/media/bulk', {
+      method: 'POST',
+      body: JSON.stringify({
+        operation: 'usage',
+        ids,
+      }),
+    });
+    return response.data?.usageData || {};
+  },
 };
 
 // Export the appropriate API based on environment
 export const api = config.enableMockApi ? mockApi : realApi;
 
 // Export individual functions for easier use
-export const { getProjects, getMedia, uploadFile, saveProject, updateMedia, deleteMedia } = api;
+export const {
+  getProjects,
+  getMedia,
+  uploadFile,
+  saveProject,
+  updateMedia,
+  deleteMedia,
+  // UnifiedProject methods
+  getUnifiedProjects,
+  getUnifiedProject,
+  createUnifiedProject,
+  createUnifiedProjectFromTemplate,
+  updateUnifiedProject,
+  deleteUnifiedProject,
+  duplicateUnifiedProject,
+  reorderUnifiedProjects,
+  bulkUpdateUnifiedProjects,
+  getMediaUsage,
+  // Bulk media operations
+  bulkUpdateMedia,
+  bulkDeleteMedia,
+  bulkGetMediaUsage,
+} = api;
 
 // Utility functions
 export const handleApiError = (error: unknown): string => {

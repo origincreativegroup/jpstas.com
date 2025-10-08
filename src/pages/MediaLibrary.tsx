@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useMedia } from '@/context/MediaContext';
+import { api } from '@/services/apiClient';
+import { ProjectReference } from '@/types/unified-project';
 import EnhancedFileUpload from '@/components/EnhancedFileUpload';
 import VideoPlayer from '@/components/VideoPlayer';
 import LazyMedia from '@/components/LazyMedia';
@@ -32,10 +34,18 @@ export default function MediaLibrary() {
   const [collections] = useState<string[]>([]);
   const [selectedCollection, setSelectedCollection] = useState<string>('all');
   const [showCollections, setShowCollections] = useState(false);
+  const [usageData, setUsageData] = useState<{ [key: string]: ProjectReference[] }>({});
+  const [loadingUsage, setLoadingUsage] = useState<{ [key: string]: boolean }>({});
+  const [showUsageModal, setShowUsageModal] = useState<string | null>(null);
+  const [usageFilter, setUsageFilter] = useState<'all' | 'used' | 'unused'>('all');
 
   useEffect(() => {
     refreshMedia();
   }, [refreshMedia]);
+
+  // Note: Removed preloading of usage data for performance
+  // Usage data is now loaded on-demand when user clicks "View Usage" button
+  // This eliminates 20+ API calls on page load and improves initial load time
 
   // Enhanced filtering and sorting
   const filteredMedia = media
@@ -60,6 +70,13 @@ export default function MediaLibrary() {
       if (selectedCollection !== 'all') {
         const fileCollections = file.metadata?.collections || [];
         if (!fileCollections.includes(selectedCollection)) return false;
+      }
+
+      // Filter by usage
+      if (usageFilter !== 'all') {
+        const fileUsage = usageData[file.id] || [];
+        if (usageFilter === 'used' && fileUsage.length === 0) return false;
+        if (usageFilter === 'unused' && fileUsage.length > 0) return false;
       }
 
       return true;
@@ -188,6 +205,60 @@ export default function MediaLibrary() {
       month: 'short',
       day: 'numeric',
     });
+  };
+
+  // Load media usage for a specific file (optimized)
+  const loadMediaUsage = async (mediaId: string) => {
+    if (usageData[mediaId]) {
+      // Already loaded, just show modal
+      setShowUsageModal(mediaId);
+      return;
+    }
+
+    setLoadingUsage(prev => ({ ...prev, [mediaId]: true }));
+    try {
+      // Use individual API call for single file (bulk endpoint is for multiple files)
+      const usage = await api.getMediaUsage(mediaId);
+      setUsageData(prev => ({ ...prev, [mediaId]: usage }));
+      setShowUsageModal(mediaId);
+    } catch (err) {
+      console.error('Failed to load media usage:', err);
+    } finally {
+      setLoadingUsage(prev => ({ ...prev, [mediaId]: false }));
+    }
+  };
+
+  // Load usage data for multiple files efficiently (for future bulk loading feature)
+  const _loadMultipleUsageData = async (mediaIds: string[]) => {
+    if (mediaIds.length === 0) return;
+
+    // Set loading state for all requested IDs
+    setLoadingUsage(prev => {
+      const newState = { ...prev };
+      mediaIds.forEach(id => {
+        if (!usageData[id]) { // Only set loading if not already loaded
+          newState[id] = true;
+        }
+      });
+      return newState;
+    });
+
+    try {
+      // Use bulk endpoint for multiple files
+      const usageDataResult = await api.bulkGetMediaUsage(mediaIds);
+      setUsageData(prev => ({ ...prev, ...usageDataResult }));
+    } catch (err) {
+      console.error('Failed to load bulk media usage:', err);
+    } finally {
+      // Clear loading state for all requested IDs
+      setLoadingUsage(prev => {
+        const newState = { ...prev };
+        mediaIds.forEach(id => {
+          delete newState[id];
+        });
+        return newState;
+      });
+    }
   };
 
   if (loading && media.length === 0) {
@@ -384,6 +455,41 @@ export default function MediaLibrary() {
                     Collections
                   </button>
                 </div>
+
+                {/* Usage Filter */}
+                <div className="flex gap-2 items-center">
+                  <span className="text-sm text-neutral-600">Usage:</span>
+                  <button
+                    onClick={() => setUsageFilter('all')}
+                    className={`px-3 py-1 rounded-lg text-sm transition-colors ${
+                      usageFilter === 'all'
+                        ? 'bg-brand text-white'
+                        : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                    }`}
+                  >
+                    All
+                  </button>
+                  <button
+                    onClick={() => setUsageFilter('used')}
+                    className={`px-3 py-1 rounded-lg text-sm transition-colors ${
+                      usageFilter === 'used'
+                        ? 'bg-brand text-white'
+                        : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                    }`}
+                  >
+                    Used
+                  </button>
+                  <button
+                    onClick={() => setUsageFilter('unused')}
+                    className={`px-3 py-1 rounded-lg text-sm transition-colors ${
+                      usageFilter === 'unused'
+                        ? 'bg-brand text-white'
+                        : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                    }`}
+                  >
+                    Unused
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -520,6 +626,25 @@ export default function MediaLibrary() {
                     <button
                       onClick={e => {
                         e.stopPropagation();
+                        loadMediaUsage(file.id);
+                      }}
+                      className="opacity-0 group-hover:opacity-100 w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center hover:bg-indigo-600 transition-all"
+                      title="View Usage"
+                    >
+                      {loadingUsage[file.id] ? (
+                        <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      )}
+                    </button>
+                    <button
+                      onClick={e => {
+                        e.stopPropagation();
                         setEditingMedia(file);
                       }}
                       className="opacity-0 group-hover:opacity-100 w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-all"
@@ -584,6 +709,16 @@ export default function MediaLibrary() {
                       </svg>
                     </button>
                   </div>
+
+                  {/* Usage Badge */}
+                  {usageData[file.id] && usageData[file.id].length > 0 && (
+                    <div className="absolute top-2 right-2 px-2 py-1 bg-indigo-500 text-white text-xs font-medium rounded-full flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                      </svg>
+                      {usageData[file.id].length}
+                    </div>
+                  )}
 
                   {/* Checkbox */}
                   <div className="absolute top-2 left-2">
@@ -684,7 +819,21 @@ export default function MediaLibrary() {
                         {formatDate(file.uploadedAt || file.createdAt)}
                       </td>
                       <td className="px-4 py-3">
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 items-center">
+                          <button
+                            onClick={() => loadMediaUsage(file.id)}
+                            className="p-1 text-indigo-600 hover:text-indigo-700 relative"
+                            title="View Usage"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            {usageData[file.id] && usageData[file.id].length > 0 && (
+                              <span className="absolute -top-1 -right-1 w-3 h-3 bg-indigo-500 rounded-full text-[8px] text-white flex items-center justify-center">
+                                {usageData[file.id].length}
+                              </span>
+                            )}
+                          </button>
                           <button
                             onClick={() => file.url && copyUrl(file.url)}
                             className="p-1 text-neutral-600 hover:text-brand"
@@ -943,6 +1092,87 @@ export default function MediaLibrary() {
                     </button>
                   </div>
                 </form>
+              </div>
+            </div>
+          )}
+
+          {/* Usage Modal */}
+          {showUsageModal && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+              <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold">Media Usage</h3>
+                  <button
+                    onClick={() => setShowUsageModal(null)}
+                    className="p-1 hover:bg-neutral-100 rounded transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                {usageData[showUsageModal] && usageData[showUsageModal].length > 0 ? (
+                  <div className="space-y-3">
+                    <p className="text-sm text-neutral-600 mb-4">
+                      This media is used in {usageData[showUsageModal].length} project{usageData[showUsageModal].length !== 1 ? 's' : ''}:
+                    </p>
+                    <div className="max-h-96 overflow-y-auto space-y-2">
+                      {usageData[showUsageModal].map((ref, idx) => (
+                        <div
+                          key={idx}
+                          className="p-3 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-indigo-300 transition-colors"
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <h4 className="font-medium text-neutral-900">{ref.projectTitle}</h4>
+                              {ref.sectionTitle && (
+                                <p className="text-sm text-neutral-600 mt-1">
+                                  Section: {ref.sectionTitle}
+                                </p>
+                              )}
+                            </div>
+                            <NavLink
+                              to={`/admin?project=${ref.projectId}`}
+                              className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
+                            >
+                              Open
+                            </NavLink>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <svg
+                      className="w-16 h-16 text-neutral-400 mx-auto mb-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                    <p className="text-neutral-600 font-medium">Not used in any projects</p>
+                    <p className="text-sm text-neutral-500 mt-1">
+                      This media file hasn't been added to any project yet
+                    </p>
+                  </div>
+                )}
+
+                <div className="mt-6 pt-4 border-t border-neutral-200">
+                  <button
+                    onClick={() => setShowUsageModal(null)}
+                    className="w-full px-4 py-2 bg-neutral-100 text-neutral-700 rounded-lg hover:bg-neutral-200 transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           )}

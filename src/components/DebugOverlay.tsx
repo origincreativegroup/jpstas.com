@@ -30,7 +30,9 @@ export const DebugOverlay: React.FC = () => {
     const off = debugBus.on((evt) => {
       setEvents((prev) => [...prev.slice(-199), evt]);
     });
-    return () => off();
+    return () => {
+      off();
+    };
   }, []);
 
   useEffect(() => {

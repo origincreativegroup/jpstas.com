@@ -55,13 +55,21 @@ class TemplateService {
     const index = this.customTemplates.findIndex(t => t.id === id);
     if (index === -1) return null;
 
+    const existing = this.customTemplates[index];
+    if (!existing) return null;
+
     this.customTemplates[index] = {
-      ...this.customTemplates[index],
+      ...existing,
       ...updates,
+      id: existing.id, // Preserve required id field
+      name: updates.name || existing.name,
+      description: updates.description || existing.description || '',
+      category: updates.category || existing.category,
+      sections: updates.sections || existing.sections,
       updatedAt: new Date().toISOString(),
     };
 
-    return this.customTemplates[index];
+    return this.customTemplates[index] || null;
   }
 
   /**
@@ -94,8 +102,11 @@ class TemplateService {
     // Increment usage count
     if (template.isCustom) {
       const index = this.customTemplates.findIndex(t => t.id === templateId);
-      if (index !== -1) {
-        this.customTemplates[index].usageCount = (this.customTemplates[index].usageCount || 0) + 1;
+      if (index !== -1 && this.customTemplates[index]) {
+        const current = this.customTemplates[index];
+        if (current) {
+          current.usageCount = (current.usageCount || 0) + 1;
+        }
       }
     }
 

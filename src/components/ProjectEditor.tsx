@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { PortfolioProject, TemplateSection } from '@/types/template';
 import { MediaFile } from '@/types/media';
 import { useMedia } from '@/context/MediaContext';
@@ -13,7 +13,7 @@ interface ProjectEditorProps {
 }
 
 export default function ProjectEditor({ project, onUpdate, onSave, onPublish, onClose }: ProjectEditorProps) {
-  const [activeSection, setActiveSection] = useState<string | null>(project.sections[0]?.id || null);
+  const [activeSection, setActiveSection] = useState<string | null>(project.sections[0]?.id ?? null);
   const [showMediaPicker, setShowMediaPicker] = useState(false);
   const [mediaPickerForSection, setMediaPickerForSection] = useState<string | null>(null);
   const { media: allMedia } = useMedia();
@@ -23,6 +23,7 @@ export default function ProjectEditor({ project, onUpdate, onSave, onPublish, on
 
     const newSections = Array.from(project.sections);
     const [removed] = newSections.splice(result.source.index, 1);
+    if (!removed) return; // Guard against undefined
     newSections.splice(result.destination.index, 0, removed);
 
     // Update order values

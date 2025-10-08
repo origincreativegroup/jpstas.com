@@ -42,11 +42,50 @@ class CloudflareStreamService {
   private accountId: string;
   private apiToken: string;
   private baseUrl: string;
+  private maxRetries: number = 3;
+  private retryDelay: number = 1000; // 1 second
 
   constructor() {
     this.accountId = import.meta.env.VITE_CLOUDFLARE_ACCOUNT_ID || '';
     this.apiToken = import.meta.env.VITE_CLOUDFLARE_API_TOKEN || '';
     this.baseUrl = `https://api.cloudflare.com/client/v4/accounts/${this.accountId}/stream`;
+  }
+
+  // Retry logic for API calls
+  private async retryApiCall<T>(
+    apiCall: () => Promise<T>,
+    operation: string,
+    maxRetries: number = this.maxRetries
+  ): Promise<T> {
+    let lastError: Error;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        return await apiCall();
+      } catch (error) {
+        lastError = error as Error;
+        
+        // Don't retry on authentication errors or invalid requests
+        if (error instanceof Error && (
+          error.message.includes('401') || 
+          error.message.includes('403') ||
+          error.message.includes('400') ||
+          error.message.includes('Invalid')
+        )) {
+          throw error;
+        }
+
+        console.warn(`${operation} failed (attempt ${attempt}/${maxRetries}):`, error);
+        
+        if (attempt < maxRetries) {
+          // Exponential backoff
+          const delay = this.retryDelay * Math.pow(2, attempt - 1);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
+      }
+    }
+
+    throw new Error(`${operation} failed after ${maxRetries} attempts: ${lastError!.message}`);
   }
 
   // Upload video to Cloudflare Stream
@@ -65,42 +104,43 @@ class CloudflareStreamService {
     }
   ): Promise<CloudflareStreamUpload> {
     if (!this.accountId || !this.apiToken) {
-      throw new Error('Cloudflare credentials not configured');
+      throw new Error('Cloudflare credentials not configured. Please check your environment variables.');
     }
 
-    const formData = new FormData();
-    formData.append('file', file);
+    return this.retryApiCall(async () => {
+      const formData = new FormData();
+      formData.append('file', file);
 
-    if (options?.name) {
-      formData.append('name', options.name);
-    }
-    if (options?.requireSignedURLs !== undefined) {
-      formData.append('requireSignedURLs', options.requireSignedURLs.toString());
-    }
-    if (options?.allowedOrigins) {
-      formData.append('allowedOrigins', options.allowedOrigins.join(','));
-    }
-    if (options?.watermark) {
-      formData.append('watermark', JSON.stringify(options.watermark));
-    }
+      if (options?.name) {
+        formData.append('name', options.name);
+      }
+      if (options?.requireSignedURLs !== undefined) {
+        formData.append('requireSignedURLs', options.requireSignedURLs.toString());
+      }
+      if (options?.allowedOrigins) {
+        formData.append('allowedOrigins', options.allowedOrigins.join(','));
+      }
+      if (options?.watermark) {
+        formData.append('watermark', JSON.stringify(options.watermark));
+      }
 
-    const response = await fetch(`${this.baseUrl}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${this.apiToken}`,
-      },
-      body: formData,
-    });
+      const response = await fetch(`${this.baseUrl}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${this.apiToken}`,
+        },
+        body: formData,
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(
-        `Cloudflare Stream upload failed: ${errorData.errors?.[0]?.message || 'Unknown error'}`
-      );
-    }
+      if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage = errorData.errors?.[0]?.message || 'Unknown error';
+        throw new Error(`Cloudflare Stream upload failed: ${errorMessage}`);
+      }
 
-    const data: StreamUploadResponse = await response.json();
-    return data.result;
+      const data: StreamUploadResponse = await response.json();
+      return data.result;
+    }, `Video upload for ${file.name}`);
   }
 
   // Get video details
@@ -109,19 +149,21 @@ class CloudflareStreamService {
       throw new Error('Cloudflare credentials not configured');
     }
 
-    const response = await fetch(`${this.baseUrl}/${uid}`, {
-      headers: {
-        Authorization: `Bearer ${this.apiToken}`,
-      },
-    });
+    return this.retryApiCall(async () => {
+      const response = await fetch(`${this.baseUrl}/${uid}`, {
+        headers: {
+          Authorization: `Bearer ${this.apiToken}`,
+        },
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to get video: ${errorData.errors?.[0]?.message || 'Unknown error'}`);
-    }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Failed to get video: ${errorData.errors?.[0]?.message || 'Unknown error'}`);
+      }
 
-    const data: StreamUploadResponse = await response.json();
-    return data.result;
+      const data: StreamUploadResponse = await response.json();
+      return data.result;
+    }, `Get video details for ${uid}`);
   }
 
   // Delete video
@@ -130,19 +172,21 @@ class CloudflareStreamService {
       throw new Error('Cloudflare credentials not configured');
     }
 
-    const response = await fetch(`${this.baseUrl}/${uid}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${this.apiToken}`,
-      },
-    });
+    return this.retryApiCall(async () => {
+      const response = await fetch(`${this.baseUrl}/${uid}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${this.apiToken}`,
+        },
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(
-        `Failed to delete video: ${errorData.errors?.[0]?.message || 'Unknown error'}`
-      );
-    }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          `Failed to delete video: ${errorData.errors?.[0]?.message || 'Unknown error'}`
+        );
+      }
+    }, `Delete video ${uid}`);
   }
 
   // Get video embed URL

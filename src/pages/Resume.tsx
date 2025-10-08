@@ -175,10 +175,9 @@ export default function Resume() {
               {/* Download Button */}
               <div className="pt-4">
                 <a
-                  href="/John_P_Stas_Resume.pdf"
+                  href="/js_resume_25.2.pdf"
+                  download="John_P_Stas_Resume.pdf"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-brand font-bold rounded-lg hover:bg-accent-dark transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path

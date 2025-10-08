@@ -156,6 +156,7 @@ export default function CaseStudyTemplate({ project, variant = 'card' }: CaseStu
         </section>
       )}
 
+
       {/* Case Study Content */}
       <div className="grid md:grid-cols-3 gap-8 mb-12">
         <div className="md:col-span-2 space-y-8">
