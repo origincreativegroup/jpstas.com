@@ -3,6 +3,10 @@ compatibility_date = "2024-01-01"
 
 pages_build_output_dir = "dist"
 
+# Environment variables (non-sensitive)
+[vars]
+CLOUDFLARE_ACCOUNT_ID = "fa917615d33ac203929027798644acef"
+
 # KV Namespaces for production
 [[kv_namespaces]]
 binding = "MEDIA_KV"
