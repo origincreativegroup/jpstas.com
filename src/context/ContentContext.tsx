@@ -105,7 +105,7 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
 
   const unpublishSection = async (key: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      const response = await fetch(`http://localhost:3000/api/content/${key}/unpublish`, {
+      const response = await fetch(`${apiClient.getBaseURL()}/content/${key}/unpublish`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

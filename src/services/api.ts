@@ -1,9 +1,11 @@
 /**
  * API Service Layer for Portfolio Backend
- * Handles all API communication with the Fly.io backend
+ * Handles all API communication - now uses unified environment config
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+import { getApiUrl } from '@/config/environment';
+
+const API_BASE_URL = getApiUrl('');
 
 // Types
 export interface ApiResponse<T> {
@@ -142,6 +144,10 @@ class ApiClient {
 
   getToken(): string | null {
     return this.token;
+  }
+
+  getBaseURL(): string {
+    return this.baseURL;
   }
 
   // Authentication
