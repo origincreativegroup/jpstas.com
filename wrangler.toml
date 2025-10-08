@@ -11,3 +11,10 @@ id = "94ff64faa5bc4d45aa27bafa0c260a07"
 [[kv_namespaces]]
 binding = "CONTENT_KV"
 id = "b75bcab3b9df4e639518196d8dc0353d"
+
+# Portfolio data (projects, media metadata, etc.)
+# You need to create this KV namespace in Cloudflare dashboard
+# and update the ID here
+[[kv_namespaces]]
+binding = "PORTFOLIO_DATA"
+id = "YOUR_KV_NAMESPACE_ID"  # Replace with actual KV namespace ID

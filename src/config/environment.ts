@@ -16,9 +16,9 @@ export interface EnvironmentConfig {
 const developmentConfig: EnvironmentConfig = {
   isDevelopment: true,
   isProduction: false,
-  apiBaseUrl: 'http://localhost:5173/api',
+  apiBaseUrl: '/api', // Use Cloudflare Functions even in dev (via Vite proxy)
   enableDebug: true,
-  enableMockApi: true,
+  enableMockApi: true, // Keep mock API for faster dev without KV setup
   enableAnalytics: false,
   enableErrorReporting: false,
   maxFileSize: 10 * 1024 * 1024, // 10MB
@@ -37,9 +37,9 @@ const developmentConfig: EnvironmentConfig = {
 const productionConfig: EnvironmentConfig = {
   isDevelopment: false,
   isProduction: true,
-  apiBaseUrl: 'https://backend-fragrant-haze-7389.fly.dev/api',
+  apiBaseUrl: '/api', // Use Cloudflare Functions on same domain
   enableDebug: false,
-  enableMockApi: false,
+  enableMockApi: false, // Use real Cloudflare Functions API in production
   enableAnalytics: true,
   enableErrorReporting: true,
   maxFileSize: 50 * 1024 * 1024, // 50MB
