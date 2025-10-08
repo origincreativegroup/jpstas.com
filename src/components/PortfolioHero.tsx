@@ -18,7 +18,7 @@ export default function PortfolioHero({ project, onProjectClick }: PortfolioHero
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.6]);
 
   const coverImage = project.images && project.images.length > 0
-    ? project.images[0].url
+    ? project.images[0]?.url || '/images/placeholder.svg'
     : '/images/placeholder.svg';
 
   // Extract first key result

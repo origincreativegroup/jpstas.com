@@ -8,32 +8,7 @@ import { mockApi } from '../utils/mockApi';
 import { usePortfolioTracking } from '@/hooks/useAnalytics';
 import { SEO } from '../components/SEO';
 import Navigation from '../components/Navigation';
-
-interface Project {
-  id: string;
-  title: string;
-  role: string;
-  summary: string;
-  tags: string[];
-  type: string;
-  featured: boolean;
-  images: Array<{
-    id: string;
-    url: string;
-    alt: string;
-    caption: string;
-    type?: 'image' | 'video';
-  }>;
-  content: {
-    challenge: string;
-    solution: string;
-    results: string;
-    process: string[];
-    technologies: string[];
-  };
-  createdAt: string;
-  updatedAt: string;
-}
+import { Project } from '@/types/project';
 
 // Category mapping for cleaner filtering
 const CATEGORIES = {

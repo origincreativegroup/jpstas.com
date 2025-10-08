@@ -47,7 +47,7 @@ export default function EmailCampaignInfographic({ className = '' }: EmailCampai
       transition: {
         duration: 1.2,
         ease: "easeInOut"
-      }
+      } as any
     }
   };
 
@@ -76,7 +76,7 @@ export default function EmailCampaignInfographic({ className = '' }: EmailCampai
         duration: 2,
         repeat: Infinity,
         ease: "easeInOut"
-      }
+      } as any
     }
   };
 

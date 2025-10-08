@@ -166,8 +166,8 @@ function parseResultsToStats(results: string): Array<{ label: string; value: str
       });
     } else if (numberMatch) {
       stats.push({
-        value: numberMatch[1],
-        label: numberMatch[2],
+        value: numberMatch[1] || '',
+        label: numberMatch[2] || '',
       });
     }
   });

@@ -187,31 +187,33 @@ export default function ProjectImpactSection({
 
     return (
       <div className="space-y-6">
-        <motion.div
-          className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 text-center border border-white/20"
-          variants={itemVariants}
-        >
-          {mainMetric.icon && (
-            <div className="mb-6 flex justify-center text-white/80">
-              {mainMetric.icon}
-            </div>
-          )}
-          <div className="text-7xl font-bold mb-4">
-            {mainMetric.isNumeric !== false && typeof mainMetric.value === 'number' ? (
-              <CounterAnimation
-                end={mainMetric.value}
-                suffix={mainMetric.suffix || ''}
-                prefix={mainMetric.prefix || ''}
-              />
-            ) : (
-              <span>{mainMetric.prefix}{mainMetric.value}{mainMetric.suffix}</span>
+        {mainMetric && (
+          <motion.div
+            className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 text-center border border-white/20"
+            variants={itemVariants}
+          >
+            {mainMetric.icon && (
+              <div className="mb-6 flex justify-center text-white/80">
+                {mainMetric.icon}
+              </div>
             )}
-          </div>
-          <p className="text-2xl font-semibold mb-2">{mainMetric.label}</p>
-          {mainMetric.description && (
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">{mainMetric.description}</p>
-          )}
-        </motion.div>
+            <div className="text-7xl font-bold mb-4">
+              {mainMetric.isNumeric !== false && typeof mainMetric.value === 'number' ? (
+                <CounterAnimation
+                  end={mainMetric.value}
+                  suffix={mainMetric.suffix || ''}
+                  prefix={mainMetric.prefix || ''}
+                />
+              ) : (
+                <span>{mainMetric.prefix}{mainMetric.value}{mainMetric.suffix}</span>
+              )}
+            </div>
+            <p className="text-2xl font-semibold mb-2">{mainMetric.label}</p>
+            {mainMetric.description && (
+              <p className="text-lg text-white/70 max-w-2xl mx-auto">{mainMetric.description}</p>
+            )}
+          </motion.div>
+        )}
 
         {otherMetrics.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

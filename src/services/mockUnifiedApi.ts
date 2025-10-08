@@ -226,9 +226,21 @@ export const mockUnifiedApi = {
     }
 
     const updatedProject: UnifiedProject = {
-      ...projects[index],
+      ...projects[index]!,
       ...updates,
-      id: projects[index]!.id, // Ensure id is not undefined
+      // Ensure required fields are not undefined
+      id: projects[index]!.id,
+      title: updates.title ?? projects[index]!.title,
+      slug: updates.slug ?? projects[index]!.slug,
+      role: updates.role ?? projects[index]!.role,
+      summary: updates.summary ?? projects[index]!.summary,
+      tags: updates.tags ?? projects[index]!.tags,
+      type: updates.type ?? projects[index]!.type,
+      featured: updates.featured ?? projects[index]!.featured,
+      sections: updates.sections ?? projects[index]!.sections,
+      content: updates.content ?? projects[index]!.content,
+      images: updates.images ?? projects[index]!.images,
+      status: updates.status ?? projects[index]!.status,
       updatedAt: new Date().toISOString(),
     };
 

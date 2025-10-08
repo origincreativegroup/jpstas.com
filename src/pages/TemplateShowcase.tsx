@@ -35,9 +35,9 @@ export default function TemplateShowcase() {
 
   const sampleProcessNodes = ecommerceProject?.content.process.slice(0, 4).map((step, i) => ({
     id: String(i + 1),
-    label: step.split(':')[0],
+    label: step.split(':')[0] || '',
     description: step.split(':')[1]?.trim() || '',
-    color: ['from-blue-500 to-blue-600', 'from-purple-500 to-purple-600', 'from-green-500 to-green-600', 'from-orange-500 to-orange-600'][i],
+    color: ['from-blue-500 to-blue-600', 'from-purple-500 to-purple-600', 'from-green-500 to-green-600', 'from-orange-500 to-orange-600'][i] || '',
   })) || [];
 
   const sampleTechnologies = ecommerceProject?.content.technologies.map((tech, i) => ({
@@ -50,10 +50,10 @@ export default function TemplateShowcase() {
   const sampleTimeline = ecommerceProject?.content.process.slice(0, 5).map((step, i) => ({
     id: String(i + 1),
     date: `Phase ${i + 1}`,
-    title: step.split(':')[0],
+    title: step.split(':')[0] || '',
     description: step.split(':')[1]?.trim() || '',
     tags: ecommerceProject.content.skills.slice(i, i + 2),
-    color: ['blue', 'purple', 'green', 'orange', 'pink'][i],
+    color: ['blue', 'purple', 'green', 'orange', 'pink'][i] || '',
   })) || [];
 
   const sampleCosts = [

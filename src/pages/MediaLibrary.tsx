@@ -229,6 +229,7 @@ export default function MediaLibrary() {
   };
 
   // Load usage data for multiple files efficiently (for future bulk loading feature)
+  // @ts-expect-error - Reserved for future bulk loading feature
   const _loadMultipleUsageData = async (mediaIds: string[]) => {
     if (mediaIds.length === 0) return;
 
@@ -711,12 +712,12 @@ export default function MediaLibrary() {
                   </div>
 
                   {/* Usage Badge */}
-                  {usageData[file.id] && usageData[file.id].length > 0 && (
+                  {usageData[file.id]?.length && usageData[file.id]!.length > 0 && (
                     <div className="absolute top-2 right-2 px-2 py-1 bg-indigo-500 text-white text-xs font-medium rounded-full flex items-center gap-1">
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                       </svg>
-                      {usageData[file.id].length}
+                      {usageData[file.id]!.length}
                     </div>
                   )}
 
@@ -828,9 +829,9 @@ export default function MediaLibrary() {
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
-                            {usageData[file.id] && usageData[file.id].length > 0 && (
+                            {usageData[file.id]?.length && usageData[file.id]!.length > 0 && (
                               <span className="absolute -top-1 -right-1 w-3 h-3 bg-indigo-500 rounded-full text-[8px] text-white flex items-center justify-center">
-                                {usageData[file.id].length}
+                                {usageData[file.id]!.length}
                               </span>
                             )}
                           </button>

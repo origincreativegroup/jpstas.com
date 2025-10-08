@@ -102,14 +102,6 @@ export default function PerformanceInfographic({
     }
   };
 
-  const progressVariants = {
-    hidden: { pathLength: 0 },
-    visible: {
-      pathLength: 1,
-      transition: { duration: 1.5, ease: "easeInOut" } as any
-    }
-  };
-
   const barVariants = {
     hidden: { width: 0 },
     visible: (width: number) => ({

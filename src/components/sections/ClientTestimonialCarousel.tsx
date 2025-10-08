@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export interface Testimonial {
@@ -117,38 +117,40 @@ export default function ClientTestimonialCarousel({
               }}
               className="absolute inset-0"
             >
-              <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                {showRating && testimonials[currentIndex].rating && (
-                  renderStars(testimonials[currentIndex].rating)
-                )}
-
-                <blockquote className="text-xl md:text-2xl text-slate-700 text-center mb-8 italic">
-                  "{testimonials[currentIndex].quote}"
-                </blockquote>
-
-                <div className="flex flex-col items-center">
-                  {testimonials[currentIndex].avatar && (
-                    <img
-                      src={testimonials[currentIndex].avatar}
-                      alt={testimonials[currentIndex].author}
-                      className="w-16 h-16 rounded-full mb-4 object-cover"
-                    />
+              {testimonials[currentIndex] && (
+                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                  {showRating && testimonials[currentIndex]?.rating && (
+                    renderStars(testimonials[currentIndex].rating)
                   )}
-                  <div className="text-center">
-                    <p className="font-bold text-lg text-slate-900">
-                      {testimonials[currentIndex].author}
-                    </p>
-                    {testimonials[currentIndex].role && (
-                      <p className="text-slate-600">
-                        {testimonials[currentIndex].role}
-                        {testimonials[currentIndex].company && (
-                          <span> at {testimonials[currentIndex].company}</span>
-                        )}
-                      </p>
+
+                  <blockquote className="text-xl md:text-2xl text-slate-700 text-center mb-8 italic">
+                    "{testimonials[currentIndex].quote}"
+                  </blockquote>
+
+                  <div className="flex flex-col items-center">
+                    {testimonials[currentIndex]?.avatar && (
+                      <img
+                        src={testimonials[currentIndex].avatar}
+                        alt={testimonials[currentIndex].author}
+                        className="w-16 h-16 rounded-full mb-4 object-cover"
+                      />
                     )}
+                    <div className="text-center">
+                      <p className="font-bold text-lg text-slate-900">
+                        {testimonials[currentIndex].author}
+                      </p>
+                      {testimonials[currentIndex]?.role && (
+                        <p className="text-slate-600">
+                          {testimonials[currentIndex].role}
+                          {testimonials[currentIndex]?.company && (
+                            <span> at {testimonials[currentIndex].company}</span>
+                          )}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </motion.div>
           </AnimatePresence>
 
