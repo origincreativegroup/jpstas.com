@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode ssr",
-    "build": "vite build",
-    "build.client": "vite build",
+    "build": "vite build --mode production && node scripts/post-build.js",
+    "build.client": "vite build --mode production",
     "preview": "vite preview",
     "serve": "wrangler pages dev ./dist"
   },
