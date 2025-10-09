@@ -1,33 +1,36 @@
 import { component$, useSignal } from '@builder.io/qwik';
-import { type DocumentHead } from '@builder.io/qwik-city';
+import { type DocumentHead, Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
   const selectedFilter = useSignal('all');
   
   const projects = [
     {
-      id: 1,
-      title: 'E-Commerce Platform Redesign',
+      id: 'formstack-integration',
+      title: 'Formstack Digital Transformation',
+      category: 'process',
+      tags: ['Process Automation', 'Form UX', 'CRM'],
+      description: 'Turned paper chaos into a digital command center. 80% paper reduction, 1,000+ submissions per season.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-hero.jpg',
+      slug: 'formstack-integration',
+    },
+    {
+      id: 'caribbeanpools-redesign',
+      title: 'Caribbean Pools E-Commerce',
       category: 'design',
-      tags: ['UI/UX', 'E-Commerce', 'WordPress'],
-      description: 'Complete redesign and development of a high-volume e-commerce platform.',
-      image: '/images/placeholder.svg',
+      tags: ['E-Commerce', 'UI/UX', 'WordPress'],
+      description: 'Complete website redesign and e-commerce platform generating $100k+ in first year.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-hero.jpg',
+      slug: 'caribbeanpools-redesign',
     },
     {
-      id: 2,
-      title: 'Print Studio Workflow',
-      category: 'operations',
-      tags: ['Process Design', 'Operations', 'Training'],
-      description: 'Built in-house print studio with optimized workflows and team training.',
-      image: '/images/placeholder.svg',
-    },
-    {
-      id: 3,
-      title: 'Custom CMS Development',
+      id: 'deckhand-prototype',
+      title: 'DeckHand Field Service App',
       category: 'development',
-      tags: ['React', 'TypeScript', 'API'],
-      description: 'Developed custom content management system with real-time collaboration.',
-      image: '/images/placeholder.svg',
+      tags: ['Mobile App', 'React Native', 'UX'],
+      description: 'Field service app prototype reducing report time by 70% with offline-first architecture.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-hero.jpg',
+      slug: 'deckhand-prototype',
     },
   ];
   
@@ -35,7 +38,7 @@ export default component$(() => {
     { id: 'all', label: 'All Projects' },
     { id: 'design', label: 'Design' },
     { id: 'development', label: 'Development' },
-    { id: 'operations', label: 'Operations' },
+    { id: 'process', label: 'Process & Operations' },
   ];
   
   const filteredProjects = selectedFilter.value === 'all' 
@@ -75,15 +78,17 @@ export default component$(() => {
         {/* Projects Grid */}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
-            <div
+            <Link
               key={project.id}
-              class="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2"
+              href={`/portfolio/${project.slug}`}
+              class="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2 block"
             >
               <div class="aspect-video bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
               <div class="p-6">
@@ -91,7 +96,7 @@ export default component$(() => {
                   {project.title}
                 </h3>
                 <p class="text-gray-600 mb-4">{project.description}</p>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
@@ -101,8 +106,14 @@ export default component$(() => {
                     </span>
                   ))}
                 </div>
+                <div class="text-blue-600 font-medium flex items-center gap-2">
+                  View Case Study
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

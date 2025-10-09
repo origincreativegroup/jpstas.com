@@ -1,0 +1,120 @@
+{
+  "slug": "deckhand-prototype",
+  "title": "DeckHand: Field Service App Prototype",
+  "tagline": "From paper logs to live route intelligence",
+  "hero": {
+    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-hero.jpg",
+    "alt": "DeckHand mobile app interface"
+  },
+  "metrics": [
+    {
+      "label": "Report Time",
+      "value": "10 → 3 min"
+    },
+    {
+      "label": "Data Loss",
+      "value": "Eliminated"
+    },
+    {
+      "label": "Visibility",
+      "value": "Real-time"
+    }
+  ],
+  "meta": {
+    "tags": ["Mobile App", "React Native", "Process Design"],
+    "tools": ["React Native", "Expo", "Firebase"],
+    "year": "2021",
+    "client": "Caribbean Pools & Spas"
+  },
+  "context": {
+    "problem": "Paper service logs led to delays, data loss, and zero visibility into field operations.",
+    "constraints": [
+      "Must work offline (spotty connectivity)",
+      "Simple enough for non-technical users",
+      "Sync with existing CRM"
+    ],
+    "quote": "If it's harder than a text message, techs won't use it."
+  },
+  "solution": {
+    "approach": "React Native prototype with offline-first architecture, automatic photo capture, chemical calculators, and manager dashboard.",
+    "bullets": [
+      "Offline data capture with auto-sync",
+      "Built-in chemical balance calculators",
+      "Photo capture with geolocation",
+      "Real-time manager dashboard"
+    ],
+    "gallery": [
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-1.jpg",
+        "alt": "Mobile interface"
+      },
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-2.jpg",
+        "alt": "Chemical calculator"
+      },
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-3.jpg",
+        "alt": "Photo capture"
+      },
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-4.jpg",
+        "alt": "Manager dashboard"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Per-Visit Time",
+      "value": "-70%"
+    },
+    {
+      "label": "Data Accuracy",
+      "value": "Near 100%"
+    },
+    {
+      "label": "Manager Visibility",
+      "value": "Real-time"
+    },
+    {
+      "label": "Tech Satisfaction",
+      "value": "High"
+    }
+  ],
+  "process": [
+    {
+      "title": "Workflow Analysis",
+      "description": "Shadow field techs and document pain points"
+    },
+    {
+      "title": "UX/UI Design",
+      "description": "Mobile-first wireframes optimized for one-handed use"
+    },
+    {
+      "title": "Prototype Build",
+      "description": "React Native MVP with core features"
+    },
+    {
+      "title": "Field Testing",
+      "description": "Real-world testing with feedback loops"
+    },
+    {
+      "title": "Refinement",
+      "description": "Iterate based on usage patterns and tech feedback"
+    }
+  ],
+  "reflection": {
+    "learning": "The best interfaces disappear. Solve the real friction, not the perceived problem.",
+    "reuse": [
+      "Offline-first architecture patterns",
+      "Calculator UI components",
+      "Photo upload with metadata"
+    ]
+  },
+  "related": [
+    {
+      "title": "Formstack Digital Forms",
+      "href": "/portfolio/formstack-integration"
+    }
+  ]
+}
+

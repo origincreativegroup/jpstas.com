@@ -1,0 +1,124 @@
+{
+  "slug": "caribbeanpools-redesign",
+  "title": "Caribbean Pools E-Commerce Redesign",
+  "tagline": "A website that tells the story of the pool lifecycle",
+  "hero": {
+    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-hero.jpg",
+    "alt": "Caribbean Pools website mockup"
+  },
+  "metrics": [
+    {
+      "label": "Engagement",
+      "value": "↑ 45%"
+    },
+    {
+      "label": "Sales Cycle",
+      "value": "30% shorter"
+    },
+    {
+      "label": "Revenue",
+      "value": "$100k+ Y1"
+    }
+  ],
+  "meta": {
+    "tags": ["E-Commerce", "UI/UX Design", "WordPress", "WooCommerce"],
+    "tools": ["Figma", "WordPress", "WooCommerce", "Custom PHP"],
+    "year": "2022-2023",
+    "client": "Caribbean Pools & Spas"
+  },
+  "context": {
+    "problem": "Legacy website failed to communicate process clarity, craftsmanship, and failed to convert visitors into leads.",
+    "constraints": [
+      "Must integrate with existing service CRM",
+      "Support seasonal content updates",
+      "Mobile-first for on-site consultations"
+    ],
+    "quote": "Show the journey, not just the product. People buy the experience."
+  },
+  "solution": {
+    "approach": "Complete redesign with responsive architecture, process infographics, rich media storytelling, and integrated e-commerce for supplies and maintenance plans.",
+    "bullets": [
+      "Comprehensive sitemap and wireframes",
+      "Custom pool lifecycle illustrations",
+      "Modular WordPress CMS with custom blocks",
+      "WooCommerce integration for retail sales"
+    ],
+    "gallery": [
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-1.jpg",
+        "alt": "Homepage design"
+      },
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-2.jpg",
+        "alt": "Process infographic"
+      },
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-3.jpg",
+        "alt": "Service pages"
+      },
+      {
+        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-4.jpg",
+        "alt": "E-commerce integration"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Visitor Understanding",
+      "value": "Dramatically Improved"
+    },
+    {
+      "label": "Brand Consistency",
+      "value": "Strengthened"
+    },
+    {
+      "label": "Online Revenue",
+      "value": "$100k+ First Year"
+    },
+    {
+      "label": "Lead Quality",
+      "value": "Higher"
+    }
+  ],
+  "process": [
+    {
+      "title": "Research & Discovery",
+      "description": "Customer interviews, competitor analysis, and journey mapping"
+    },
+    {
+      "title": "Wireframes & IA",
+      "description": "Information architecture and low-fidelity wireframes"
+    },
+    {
+      "title": "Visual Design",
+      "description": "High-fidelity mockups and custom illustrations"
+    },
+    {
+      "title": "Development",
+      "description": "WordPress/WooCommerce build with custom functionality"
+    },
+    {
+      "title": "Launch & Optimization",
+      "description": "Deploy, train team, and iterate based on analytics"
+    }
+  ],
+  "reflection": {
+    "learning": "Visual storytelling of process builds trust. E-commerce success depends on education before the ask.",
+    "reuse": [
+      "Process visualization patterns",
+      "Mobile-first content blocks",
+      "Service-to-product funnel design"
+    ]
+  },
+  "related": [
+    {
+      "title": "Formstack Digital Forms",
+      "href": "/portfolio/formstack-integration"
+    },
+    {
+      "title": "Print Studio Operations",
+      "href": "/portfolio/print-studio"
+    }
+  ]
+}
+

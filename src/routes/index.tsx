@@ -40,36 +40,101 @@ export default component$(() => {
       {/* Featured Work Preview */}
       <section class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-6">
-          <h2 class="text-4xl font-bold text-center mb-4">Featured Projects</h2>
+          <h2 class="text-4xl font-bold text-center mb-4">Featured Case Studies</h2>
           <p class="text-xl text-gray-600 text-center mb-12">
-            A selection of recent work showcasing design, development, and operational excellence
+            Real projects, measurable impact, and the process behind them
           </p>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div 
-                key={item} 
-                class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2"
-              >
-                <div class="aspect-video bg-gradient-to-br from-blue-400 to-indigo-600"></div>
-                <div class="p-6 bg-white">
-                  <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
-                    Project Title {item}
-                  </h3>
-                  <p class="text-gray-600 mb-4">
-                    Brief description of the project and its impact.
-                  </p>
-                  <div class="flex gap-2">
-                    <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
-                      Design
-                    </span>
-                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">
-                      Development
-                    </span>
-                  </div>
+            <Link
+              href="/portfolio/formstack-integration"
+              class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 bg-white"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img 
+                  src="https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-hero.jpg"
+                  alt="Formstack Digital Transformation"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                  Formstack Digital Forms
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  80% paper reduction, 1,000+ submissions per season
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                    Process
+                  </span>
+                  <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm">
+                    Automation
+                  </span>
                 </div>
               </div>
-            ))}
+            </Link>
+
+            <Link
+              href="/portfolio/caribbeanpools-redesign"
+              class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 bg-white"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img 
+                  src="https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-hero.jpg"
+                  alt="Caribbean Pools E-Commerce"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                  E-Commerce Platform
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  $100k+ revenue in first year from complete redesign
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
+                    Design
+                  </span>
+                  <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
+                    E-Commerce
+                  </span>
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              href="/portfolio/deckhand-prototype"
+              class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 bg-white"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img 
+                  src="https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-hero.jpg"
+                  alt="DeckHand Field Service App"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                  Field Service App
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  70% time reduction with offline-first mobile app
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">
+                    Mobile
+                  </span>
+                  <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                    Development
+                  </span>
+                </div>
+              </div>
+            </Link>
           </div>
           
           <div class="text-center mt-12">
@@ -77,7 +142,7 @@ export default component$(() => {
               href="/portfolio" 
               class="inline-block px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-semibold"
             >
-              View All Projects →
+              View All Case Studies →
             </Link>
           </div>
         </div>
