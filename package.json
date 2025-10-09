@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode ssr",
-    "build": "qwik build",
+    "build": "vite build",
     "build.client": "vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.ts*\"",
