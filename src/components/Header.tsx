@@ -1,7 +1,7 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 
-export default component$(() => {
+export const Header = component$(() => {
   const isMenuOpen = useSignal(false);
 
   return (
