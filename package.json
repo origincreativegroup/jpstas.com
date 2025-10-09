@@ -8,16 +8,16 @@
     "build": "vite build",
     "build.client": "vite build",
     "preview": "vite preview",
-    "lint": "eslint \"src/**/*.ts*\"",
     "serve": "wrangler pages dev ./dist"
   },
   "dependencies": {
-    "@builder.io/qwik": "^1.17.0",
-    "@builder.io/qwik-city": "^1.17.0"
+    "@builder.io/qwik": "^1.17.0"
   },
   "devDependencies": {
+    "@builder.io/qwik-city": "^1.17.0",
     "@types/node": "^22.18.8",
     "autoprefixer": "^10.4.20",
+    "ignore": "^7.0.5",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2",

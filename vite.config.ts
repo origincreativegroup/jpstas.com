@@ -6,6 +6,10 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig(() => {
   return {
     plugins: [qwikCity(), qwikVite(), tsconfigPaths()],
+    build: {
+      target: 'es2020',
+    },
+    publicDir: 'public',
     preview: {
       headers: {
         'Cache-Control': 'public, max-age=600',
