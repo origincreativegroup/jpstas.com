@@ -1,0 +1,17 @@
+{
+  "name": "John P. Stas - Portfolio",
+  "short_name": "JP Stas",
+  "description": "Creative Technologist, Designer & Process Innovator",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+

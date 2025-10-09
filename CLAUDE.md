@@ -1,1 +1,0 @@
-- your working with cursor ai to help build this application
