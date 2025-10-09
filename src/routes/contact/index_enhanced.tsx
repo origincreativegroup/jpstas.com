@@ -38,7 +38,7 @@ export default component$(() => {
           <h1 class="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-highlight bg-clip-text text-transparent">
             Let's Connect
           </h1>
-          <p class="text-xl lg:text-2xl text-text-secondary max-w-3xl mx-auto">
+          <p class="text-xl lg:text-2xl text-charcoal/70 max-w-3xl mx-auto">
             Have a project in mind? Let's discuss how we can work together.
           </p>
         </section>
@@ -47,7 +47,7 @@ export default component$(() => {
           {/* Contact Info */}
           <div class="scroll-reveal">
             <div class="rounded-3xl glass p-8 lg:p-10 h-full">
-              <h2 class="text-3xl font-bold mb-8 text-text-primary flex items-center gap-3">
+              <h2 class="text-3xl font-bold mb-8 text-charcoal flex items-center gap-3">
                 <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-white">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -64,7 +64,7 @@ export default component$(() => {
                     </svg>
                   </div>
                   <div>
-                    <h3 class="font-bold text-text-primary mb-1">Email</h3>
+                    <h3 class="font-bold text-charcoal mb-1">Email</h3>
                     <a href="mailto:john@jpstas.com" class="text-primary hover:text-secondary transition-colors font-medium">
                       john@jpstas.com
                     </a>
@@ -78,7 +78,7 @@ export default component$(() => {
                     </svg>
                   </div>
                   <div>
-                    <h3 class="font-bold text-text-primary mb-1">LinkedIn</h3>
+                    <h3 class="font-bold text-charcoal mb-1">LinkedIn</h3>
                     <a 
                       href="https://linkedin.com/in/johnpstas" 
                       target="_blank" 
@@ -97,7 +97,7 @@ export default component$(() => {
                     </svg>
                   </div>
                   <div>
-                    <h3 class="font-bold text-text-primary mb-1">GitHub</h3>
+                    <h3 class="font-bold text-charcoal mb-1">GitHub</h3>
                     <a 
                       href="https://github.com/johnpstas" 
                       target="_blank" 
@@ -116,8 +116,8 @@ export default component$(() => {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div>
-                    <h3 class="font-bold text-text-primary mb-1">Response Time</h3>
-                    <p class="text-text-primary text-sm leading-relaxed">
+                    <h3 class="font-bold text-charcoal mb-1">Response Time</h3>
+                    <p class="text-charcoal/80 text-sm leading-relaxed">
                       I typically respond within 24-48 hours. For urgent inquiries, 
                       please indicate "URGENT" in the subject line.
                     </p>
@@ -136,8 +136,8 @@ export default component$(() => {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 class="text-3xl font-bold mb-3 text-text-primary">Message Sent!</h3>
-                <p class="text-lg text-text-secondary mb-6">
+                <h3 class="text-3xl font-bold mb-3 text-charcoal">Message Sent!</h3>
+                <p class="text-lg text-charcoal/70 mb-6">
                   Thank you for reaching out. I'll get back to you soon.
                 </p>
                 <button
@@ -161,61 +161,57 @@ export default component$(() => {
                   class="space-y-6"
                 >
                   <div>
-                    <label for="name" class="block font-semibold mb-2 text-text-primary">
-                      Name <span class="text-error" aria-label="required">*</span>
+                    <label for="name" class="block font-semibold mb-2 text-charcoal">
+                      Name *
                     </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       required
-                      aria-required="true"
-                      class="w-full px-4 py-3 border-2 border-text-secondary/40 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-white"
+                      class="w-full px-4 py-3 border-2 border-neutral/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-white"
                       placeholder="Your name"
                     />
                   </div>
 
                   <div>
-                    <label for="email" class="block font-semibold mb-2 text-text-primary">
-                      Email <span class="text-error" aria-label="required">*</span>
+                    <label for="email" class="block font-semibold mb-2 text-charcoal">
+                      Email *
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       required
-                      aria-required="true"
-                      class="w-full px-4 py-3 border-2 border-text-secondary/40 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-white"
+                      class="w-full px-4 py-3 border-2 border-neutral/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-white"
                       placeholder="your@email.com"
                     />
                   </div>
 
                   <div>
-                    <label for="subject" class="block font-semibold mb-2 text-text-primary">
-                      Subject <span class="text-error" aria-label="required">*</span>
+                    <label for="subject" class="block font-semibold mb-2 text-charcoal">
+                      Subject *
                     </label>
                     <input
                       type="text"
                       id="subject"
                       name="subject"
                       required
-                      aria-required="true"
-                      class="w-full px-4 py-3 border-2 border-text-secondary/40 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-white"
+                      class="w-full px-4 py-3 border-2 border-neutral/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-white"
                       placeholder="What's this about?"
                     />
                   </div>
 
                   <div>
-                    <label for="message" class="block font-semibold mb-2 text-text-primary">
-                      Message <span class="text-error" aria-label="required">*</span>
+                    <label for="message" class="block font-semibold mb-2 text-charcoal">
+                      Message *
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       required
-                      aria-required="true"
                       rows={6}
-                      class="w-full px-4 py-3 border-2 border-text-secondary/40 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none transition-all bg-white"
+                      class="w-full px-4 py-3 border-2 border-neutral/30 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none transition-all bg-white"
                       placeholder="Tell me about your project..."
                     ></textarea>
                   </div>

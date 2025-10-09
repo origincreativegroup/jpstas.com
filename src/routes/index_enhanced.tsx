@@ -38,11 +38,8 @@ export default component$(() => {
             {/* Left Column - Content */}
             <div class="space-y-8 scroll-reveal">
               <div class="inline-block">
-                <span class="px-4 py-2 glass rounded-full text-sm font-semibold text-primary flex items-center gap-2">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                  </svg>
-                  Welcome to my portfolio
+                <span class="px-4 py-2 glass rounded-full text-sm font-semibold text-primary">
+                  👋 Welcome to my portfolio
                 </span>
               </div>
 
@@ -53,12 +50,12 @@ export default component$(() => {
                     & Designer
                   </span>
                 </h1>
-                <p class="text-xl lg:text-2xl text-text-secondary font-medium leading-relaxed">
+                <p class="text-xl lg:text-2xl text-charcoal/70 font-medium leading-relaxed">
                   Transforming business challenges into elegant solutions
                 </p>
               </div>
               
-              <p class="text-lg text-text-secondary leading-relaxed max-w-2xl">
+              <p class="text-lg text-charcoal/60 leading-relaxed max-w-2xl">
                 I specialize in design thinking, technical expertise, and operational excellence 
                 to deliver measurable results across digital products and business processes.
               </p>
@@ -91,8 +88,8 @@ export default component$(() => {
                 </div>
                 <AnimatedMetric value="70%" label="Time Reduction" />
                 <div class="glass rounded-2xl p-6 bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/30">
-                  <div class="text-3xl font-bold text-primary mb-2">4</div>
-                  <div class="text-sm text-text-primary font-medium">Featured Projects</div>
+                  <div class="text-3xl font-bold text-primary mb-2">3</div>
+                  <div class="text-sm text-charcoal/80 font-medium">Featured Projects</div>
                 </div>
               </div>
               
@@ -111,10 +108,10 @@ export default component$(() => {
             <div class="inline-block mb-4 px-4 py-2 bg-secondary/10 rounded-full">
               <span class="text-sm font-semibold text-secondary uppercase tracking-wide">Featured Work</span>
             </div>
-            <h2 class="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+            <h2 class="text-4xl lg:text-5xl font-bold text-charcoal mb-4">
               Case Studies
             </h2>
-            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+            <p class="text-xl text-charcoal/60 max-w-3xl mx-auto">
               Real projects, measurable impact, and the process behind them
             </p>
           </div>
@@ -137,10 +134,10 @@ export default component$(() => {
                 </div>
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors">
+                <h3 class="text-xl font-bold text-charcoal mb-3 group-hover:text-primary transition-colors">
                   Formstack Digital Forms
                 </h3>
-                <p class="text-text-secondary mb-4 leading-relaxed">
+                <p class="text-charcoal/60 mb-4 leading-relaxed">
                   80% paper reduction, 1,000+ submissions per season
                 </p>
                 <div class="flex gap-2 flex-wrap">
@@ -172,10 +169,10 @@ export default component$(() => {
                 </div>
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-secondary transition-colors">
+                <h3 class="text-xl font-bold text-charcoal mb-3 group-hover:text-secondary transition-colors">
                   E-Commerce Platform
                 </h3>
-                <p class="text-text-secondary mb-4 leading-relaxed">
+                <p class="text-charcoal/60 mb-4 leading-relaxed">
                   $100k+ revenue in first year from complete redesign
                 </p>
                 <div class="flex gap-2 flex-wrap">
@@ -207,10 +204,10 @@ export default component$(() => {
                 </div>
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-highlight transition-colors">
+                <h3 class="text-xl font-bold text-charcoal mb-3 group-hover:text-highlight transition-colors">
                   Field Service App
                 </h3>
-                <p class="text-text-secondary mb-4 leading-relaxed">
+                <p class="text-charcoal/60 mb-4 leading-relaxed">
                   70% time reduction with offline-first mobile app
                 </p>
                 <div class="flex gap-2 flex-wrap">
@@ -246,10 +243,10 @@ export default component$(() => {
             <div class="inline-block mb-4 px-4 py-2 bg-highlight/10 rounded-full">
               <span class="text-sm font-semibold text-highlight uppercase tracking-wide">Expertise</span>
             </div>
-            <h2 class="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+            <h2 class="text-4xl lg:text-5xl font-bold text-charcoal mb-4">
               Core Skills
             </h2>
-            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+            <p class="text-xl text-charcoal/60 max-w-3xl mx-auto">
               Specialized skills across design, development, and process innovation
             </p>
           </div>
@@ -261,8 +258,8 @@ export default component$(() => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-text-primary mb-4">Design & UX</h3>
-              <p class="text-text-secondary leading-relaxed">
+              <h3 class="text-2xl font-bold text-charcoal mb-4">Design & UX</h3>
+              <p class="text-charcoal/70 leading-relaxed">
                 Creating intuitive, beautiful interfaces that solve real business problems through user-centered design principles.
               </p>
             </div>
@@ -273,8 +270,8 @@ export default component$(() => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-text-primary mb-4">Development</h3>
-              <p class="text-text-secondary leading-relaxed">
+              <h3 class="text-2xl font-bold text-charcoal mb-4">Development</h3>
+              <p class="text-charcoal/70 leading-relaxed">
                 Building scalable, performant web applications with modern technologies and best practices.
               </p>
             </div>
@@ -285,8 +282,8 @@ export default component$(() => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-text-primary mb-4">Process Innovation</h3>
-              <p class="text-text-secondary leading-relaxed">
+              <h3 class="text-2xl font-bold text-charcoal mb-4">Process Innovation</h3>
+              <p class="text-charcoal/70 leading-relaxed">
                 Optimizing workflows and operations for maximum efficiency and measurable business impact.
               </p>
             </div>

@@ -1,6 +1,12 @@
 export type Metric = { label: string; value: string };
 export type Step = { title: string; description?: string; icon?: string };
-export type Media = { src: string; alt?: string; type?: 'image' | 'video' | 'gif' };
+export type Media = { 
+  src: string; 
+  alt?: string; 
+  type?: 'image' | 'video' | 'gif';
+  poster?: string; // Thumbnail for videos
+  caption?: string; // Caption for images/videos
+};
 export type Testimonial = { quote: string; author?: string; role?: string };
 
 export type CaseStudy = {
