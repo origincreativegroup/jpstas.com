@@ -8,6 +8,13 @@ export const useStudy = routeLoader$(async ({ params }) => {
     'formstack-integration': await import('~/data/formstack.json'),
     'caribbeanpools-redesign': await import('~/data/caribbeanpools.json'),
     'deckhand-prototype': await import('~/data/deckhand.json'),
+    'print-studio': await import('~/data/printstudio.json'),
+    'brand-evolution': await import('~/data/brand-evolution.json'),
+    'drone-media': await import('~/data/drone-media.json'),
+    'email-marketing': await import('~/data/email-marketing.json'),
+    'ivr-system': await import('~/data/ivr-system.json'),
+    'mindforge': await import('~/data/mindforge.json'),
+    'shopcaribbeanpools': await import('~/data/shopcaribbeanpools.json'),
   };
   const mod = map[slug];
   if (!mod) throw new Error('Case study not found');

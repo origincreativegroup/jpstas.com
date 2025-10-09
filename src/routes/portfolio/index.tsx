@@ -1,8 +1,9 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
   const selectedFilter = useSignal('all');
+  const isAnimating = useSignal(false);
   
   const projects = [
     {
@@ -13,15 +14,27 @@ export default component$(() => {
       description: 'Turned paper chaos into a digital command center. 80% paper reduction, 1,000+ submissions per season.',
       image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-hero.jpg',
       slug: 'formstack-integration',
+      featured: true,
     },
     {
       id: 'caribbeanpools-redesign',
-      title: 'Caribbean Pools E-Commerce',
+      title: 'Caribbean Pools Website Redesign',
       category: 'design',
-      tags: ['E-Commerce', 'UI/UX', 'WordPress'],
-      description: 'Complete website redesign and e-commerce platform generating $100k+ in first year.',
+      tags: ['Web Design', 'UI/UX', 'WordPress'],
+      description: 'Website redesign that tells the story of the pool lifecycle with process visualization and improved engagement.',
       image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-hero.jpg',
       slug: 'caribbeanpools-redesign',
+      featured: true,
+    },
+    {
+      id: 'shopcaribbeanpools',
+      title: 'ShopCaribbeanPools.com E-Commerce',
+      category: 'development',
+      tags: ['E-Commerce', 'UX Design', 'Web Development'],
+      description: 'E-commerce platform generating $100K+ in first year by digitizing the Early Buy program.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/shop-hero.jpg',
+      slug: 'shopcaribbeanpools',
+      featured: true,
     },
     {
       id: 'deckhand-prototype',
@@ -31,104 +44,246 @@ export default component$(() => {
       description: 'Field service app prototype reducing report time by 70% with offline-first architecture.',
       image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-hero.jpg',
       slug: 'deckhand-prototype',
+      featured: true,
+    },
+    {
+      id: 'mindforge',
+      title: 'MindForge: AI Process Mapping',
+      category: 'development',
+      tags: ['AI', 'SaaS', 'Data Visualization'],
+      description: 'AI-powered SaaS platform turning text descriptions into interactive workflow visualizations with 80% accuracy.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/mindforge-hero.jpg',
+      slug: 'mindforge',
+      featured: true,
+    },
+    {
+      id: 'print-studio',
+      title: 'In-House Print Studio Build',
+      category: 'process',
+      tags: ['Print Production', 'Workflow', 'Process Innovation'],
+      description: 'Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.',
+      image: 'https://imagedelivery.net/fa917615d33ac203929027798644acef/ac59d0cc-64e0-4d08-7bb9-7bb3c098e200/public',
+      slug: 'print-studio',
+      featured: true,
+    },
+    {
+      id: 'brand-evolution',
+      title: 'Caribbean Pools Brand Evolution',
+      category: 'design',
+      tags: ['Brand Identity', 'Design Systems', 'Creative Direction'],
+      description: 'Decade-long brand transformation from $7M to $17M with unified identity across all channels.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/brand-evolution-hero.jpg',
+      slug: 'brand-evolution',
+      featured: true,
+    },
+    {
+      id: 'drone-media',
+      title: 'Drone Photo & Video Project',
+      category: 'design',
+      tags: ['Drone Photography', 'FPV', 'Content Production'],
+      description: 'Cinematic drone media campaign achieving 400% increase in social engagement and creating reusable media library.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/drone-hero.jpg',
+      slug: 'drone-media',
+      featured: false,
+    },
+    {
+      id: 'email-marketing',
+      title: 'Email Marketing Campaigns',
+      category: 'design',
+      tags: ['Email Marketing', 'Automation', 'CRM Integration'],
+      description: 'Automated email campaigns achieving 45-60% open rates and 80% automation of customer communications.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/email-marketing-hero.jpg',
+      slug: 'email-marketing',
+      featured: false,
+    },
+    {
+      id: 'ivr-system',
+      title: 'IVR Call Menu Optimization',
+      category: 'process',
+      tags: ['IVR System', 'Customer Experience', 'Process Optimization'],
+      description: 'Intelligent call routing reducing handling time by 35% and dropped calls by 60%.',
+      image: 'https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/ivr-hero.jpg',
+      slug: 'ivr-system',
+      featured: false,
     },
   ];
   
   const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'design', label: 'Design' },
-    { id: 'development', label: 'Development' },
-    { id: 'process', label: 'Process & Operations' },
+    { 
+      id: 'all', 
+      label: 'All Projects', 
+      icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+    },
+    { 
+      id: 'design', 
+      label: 'Design', 
+      icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" /></svg>
+    },
+    { 
+      id: 'development', 
+      label: 'Development', 
+      icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+    },
+    { 
+      id: 'process', 
+      label: 'Process & Operations', 
+      icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+    },
   ];
   
   const filteredProjects = selectedFilter.value === 'all' 
     ? projects 
     : projects.filter(p => p.category === selectedFilter.value);
+
+  // Scroll reveal animation
+  useVisibleTask$(() => {
+    if (typeof window === 'undefined') return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.scroll-reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  });
   
   return (
-    <div class="py-16">
-      <div class="max-w-6xl mx-auto px-6">
+    <div class="min-h-screen bg-gradient-to-b from-white via-neutral/5 to-white py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <section class="text-center mb-16">
-          <h1 class="text-5xl font-bold mb-6">Portfolio</h1>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <section class="text-center mb-16 scroll-reveal">
+          <div class="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
+            <span class="text-sm font-semibold text-primary uppercase tracking-wide">Selected Work</span>
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-highlight bg-clip-text text-transparent">
+            Portfolio
+          </h1>
+          <p class="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
             A showcase of projects spanning design, development, and operational excellence
           </p>
         </section>
 
-        {/* Filter */}
-        <div class="flex justify-center gap-4 mb-12 flex-wrap">
-          {categories.map((cat) => (
+        {/* Filter with Glassmorphism */}
+        <div class="flex justify-center gap-3 mb-16 flex-wrap scroll-reveal">
+          {categories.map((cat, index) => (
             <button
               key={cat.id}
               onClick$={() => {
                 selectedFilter.value = cat.id;
+                isAnimating.value = true;
+                setTimeout(() => (isAnimating.value = false), 300);
               }}
-              class={`px-6 py-2 rounded-lg font-medium transition-all ${
+              style={{ animationDelay: `${index * 100}ms` }}
+              class={`group flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                 selectedFilter.value === cat.id
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'glass scale-105 shadow-glow text-primary'
+                  : 'bg-white/80 text-charcoal hover:bg-white hover:shadow-lg hover:scale-105'
               }`}
             >
+              {cat.icon}
               {cat.label}
             </button>
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
+        {/* Projects Grid with Stagger Animation */}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {filteredProjects.map((project, index) => (
             <Link
               key={project.id}
               href={`/portfolio/${project.slug}`}
-              class="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2 block"
+              style={{ animationDelay: `${index * 100}ms` }}
+              class={`group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 block scroll-reveal ${
+                isAnimating.value ? 'opacity-0' : ''
+              }`}
             >
-              <div class="aspect-video bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
+              {/* Featured Badge */}
+              {project.featured && (
+                <div class="absolute top-4 left-4 z-10 glass rounded-full px-3 py-1">
+                  <span class="text-xs font-bold text-primary">Featured</span>
+                </div>
+              )}
+
+              {/* Image with Gradient Overlay */}
+              <div class="relative aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
                 <img
                   src={project.image}
                   alt={project.title}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
                   loading="lazy"
                 />
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
+
+              {/* Content */}
               <div class="p-6">
-                <h3 class="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 class="text-xl font-bold mb-3 text-text-primary group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p class="text-gray-600 mb-4">{project.description}</p>
+                <p class="text-text-secondary mb-4 leading-relaxed">{project.description}</p>
+                
+                {/* Tags */}
                 <div class="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
+                      class="px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary rounded-full text-sm font-medium border border-primary/20"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div class="text-blue-600 font-medium flex items-center gap-2">
+
+                {/* CTA */}
+                <div class="flex items-center gap-2 text-primary font-semibold group-hover:gap-4 transition-all">
                   View Case Study
-                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
+              </div>
+
+              {/* Hover Glow Effect */}
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
               </div>
             </Link>
           ))}
         </div>
 
-        {/* CTA */}
-        <section class="text-center mt-20 py-16 bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl">
-          <h2 class="text-3xl font-bold mb-4">Interested in working together?</h2>
-          <p class="text-xl text-gray-600 mb-8">
-            Let's discuss how I can help bring your project to life
-          </p>
-          <a
-            href="/contact"
-            class="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold shadow-lg"
-          >
-            Start a Project
-          </a>
+        {/* CTA Section with Glassmorphism */}
+        <section class="text-center py-20 relative overflow-hidden rounded-3xl scroll-reveal">
+          {/* Animated Background */}
+          <div class="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-highlight opacity-10">
+            <div class="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-float" />
+            <div class="absolute bottom-10 right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-float" style="animation-delay: 1s" />
+          </div>
+
+          <div class="relative z-10 glass rounded-3xl p-12">
+            <h2 class="text-4xl font-bold mb-4 text-text-primary">Interested in working together?</h2>
+            <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
+              Let's discuss how I can help bring your project to life
+            </p>
+            <Link
+              href="/contact"
+              class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl hover:shadow-glow-lg transition-all duration-300 text-lg font-semibold transform hover:scale-105"
+            >
+              Start a Project
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
         </section>
       </div>
     </div>
