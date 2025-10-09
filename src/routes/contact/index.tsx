@@ -28,14 +28,14 @@ export default component$(() => {
   });
   
   return (
-    <div class="min-h-screen bg-gradient-to-b from-white via-neutral/5 to-white py-16">
+    <div class="min-h-screen bg-white py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <section class="text-center mb-16 scroll-reveal">
           <div class="inline-block mb-4 px-4 py-2 bg-secondary/10 rounded-full">
             <span class="text-sm font-semibold text-secondary uppercase tracking-wide">Get In Touch</span>
           </div>
-          <h1 class="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-highlight bg-clip-text text-transparent">
+          <h1 class="text-5xl lg:text-6xl font-bold mb-6 text-primary">
             Let's Connect
           </h1>
           <p class="text-xl lg:text-2xl text-text-secondary max-w-3xl mx-auto">

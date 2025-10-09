@@ -28,10 +28,7 @@ export default component$(() => {
   return (
     <div class="min-h-screen bg-white">
       {/* Hero Section */}
-      <section class="relative overflow-hidden bg-gradient-to-br from-white via-neutral/10 to-primary/5 py-24 lg:py-32">
-        {/* Animated Background Elements */}
-        <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
-        <div class="absolute bottom-0 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s" />
+      <section class="relative overflow-hidden bg-white py-24 lg:py-32">
         
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -47,11 +44,8 @@ export default component$(() => {
               </div>
 
               <div class="space-y-6">
-                <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-charcoal leading-tight">
-                  Creative Technologist
-                  <span class="block bg-gradient-to-r from-primary via-secondary to-highlight bg-clip-text text-transparent">
-                    & Designer
-                  </span>
+                <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-primary leading-tight">
+                  Creative Technologist & Designer
                 </h1>
                 <p class="text-xl lg:text-2xl text-text-secondary font-medium leading-relaxed">
                   Transforming business challenges into elegant solutions
@@ -64,38 +58,53 @@ export default component$(() => {
               </p>
 
               <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link 
-                  href="/portfolio" 
-                  class="group px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl hover:shadow-glow-lg transition-all duration-300 text-lg font-semibold transform hover:scale-105 flex items-center justify-center gap-2"
+                <Link
+                  href="/portfolio"
+                  class="group px-8 py-4 bg-primary text-white rounded-xl hover:bg-primary-hover transition-all duration-300 text-lg font-semibold flex items-center justify-center gap-2"
                 >
                   View My Work
                   <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
-                <Link 
-                  href="/contact" 
-                  class="px-8 py-4 glass text-primary rounded-xl hover:shadow-lg transition-all duration-300 text-lg font-semibold border border-primary/20 flex items-center justify-center"
+                <Link
+                  href="/contact"
+                  class="px-8 py-4 bg-white text-primary rounded-xl hover:bg-neutral transition-all duration-300 text-lg font-semibold border-2 border-primary flex items-center justify-center"
                 >
                   Get In Touch
                 </Link>
               </div>
             </div>
 
-            {/* Right Column - Stats Cards */}
+            {/* Right Column - Hero Image/Video */}
             <div class="relative scroll-reveal">
-              <div class="grid grid-cols-2 gap-6">
-                <AnimatedMetric value="80%" label="Paper Reduction" />
-                <div class="mt-8">
-                  <AnimatedMetric value="$100k+" label="Revenue Generated" />
-                </div>
-                <AnimatedMetric value="70%" label="Time Reduction" />
-                <div class="glass rounded-2xl p-6 bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/30">
-                  <div class="text-3xl font-bold text-primary mb-2">4</div>
-                  <div class="text-sm text-text-primary font-medium">Featured Projects</div>
+              {/* Hero Image with overlay */}
+              <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                <img
+                  src="https://placehold.co/800x600/2E3192/FFFFFF?text=Portfolio+Showcase"
+                  alt="Portfolio Showcase"
+                  class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  width="800"
+                  height="600"
+                />
+                {/* Gradient overlay */}
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Stats overlay on image */}
+                <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="glass-dark rounded-xl p-4 backdrop-blur-lg border border-white/20">
+                      <div class="text-2xl font-bold text-white mb-1">80%</div>
+                      <div class="text-xs text-white/90 font-medium">Paper Reduction</div>
+                    </div>
+                    <div class="glass-dark rounded-xl p-4 backdrop-blur-lg border border-white/20">
+                      <div class="text-2xl font-bold text-white mb-1">$100k+</div>
+                      <div class="text-xs text-white/90 font-medium">Revenue Generated</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
+
               {/* Floating Elements */}
               <div class="absolute -top-4 -right-4 w-24 h-24 bg-highlight/20 rounded-full blur-2xl animate-pulse-slow" />
               <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary/20 rounded-full blur-2xl animate-pulse-slow" style="animation-delay: 1s" />
@@ -104,87 +113,102 @@ export default component$(() => {
         </div>
       </section>
 
-      {/* Featured Work */}
-      <section class="py-20 bg-gradient-to-b from-white to-neutral/5">
+      {/* Featured Work - Visual Gallery Style */}
+      <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16 scroll-reveal">
             <div class="inline-block mb-4 px-4 py-2 bg-secondary/10 rounded-full">
               <span class="text-sm font-semibold text-secondary uppercase tracking-wide">Featured Work</span>
             </div>
             <h2 class="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
-              Case Studies
+              Visual Case Studies
             </h2>
             <p class="text-xl text-text-secondary max-w-3xl mx-auto">
-              Real projects, measurable impact, and the process behind them
+              See the transformation through design, process, and measurable results
             </p>
           </div>
-          
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Card 1 - Formstack */}
+
+          {/* Large Featured Card - Hero Style */}
+          <div class="mb-8 scroll-reveal">
             <Link
               href="/portfolio/formstack-integration"
-              class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-neutral/10 hover:border-primary/30 transform hover:-translate-y-2 scroll-reveal"
+              class="group relative block rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_20px_60px_rgba(46,49,146,0.3)] transition-all duration-500"
             >
-              <div class="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 relative overflow-hidden">
-                <img 
-                  src="https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-hero.jpg"
+              <div class="relative aspect-[21/9] lg:aspect-[21/8]">
+                <img
+                  src="https://placehold.co/1400x600/2E3192/FFFFFF?text=Digital+Transformation+%E2%80%A2+80%25+Paper+Reduction"
                   alt="Formstack Digital Transformation"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  width="1400"
+                  height="600"
                 />
-                <div class="absolute top-4 left-4 glass rounded-lg px-3 py-1">
-                  <span class="text-sm font-medium text-primary">Process</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors">
-                  Formstack Digital Forms
-                </h3>
-                <p class="text-text-secondary mb-4 leading-relaxed">
-                  80% paper reduction, 1,000+ submissions per season
-                </p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                    Automation
-                  </span>
-                  <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-medium">
-                    Process
-                  </span>
+                {/* Gradient Overlay */}
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
+
+                {/* Content Overlay */}
+                <div class="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
+                  <div class="max-w-3xl">
+                    <div class="inline-block mb-4 px-4 py-2 bg-primary/20 backdrop-blur-sm rounded-lg border border-white/20">
+                      <span class="text-sm font-bold text-white">Process Innovation</span>
+                    </div>
+                    <h3 class="text-3xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                      Formstack Digital Forms
+                    </h3>
+                    <p class="text-lg lg:text-xl text-white/90 mb-6 drop-shadow-lg">
+                      Transformed paper chaos into a digital command center. 80% paper reduction, 1,000+ submissions per season.
+                    </p>
+                    <div class="flex gap-3 flex-wrap">
+                      <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
+                        Automation
+                      </span>
+                      <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
+                        Process Design
+                      </span>
+                      <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
+                        CRM Integration
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Link>
+          </div>
 
+          {/* Two Column Featured Cards */}
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             {/* Card 2 - Caribbean Pools */}
             <Link
               href="/portfolio/caribbeanpools-redesign"
-              class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-neutral/10 hover:border-secondary/30 transform hover:-translate-y-2 scroll-reveal"
-              style="animation-delay: 100ms"
+              class="group relative block rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal"
             >
-              <div class="aspect-video bg-gradient-to-br from-highlight/10 to-primary/10 relative overflow-hidden">
-                <img 
-                  src="https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-hero.jpg"
+              <div class="relative aspect-[4/3]">
+                <img
+                  src="https://placehold.co/800x600/D4A14A/FFFFFF?text=E-Commerce+Redesign+%E2%80%A2+%24100K%2B+Revenue"
                   alt="Caribbean Pools E-Commerce"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  width="800"
+                  height="600"
                 />
-                <div class="absolute top-4 left-4 glass rounded-lg px-3 py-1">
-                  <span class="text-sm font-medium text-highlight">Design</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-secondary transition-colors">
-                  E-Commerce Platform
-                </h3>
-                <p class="text-text-secondary mb-4 leading-relaxed">
-                  $100k+ revenue in first year from complete redesign
-                </p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-3 py-1 bg-highlight/10 text-highlight rounded-full text-sm font-medium">
-                    E-Commerce
-                  </span>
-                  <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                    Design
-                  </span>
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent"></div>
+
+                <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+                  <div class="inline-block mb-3 px-3 py-2 bg-highlight/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
+                    <span class="text-sm font-bold text-white">Design & UX</span>
+                  </div>
+                  <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 drop-shadow-lg">
+                    E-Commerce Platform
+                  </h3>
+                  <p class="text-white/90 mb-4 drop-shadow-lg">
+                    Complete website redesign generating $100k+ in first year
+                  </p>
+                  <div class="flex gap-2 flex-wrap">
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
+                      E-Commerce
+                    </span>
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
+                      Web Design
+                    </span>
+                  </div>
                 </div>
               </div>
             </Link>
@@ -192,34 +216,37 @@ export default component$(() => {
             {/* Card 3 - DeckHand */}
             <Link
               href="/portfolio/deckhand-prototype"
-              class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-neutral/10 hover:border-highlight/30 transform hover:-translate-y-2 scroll-reveal"
-              style="animation-delay: 200ms"
+              class="group relative block rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal"
+              style="animation-delay: 100ms"
             >
-              <div class="aspect-video bg-gradient-to-br from-secondary/10 to-highlight/10 relative overflow-hidden">
-                <img 
-                  src="https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-hero.jpg"
+              <div class="relative aspect-[4/3]">
+                <img
+                  src="https://placehold.co/800x600/6B5D3F/FFFFFF?text=Mobile+App+%E2%80%A2+70%25+Time+Savings"
                   alt="DeckHand Field Service App"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  width="800"
+                  height="600"
                 />
-                <div class="absolute top-4 left-4 glass rounded-lg px-3 py-1">
-                  <span class="text-sm font-medium text-secondary">Mobile</span>
-                </div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-bold text-text-primary mb-3 group-hover:text-highlight transition-colors">
-                  Field Service App
-                </h3>
-                <p class="text-text-secondary mb-4 leading-relaxed">
-                  70% time reduction with offline-first mobile app
-                </p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-medium">
-                    Mobile
-                  </span>
-                  <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                    Development
-                  </span>
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent"></div>
+
+                <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+                  <div class="inline-block mb-3 px-3 py-2 bg-secondary/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
+                    <span class="text-sm font-bold text-white">Mobile Development</span>
+                  </div>
+                  <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 drop-shadow-lg">
+                    Field Service App
+                  </h3>
+                  <p class="text-white/90 mb-4 drop-shadow-lg">
+                    Offline-first mobile app reducing report time by 70%
+                  </p>
+                  <div class="flex gap-2 flex-wrap">
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
+                      React Native
+                    </span>
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
+                      UX Design
+                    </span>
+                  </div>
                 </div>
               </div>
             </Link>
@@ -256,7 +283,7 @@ export default component$(() => {
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="group rounded-3xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 scroll-reveal">
-              <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div class="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
                 </svg>
@@ -268,7 +295,7 @@ export default component$(() => {
             </div>
             
             <div class="group rounded-3xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 scroll-reveal" style="animation-delay: 100ms">
-              <div class="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div class="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
@@ -280,7 +307,7 @@ export default component$(() => {
             </div>
             
             <div class="group rounded-3xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 scroll-reveal" style="animation-delay: 200ms">
-              <div class="w-16 h-16 bg-gradient-to-br from-highlight to-highlight/60 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div class="w-16 h-16 bg-highlight rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -294,34 +321,133 @@ export default component$(() => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section class="py-20 relative overflow-hidden scroll-reveal">
-        <div class="absolute inset-0 bg-gradient-to-br from-charcoal via-primary to-secondary" />
-        <div class="absolute inset-0 opacity-10">
-          <div class="absolute inset-0" style="background-image: radial-gradient(circle, #FFFFFF 1px, transparent 1px); background-size: 40px 40px;" />
+      {/* Video/Image Showcase Section */}
+      <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16 scroll-reveal">
+            <div class="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
+              <span class="text-sm font-semibold text-primary uppercase tracking-wide">Showcase</span>
+            </div>
+            <h2 class="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+              Work in Action
+            </h2>
+            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+              See real projects come to life through visuals and demonstrations
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Video Placeholder 1 */}
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal">
+              <div class="relative aspect-video bg-gradient-to-br from-primary/20 to-secondary/20">
+                <img
+                  src="https://placehold.co/800x450/6B5D3F/FFFFFF?text=Project+Demo+Video"
+                  alt="Project Demo Video"
+                  class="w-full h-full object-cover"
+                  width="800"
+                  height="450"
+                />
+                {/* Play button overlay */}
+                <div class="absolute inset-0 flex items-center justify-center bg-charcoal/40 group-hover:bg-charcoal/30 transition-colors">
+                  <div class="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
+                    <svg class="w-8 h-8 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="p-6 bg-white border border-neutral/10">
+                <h3 class="text-xl font-bold text-text-primary mb-2">Process Overview</h3>
+                <p class="text-text-secondary">Watch how design thinking transforms complex problems into elegant solutions</p>
+              </div>
+            </div>
+
+            {/* Image Showcase 2 */}
+            <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal" style="animation-delay: 100ms">
+              <div class="relative aspect-video">
+                <img
+                  src="https://placehold.co/800x450/D4A14A/FFFFFF?text=Before+%26+After"
+                  alt="Before and After Comparison"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  width="800"
+                  height="450"
+                />
+                <div class="absolute top-4 right-4 glass rounded-lg px-3 py-2">
+                  <span class="text-sm font-bold text-highlight">Before & After</span>
+                </div>
+              </div>
+              <div class="p-6 bg-white border border-neutral/10">
+                <h3 class="text-xl font-bold text-text-primary mb-2">Visual Transformations</h3>
+                <p class="text-text-secondary">See the dramatic improvements in user experience and design</p>
+              </div>
+            </div>
+
+            {/* Image Grid */}
+            <div class="lg:col-span-2 grid grid-cols-3 gap-4 scroll-reveal" style="animation-delay: 200ms">
+              <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+                <img
+                  src="https://placehold.co/400x400/2E3192/FFFFFF?text=Design+System"
+                  alt="Design System"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  width="400"
+                  height="400"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                  <span class="text-white font-semibold text-sm">Design System</span>
+                </div>
+              </div>
+              <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+                <img
+                  src="https://placehold.co/400x400/6B5D3F/FFFFFF?text=Wireframes"
+                  alt="Wireframes"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  width="400"
+                  height="400"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                  <span class="text-white font-semibold text-sm">Wireframes</span>
+                </div>
+              </div>
+              <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+                <img
+                  src="https://placehold.co/400x400/D4A14A/FFFFFF?text=Prototypes"
+                  alt="Prototypes"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  width="400"
+                  height="400"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                  <span class="text-white font-semibold text-sm">Prototypes</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-white">
+      </section>
+
+      {/* CTA Section */}
+      <section class="py-20 bg-neutral">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-primary">
             Let's Build Something Great
           </h2>
-          <p class="text-xl mb-12 text-white/80 max-w-3xl mx-auto leading-relaxed">
-            I'm always interested in hearing about new projects and opportunities. 
+          <p class="text-xl mb-12 text-text-secondary max-w-3xl mx-auto leading-relaxed">
+            I'm always interested in hearing about new projects and opportunities.
             Let's discuss how we can create meaningful impact together.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/contact" 
-              class="inline-flex items-center gap-3 px-8 py-4 bg-white text-charcoal rounded-xl hover:shadow-2xl transition-all duration-300 text-lg font-semibold transform hover:scale-105"
+            <Link
+              href="/contact"
+              class="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-xl hover:bg-primary-hover transition-all duration-300 text-lg font-semibold"
             >
               Start a Conversation
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </Link>
-            <Link 
-              href="/portfolio" 
-              class="inline-flex items-center gap-3 px-8 py-4 glass-dark text-white rounded-xl hover:bg-white/20 transition-all duration-300 text-lg font-semibold border border-white/20"
+            <Link
+              href="/portfolio"
+              class="inline-flex items-center gap-3 px-8 py-4 bg-white text-primary rounded-xl hover:bg-neutral transition-all duration-300 text-lg font-semibold border-2 border-primary"
             >
               View My Work
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

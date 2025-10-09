@@ -203,14 +203,14 @@ export default component$(() => {
               key={project.id}
               href={`/portfolio/${project.slug}`}
               style={{ animationDelay: `${index * 100}ms` }}
-              class={`group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 block scroll-reveal ${
+              class={`group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 block scroll-reveal ${
                 isAnimating.value ? 'opacity-0' : ''
               }`}
             >
               {/* Featured Badge */}
               {project.featured && (
-                <div class="absolute top-4 left-4 z-10 glass rounded-full px-3 py-1">
-                  <span class="text-xs font-bold text-primary">Featured</span>
+                <div class="absolute top-4 right-4 z-10 glass rounded-lg px-3 py-2">
+                  <span class="text-sm font-bold text-highlight">Featured</span>
                 </div>
               )}
 
@@ -219,43 +219,29 @@ export default component$(() => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
               {/* Content */}
-              <div class="p-6">
-                <h3 class="text-xl font-bold mb-3 text-text-primary group-hover:text-primary transition-colors duration-300">
+              <div class="p-6 bg-white border border-neutral/10">
+                <h3 class="text-xl font-bold mb-2 text-text-primary">
                   {project.title}
                 </h3>
                 <p class="text-text-secondary mb-4 leading-relaxed">{project.description}</p>
-                
+
                 {/* Tags */}
-                <div class="flex flex-wrap gap-2 mb-4">
+                <div class="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      class="px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary rounded-full text-sm font-medium border border-primary/20"
+                      class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-
-                {/* CTA */}
-                <div class="flex items-center gap-2 text-primary font-semibold group-hover:gap-4 transition-all">
-                  View Case Study
-                  <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Hover Glow Effect */}
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <div class="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
               </div>
             </Link>
           ))}

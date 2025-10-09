@@ -86,20 +86,35 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
                     </div>
 
                     {/* Content */}
-                    <div class="pl-8 lg:pl-12">
-                      <h3 class="text-xl lg:text-2xl font-bold text-charcoal mb-3 flex items-center gap-2">
-                        {s.title}
-                        <svg class={`w-5 h-5 text-secondary transition-all duration-300 ${
-                          hoveredNode.value === i ? 'opacity-100 translate-x-1' : 'opacity-0'
-                        }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                      </h3>
-                      {s.description && (
-                        <p class="text-charcoal/70 leading-relaxed lg:text-lg">
-                          {s.description}
-                        </p>
-                      )}
+                    <div class="pl-8 lg:pl-12 grid lg:grid-cols-3 gap-6 items-center">
+                      <div class="lg:col-span-2">
+                        <h3 class="text-xl lg:text-2xl font-bold text-charcoal mb-3 flex items-center gap-2">
+                          {s.title}
+                          <svg class={`w-5 h-5 text-secondary transition-all duration-300 ${
+                            hoveredNode.value === i ? 'opacity-100 translate-x-1' : 'opacity-0'
+                          }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </h3>
+                        {s.description && (
+                          <p class="text-charcoal/70 leading-relaxed lg:text-lg">
+                            {s.description}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Process step visualization */}
+                      <div class="lg:col-span-1">
+                        <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg">
+                          <img
+                            src={`https://placehold.co/300x300/${i % 3 === 0 ? '2E3192' : i % 3 === 1 ? '6B5D3F' : 'D4A14A'}/FFFFFF?text=Step+${i + 1}`}
+                            alt={`Process: ${s.title}`}
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            width="300"
+                            height="300"
+                          />
+                        </div>
+                      </div>
                     </div>
 
                     {/* Connecting dots */}

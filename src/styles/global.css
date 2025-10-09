@@ -87,7 +87,8 @@ button {
 }
 
 /* Ensure interactive links meet minimum touch target size */
-a[href] {
+/* Only apply to simple text links, not button-styled links */
+a[href]:not([class*="px-"]):not([class*="py-"]) {
   min-height: 44px;
   display: inline-flex;
   align-items: center;

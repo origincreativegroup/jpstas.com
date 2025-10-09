@@ -8,40 +8,43 @@ export default {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // New color palette from design
-        'royal-blue': '#55A3CF',
-        'teal-aqua': '#00BF5F',
-        'navy-blue': '#1E3C0F',
-        'lavender': '#E8E8F0',
-        'charcoal': '#2C2C2C',
-        'amber': '#FFA500',
-        'pure-white': '#FFFFFF',
-        
-        // Legacy brand colors (keeping for compatibility)
-        brand: '#1E3C0F', // Updated to navy-blue
-        accent: '#FFA500', // Updated to amber
-        'brand-light': '#E8E8F0', // Updated to lavender
-        'brand-dark': '#2C2C2C', // Updated to charcoal
-        'accent-dark': '#E69500', // Darker amber
-        'neutral-warm': '#6B635B',
-        'text-primary': '#1a1a1a', // WCAG AA compliant - 15:1 contrast
-        'text-secondary': '#4a4a4a', // WCAG AA compliant - 9.7:1 contrast
-        'text-tertiary': '#5a5a5a', // WCAG AA compliant - 7:1 contrast
-        
-        // Additional semantic colors - ADA compliant versions
-        primary: '#3182CE', // Darker royal blue for better contrast (4.5:1)
-        'primary-hover': '#2563EB', // Even darker for hover states
-        'primary-light': '#55A3CF', // Original for backgrounds
-        secondary: '#059669', // Darker teal for better contrast (4.5:1)
-        'secondary-hover': '#047857', // Darker for hover states
-        'secondary-light': '#00BF5F', // Original for backgrounds
-        tertiary: '#1E3C0F', // Navy blue (already dark enough)
+        // Primary Color Palette (from design image)
+        'navy': '#2E3192', // Deep Navy/Purple - Primary brand color
+        'lavender': '#E8E8F0', // Soft Lavender - Neutral/backgrounds
+        'golden': '#D4A14A', // Golden Yellow - Accent/highlight
+        'olive': '#6B5D3F', // Olive Brown - Secondary/earthy tone
+        'charcoal': '#2E3192', // Navy - matches primary
+
+        // Semantic color mappings
+        primary: '#2E3192', // Navy
+        'primary-hover': '#252980', // Darker navy for hover
+        'primary-light': '#4A4DB8', // Lighter navy for backgrounds
+        secondary: '#6B5D3F', // Olive
+        'secondary-hover': '#5A4D34', // Darker olive
+        'secondary-light': '#8B7D5F', // Lighter olive
+        tertiary: '#2E3192', // Navy (same as primary)
         neutral: '#E8E8F0', // Lavender
-        dark: '#1a1a1a', // Darker charcoal for text - WCAG compliant
-        charcoal: '#2C2C2C', // Original charcoal for backgrounds
-        highlight: '#D97706', // Darker amber for better contrast (4.5:1)
-        'highlight-hover': '#B45309', // Even darker for hover
-        'highlight-light': '#FFA500', // Original for backgrounds
+        highlight: '#D4A14A', // Golden
+        'highlight-hover': '#C08F39', // Darker golden
+        'highlight-light': '#E0B765', // Lighter golden
+
+        // Text colors (ADA compliant)
+        'text-primary': '#2E3192', // Navy - primary text color
+        'text-secondary': '#6B5D3F', // Olive - secondary text
+        'text-tertiary': '#5a5a5a', // Medium-dark gray - 7:1 contrast
+
+        // Legacy/compatibility (map to new palette)
+        'royal-blue': '#2E3192',
+        'teal-aqua': '#6B5D3F',
+        'navy-blue': '#2E3192',
+        'amber': '#D4A14A',
+        'pure-white': '#FFFFFF',
+        brand: '#2E3192',
+        accent: '#D4A14A',
+        'brand-light': '#E8E8F0',
+        'brand-dark': '#2C2C2C',
+        'accent-dark': '#C08F39',
+        dark: '#1a1a1a',
       },
       borderRadius: {
         '2xl': '1.25rem',
