@@ -1,6 +1,21 @@
 import { component$ } from '@builder.io/qwik';
 import { routeLoader$, type DocumentHead } from '@builder.io/qwik-city';
+import type { StaticGenerateHandler } from '@builder.io/qwik-city';
 import { CaseStudyPage } from '~/components/CaseStudyPage';
+
+// List of all portfolio case study slugs for static generation
+const PORTFOLIO_SLUGS = [
+  'formstack-integration',
+  'caribbeanpools-redesign',
+  'deckhand-prototype',
+  'print-studio',
+  'brand-evolution',
+  'drone-media',
+  'email-marketing',
+  'ivr-system',
+  'mindforge',
+  'shopcaribbeanpools',
+];
 
 export const useStudy = routeLoader$(async ({ params }) => {
   const slug = params.slug;
@@ -20,6 +35,13 @@ export const useStudy = routeLoader$(async ({ params }) => {
   if (!mod) throw new Error('Case study not found');
   return mod.default || mod;
 });
+
+// Tell Qwik which portfolio pages to statically generate
+export const onStaticGenerate: StaticGenerateHandler = async () => {
+  return {
+    params: PORTFOLIO_SLUGS.map((slug) => ({ slug })),
+  };
+};
 
 export default component$(() => {
   const study = useStudy();

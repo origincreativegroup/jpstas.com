@@ -3,7 +3,7 @@
   "title": "DeckHand: Field Service App Prototype",
   "tagline": "From paper logs to live route intelligence",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-hero.jpg",
+    "src": "https://media.jpstas.com/deckhand-hero.jpg",
     "alt": "DeckHand mobile app interface"
   },
   "metrics": [
@@ -45,19 +45,19 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-1.jpg",
+        "src": "https://media.jpstas.com/deckhand-1.jpg",
         "alt": "Mobile interface"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-2.jpg",
+        "src": "https://media.jpstas.com/deckhand-2.jpg",
         "alt": "Chemical calculator"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-3.jpg",
+        "src": "https://media.jpstas.com/deckhand-3.jpg",
         "alt": "Photo capture"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/deckhand-4.jpg",
+        "src": "https://media.jpstas.com/deckhand-4.jpg",
         "alt": "Manager dashboard"
       }
     ]

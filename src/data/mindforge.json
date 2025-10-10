@@ -3,7 +3,7 @@
   "title": "MindForge: AI-Powered Process Mapping & Business Intelligence",
   "tagline": "Turning text descriptions into interactive workflow visualizations",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/mindforge-hero.jpg",
+    "src": "https://media.jpstas.com/mindforge-hero.jpg",
     "alt": "MindForge dashboard interface"
   },
   "metrics": [
@@ -47,19 +47,19 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/mindforge-dashboard.jpg",
+        "src": "https://media.jpstas.com/mindforge-dashboard.jpg",
         "alt": "Dashboard mockup"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/mindforge-process-diagram.jpg",
+        "src": "https://media.jpstas.com/mindforge-process-diagram.jpg",
         "alt": "Process diagram generation"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/mindforge-ai-animation.jpg",
+        "src": "https://media.jpstas.com/mindforge-ai-animation.jpg",
         "alt": "AI mapping animation"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/mindforge-user-flow.jpg",
+        "src": "https://media.jpstas.com/mindforge-user-flow.jpg",
         "alt": "User flow charts"
       }
     ]

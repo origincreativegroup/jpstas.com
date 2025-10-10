@@ -3,7 +3,7 @@
   "title": "IVR Call Menu & Customer Experience Optimization",
   "tagline": "Intelligent call routing that reduced wait times by 35%",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/ivr-hero.jpg",
+    "src": "https://media.jpstas.com/ivr-hero.jpg",
     "alt": "IVR system flowchart"
   },
   "metrics": [
@@ -47,15 +47,15 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/ivr-flowchart.jpg",
+        "src": "https://media.jpstas.com/ivr-flowchart.jpg",
         "alt": "IVR system flowchart"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/ivr-routing-dashboard.jpg",
+        "src": "https://media.jpstas.com/ivr-routing-dashboard.jpg",
         "alt": "Call routing dashboard"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/ivr-analytics.jpg",
+        "src": "https://media.jpstas.com/ivr-analytics.jpg",
         "alt": "Call analytics infographics"
       }
     ]

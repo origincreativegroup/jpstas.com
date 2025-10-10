@@ -3,7 +3,7 @@
   "title": "New Pool Drone Photo & Video Project",
   "tagline": "Cinematic storytelling that elevated brand perception",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/drone-hero.jpg",
+    "src": "https://media.jpstas.com/drone-hero.jpg",
     "alt": "Aerial drone shot of completed pool"
   },
   "metrics": [
@@ -47,19 +47,19 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/drone-aerial-1.jpg",
+        "src": "https://media.jpstas.com/drone-aerial-1.jpg",
         "alt": "Aerial pool photography"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/drone-fpv-1.jpg",
+        "src": "https://media.jpstas.com/drone-fpv-1.jpg",
         "alt": "FPV flythrough footage"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/drone-video-reel.jpg",
+        "src": "https://media.jpstas.com/drone-video-reel.jpg",
         "alt": "Social media video reel"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/drone-marketing-use.jpg",
+        "src": "https://media.jpstas.com/drone-marketing-use.jpg",
         "alt": "Marketing campaign integration"
       }
     ]

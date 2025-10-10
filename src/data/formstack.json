@@ -3,7 +3,7 @@
   "title": "Formstack Digital Transformation",
   "tagline": "Turning paper chaos into a digital command center",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-hero.jpg",
+    "src": "https://media.jpstas.com/formstack-hero.jpg",
     "alt": "Formstack workflow dashboard",
     "type": "image"
   },
@@ -54,19 +54,19 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-1.jpg",
+        "src": "https://media.jpstas.com/formstack-1.jpg",
         "alt": "Form template example"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-2.jpg",
+        "src": "https://media.jpstas.com/formstack-2.jpg",
         "alt": "Mobile capture interface"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-3.jpg",
+        "src": "https://media.jpstas.com/formstack-3.jpg",
         "alt": "Approval workflow"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/formstack-4.jpg",
+        "src": "https://media.jpstas.com/formstack-4.jpg",
         "alt": "PDF output example"
       }
     ]

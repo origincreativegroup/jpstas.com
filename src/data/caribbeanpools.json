@@ -3,7 +3,7 @@
   "title": "Caribbean Pools E-Commerce Redesign",
   "tagline": "A website that tells the story of the pool lifecycle",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-hero.jpg",
+    "src": "https://media.jpstas.com/caribbean-hero.jpg",
     "alt": "Caribbean Pools website mockup"
   },
   "metrics": [
@@ -45,19 +45,19 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-1.jpg",
+        "src": "https://media.jpstas.com/caribbean-1.jpg",
         "alt": "Homepage design"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-2.jpg",
+        "src": "https://media.jpstas.com/caribbean-2.jpg",
         "alt": "Process infographic"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-3.jpg",
+        "src": "https://media.jpstas.com/caribbean-3.jpg",
         "alt": "Service pages"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/caribbean-4.jpg",
+        "src": "https://media.jpstas.com/caribbean-4.jpg",
         "alt": "E-commerce integration"
       }
     ]

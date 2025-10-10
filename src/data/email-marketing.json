@@ -3,7 +3,7 @@
   "title": "Email Marketing Campaigns & Customer Communications",
   "tagline": "Automated campaigns that connect design with data",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/email-marketing-hero.jpg",
+    "src": "https://media.jpstas.com/email-marketing-hero.jpg",
     "alt": "Email campaign dashboard"
   },
   "metrics": [
@@ -47,19 +47,19 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/email-templates.jpg",
+        "src": "https://media.jpstas.com/email-templates.jpg",
         "alt": "Email template showcase"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/email-analytics.jpg",
+        "src": "https://media.jpstas.com/email-analytics.jpg",
         "alt": "Campaign analytics dashboard"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/email-segmentation.jpg",
+        "src": "https://media.jpstas.com/email-segmentation.jpg",
         "alt": "Audience segmentation charts"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/email-automation.jpg",
+        "src": "https://media.jpstas.com/email-automation.jpg",
         "alt": "Automation flow diagrams"
       }
     ]

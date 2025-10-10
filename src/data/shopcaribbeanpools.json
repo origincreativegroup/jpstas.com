@@ -3,7 +3,7 @@
   "title": "ShopCaribbeanPools.com E-Commerce Launch",
   "tagline": "Digitizing the Early Buy program and modernizing retail sales",
   "hero": {
-    "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/shop-hero.jpg",
+    "src": "https://media.jpstas.com/shop-hero.jpg",
     "alt": "ShopCaribbeanPools.com homepage"
   },
   "metrics": [
@@ -47,19 +47,19 @@
     ],
     "gallery": [
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/shop-homepage.jpg",
+        "src": "https://media.jpstas.com/shop-homepage.jpg",
         "alt": "Website homepage"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/shop-mobile-checkout.jpg",
+        "src": "https://media.jpstas.com/shop-mobile-checkout.jpg",
         "alt": "Mobile checkout UI"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/shop-analytics.jpg",
+        "src": "https://media.jpstas.com/shop-analytics.jpg",
         "alt": "Analytics dashboard"
       },
       {
-        "src": "https://fa917615d33ac203929027798644acef.r2.cloudflarestorage.com/jpstas-media/shop-sales-funnel.jpg",
+        "src": "https://media.jpstas.com/shop-sales-funnel.jpg",
         "alt": "Sales funnel infographic"
       }
     ]
