@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-10-10T12:13:00.214Z",
+  "nodeVersion": "v22.20.0",
+  "platform": "darwin",
+  "buildExists": true,
+  "manifestExists": true,
+  "files": {
+    "core": true,
+    "preloader": true,
+    "qwikLoader": true,
+    "indexHtml": true
+  },
+  "manifest": {
+    "core": "q-DlU78kqO.js",
+    "preloader": "q-CjL2eSnZ.js",
+    "qwikLoader": "q-naDMFAHy.js",
+    "buildMode": "production"
+  }
+}
