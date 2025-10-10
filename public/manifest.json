@@ -8,7 +8,7 @@
   "theme_color": "#1e40af",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "https://media.jpstas.com/assets/SVG%20Icons.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

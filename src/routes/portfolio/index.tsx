@@ -62,7 +62,7 @@ export default component$(() => {
       category: 'process',
       tags: ['Print Production', 'Workflow', 'Process Innovation'],
       description: 'Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.',
-      image: 'https://www.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg',
+      image: 'https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg',
       slug: 'print-studio',
       featured: true,
     },
