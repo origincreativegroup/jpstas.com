@@ -24,7 +24,7 @@ export const Footer = component$(() => {
   
   return (
     <>
-      <footer class="relative overflow-hidden bg-gradient-to-br from-charcoal via-primary/10 to-secondary/10">
+      <footer class="relative overflow-hidden bg-charcoal">
         {/* Background Pattern */}
         <div class="absolute inset-0 opacity-5">
           <div class="absolute inset-0" style="background-image: radial-gradient(circle, #FFFFFF 1px, transparent 1px); background-size: 32px 32px;" />
@@ -35,7 +35,7 @@ export const Footer = component$(() => {
             {/* Brand Section */}
             <div class="lg:col-span-2">
               <Link href="/" class="flex items-center gap-3 mb-6 group">
-                <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                   <span class="text-white font-bold text-lg">JS</span>
                 </div>
                 <span class="text-2xl font-bold text-white">John P. Stas</span>
@@ -147,7 +147,7 @@ export const Footer = component$(() => {
       {showBackToTop.value && (
         <button
           onClick$={scrollToTop}
-          class="fixed bottom-8 right-8 z-40 w-12 h-12 bg-gradient-to-br from-primary to-secondary text-white rounded-xl shadow-glow hover:shadow-glow-lg transition-all duration-300 transform hover:scale-110 flex items-center justify-center animate-fadeIn"
+          class="fixed bottom-8 right-8 z-40 w-12 h-12 bg-primary text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center animate-fadeIn"
           aria-label="Back to top"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

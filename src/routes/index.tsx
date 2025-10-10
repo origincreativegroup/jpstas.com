@@ -87,8 +87,8 @@ export default component$(() => {
                   width="800"
                   height="600"
                 />
-                {/* Gradient overlay */}
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Dark overlay */}
+                <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Stats overlay on image */}
                 <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
@@ -131,19 +131,19 @@ export default component$(() => {
           {/* Large Featured Card - Hero Style */}
           <div class="mb-8 scroll-reveal">
             <Link
-              href="/portfolio/formstack-integration"
-              class="group relative block rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_20px_60px_rgba(46,49,146,0.3)] transition-all duration-500"
+              href="/portfolio/print-studio"
+              class="group relative block rounded-3xl overflow-hidden shadow-2xl hover:shadow-2xl transition-all duration-500"
             >
               <div class="relative aspect-[21/9] lg:aspect-[21/8]">
                 <img
-                  src="https://placehold.co/1400x600/2E3192/FFFFFF?text=Digital+Transformation+%E2%80%A2+80%25+Paper+Reduction"
-                  alt="Formstack Digital Transformation"
+                  src="https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg"
+                  alt="In-House Print Studio Build"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   width="1400"
                   height="600"
                 />
-                {/* Gradient Overlay */}
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent"></div>
+                {/* Dark Overlay */}
+                <div class="absolute inset-0 bg-charcoal/70"></div>
 
                 {/* Content Overlay */}
                 <div class="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
@@ -152,20 +152,20 @@ export default component$(() => {
                       <span class="text-sm font-bold text-white">Process Innovation</span>
                     </div>
                     <h3 class="text-3xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                      Formstack Digital Forms
+                      In-House Print Studio Build
                     </h3>
                     <p class="text-lg lg:text-xl text-white/90 mb-6 drop-shadow-lg">
-                      Transformed paper chaos into a digital command center. 80% paper reduction, 1,000+ submissions per season.
+                      Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.
                     </p>
                     <div class="flex gap-3 flex-wrap">
                       <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
-                        Automation
+                        Print Production
                       </span>
                       <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
-                        Process Design
+                        Apparel Design
                       </span>
                       <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
-                        CRM Integration
+                        Workflow Automation
                       </span>
                     </div>
                   </div>
@@ -176,75 +176,75 @@ export default component$(() => {
 
           {/* Two Column Featured Cards */}
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            {/* Card 2 - Caribbean Pools */}
+            {/* Card 2 - Brand Evolution */}
             <Link
-              href="/portfolio/caribbeanpools-redesign"
+              href="/portfolio/brand-evolution"
               class="group relative block rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal"
             >
               <div class="relative aspect-[4/3]">
                 <img
-                  src="https://placehold.co/800x600/D4A14A/FFFFFF?text=E-Commerce+Redesign+%E2%80%A2+%24100K%2B+Revenue"
-                  alt="Caribbean Pools E-Commerce"
+                  src="https://media.jpstas.com/brand-evolution-hero.jpg"
+                  alt="Caribbean Pools Brand Evolution"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   width="800"
                   height="600"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent"></div>
+                <div class="absolute inset-0 bg-charcoal/70"></div>
 
                 <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
-                  <div class="inline-block mb-3 px-3 py-2 bg-highlight/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
-                    <span class="text-sm font-bold text-white">Design & UX</span>
+                  <div class="inline-block mb-3 px-3 py-2 bg-secondary/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
+                    <span class="text-sm font-bold text-white">Brand Identity</span>
                   </div>
                   <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 drop-shadow-lg">
-                    E-Commerce Platform
+                    Caribbean Pools Brand Evolution
                   </h3>
                   <p class="text-white/90 mb-4 drop-shadow-lg">
-                    Complete website redesign generating $100k+ in first year
+                    Decade-long brand transformation from $7M to $17M with unified identity across all channels
                   </p>
                   <div class="flex gap-2 flex-wrap">
                     <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      E-Commerce
+                      Brand Identity
                     </span>
                     <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      Web Design
+                      Design Systems
                     </span>
                   </div>
                 </div>
               </div>
             </Link>
 
-            {/* Card 3 - DeckHand */}
+            {/* Card 3 - Caribbean Pools Website Redesign */}
             <Link
-              href="/portfolio/deckhand-prototype"
+              href="/portfolio/caribbeanpools-redesign"
               class="group relative block rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal"
               style="animation-delay: 100ms"
             >
               <div class="relative aspect-[4/3]">
                 <img
-                  src="https://placehold.co/800x600/6B5D3F/FFFFFF?text=Mobile+App+%E2%80%A2+70%25+Time+Savings"
-                  alt="DeckHand Field Service App"
+                  src="https://media.jpstas.com/caribbean-hero.jpg"
+                  alt="Caribbean Pools Website Redesign"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   width="800"
                   height="600"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent"></div>
+                <div class="absolute inset-0 bg-charcoal/70"></div>
 
                 <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
-                  <div class="inline-block mb-3 px-3 py-2 bg-secondary/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
-                    <span class="text-sm font-bold text-white">Mobile Development</span>
+                  <div class="inline-block mb-3 px-3 py-2 bg-highlight/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
+                    <span class="text-sm font-bold text-white">Web Design</span>
                   </div>
                   <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 drop-shadow-lg">
-                    Field Service App
+                    Caribbean Pools Website Redesign
                   </h3>
                   <p class="text-white/90 mb-4 drop-shadow-lg">
-                    Offline-first mobile app reducing report time by 70%
+                    Website redesign that tells the story of the pool lifecycle with process visualization and improved engagement
                   </p>
                   <div class="flex gap-2 flex-wrap">
                     <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      React Native
+                      Web Design
                     </span>
                     <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      UX Design
+                      UI/UX
                     </span>
                   </div>
                 </div>
@@ -339,7 +339,7 @@ export default component$(() => {
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Video Placeholder 1 */}
             <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal">
-              <div class="relative aspect-video bg-gradient-to-br from-primary/20 to-secondary/20">
+              <div class="relative aspect-video bg-neutral/10">
                 <img
                   src="https://placehold.co/800x450/6B5D3F/FFFFFF?text=Project+Demo+Video"
                   alt="Project Demo Video"
@@ -392,7 +392,7 @@ export default component$(() => {
                   width="400"
                   height="400"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <div class="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                   <span class="text-white font-semibold text-sm">Design System</span>
                 </div>
               </div>
@@ -404,7 +404,7 @@ export default component$(() => {
                   width="400"
                   height="400"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <div class="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                   <span class="text-white font-semibold text-sm">Wireframes</span>
                 </div>
               </div>
@@ -416,7 +416,7 @@ export default component$(() => {
                   width="400"
                   height="400"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <div class="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                   <span class="text-white font-semibold text-sm">Prototypes</span>
                 </div>
               </div>

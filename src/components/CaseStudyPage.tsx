@@ -10,7 +10,7 @@ import { RelatedCarousel } from '~/components/case-study/RelatedCarousel';
 
 export const CaseStudyPage = component$(({ data }: { data: CaseStudy }) => {
   return (
-    <div class="min-h-screen bg-gradient-to-b from-white via-neutral/5 to-white">
+    <div class="min-h-screen bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
         <HeroUnit data={data} />
         <ContextPanel data={data} />
@@ -21,7 +21,7 @@ export const CaseStudyPage = component$(({ data }: { data: CaseStudy }) => {
         {data.reflection && (
           <section class="rounded-3xl glass p-8 lg:p-12 shadow-xl">
             <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-charcoal flex items-center gap-3">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-highlight to-amber-600 text-white">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-highlight text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>

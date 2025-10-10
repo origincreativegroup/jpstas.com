@@ -37,7 +37,7 @@ export const VideoPlayer = component$<VideoPlayerProps>(({
 
       {/* Overlay with Play Button (shown when not playing) */}
       {!isPlaying.value && (
-        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-transparent pointer-events-none">
+        <div class="absolute inset-0 flex items-center justify-center bg-charcoal/60 pointer-events-none">
           <div class="pointer-events-auto">
             <button
               onClick$={(e) => {

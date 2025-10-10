@@ -37,10 +37,9 @@ export const Header = component$(() => {
           {/* Logo */}
           <Link href="/" class="flex items-center gap-3 group">
             <div class="relative">
-              <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+              <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                 <span class="text-white font-bold text-base">JS</span>
               </div>
-              <div class="absolute -inset-1 bg-gradient-to-br from-primary to-secondary rounded-xl opacity-0 group-hover:opacity-20 blur transition-opacity" />
             </div>
             <span class="text-xl font-bold text-text-primary group-hover:text-primary-hover transition-colors hidden sm:block">
               John P. Stas
@@ -59,7 +58,7 @@ export const Header = component$(() => {
             >
               About
               {isActive('/about') && (
-                <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary" />
+                <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
               )}
             </Link>
             <Link 
@@ -72,7 +71,7 @@ export const Header = component$(() => {
             >
               Work
               {isActive('/portfolio') && (
-                <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary" />
+                <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
               )}
             </Link>
             <Link 
@@ -85,12 +84,12 @@ export const Header = component$(() => {
             >
               Resume
               {isActive('/resume') && (
-                <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary" />
+                <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
               )}
             </Link>
-            <Link 
-              href="/contact" 
-              class="px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white rounded-xl hover:shadow-glow transition-all duration-300 font-semibold transform hover:scale-105"
+            <Link
+              href="/contact"
+              class="px-6 py-2.5 bg-primary text-white rounded-xl hover:shadow-lg transition-all duration-300 font-semibold transform hover:scale-105"
               aria-label="Contact John P. Stas"
             >
               Contact
@@ -152,9 +151,9 @@ export const Header = component$(() => {
               >
                 Resume
               </Link>
-              <Link 
-                href="/contact" 
-                class="px-4 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl hover:shadow-glow transition-all font-semibold text-center"
+              <Link
+                href="/contact"
+                class="px-4 py-3 bg-primary text-white rounded-xl hover:shadow-lg transition-all font-semibold text-center"
                 onClick$={() => isMenuOpen.value = false}
               >
                 Contact

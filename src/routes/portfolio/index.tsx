@@ -158,14 +158,14 @@ export default component$(() => {
   });
 
   return (
-    <div class="min-h-screen bg-gradient-to-b from-white via-neutral/5 to-white py-16">
+    <div class="min-h-screen bg-white py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <section class="text-center mb-16 scroll-reveal">
           <div class="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
             <span class="text-sm font-semibold text-primary uppercase tracking-wide">Selected Work</span>
           </div>
-          <h1 class="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-highlight bg-clip-text text-transparent">
+          <h1 class="text-5xl lg:text-6xl font-bold mb-6 text-primary">
             Portfolio
           </h1>
           <p class="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
@@ -214,8 +214,8 @@ export default component$(() => {
                 </div>
               )}
 
-              {/* Image with Gradient Overlay */}
-              <div class="relative aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
+              {/* Image */}
+              <div class="relative aspect-video overflow-hidden bg-neutral/10">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -250,7 +250,7 @@ export default component$(() => {
         {/* CTA Section with Glassmorphism */}
         <section class="text-center py-20 relative overflow-hidden rounded-3xl scroll-reveal">
           {/* Animated Background */}
-          <div class="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-highlight opacity-10">
+          <div class="absolute inset-0 bg-neutral/5">
             <div class="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-float" />
             <div class="absolute bottom-10 right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-float" style="animation-delay: 1s" />
           </div>
@@ -262,7 +262,7 @@ export default component$(() => {
             </p>
             <Link
               href="/contact"
-              class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl hover:shadow-glow-lg transition-all duration-300 text-lg font-semibold transform hover:scale-105"
+              class="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-xl hover:shadow-lg transition-all duration-300 text-lg font-semibold transform hover:scale-105"
             >
               Start a Project
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

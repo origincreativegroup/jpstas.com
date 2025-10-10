@@ -87,7 +87,7 @@ export const ImageGallery = component$<ImageGalleryProps>(({ images, initialInde
               class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div class="absolute inset-0 bg-charcoal/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <div class="absolute bottom-3 left-3 right-3">
                 <p class="text-sm font-medium text-white line-clamp-2">{image.alt}</p>
               </div>

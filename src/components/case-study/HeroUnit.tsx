@@ -5,7 +5,7 @@ import { VideoPlayer } from '~/components/VideoPlayer';
 
 export const HeroUnit = component$(({ data }: { data: CaseStudy }) => {
   return (
-    <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-neutral/10 to-primary/5 shadow-2xl">
+    <section class="relative overflow-hidden rounded-3xl bg-white shadow-2xl">
       {/* Decorative Background Elements */}
       <div class="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-float" />
       <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float" style="animation-delay: 2s" />
@@ -42,9 +42,9 @@ export const HeroUnit = component$(({ data }: { data: CaseStudy }) => {
           {data.meta?.tags && (
             <div class="flex flex-wrap gap-2 pt-2">
               {data.meta.tags.map((t) => (
-                <span 
-                  key={t} 
-                  class="px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 text-primary rounded-full text-sm font-semibold border border-primary/20 hover:scale-105 transition-transform"
+                <span
+                  key={t}
+                  class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold border border-primary/20 hover:scale-105 transition-transform"
                 >
                   {t}
                 </span>
@@ -85,11 +85,11 @@ export const HeroUnit = component$(({ data }: { data: CaseStudy }) => {
                 title={data.title}
               />
             ) : (
-              <div class="aspect-video w-full overflow-hidden bg-gradient-to-br from-neutral/20 to-primary/10">
-                <img 
-                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                  src={data.hero?.src || '/images/placeholder.svg'} 
-                  alt={data.hero?.alt || data.title} 
+              <div class="w-full overflow-hidden bg-neutral/10">
+                <img
+                  class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  src={data.hero?.src || '/images/placeholder.svg'}
+                  alt={data.hero?.alt || data.title}
                 />
               </div>
             )}

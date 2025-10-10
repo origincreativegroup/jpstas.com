@@ -66,7 +66,7 @@ export default component$(() => {
             {/* Bio Text */}
             <div class="lg:col-span-3 rounded-3xl glass p-8 lg:p-12">
               <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-text-primary flex items-center gap-3">
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-white">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
@@ -99,7 +99,7 @@ export default component$(() => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="group rounded-2xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center">
+                <div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
                   </svg>
@@ -127,7 +127,7 @@ export default component$(() => {
             
             <div class="group rounded-2xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 bg-gradient-to-br from-secondary to-secondary/60 rounded-xl flex items-center justify-center">
+                <div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
@@ -155,7 +155,7 @@ export default component$(() => {
             
             <div class="group rounded-2xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 bg-gradient-to-br from-highlight to-highlight/60 rounded-xl flex items-center justify-center">
+                <div class="w-12 h-12 bg-highlight rounded-xl flex items-center justify-center">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -183,7 +183,7 @@ export default component$(() => {
             
             <div class="group rounded-2xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 bg-gradient-to-br from-charcoal to-charcoal/60 rounded-xl flex items-center justify-center">
+                <div class="w-12 h-12 bg-charcoal rounded-xl flex items-center justify-center">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                   </svg>
@@ -217,10 +217,10 @@ export default component$(() => {
           
           <div class="relative space-y-8">
             {/* Vertical Line */}
-            <div class="absolute left-4 lg:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-secondary to-highlight" />
+            <div class="absolute left-4 lg:left-8 top-0 bottom-0 w-1 bg-primary" />
             
             <div class="relative pl-12 lg:pl-20 group">
-              <div class="absolute left-0 lg:left-4 top-0 flex h-8 w-8 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary shadow-lg group-hover:scale-110 transition-transform">
+              <div class="absolute left-0 lg:left-4 top-0 flex h-8 w-8 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-primary shadow-lg group-hover:scale-110 transition-transform">
                 <svg class="w-4 h-4 lg:w-6 lg:w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
@@ -236,7 +236,7 @@ export default component$(() => {
             </div>
             
             <div class="relative pl-12 lg:pl-20 group">
-              <div class="absolute left-0 lg:left-4 top-0 flex h-8 w-8 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-gradient-to-br from-secondary to-highlight shadow-lg group-hover:scale-110 transition-transform">
+              <div class="absolute left-0 lg:left-4 top-0 flex h-8 w-8 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-secondary shadow-lg group-hover:scale-110 transition-transform">
                 <svg class="w-4 h-4 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
@@ -252,7 +252,7 @@ export default component$(() => {
             </div>
             
             <div class="relative pl-12 lg:pl-20 group">
-              <div class="absolute left-0 lg:left-4 top-0 flex h-8 w-8 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-gradient-to-br from-highlight to-amber-600 shadow-lg group-hover:scale-110 transition-transform">
+              <div class="absolute left-0 lg:left-4 top-0 flex h-8 w-8 lg:h-12 lg:w-12 items-center justify-center rounded-full bg-highlight shadow-lg group-hover:scale-110 transition-transform">
                 <svg class="w-4 h-4 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>

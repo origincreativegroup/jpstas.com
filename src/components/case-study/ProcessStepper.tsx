@@ -6,21 +6,16 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
 
   return (
     <section class="relative overflow-hidden rounded-3xl bg-white shadow-xl p-8 lg:p-12">
-      {/* Animated gradient orbs */}
-      <div class="absolute top-20 right-0 w-72 h-72 bg-gradient-to-bl from-secondary/10 to-transparent rounded-full blur-3xl animate-float" style="animation-delay: 1s" />
-      <div class="absolute bottom-20 left-0 w-96 h-96 bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl animate-float" />
-
       <div class="relative z-10">
         {/* Header */}
         <div class="mb-12 text-center">
           <div class="flex items-center justify-center gap-4 mb-6">
             <div class="relative group">
-              <div class="w-14 h-14 bg-gradient-to-br from-secondary to-teal-aqua rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
+              <div class="w-14 h-14 bg-secondary rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </div>
-              <div class="absolute inset-0 bg-gradient-to-br from-secondary to-teal-aqua rounded-2xl opacity-20 blur-xl group-hover:opacity-40 transition-opacity" />
             </div>
             <div class="text-left">
               <h2 class="text-3xl lg:text-4xl font-bold text-charcoal mb-1">
@@ -42,7 +37,7 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
                 <path
                   key={i}
                   d={`M ${isEven ? '50%' : '30%'} ${20 + i * 100} Q 50% ${60 + i * 100} ${isEven ? '30%' : '70%'} ${120 + i * 100}`}
-                  stroke="url(#gradient)"
+                  stroke="#00BF5F"
                   stroke-width="2"
                   fill="none"
                   opacity="0.3"
@@ -51,12 +46,6 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
                 />
               );
             })}
-            <defs>
-              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#00BF5F;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#55A3CF;stop-opacity:1" />
-              </linearGradient>
-            </defs>
           </svg>
 
           {/* Process Nodes in Mind Map Layout */}
@@ -75,13 +64,13 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
                   onMouseEnter$={() => hoveredNode.value = i}
                   onMouseLeave$={() => hoveredNode.value = null}
                 >
-                  <div class={`group relative rounded-2xl bg-gradient-to-br from-white to-neutral/20 border-2 p-6 lg:p-8 shadow-lg transition-all duration-300 ${
+                  <div class={`group relative rounded-2xl bg-white border-2 p-6 lg:p-8 shadow-lg transition-all duration-300 ${
                     hoveredNode.value === i
                       ? 'border-secondary shadow-2xl scale-105 -translate-y-2'
                       : 'border-neutral/20 hover:border-secondary/30 hover:shadow-xl'
                   }`}>
                     {/* Node number badge */}
-                    <div class="absolute -top-4 -left-4 w-12 h-12 lg:w-14 lg:h-14 rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 lg:w-14 lg:h-14 rounded-xl bg-secondary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                       <span class="text-xl lg:text-2xl font-bold text-white">{i + 1}</span>
                     </div>
 
@@ -119,13 +108,8 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
 
                     {/* Connecting dots */}
                     {i < data.process.length - 1 && (
-                      <div class={`absolute ${isEven ? '-right-2' : '-left-2'} bottom-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-secondary to-primary animate-pulse`} />
+                      <div class={`absolute ${isEven ? '-right-2' : '-left-2'} bottom-1/2 w-4 h-4 rounded-full bg-secondary animate-pulse`} />
                     )}
-
-                    {/* Glow effect on hover */}
-                    <div class={`absolute inset-0 rounded-2xl bg-gradient-to-br from-secondary/10 to-primary/10 transition-opacity duration-300 ${
-                      hoveredNode.value === i ? 'opacity-100' : 'opacity-0'
-                    }`} />
                   </div>
                 </div>
               );
@@ -136,19 +120,18 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
         {/* Completion indicator */}
         <div class="mt-12 flex justify-center">
           <div class="relative group">
-            <div class="rounded-2xl bg-gradient-to-r from-secondary to-primary p-[2px]">
+            <div class="rounded-2xl bg-secondary p-[2px]">
               <div class="rounded-2xl bg-white px-8 py-4 flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
+                <div class="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span class="text-lg font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+                <span class="text-lg font-bold text-secondary">
                   Delivered Successfully
                 </span>
               </div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-r from-secondary to-primary rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity" />
           </div>
         </div>
       </div>

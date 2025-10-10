@@ -47,7 +47,7 @@ export const GallerySection = component$<GallerySectionProps>(({
                   loading="lazy"
                 />
                 {image.caption && (
-                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/80 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div class="absolute inset-x-0 bottom-0 bg-charcoal/80 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <p class="text-sm text-white">{image.caption}</p>
                   </div>
                 )}

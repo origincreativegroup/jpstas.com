@@ -72,7 +72,7 @@ export const AnimatedMetric = component$<AnimatedMetricProps>(({
   return (
     <div 
       id={`metric-${label.replace(/\s+/g, '-')}`}
-      class="rounded-2xl bg-gradient-to-br from-white to-neutral/30 p-6 shadow-lg border border-neutral/20 transition-all duration-300 hover:shadow-xl hover:scale-105"
+      class="rounded-2xl bg-white p-6 shadow-lg border border-neutral/20 transition-all duration-300 hover:shadow-xl hover:scale-105"
     >
       <div class="text-3xl font-bold text-primary mb-2 md:text-4xl">
         {displayValue.value}
