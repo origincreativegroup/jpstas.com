@@ -45,7 +45,7 @@ export const Footer = component$(() => {
               </p>
               <div class="flex gap-3">
                 <a 
-                  href="https://linkedin.com/in/johnpstas" 
+                  href="https://www.linkedin.com/in/john-stas-22b01054/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   class="group w-12 h-12 glass-dark rounded-xl flex items-center justify-center hover:bg-primary transition-all duration-300 hover:scale-110"
@@ -56,7 +56,7 @@ export const Footer = component$(() => {
                   </svg>
                 </a>
                 <a 
-                  href="https://github.com/johnpstas" 
+                  href="https://github.com/origincreativegroup" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   class="group w-12 h-12 glass-dark rounded-xl flex items-center justify-center hover:bg-secondary transition-all duration-300 hover:scale-110"
@@ -67,7 +67,7 @@ export const Footer = component$(() => {
                   </svg>
                 </a>
                 <a 
-                  href="mailto:john@jpstas.com" 
+                  href="mailto:johnpstas@gmail.com" 
                   class="group w-12 h-12 glass-dark rounded-xl flex items-center justify-center hover:bg-highlight transition-all duration-300 hover:scale-110"
                   aria-label="Email"
                 >

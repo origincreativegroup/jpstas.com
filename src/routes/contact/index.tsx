@@ -65,8 +65,8 @@ export default component$(() => {
                   </div>
                   <div>
                     <h3 class="font-bold text-text-primary mb-1">Email</h3>
-                    <a href="mailto:john@jpstas.com" class="text-primary hover:text-secondary transition-colors font-medium">
-                      john@jpstas.com
+                    <a href="mailto:johnpstas@gmail.com" class="text-primary hover:text-secondary transition-colors font-medium">
+                      johnpstas@gmail.com
                     </a>
                   </div>
                 </div>
@@ -80,12 +80,12 @@ export default component$(() => {
                   <div>
                     <h3 class="font-bold text-text-primary mb-1">LinkedIn</h3>
                     <a 
-                      href="https://linkedin.com/in/johnpstas" 
+                      href="https://www.linkedin.com/in/john-stas-22b01054/" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       class="text-secondary hover:text-highlight transition-colors font-medium"
                     >
-                      /in/johnpstas
+                      /in/john-stas-22b01054
                     </a>
                   </div>
                 </div>
@@ -99,12 +99,12 @@ export default component$(() => {
                   <div>
                     <h3 class="font-bold text-text-primary mb-1">GitHub</h3>
                     <a 
-                      href="https://github.com/johnpstas" 
+                      href="https://github.com/origincreativegroup" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       class="text-charcoal hover:text-primary transition-colors font-medium"
                     >
-                      @johnpstas
+                      @origincreativegroup
                     </a>
                   </div>
                 </div>

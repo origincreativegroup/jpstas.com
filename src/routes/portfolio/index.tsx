@@ -4,7 +4,7 @@ import { type DocumentHead, Link } from '@builder.io/qwik-city';
 export default component$(() => {
   const selectedFilter = useSignal('all');
   const isAnimating = useSignal(false);
-  
+
   const projects = [
     {
       id: 'formstack-integration',
@@ -62,7 +62,7 @@ export default component$(() => {
       category: 'process',
       tags: ['Print Production', 'Workflow', 'Process Innovation'],
       description: 'Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.',
-      image: 'https://imagedelivery.net/fa917615d33ac203929027798644acef/ac59d0cc-64e0-4d08-7bb9-7bb3c098e200/public',
+      image: 'https://www.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg',
       slug: 'print-studio',
       featured: true,
     },
@@ -107,38 +107,38 @@ export default component$(() => {
       featured: false,
     },
   ];
-  
+
   const categories = [
-    { 
-      id: 'all', 
-      label: 'All Projects', 
+    {
+      id: 'all',
+      label: 'All Projects',
       icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
     },
-    { 
-      id: 'design', 
-      label: 'Design', 
+    {
+      id: 'design',
+      label: 'Design',
       icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" /></svg>
     },
-    { 
-      id: 'development', 
-      label: 'Development', 
+    {
+      id: 'development',
+      label: 'Development',
       icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
     },
-    { 
-      id: 'process', 
-      label: 'Process & Operations', 
+    {
+      id: 'process',
+      label: 'Process & Operations',
       icon: <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
     },
   ];
-  
-  const filteredProjects = selectedFilter.value === 'all' 
-    ? projects 
+
+  const filteredProjects = selectedFilter.value === 'all'
+    ? projects
     : projects.filter(p => p.category === selectedFilter.value);
 
   // Scroll reveal animation
   useVisibleTask$(() => {
     if (typeof window === 'undefined') return;
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -156,7 +156,7 @@ export default component$(() => {
 
     return () => observer.disconnect();
   });
-  
+
   return (
     <div class="min-h-screen bg-gradient-to-b from-white via-neutral/5 to-white py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -285,4 +285,3 @@ export const head: DocumentHead = {
     },
   ],
 };
-

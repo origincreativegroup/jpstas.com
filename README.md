@@ -87,5 +87,5 @@ Content is managed through:
 ## 🔗 Links
 
 - [Portfolio](https://www.jpstas.com)
-- [LinkedIn](https://linkedin.com/in/johnpstas)
-- [GitHub](https://github.com/johnpstas)
+- [LinkedIn](https://www.linkedin.com/in/john-stas-22b01054/)
+- [GitHub](https://github.com/origincreativegroup)
