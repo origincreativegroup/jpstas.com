@@ -7,6 +7,11 @@
     "dev": "vite --mode ssr",
     "build": "vite build --mode production && node scripts/post-build.js",
     "build.client": "vite build --mode production",
+    "build:validate": "node scripts/validate-build.js",
+    "build:debug": "node scripts/debug-build.js",
+    "build:check": "npm run build && npm run build:validate",
+    "pre-deploy": "node scripts/pre-deploy-check.js",
+    "check:production": "node scripts/check-production.js",
     "preview": "vite preview",
     "serve": "wrangler pages dev ./dist"
   },

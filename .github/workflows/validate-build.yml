@@ -1,0 +1,48 @@
+name: Validate Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Build and Validate
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build project
+        run: npm run build
+        
+      - name: Validate build output
+        run: npm run build:validate
+        
+      - name: Check production (on main branch only)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npm run check:production
+        continue-on-error: true
+        
+      - name: Upload build artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: |
+            dist/
+            build-debug-report.json
+            production-output.html
+          retention-days: 7
+
