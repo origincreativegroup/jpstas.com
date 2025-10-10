@@ -1,4 +1,5 @@
 import https from 'https';
+import { writeFileSync } from 'fs';
 
 const PRODUCTION_URL = 'https://www.jpstas.com';
 
@@ -75,8 +76,7 @@ https.get(PRODUCTION_URL, (res) => {
       
       // Save HTML for debugging
       console.error('💾 Saving production HTML for debugging...');
-      const fs = await import('fs');
-      fs.writeFileSync('production-output.html', html);
+      writeFileSync('production-output.html', html);
       console.error('   Saved to: production-output.html\n');
       
       process.exit(1);

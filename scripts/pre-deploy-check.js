@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 
 console.log('🚀 Pre-Deployment Check\n');
@@ -95,8 +95,7 @@ if (existsSync(manifestPath)) {
 // 5. Check assets directory
 const assetsPath = join(distPath, 'assets');
 if (existsSync(assetsPath)) {
-  const fs = await import('fs');
-  const files = fs.readdirSync(assetsPath);
+  const files = readdirSync(assetsPath);
   console.log(`✅ assets directory: ${files.length} files\n`);
 } else {
   warnings.push('assets directory not found');
@@ -105,8 +104,7 @@ if (existsSync(assetsPath)) {
 // 6. Check build directory
 const buildPath = join(distPath, 'build');
 if (existsSync(buildPath)) {
-  const fs = await import('fs');
-  const files = fs.readdirSync(buildPath);
+  const files = readdirSync(buildPath);
   console.log(`✅ build directory: ${files.length} files\n`);
 } else {
   errors.push('build directory not found');
