@@ -8,11 +8,7 @@ import { qwikLoaderPlugin } from './scripts/qwik-loader-plugin.js';
 export default defineConfig(() => {
   return {
     plugins: [
-      qwikCity({
-        staticGenerate: {
-          origin: 'https://www.jpstas.com',
-        },
-      }),
+      qwikCity(),
       qwikVite(),
       staticAdapter({
         origin: 'https://www.jpstas.com',
@@ -20,6 +16,9 @@ export default defineConfig(() => {
       tsconfigPaths(),
       qwikLoaderPlugin(), // Inject QwikLoader during build
     ],
+    ssr: {
+      noExternal: true,
+    },
     build: {
       target: 'es2020',
     },
