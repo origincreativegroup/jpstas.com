@@ -41,7 +41,7 @@ export const VideoPlayer = component$<VideoPlayerProps>(({
           <div class="pointer-events-auto">
             <button
               onClick$={(e) => {
-                const video = e.currentTarget.closest('div')?.previousElementSibling as HTMLVideoElement;
+                const video = (e.currentTarget as HTMLElement).closest('div')?.previousElementSibling as HTMLVideoElement;
                 if (video) video.play();
               }}
               class="flex items-center justify-center w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full shadow-2xl hover:bg-white hover:scale-110 transition-all duration-300 group"

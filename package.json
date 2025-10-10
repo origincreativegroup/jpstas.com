@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode ssr",
-    "build": "vite build && node scripts/post-build.js",
+    "build": "qwik build && node scripts/post-build.js",
     "build.client": "vite build",
+    "build.server": "vite build -c adapters/static/vite.config.ts",
+    "build.types": "tsc --incremental --noEmit",
     "build:validate": "node scripts/validate-build.js",
     "build:debug": "node scripts/debug-build.js",
     "build:check": "npm run build && npm run build:validate",

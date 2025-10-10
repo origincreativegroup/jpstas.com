@@ -40,25 +40,25 @@ export const ComparisonSlider = component$<ComparisonSliderProps>(({
         class="relative aspect-video w-full select-none"
         onMouseDown$={(e) => {
           isDragging.value = true;
-          const rect = e.currentTarget.getBoundingClientRect();
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
           handleMove(e.clientX, rect);
         }}
         onMouseUp$={() => (isDragging.value = false)}
         onMouseLeave$={() => (isDragging.value = false)}
         onMouseMove$={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
           handleMouseMove(e, rect);
         }}
         onTouchStart$={(e) => {
           isDragging.value = true;
-          const rect = e.currentTarget.getBoundingClientRect();
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
           if (e.touches[0]) {
             handleMove(e.touches[0].clientX, rect);
           }
         }}
         onTouchEnd$={() => (isDragging.value = false)}
         onTouchMove$={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
           handleTouchMove(e, rect);
         }}
       >
