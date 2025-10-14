@@ -21,6 +21,129 @@
     },
     
     /**
+     * Show the media library interface
+     */
+    show: function(options = {}) {
+      console.log('R2 Media Library show called with options:', options);
+      
+      // Create a simple media library interface
+      const mediaLibrary = document.createElement('div');
+      mediaLibrary.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `;
+      
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 800px;
+        max-height: 600px;
+        overflow: auto;
+      `;
+      
+      modal.innerHTML = `
+        <h2>R2 Media Library</h2>
+        <div id="r2-media-list"></div>
+        <input type="file" id="r2-upload" multiple>
+        <button onclick="window.R2MediaLibrary.hide()">Close</button>
+      `;
+      
+      mediaLibrary.appendChild(modal);
+      document.body.appendChild(mediaLibrary);
+      
+      // Load existing media
+      this.loadMediaList();
+      
+      // Handle file uploads
+      document.getElementById('r2-upload').addEventListener('change', (e) => {
+        this.handleUpload(e.target.files);
+      });
+      
+      return Promise.resolve();
+    },
+    
+    /**
+     * Hide the media library interface
+     */
+    hide: function() {
+      const mediaLibrary = document.querySelector('div[style*="position: fixed"]');
+      if (mediaLibrary) {
+        document.body.removeChild(mediaLibrary);
+      }
+      return Promise.resolve();
+    },
+    
+    /**
+     * Load media list
+     */
+    loadMediaList: async function() {
+      try {
+        const response = await fetch(`${R2_API_BASE}/list`);
+        const data = await response.json();
+        
+        const list = document.getElementById('r2-media-list');
+        if (list) {
+          list.innerHTML = data.files.map(file => `
+            <div style="border: 1px solid #ccc; margin: 5px; padding: 10px;">
+              <img src="${file.url}" style="max-width: 100px; max-height: 100px;" />
+              <p>${file.filename}</p>
+              <button onclick="window.R2MediaLibrary.selectMedia('${file.url}')">Select</button>
+            </div>
+          `).join('');
+        }
+      } catch (error) {
+        console.error('Failed to load media list:', error);
+      }
+    },
+    
+    /**
+     * Handle file uploads
+     */
+    handleUpload: async function(files) {
+      for (const file of files) {
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('path', 'portfolio');
+          
+          const response = await fetch(`${R2_API_BASE}/upload`, {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (response.ok) {
+            console.log('File uploaded:', file.name);
+            this.loadMediaList(); // Refresh the list
+          }
+        } catch (error) {
+          console.error('Upload failed:', error);
+        }
+      }
+    },
+    
+    /**
+     * Select media and return URL
+     */
+    selectMedia: function(url) {
+      // This would typically trigger the CMS to use the selected media
+      console.log('Media selected:', url);
+      this.hide();
+      
+      // Trigger a custom event that the CMS can listen for
+      window.dispatchEvent(new CustomEvent('r2-media-selected', { detail: { url } }));
+    },
+    
+    /**
      * Upload handler - uploads file to R2 via API
      */
     upload: async function(file, path) {
@@ -99,60 +222,6 @@
         console.error('R2 list error:', error);
         return { items: [], hasMore: false };
       }
-    },
-    
-    /**
-     * Delete a media file
-     */
-    delete: async function(fileId) {
-      try {
-        const response = await fetch(`${R2_API_BASE}/delete`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ key: fileId }),
-          credentials: 'include'
-        });
-        
-        if (!response.ok) {
-          throw new Error('Failed to delete file');
-        }
-        
-        return true;
-      } catch (error) {
-        console.error('R2 delete error:', error);
-        throw error;
-      }
-    },
-    
-    /**
-     * Get file details
-     */
-    getFile: async function(fileId) {
-      try {
-        const response = await fetch(`${R2_API_BASE}/file?key=${encodeURIComponent(fileId)}`, {
-          credentials: 'include'
-        });
-        
-        if (!response.ok) {
-          throw new Error('File not found');
-        }
-        
-        const data = await response.json();
-        
-        return {
-          id: data.key,
-          name: data.filename,
-          size: data.size,
-          url: data.url,
-          path: data.key,
-          uploadedAt: data.uploaded
-        };
-      } catch (error) {
-        console.error('R2 getFile error:', error);
-        throw error;
-      }
     }
   };
   
@@ -186,4 +255,3 @@
   // Also expose globally for debugging
   window.R2MediaLibrary = R2MediaLibrary;
 })();
-
