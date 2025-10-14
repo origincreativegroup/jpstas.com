@@ -9,7 +9,7 @@
   </head>
   <body>
     <!-- Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.1.0/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@^3.2.0/dist/decap-cms.js"></script>
     
     <!-- Git Gateway for authentication -->
     <script src="https://unpkg.com/decap-cms-backend-git-gateway@^3.0.0/dist/git-gateway-backend.js"></script>
@@ -20,6 +20,27 @@
     <script>
       // Admin interface loaded - R2 media library registration is handled by r2-backend.js
       console.log('Admin interface loaded');
+      
+      // Add debugging functions to window for manual testing
+      window.debugR2 = function() {
+        console.log('=== R2 Media Library Debug Info ===');
+        console.log('CMS available:', !!window.CMS);
+        console.log('registerMediaLibrary available:', !!(window.CMS && window.CMS.registerMediaLibrary));
+        console.log('getMediaLibrary available:', !!(window.CMS && window.CMS.getMediaLibrary));
+        console.log('R2MediaLibrary available:', !!window.R2MediaLibrary);
+        console.log('isR2Registered():', window.isR2Registered ? window.isR2Registered() : 'function not available');
+        
+        if (window.CMS && window.CMS.getMediaLibrary) {
+          console.log('Available media libraries:', Object.keys(window.CMS.getMediaLibrary() || {}));
+        }
+        
+        console.log('=== End Debug Info ===');
+      };
+      
+      // Auto-run debug after a short delay
+      setTimeout(function() {
+        window.debugR2();
+      }, 3000);
     </script>
   </body>
 </html>
