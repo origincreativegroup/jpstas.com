@@ -14,9 +14,31 @@
     <!-- Git Gateway for authentication -->
     <script src="https://unpkg.com/decap-cms-backend-git-gateway@^3.0.0/dist/git-gateway-backend.js"></script>
     
+    <!-- Custom R2 Media Backend -->
+    <script src="/admin/r2-backend.js"></script>
+    
     <script>
-      // Initialize CMS
-      console.log('Decap CMS loaded');
+      // Register R2 Media Library and initialize CMS
+      window.addEventListener('load', function() {
+        if (window.CMS) {
+          // CMS is already loaded, register immediately
+          if (window.R2MediaLibrary) {
+            window.CMS.registerMediaLibrary(window.R2MediaLibrary);
+            console.log('R2 Media Library registered');
+          }
+        } else {
+          // Wait for CMS to load
+          const checkCMS = setInterval(function() {
+            if (window.CMS && window.R2MediaLibrary) {
+              window.CMS.registerMediaLibrary(window.R2MediaLibrary);
+              console.log('R2 Media Library registered');
+              clearInterval(checkCMS);
+            }
+          }, 100);
+        }
+      });
+      
+      console.log('Admin interface loaded');
     </script>
   </body>
 </html>

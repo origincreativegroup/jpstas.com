@@ -6,6 +6,12 @@ backend:
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
+# Custom R2 media library
+media_library:
+  name: r2
+  config:
+    api_url: /api/cms/media
+
 # Site configuration
 site_url: https://jpstas.com
 display_url: https://jpstas.com
