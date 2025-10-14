@@ -18,26 +18,7 @@
     <script src="/admin/r2-backend.js"></script>
     
     <script>
-      // Register R2 Media Library and initialize CMS
-      window.addEventListener('load', function() {
-        if (window.CMS) {
-          // CMS is already loaded, register immediately
-          if (window.R2MediaLibrary) {
-            window.CMS.registerMediaLibrary(window.R2MediaLibrary);
-            console.log('R2 Media Library registered');
-          }
-        } else {
-          // Wait for CMS to load
-          const checkCMS = setInterval(function() {
-            if (window.CMS && window.R2MediaLibrary) {
-              window.CMS.registerMediaLibrary(window.R2MediaLibrary);
-              console.log('R2 Media Library registered');
-              clearInterval(checkCMS);
-            }
-          }, 100);
-        }
-      });
-      
+      // Admin interface loaded - R2 media library registration is handled by r2-backend.js
       console.log('Admin interface loaded');
     </script>
   </body>

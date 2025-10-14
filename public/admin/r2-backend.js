@@ -156,17 +156,30 @@
     }
   };
   
-  // Register media library when CMS is ready
+  // Register media library when CMS is ready (prevent duplicate registration)
+  function registerR2MediaLibrary() {
+    if (window.CMS && window.CMS.getMediaLibrary && !window.CMS.getMediaLibrary('r2')) {
+      window.CMS.registerMediaLibrary(R2MediaLibrary);
+      console.log('R2 Media Library registered with Decap CMS');
+      return true;
+    }
+    return false;
+  }
+
+  // Try to register immediately if CMS is available
   if (window.CMS) {
-    window.CMS.registerMediaLibrary(R2MediaLibrary);
-    console.log('R2 Media Library registered with Decap CMS');
+    registerR2MediaLibrary();
   } else {
     // Wait for CMS to load
-    document.addEventListener('DOMContentLoaded', function() {
-      if (window.CMS) {
-        window.CMS.registerMediaLibrary(R2MediaLibrary);
-        console.log('R2 Media Library registered with Decap CMS');
+    const checkCMS = setInterval(function() {
+      if (registerR2MediaLibrary()) {
+        clearInterval(checkCMS);
       }
+    }, 100);
+    
+    // Also try on DOMContentLoaded as backup
+    document.addEventListener('DOMContentLoaded', function() {
+      registerR2MediaLibrary();
     });
   }
   
