@@ -158,32 +158,89 @@
   
   // Register media library when CMS is ready (prevent duplicate registration)
   function registerR2MediaLibrary() {
-    if (window.CMS && window.CMS.getMediaLibrary && !window.CMS.getMediaLibrary('r2')) {
-      window.CMS.registerMediaLibrary(R2MediaLibrary);
-      console.log('R2 Media Library registered with Decap CMS');
+    if (window.CMS && window.CMS.registerMediaLibrary) {
+      // Check if already registered to prevent duplicates
+      const existingLibrary = window.CMS.getMediaLibrary ? window.CMS.getMediaLibrary('r2') : null;
+      if (!existingLibrary) {
+        window.CMS.registerMediaLibrary(R2MediaLibrary);
+        console.log('R2 Media Library registered with Decap CMS');
+        return true;
+      } else {
+        console.log('R2 Media Library already registered');
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Function to attempt registration with multiple strategies
+  function attemptRegistration() {
+    console.log('Attempting to register R2 media library...');
+    console.log('CMS available:', !!window.CMS);
+    console.log('registerMediaLibrary available:', !!(window.CMS && window.CMS.registerMediaLibrary));
+    
+    if (registerR2MediaLibrary()) {
+      console.log('R2 Media Library registration successful!');
       return true;
     }
     return false;
   }
 
-  // Try to register immediately if CMS is available
-  if (window.CMS) {
-    registerR2MediaLibrary();
+  // Register the media library immediately when this script loads
+  // This ensures it's available before CMS initialization
+  console.log('R2 Media Library script loaded, attempting immediate registration...');
+  
+  // Try immediate registration
+  if (window.CMS && window.CMS.registerMediaLibrary) {
+    console.log('CMS available immediately, registering R2 media library...');
+    attemptRegistration();
   } else {
-    // Wait for CMS to load
+    console.log('CMS not available yet, setting up registration strategies...');
+    
+    // Strategy 1: Wait for CMS to load
+    let attempts = 0;
+    const maxAttempts = 50; // 5 seconds max
+    
     const checkCMS = setInterval(function() {
-      if (registerR2MediaLibrary()) {
+      attempts++;
+      console.log(`Registration attempt ${attempts}/${maxAttempts}`);
+      
+      if (attemptRegistration()) {
+        clearInterval(checkCMS);
+      } else if (attempts >= maxAttempts) {
+        console.warn('Failed to register R2 media library after maximum attempts');
         clearInterval(checkCMS);
       }
     }, 100);
     
-    // Also try on DOMContentLoaded as backup
+    // Strategy 2: DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function() {
-      registerR2MediaLibrary();
+      console.log('DOMContentLoaded, attempting to register R2 media library...');
+      attemptRegistration();
     });
+    
+    // Strategy 3: Window load event
+    window.addEventListener('load', function() {
+      console.log('Window loaded, attempting to register R2 media library...');
+      attemptRegistration();
+    });
+    
+    // Strategy 4: Timeout fallback
+    setTimeout(function() {
+      console.log('Timeout reached, attempting to register R2 media library...');
+      attemptRegistration();
+    }, 2000);
   }
   
   // Also expose globally for debugging
   window.R2MediaLibrary = R2MediaLibrary;
+  
+  // Expose registration function for manual debugging
+  window.registerR2MediaLibrary = registerR2MediaLibrary;
+  
+  // Add a function to check if R2 is registered
+  window.isR2Registered = function() {
+    return window.CMS && window.CMS.getMediaLibrary && window.CMS.getMediaLibrary('r2') !== null;
+  };
 })();
 
