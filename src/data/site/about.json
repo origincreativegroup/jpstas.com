@@ -1,0 +1,88 @@
+{
+  "heading": "About Me",
+  "subheading": "I'm a Creative Technologist who bridges the gap between design, development, and operations. With a unique blend of technical expertise and creative problem-solving, I help businesses transform their digital presence and operational efficiency.",
+  "bio": "Throughout my career, I've worn many hats: designer, developer, process innovator, and technical leader. This diverse experience has given me a holistic understanding of how digital products come to life and thrive.\n\nMy approach combines design thinking with technical implementation, ensuring that solutions are not only beautiful and functional, but also scalable and maintainable.\n\nI'm passionate about continuous learning, staying current with emerging technologies, and finding innovative ways to solve complex business challenges.",
+  "photo": "https://placehold.co/600x600/2E3192/FFFFFF?text=Profile+Photo",
+  "photoAlt": "John P. Stas",
+  "background": {
+    "title": "Background",
+    "paragraphs": [
+      "Throughout my career, I've worn many hats: designer, developer, process innovator, and technical leader. This diverse experience has given me a holistic understanding of how digital products come to life and thrive.",
+      "My approach combines design thinking with technical implementation, ensuring that solutions are not only beautiful and functional, but also scalable and maintainable.",
+      "I'm passionate about continuous learning, staying current with emerging technologies, and finding innovative ways to solve complex business challenges."
+    ]
+  },
+  "skills": [
+    {
+      "category": "Design & UX",
+      "iconColor": "primary",
+      "items": [
+        "UI/UX Design",
+        "Brand Identity",
+        "Design Systems",
+        "User Research",
+        "Prototyping"
+      ]
+    },
+    {
+      "category": "Development",
+      "iconColor": "secondary",
+      "items": [
+        "React & TypeScript",
+        "Modern JavaScript",
+        "Responsive Design",
+        "API Integration",
+        "Performance Optimization"
+      ]
+    },
+    {
+      "category": "Operations",
+      "iconColor": "highlight",
+      "items": [
+        "Process Design",
+        "Workflow Automation",
+        "Team Leadership",
+        "Project Management",
+        "Quality Assurance"
+      ]
+    },
+    {
+      "category": "Tools & Platforms",
+      "iconColor": "charcoal",
+      "items": [
+        "Figma & Adobe Suite",
+        "VS Code & Git",
+        "Cloudflare Hosting",
+        "Analytics & SEO",
+        "CI/CD & DevOps"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "period": "2020 - Present",
+      "role": "Creative Technologist",
+      "description": "Leading digital transformation initiatives, designing and building custom solutions, and optimizing operational workflows for improved efficiency.",
+      "color": "primary"
+    },
+    {
+      "period": "2018 - 2020",
+      "role": "Designer & Developer",
+      "description": "Created user-centered digital experiences, developed responsive web applications, and collaborated with cross-functional teams.",
+      "color": "secondary"
+    },
+    {
+      "period": "2015 - 2018",
+      "role": "Operations & Process Designer",
+      "description": "Streamlined business processes, implemented new systems, and trained teams on best practices for operational excellence.",
+      "color": "highlight"
+    }
+  ],
+  "cta": {
+    "title": "Want to work together?",
+    "description": "I'm always open to discussing new projects and opportunities.",
+    "buttonText": "Get In Touch",
+    "buttonLink": "/contact"
+  }
+}
+

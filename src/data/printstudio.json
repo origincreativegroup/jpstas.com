@@ -47,6 +47,11 @@
     ],
     "gallery": [
       {
+        "src": "https://media.jpstas.com/portfolio/PrintStudio/palm-tree-standee-closeup-display-detail.png",
+        "alt": "Palm tree standee closeup display detail",
+        "caption": "Custom standee print detail and quality"
+      },
+      {
         "src": "https://media.jpstas.com/print-studio-production.jpg",
         "alt": "HP Latex printer in action",
         "caption": "Large-format printing operation"

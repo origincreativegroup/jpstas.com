@@ -47,6 +47,12 @@
     ],
     "gallery": [
       {
+        "src": "af4889355cd0d36bac6722871cb2bcb3",
+        "type": "video",
+        "caption": "FPV Drone Flythrough - Caribbean Pools Project",
+        "alt": "FPV drone video flythrough of pool installation"
+      },
+      {
         "src": "https://media.jpstas.com/drone-aerial-1.jpg",
         "alt": "Aerial pool photography"
       },
@@ -124,6 +130,8 @@
     }
   ]
 }
+
+
 
 
 

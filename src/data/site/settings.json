@@ -1,0 +1,28 @@
+{
+  "siteTitle": "John P. Stas",
+  "siteDescription": "Portfolio of John P. Stas - Creative Technologist, Designer, and Process Innovator specializing in design, development, and operational excellence.",
+  "authorName": "John P. Stas",
+  "authorEmail": "johnpstas@gmail.com",
+  "logo": "/favicon.svg",
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/john-stas-22b01054/",
+    "github": "https://github.com/origincreativegroup",
+    "email": "johnpstas@gmail.com"
+  },
+  "seo": {
+    "description": "Creative Technologist and Designer with expertise in UI/UX design, full-stack development, and process innovation. Building elegant solutions to complex business challenges.",
+    "keywords": [
+      "Creative Technologist",
+      "UX Designer",
+      "Full Stack Developer",
+      "Process Innovation",
+      "Web Design",
+      "React Developer",
+      "TypeScript",
+      "Design Systems",
+      "Operational Excellence"
+    ],
+    "ogImage": "/images/og-image.jpg"
+  }
+}
+

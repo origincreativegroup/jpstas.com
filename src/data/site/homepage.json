@@ -1,0 +1,52 @@
+{
+  "title": "Creative Technologist & Designer",
+  "subtitle": "Transforming business challenges into elegant solutions",
+  "description": "I specialize in design thinking, technical expertise, and operational excellence to deliver measurable results across digital products and business processes.",
+  "heroImage": "https://placehold.co/800x600/2E3192/FFFFFF?text=Portfolio+Showcase",
+  "heroImageAlt": "Portfolio Showcase",
+  "featuredProjects": [
+    {
+      "title": "In-House Print Studio Build",
+      "slug": "print-studio",
+      "description": "Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.",
+      "image": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
+      "category": "Process Innovation",
+      "tags": ["Print Production", "Apparel Design", "Workflow Automation"]
+    },
+    {
+      "title": "Caribbean Pools Brand Evolution",
+      "slug": "brand-evolution",
+      "description": "Decade-long brand transformation from $7M to $17M with unified identity across all channels",
+      "image": "https://media.jpstas.com/brand-evolution-hero.jpg",
+      "category": "Brand Identity",
+      "tags": ["Brand Identity", "Design Systems"]
+    },
+    {
+      "title": "Caribbean Pools Website Redesign",
+      "slug": "caribbeanpools-redesign",
+      "description": "Website redesign that tells the story of the pool lifecycle with process visualization and improved engagement",
+      "image": "https://media.jpstas.com/caribbean-hero.jpg",
+      "category": "Web Design",
+      "tags": ["Web Design", "UI/UX"]
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Paper Reduction",
+      "value": "80%"
+    },
+    {
+      "label": "Revenue Generated",
+      "value": "$100k+"
+    },
+    {
+      "label": "Cost Savings",
+      "value": "$250K+"
+    },
+    {
+      "label": "Years Experience",
+      "value": "10+"
+    }
+  ]
+}
+

@@ -15,7 +15,12 @@
     "pre-deploy": "node scripts/pre-deploy-check.js",
     "check:production": "node scripts/check-production.js",
     "preview": "vite preview",
-    "serve": "wrangler pages dev ./dist"
+    "serve": "wrangler pages dev ./dist",
+    "r2:upload": "node scripts/upload-to-r2.js",
+    "r2:audit": "node scripts/audit-media-urls.js",
+    "r2:update-urls": "node scripts/update-r2-urls.js",
+    "cms:deploy": "cd workers && npx wrangler deploy",
+    "cms:dev": "cd workers && npx wrangler dev"
   },
   "dependencies": {
     "@builder.io/qwik": "^1.17.0"
