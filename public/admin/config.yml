@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: origincreativegroup/jpstas.com
+  name: git-gateway
   branch: main
-  base_url: https://jpstas.com
-  auth_endpoint: /api/cms/auth
 
 # Use custom R2 media backend
 media_folder: "public/images/uploads"
