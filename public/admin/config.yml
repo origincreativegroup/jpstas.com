@@ -28,175 +28,194 @@ collections:
       - name: "print-studio"
         label: "Print Studio"
         file: "src/data/printstudio.json"
-      - name: "brand-evolution"
-        label: "Brand Evolution"
-        file: "src/data/brand-evolution.json"
-      - name: "drone-media"
-        label: "Drone Media"
-        file: "src/data/drone-media.json"
-      - name: "email-marketing"
-        label: "Email Marketing"
-        file: "src/data/email-marketing.json"
-      - name: "formstack"
-        label: "Formstack Integration"
-        file: "src/data/formstack.json"
-      - name: "ivr-system"
-        label: "IVR System"
-        file: "src/data/ivr-system.json"
-      - name: "mindforge"
-        label: "MindForge AI"
-        file: "src/data/mindforge.json"
-      - name: "shopcaribbeanpools"
-        label: "Shop Caribbean Pools"
-        file: "src/data/shopcaribbeanpools.json"
-    editor:
-      preview: false
-    fields:
-      - {label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', 'Must be lowercase with hyphens'], hint: "URL-friendly identifier (e.g., print-studio)"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Tagline", name: "tagline", widget: "text"}
-      
-      # Hero Section
-      - label: "Hero Image"
-        name: "hero"
-        widget: "object"
-        collapsed: false
         fields:
-          - {label: "Image", name: "src", widget: "image"}
-          - {label: "Alt Text", name: "alt", widget: "string"}
-      
-      # Metrics
-      - label: "Key Metrics"
-        name: "metrics"
-        widget: "list"
-        min: 3
-        max: 4
-        collapsed: false
-        summary: '{{fields.label}}: {{fields.value}}'
-        fields:
-          - {label: "Label", name: "label", widget: "string"}
-          - {label: "Value", name: "value", widget: "string"}
-      
-      # Meta Information
-      - label: "Meta Information"
-        name: "meta"
-        widget: "object"
-        collapsed: true
-        fields:
-          - {label: "Tags", name: "tags", widget: "list", required: false}
-          - {label: "Tools Used", name: "tools", widget: "list", required: false}
-          - {label: "Year", name: "year", widget: "string", required: false}
-          - {label: "Client", name: "client", widget: "string", required: false}
-      
-      # Context Section
-      - label: "Context & Problem"
-        name: "context"
-        widget: "object"
-        collapsed: false
-        fields:
-          - {label: "Problem Statement", name: "problem", widget: "text"}
-          - label: "Constraints"
-            name: "constraints"
-            widget: "list"
-            required: false
-            field: {label: "Constraint", name: "constraint", widget: "string"}
-          - {label: "Quote", name: "quote", widget: "text", required: false}
-      
-      # Solution Section
-      - label: "Solution"
-        name: "solution"
-        widget: "object"
-        collapsed: false
-        fields:
-          - {label: "Approach", name: "approach", widget: "text"}
-          - label: "Key Features/Bullets"
-            name: "bullets"
-            widget: "list"
-            required: false
-            field: {label: "Feature", name: "bullet", widget: "string"}
+          - {label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', 'Must be lowercase with hyphens'], hint: "URL-friendly identifier (e.g., print-studio)"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Tagline", name: "tagline", widget: "text"}
           
-          # Gallery
-          - label: "Gallery"
-            name: "gallery"
-            widget: "list"
-            required: false
-            summary: '{{fields.type | upper}}: {{fields.caption}}'
+          # Hero Section
+          - label: "Hero Image"
+            name: "hero"
+            widget: "object"
+            collapsed: false
             fields:
-              - {label: "Media", name: "src", widget: "string", hint: "For images: upload or paste URL. For videos: Cloudflare Stream ID (32 char hex) or video URL"}
-              - {label: "Alt Text", name: "alt", widget: "string", required: false}
-              - {label: "Type", name: "type", widget: "select", options: ["image", "video", "gif"], default: "image", required: false}
-              - {label: "Poster/Thumbnail", name: "poster", widget: "image", required: false, hint: "For videos only - upload poster image"}
-              - {label: "Caption", name: "caption", widget: "string", required: false}
+              - {label: "Image", name: "src", widget: "image"}
+              - {label: "Alt Text", name: "alt", widget: "string"}
           
-          # Before/After Comparison
-          - label: "Before & After"
-            name: "beforeAfter"
+          # Metrics
+          - label: "Key Metrics"
+            name: "metrics"
+            widget: "list"
+            min: 3
+            max: 4
+            collapsed: false
+            summary: '{{fields.label}}: {{fields.value}}'
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Value", name: "value", widget: "string"}
+          
+          # Meta Information
+          - label: "Meta Information"
+            name: "meta"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Tags", name: "tags", widget: "list", required: false}
+              - {label: "Tools Used", name: "tools", widget: "list", required: false}
+              - {label: "Year", name: "year", widget: "string", required: false}
+              - {label: "Client", name: "client", widget: "string", required: false}
+          
+          # Context Section
+          - label: "Context & Problem"
+            name: "context"
+            widget: "object"
+            collapsed: false
+            fields:
+              - {label: "Problem Statement", name: "problem", widget: "text"}
+              - label: "Constraints"
+                name: "constraints"
+                widget: "list"
+                required: false
+                field: {label: "Constraint", name: "constraint", widget: "string"}
+              - {label: "Quote", name: "quote", widget: "text", required: false}
+          
+          # Solution Section
+          - label: "Solution"
+            name: "solution"
+            widget: "object"
+            collapsed: false
+            fields:
+              - {label: "Approach", name: "approach", widget: "text"}
+              - label: "Key Features/Bullets"
+                name: "bullets"
+                widget: "list"
+                required: false
+                field: {label: "Feature", name: "bullet", widget: "string"}
+              
+              # Gallery
+              - label: "Gallery"
+                name: "gallery"
+                widget: "list"
+                required: false
+                summary: '{{fields.type | upper}}: {{fields.caption}}'
+                fields:
+                  - {label: "Media", name: "src", widget: "string", hint: "For images: upload or paste URL. For videos: Cloudflare Stream ID (32 char hex) or video URL"}
+                  - {label: "Alt Text", name: "alt", widget: "string", required: false}
+                  - {label: "Type", name: "type", widget: "select", options: ["image", "video", "gif"], default: "image", required: false}
+                  - {label: "Poster/Thumbnail", name: "poster", widget: "image", required: false, hint: "For videos only - upload poster image"}
+                  - {label: "Caption", name: "caption", widget: "string", required: false}
+              
+              # Before/After Comparison
+              - label: "Before & After"
+                name: "beforeAfter"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - label: "Before"
+                    name: "before"
+                    widget: "object"
+                    fields:
+                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Alt Text", name: "alt", widget: "string"}
+                  - label: "After"
+                    name: "after"
+                    widget: "object"
+                    fields:
+                      - {label: "Image", name: "src", widget: "image"}
+                      - {label: "Alt Text", name: "alt", widget: "string"}
+          
+          # Impact Metrics
+          - label: "Impact & Results"
+            name: "impact"
+            widget: "list"
+            min: 3
+            max: 6
+            collapsed: false
+            summary: '{{fields.label}}: {{fields.value}}'
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Value", name: "value", widget: "string"}
+          
+          # Process Steps
+          - label: "Process/Methodology"
+            name: "process"
+            widget: "list"
+            min: 3
+            collapsed: false
+            summary: '{{fields.title}}'
+            fields:
+              - {label: "Step Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Icon", name: "icon", widget: "string", required: false, hint: "Icon identifier (optional)"}
+          
+          # Reflection
+          - label: "Reflection & Learning"
+            name: "reflection"
             widget: "object"
             required: false
             collapsed: true
             fields:
-              - label: "Before"
-                name: "before"
-                widget: "object"
-                fields:
-                  - {label: "Image", name: "src", widget: "image"}
-                  - {label: "Alt Text", name: "alt", widget: "string"}
-              - label: "After"
-                name: "after"
-                widget: "object"
-                fields:
-                  - {label: "Image", name: "src", widget: "image"}
-                  - {label: "Alt Text", name: "alt", widget: "string"}
-      
-      # Impact Metrics
-      - label: "Impact & Results"
-        name: "impact"
-        widget: "list"
-        min: 3
-        max: 6
-        collapsed: false
-        summary: '{{fields.label}}: {{fields.value}}'
-        fields:
-          - {label: "Label", name: "label", widget: "string"}
-          - {label: "Value", name: "value", widget: "string"}
-      
-      # Process Steps
-      - label: "Process/Methodology"
-        name: "process"
-        widget: "list"
-        min: 3
-        collapsed: false
-        summary: '{{fields.title}}'
-        fields:
-          - {label: "Step Title", name: "title", widget: "string"}
-          - {label: "Description", name: "description", widget: "text", required: false}
-          - {label: "Icon", name: "icon", widget: "string", required: false, hint: "Icon identifier (optional)"}
-      
-      # Reflection
-      - label: "Reflection & Learning"
-        name: "reflection"
-        widget: "object"
-        required: false
-        collapsed: true
-        fields:
-          - {label: "Key Learning", name: "learning", widget: "text"}
-          - label: "Reusable Patterns"
-            name: "reuse"
+              - {label: "Key Learning", name: "learning", widget: "text"}
+              - label: "Reusable Patterns"
+                name: "reuse"
+                widget: "list"
+                required: false
+                field: {label: "Pattern", name: "pattern", widget: "string"}
+          
+          # Related Projects
+          - label: "Related Projects"
+            name: "related"
             widget: "list"
             required: false
-            field: {label: "Pattern", name: "pattern", widget: "string"}
-      
-      # Related Projects
-      - label: "Related Projects"
-        name: "related"
-        widget: "list"
-        required: false
-        max: 3
-        collapsed: true
-        summary: '{{fields.title}}'
+            max: 3
+            collapsed: true
+            summary: '{{fields.title}}'
+            fields:
+              - {label: "Project Title", name: "title", widget: "string"}
+              - {label: "Link", name: "href", widget: "string", hint: "e.g., /portfolio/project-name"}
+      - name: "brand-evolution"
+        label: "Brand Evolution"
+        file: "src/data/brand-evolution.json"
         fields:
-          - {label: "Project Title", name: "title", widget: "string"}
-          - {label: "Link", name: "href", widget: "string", hint: "e.g., /portfolio/project-name"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Content", name: "content", widget: "text"}
+      - name: "drone-media"
+        label: "Drone Media"
+        file: "src/data/drone-media.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Content", name: "content", widget: "text"}
+      - name: "email-marketing"
+        label: "Email Marketing"
+        file: "src/data/email-marketing.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Content", name: "content", widget: "text"}
+      - name: "formstack"
+        label: "Formstack Integration"
+        file: "src/data/formstack.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Content", name: "content", widget: "text"}
+      - name: "ivr-system"
+        label: "IVR System"
+        file: "src/data/ivr-system.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Content", name: "content", widget: "text"}
+      - name: "mindforge"
+        label: "MindForge AI"
+        file: "src/data/mindforge.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Content", name: "content", widget: "text"}
+      - name: "shopcaribbeanpools"
+        label: "Shop Caribbean Pools"
+        file: "src/data/shopcaribbeanpools.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Content", name: "content", widget: "text"}
 
   # Homepage Content
   - name: "homepage"
