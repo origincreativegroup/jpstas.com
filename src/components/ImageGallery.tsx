@@ -114,17 +114,22 @@ export const ImageGallery = component$<ImageGalleryProps>(({ images, initialInde
           {/* Close Button */}
           <button
             onClick$={closeGallery}
-            class="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition-all hover:bg-white/20 hover:scale-110"
+            class="absolute right-6 top-6 z-50 rounded-full bg-white/90 p-4 text-charcoal shadow-xl transition-all hover:bg-white hover:scale-110 focus:ring-2 focus:ring-white"
             aria-label="Close gallery"
           >
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
-          {/* Image Counter */}
+          {/* Image Counter and Close Hint */}
           <div class="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md">
             {currentIndex.value + 1} / {images.length}
+          </div>
+          
+          {/* Close Hint */}
+          <div class="absolute left-6 top-6 z-10 rounded-full bg-white/10 px-3 py-2 text-xs font-medium text-white backdrop-blur-md">
+            Press ESC to close
           </div>
 
           {/* Main Image Container */}
