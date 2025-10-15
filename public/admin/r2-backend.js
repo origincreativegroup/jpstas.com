@@ -28,6 +28,7 @@
       
       // Create a simple media library interface
       const mediaLibrary = document.createElement('div');
+      mediaLibrary.id = 'r2-media-library-modal';
       mediaLibrary.style.cssText = `
         position: fixed;
         top: 0;
@@ -76,9 +77,9 @@
      * Hide the media library interface
      */
     hide: function() {
-      const mediaLibrary = document.querySelector('div[style*="position: fixed"]');
-      if (mediaLibrary) {
-        document.body.removeChild(mediaLibrary);
+      const mediaLibrary = document.getElementById('r2-media-library-modal');
+      if (mediaLibrary && mediaLibrary.parentNode) {
+        mediaLibrary.parentNode.removeChild(mediaLibrary);
       }
       return Promise.resolve();
     },
