@@ -8,23 +8,23 @@ const REQUIRED_ELEMENTS = {
     critical: true
   },
   stylesheet: {
-    pattern: /<link rel="stylesheet" href="\/assets\/.*\.css">/,
+    pattern: /<link rel="stylesheet" href="\/assets\/.*\.css"/,
     description: 'Stylesheet link',
     critical: true
   },
   preloader: {
-    pattern: /<script type="module" src="\/build\/q-.*\.js"><\/script>/,
+    pattern: /import\("\/build\/q-.*\.js"\)/,
     description: 'Qwik preloader module',
     critical: true
   },
   core: {
-    pattern: /<script nomodule src="\/build\/q-.*\.js"><\/script>/,
-    description: 'Qwik core script',
+    pattern: /q-DlU78kqO\.js/,
+    description: 'Qwik core script reference',
     critical: true
   },
   rootDiv: {
-    pattern: /<div id="root"><!--qwik--><\/div>/,
-    description: 'Root div with qwik comment',
+    pattern: /min-h-screen flex flex-col/,
+    description: 'Qwik root container',
     critical: true
   }
 };

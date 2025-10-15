@@ -81,8 +81,8 @@ Access the visual CMS at **`/admin`** to manage all content without touching cod
 4. Publish changes (auto-commits to Git)
 
 **Documentation:**
-- [CMS Admin Guide](./CMS_ADMIN_GUIDE.md) - How to use the CMS
-- [CMS Deployment Guide](./CMS_DEPLOYMENT.md) - Setup and configuration
+- [CMS Admin Guide](./docs/cms/CMS_ADMIN_GUIDE.md) - How to use the CMS
+- [CMS Deployment Guide](./docs/cms/CMS_DEPLOYMENT.md) - Setup and configuration
 
 ### Media Management
 
@@ -99,7 +99,7 @@ npm run r2:audit
 npm run r2:update-urls
 ```
 
-**See also:** [Media Management Guide](./MEDIA_MANAGEMENT.md)
+**See also:** [Media Management Guide](./docs/media/MEDIA_MANAGEMENT.md)
 
 ### Direct Content Editing
 
@@ -120,6 +120,34 @@ Content can also be edited directly:
 - 🚀 Edge-deployed for global performance
 - 🔐 Cloudflare Access authentication for admin
 - 💾 Git-based content storage & version control
+
+## 📚 Documentation
+
+### CMS & Content Management
+- [CMS Admin Guide](./docs/cms/CMS_ADMIN_GUIDE.md) - How to use the visual CMS
+- [CMS Deployment Guide](./docs/cms/CMS_DEPLOYMENT.md) - Setup and configuration
+- [CMS Implementation Summary](./docs/cms/CMS_IMPLEMENTATION_SUMMARY.md) - Technical details
+- [CMS Options](./docs/cms/CMS_OPTIONS.md) - Alternative CMS solutions
+
+### Deployment & Build
+- [Deployment Guide](./docs/deployment/DEPLOYMENT_GUIDE.md) - Main deployment procedures
+- [Build Process](./docs/deployment/BUILD_PROCESS.md) - Build pipeline documentation
+
+### Media Management
+- [Media Management Guide](./docs/media/MEDIA_MANAGEMENT.md) - Media upload and management
+- [Cloudflare Media Guide](./docs/media/CLOUDFLARE_MEDIA_GUIDE.md) - Cloudflare integration
+- [R2 Upload Guide](./docs/media/R2_UPLOAD_GUIDE.md) - R2 upload procedures
+
+### Accessibility
+- [Accessibility Audit](./docs/accessibility/ACCESSIBILITY_AUDIT.md) - Audit results
+- [Accessibility Summary](./docs/accessibility/ACCESSIBILITY_SUMMARY.md) - Summary of findings
+- [Accessibility Testing Guide](./docs/accessibility/ACCESSIBILITY_TESTING_GUIDE.md) - Testing procedures
+
+### Debugging & Development
+- [Debugging Tools Summary](./docs/debugging/DEBUGGING_TOOLS_SUMMARY.md) - Available debugging tools
+
+### Archive
+Historical documentation and completed project summaries are archived in [`/archive`](./archive/) for reference.
 
 ## 📄 License
 
