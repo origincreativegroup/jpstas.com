@@ -122,7 +122,7 @@ collections:
             required: false
             summary: '{{fields.type | upper}}: {{fields.caption}}'
             fields:
-              - {label: "Media", name: "src", widget: "image", hint: "Upload image or paste full URL for external images/videos"}
+              - {label: "Media", name: "src", widget: "string", hint: "For images: upload or paste URL. For videos: Cloudflare Stream ID (32 char hex) or video URL"}
               - {label: "Alt Text", name: "alt", widget: "string", required: false}
               - {label: "Type", name: "type", widget: "select", options: ["image", "video", "gif"], default: "image", required: false}
               - {label: "Poster/Thumbnail", name: "poster", widget: "image", required: false, hint: "For videos only - upload poster image"}
