@@ -2,6 +2,7 @@ backend:
   name: github
   repo: origincreativegroup/jpstas.com
   branch: main
+  auth_scope: repo
   base_url: https://jpstas.com
 
 # Media configuration

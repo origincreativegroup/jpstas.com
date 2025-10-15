@@ -14,6 +14,20 @@
     <!-- GitHub backend for authentication -->
     <script src="https://unpkg.com/decap-cms-backend-github@^3.0.0/dist/github-backend.js"></script>
     
+    <script>
+      // Configure GitHub OAuth
+      window.CMS_MANUAL_INIT = true;
+      window.CMS.init({
+        config: {
+          backend: {
+            name: 'github',
+            repo: 'origincreativegroup/jpstas.com',
+            branch: 'main'
+          }
+        }
+      });
+    </script>
+    
     <!-- Custom R2 Media Backend -->
     <script src="/admin/r2-backend.js"></script>
     
