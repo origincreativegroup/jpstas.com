@@ -1,9 +1,7 @@
 backend:
-  name: github
+  name: test-repo
   repo: origincreativegroup/jpstas.com
   branch: main
-  auth_scope: repo
-  base_url: https://jpstas.com
 
 # Media configuration
 media_folder: "public/images/uploads"
