@@ -62,7 +62,7 @@ collections:
         widget: "object"
         collapsed: false
         fields:
-          - {label: "Image URL", name: "src", widget: "image"}
+          - {label: "Image", name: "src", widget: "image"}
           - {label: "Alt Text", name: "alt", widget: "string"}
       
       # Metrics
@@ -139,13 +139,13 @@ collections:
                 name: "before"
                 widget: "object"
                 fields:
-                  - {label: "Image URL", name: "src", widget: "image"}
+                  - {label: "Image", name: "src", widget: "image"}
                   - {label: "Alt Text", name: "alt", widget: "string"}
               - label: "After"
                 name: "after"
                 widget: "object"
                 fields:
-                  - {label: "Image URL", name: "src", widget: "image"}
+                  - {label: "Image", name: "src", widget: "image"}
                   - {label: "Alt Text", name: "alt", widget: "string"}
       
       # Impact Metrics
