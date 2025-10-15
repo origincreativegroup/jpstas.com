@@ -196,47 +196,52 @@ export default component$(() => {
           ))}
         </div>
 
-        {/* Projects Grid with Stagger Animation */}
+        {/* Projects Grid with Image-First Design */}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {filteredProjects.map((project, index) => (
             <Link
               key={project.id}
               href={`/portfolio/${project.slug}`}
               style={{ animationDelay: `${index * 100}ms` }}
-              class={`group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 block scroll-reveal ${
+              class={`group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 block scroll-reveal hover:-translate-y-2 ${
                 isAnimating.value ? 'opacity-0' : ''
               }`}
             >
-              {/* Featured Badge */}
-              {project.featured && (
-                <div class="absolute top-4 right-4 z-10 glass rounded-lg px-3 py-2">
-                  <span class="text-sm font-bold text-highlight">Featured</span>
-                </div>
-              )}
-
-              {/* Image */}
-              <div class="relative aspect-video overflow-hidden bg-neutral/10">
+              {/* Hero Image Section - 60% of card */}
+              <div class="relative aspect-[4/3] overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
+                
+                {/* Gradient Overlay for Featured Badge Visibility */}
+                <div class="absolute inset-0 bg-gradient-to-b from-charcoal/20 via-transparent to-transparent"></div>
+                
+                {/* Featured Badge */}
+                {project.featured && (
+                  <div class="absolute top-4 right-4 z-10 glass rounded-lg px-3 py-2 backdrop-blur-sm">
+                    <span class="text-sm font-bold text-highlight">Featured</span>
+                  </div>
+                )}
               </div>
 
-              {/* Content */}
-              <div class="p-6 bg-white border border-neutral/10">
-                <h3 class="text-xl font-bold mb-2 text-text-primary">
-                  {project.title}
-                </h3>
-                <p class="text-text-secondary mb-4 leading-relaxed">{project.description}</p>
+              {/* Content Section - 40% of card */}
+              <div class="p-6 bg-white border border-neutral/10 flex flex-col justify-between min-h-[160px]">
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold mb-3 text-primary leading-tight">
+                    {project.title}
+                  </h3>
+                  <p class="text-text-secondary leading-relaxed text-sm line-clamp-3">{project.description}</p>
+                </div>
 
                 {/* Tags */}
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 mt-4">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                      class="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold"
                     >
                       {tag}
                     </span>
