@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/mindforge-hero.jpg",
     "alt": "MindForge dashboard interface"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/mindforge-hero.jpg",
+    "alt": "MindForge AI process mapping"
+  },
   "metrics": [
     {
       "label": "Diagram Accuracy",

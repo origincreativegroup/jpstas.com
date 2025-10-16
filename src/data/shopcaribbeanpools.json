@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/shop-hero.jpg",
     "alt": "ShopCaribbeanPools.com homepage"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/shop-hero.jpg",
+    "alt": "ShopCaribbeanPools.com E-Commerce"
+  },
   "metrics": [
     {
       "label": "Year 1 Revenue",

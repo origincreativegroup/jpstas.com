@@ -7,6 +7,11 @@
     "alt": "Formstack workflow dashboard",
     "type": "image"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/formstack-hero.jpg",
+    "alt": "Formstack workflow dashboard",
+    "type": "image"
+  },
   "metrics": [
     {
       "label": "Paper Reduction",

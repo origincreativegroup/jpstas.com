@@ -10,7 +10,7 @@ export const HeroUnit = component$(({ data }: { data: CaseStudy }) => {
       <div class="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-float" />
       <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float" style="animation-delay: 2s" />
       
-      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 p-8 lg:p-12">
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 p-6 lg:p-10">
         {/* Content */}
         <div class="space-y-6 flex flex-col justify-center">
           <div class="inline-block">

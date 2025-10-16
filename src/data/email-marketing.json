@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/email-marketing-hero.jpg",
     "alt": "Email campaign dashboard"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/email-marketing-hero.jpg",
+    "alt": "Email marketing campaigns"
+  },
   "metrics": [
     {
       "label": "Open Rate",

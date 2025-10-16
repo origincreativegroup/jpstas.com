@@ -1,12 +1,20 @@
 {
   "slug": "caribbeanpools-redesign",
-  "title": "Caribbean Pools E-Commerce Redesign",
-  "tagline": "A website that tells the story of the pool lifecycle",
+  "title": "Caribbean Pools Website & E-Commerce Platform",
+  "tagline": "Complete digital transformation from legacy website to modern e-commerce ecosystem",
   "hero": {
     "src": "https://media.jpstas.com/caribbean-hero.jpg",
-    "alt": "Caribbean Pools website mockup"
+    "alt": "Caribbean Pools website and e-commerce platform"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/caribbean-hero.jpg",
+    "alt": "Caribbean Pools website redesign"
   },
   "metrics": [
+    {
+      "label": "Year 1 Revenue",
+      "value": "$100K+"
+    },
     {
       "label": "Engagement",
       "value": "↑ 45%"
@@ -14,100 +22,145 @@
     {
       "label": "Sales Cycle",
       "value": "30% shorter"
-    },
-    {
-      "label": "Revenue",
-      "value": "$100k+ Y1"
     }
   ],
   "meta": {
-    "tags": ["E-Commerce", "UI/UX Design", "WordPress", "WooCommerce"],
-    "tools": ["Figma", "WordPress", "WooCommerce", "Custom PHP"],
-    "year": "2022-2023",
+    "tags": ["E-Commerce", "UI/UX Design", "WordPress", "WooCommerce", "Web Development"],
+    "tools": ["Figma", "WordPress", "WooCommerce", "Jobber CRM", "Mailchimp", "Custom PHP"],
+    "year": "2020-2023",
     "client": "Caribbean Pools & Spas"
   },
   "context": {
-    "problem": "Legacy website failed to communicate process clarity, craftsmanship, and failed to convert visitors into leads.",
+    "problem": "Legacy website failed to communicate process clarity and craftsmanship, while all retail sales were handled manually by phone or paper forms. This created conversion issues, seasonal bottlenecks, and missed revenue opportunities.",
     "constraints": [
-      "Must integrate with existing service CRM",
-      "Support seasonal content updates",
-      "Mobile-first for on-site consultations"
+      "Must integrate with existing service CRM and inventory",
+      "Need to digitize complex Early Buy program logic",
+      "Support seasonal content updates and promotions",
+      "Mobile-first for on-site consultations and customer ordering",
+      "Minimal e-commerce team experience"
     ],
-    "quote": "Show the journey, not just the product. People buy the experience."
+    "quote": "Show the journey, not just the product. Let customers order when it's convenient for them."
   },
   "solution": {
-    "approach": "Complete redesign with responsive architecture, process infographics, rich media storytelling, and integrated e-commerce for supplies and maintenance plans.",
+    "approach": "Complete digital ecosystem redesign combining responsive WordPress architecture with WooCommerce e-commerce. Integrated process storytelling, custom lifecycle illustrations, Early Buy program automation, and seamless CRM connectivity.",
     "bullets": [
-      "Comprehensive sitemap and wireframes",
-      "Custom pool lifecycle illustrations",
-      "Modular WordPress CMS with custom blocks",
-      "WooCommerce integration for retail sales"
+      "Comprehensive sitemap, wireframes, and information architecture",
+      "Custom pool lifecycle illustrations and process infographics",
+      "Modular WordPress CMS with custom blocks for content flexibility",
+      "ShopCaribbeanPools.com e-commerce platform with Early Buy logic",
+      "Bi-directional Jobber CRM and inventory integration",
+      "Mobile-first checkout and consultation experience",
+      "Automated email marketing and promotional workflows"
     ],
     "gallery": [
       {
         "src": "https://media.jpstas.com/caribbean-1.jpg",
-        "alt": "Homepage design"
+        "alt": "Homepage design with pool lifecycle storytelling"
       },
       {
         "src": "https://media.jpstas.com/caribbean-2.jpg",
-        "alt": "Process infographic"
+        "alt": "Custom process infographic and service visualization"
+      },
+      {
+        "src": "https://media.jpstas.com/shop-homepage.jpg",
+        "alt": "ShopCaribbeanPools.com e-commerce storefront"
+      },
+      {
+        "src": "https://media.jpstas.com/shop-mobile-checkout.jpg",
+        "alt": "Mobile-optimized checkout experience"
       },
       {
         "src": "https://media.jpstas.com/caribbean-3.jpg",
-        "alt": "Service pages"
+        "alt": "Service pages with rich media"
       },
       {
         "src": "https://media.jpstas.com/caribbean-4.jpg",
-        "alt": "E-commerce integration"
+        "alt": "E-commerce and service integration"
+      },
+      {
+        "src": "https://media.jpstas.com/shop-analytics.jpg",
+        "alt": "Analytics dashboard and performance tracking"
+      },
+      {
+        "src": "https://media.jpstas.com/shop-sales-funnel.jpg",
+        "alt": "Sales funnel optimization"
       }
     ]
   },
   "impact": [
     {
-      "label": "Visitor Understanding",
-      "value": "Dramatically Improved"
+      "label": "First-Year E-Commerce Revenue",
+      "value": "$100K+"
     },
     {
-      "label": "Brand Consistency",
-      "value": "Strengthened"
+      "label": "Website Engagement",
+      "value": "+45%"
     },
     {
-      "label": "Online Revenue",
-      "value": "$100k+ First Year"
+      "label": "Sales Cycle Duration",
+      "value": "-30%"
+    },
+    {
+      "label": "Support Call Volume",
+      "value": "-30%"
+    },
+    {
+      "label": "Order Accessibility",
+      "value": "24/7"
     },
     {
       "label": "Lead Quality",
-      "value": "Higher"
+      "value": "Improved"
     }
   ],
   "process": [
     {
       "title": "Research & Discovery",
-      "description": "Customer interviews, competitor analysis, and journey mapping"
+      "description": "Customer interviews, sales process mapping, competitor analysis, and journey mapping"
     },
     {
-      "title": "Wireframes & IA",
-      "description": "Information architecture and low-fidelity wireframes"
+      "title": "Information Architecture",
+      "description": "Site structure, navigation design, and low-fidelity wireframes for both platforms"
     },
     {
       "title": "Visual Design",
-      "description": "High-fidelity mockups and custom illustrations"
+      "description": "High-fidelity mockups, custom pool lifecycle illustrations, and brand application"
     },
     {
-      "title": "Development",
-      "description": "WordPress/WooCommerce build with custom functionality"
+      "title": "WordPress Development",
+      "description": "Custom theme build, modular content blocks, and responsive templates"
     },
     {
-      "title": "Launch & Optimization",
-      "description": "Deploy, train team, and iterate based on analytics"
+      "title": "E-Commerce Build",
+      "description": "WooCommerce platform, Early Buy program logic, and mobile checkout optimization"
+    },
+    {
+      "title": "Integration",
+      "description": "Jobber CRM sync, inventory management, payment processing, and email automation"
+    },
+    {
+      "title": "Testing & QA",
+      "description": "User testing, checkout flow optimization, and cross-device compatibility"
+    },
+    {
+      "title": "Launch & Training",
+      "description": "Deploy platforms, train team, and establish content workflows"
+    },
+    {
+      "title": "Optimization",
+      "description": "Monitor analytics, iterate on UX, and refine promotional strategies"
     }
   ],
   "reflection": {
-    "learning": "Visual storytelling of process builds trust. E-commerce success depends on education before the ask.",
+    "learning": "Visual storytelling builds trust and educates before asking for the sale. E-commerce success requires removing friction and meeting customers where they are—whether that's researching services or buying supplies at 2 AM.",
     "reuse": [
-      "Process visualization patterns",
-      "Mobile-first content blocks",
-      "Service-to-product funnel design"
+      "Process visualization and lifecycle storytelling patterns",
+      "Mobile-first content blocks and responsive templates",
+      "WooCommerce + CRM integration architecture",
+      "Service-to-product customer journey design",
+      "Early Buy promotional program logic",
+      "Checkout optimization techniques",
+      "Analytics dashboard templates"
     ]
   },
   "related": [
@@ -116,9 +169,12 @@
       "href": "/portfolio/formstack-integration"
     },
     {
+      "title": "Email Marketing Campaigns",
+      "href": "/portfolio/email-marketing"
+    },
+    {
       "title": "Print Studio Operations",
       "href": "/portfolio/print-studio"
     }
   ]
 }
-

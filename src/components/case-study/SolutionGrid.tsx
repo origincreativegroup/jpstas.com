@@ -8,7 +8,7 @@ import { VideoPlayer } from '~/components/VideoPlayer';
 export const SolutionGrid = component$(({ data }: { data: CaseStudy }) => {
   const g = data.solution;
   return (
-    <section class="relative overflow-hidden rounded-3xl bg-white shadow-xl p-8 lg:p-12">
+    <section class="relative overflow-hidden rounded-3xl bg-white shadow-xl p-6 lg:p-10">
       <div class="relative z-10">
         {/* Header */}
         <div class="mb-10">

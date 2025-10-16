@@ -1,112 +1,49 @@
 import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
-import { type DocumentHead, Link } from '@builder.io/qwik-city';
+import { type DocumentHead, Link, routeLoader$ } from '@builder.io/qwik-city';
+import type { CaseStudy } from '~/types/case-study';
+
+// Import all case study JSON files
+import formstackData from '~/data/formstack.json';
+import caribbeanpoolsData from '~/data/caribbeanpools.json';
+import shopcaribbeanpoolsData from '~/data/shopcaribbeanpools.json';
+import deckhandData from '~/data/deckhand.json';
+import mindforgeData from '~/data/mindforge.json';
+import printstudioData from '~/data/printstudio.json';
+import brandEvolutionData from '~/data/brand-evolution.json';
+import droneMediaData from '~/data/drone-media.json';
+import emailMarketingData from '~/data/email-marketing.json';
+import ivrSystemData from '~/data/ivr-system.json';
+
+// Map case studies with their categories and featured status
+const caseStudyMapping = [
+  { data: formstackData as CaseStudy, category: 'process', featured: true },
+  { data: caribbeanpoolsData as CaseStudy, category: 'design', featured: true },
+  { data: shopcaribbeanpoolsData as CaseStudy, category: 'development', featured: true },
+  { data: deckhandData as CaseStudy, category: 'development', featured: true },
+  { data: mindforgeData as CaseStudy, category: 'development', featured: true },
+  { data: printstudioData as CaseStudy, category: 'process', featured: true },
+  { data: brandEvolutionData as CaseStudy, category: 'design', featured: true },
+  { data: droneMediaData as CaseStudy, category: 'design', featured: false },
+  { data: emailMarketingData as CaseStudy, category: 'design', featured: false },
+  { data: ivrSystemData as CaseStudy, category: 'process', featured: false },
+];
 
 export default component$(() => {
   const selectedFilter = useSignal('all');
   const isAnimating = useSignal(false);
 
-  const projects = [
-    {
-      id: 'formstack-integration',
-      title: 'Formstack Digital Transformation',
-      category: 'process',
-      tags: ['Process Automation', 'Form UX', 'CRM'],
-      description: 'Turned paper chaos into a digital command center. 80% paper reduction, 1,000+ submissions per season.',
-      image: 'https://media.jpstas.com/formstack-hero.jpg',
-      slug: 'formstack-integration',
-      featured: true,
-    },
-    {
-      id: 'caribbeanpools-redesign',
-      title: 'Caribbean Pools Website Redesign',
-      category: 'design',
-      tags: ['Web Design', 'UI/UX', 'WordPress'],
-      description: 'Website redesign that tells the story of the pool lifecycle with process visualization and improved engagement.',
-      image: 'https://media.jpstas.com/caribbean-hero.jpg',
-      slug: 'caribbeanpools-redesign',
-      featured: true,
-    },
-    {
-      id: 'shopcaribbeanpools',
-      title: 'ShopCaribbeanPools.com E-Commerce',
-      category: 'development',
-      tags: ['E-Commerce', 'UX Design', 'Web Development'],
-      description: 'E-commerce platform generating $100K+ in first year by digitizing the Early Buy program.',
-      image: 'https://media.jpstas.com/shop-hero.jpg',
-      slug: 'shopcaribbeanpools',
-      featured: true,
-    },
-    {
-      id: 'deckhand-prototype',
-      title: 'DeckHand Field Service App',
-      category: 'development',
-      tags: ['Mobile App', 'React Native', 'UX'],
-      description: 'Field service app prototype reducing report time by 70% with offline-first architecture.',
-      image: 'https://media.jpstas.com/deckhand-hero.jpg',
-      slug: 'deckhand-prototype',
-      featured: true,
-    },
-    {
-      id: 'mindforge',
-      title: 'MindForge: AI Process Mapping',
-      category: 'development',
-      tags: ['AI', 'SaaS', 'Data Visualization'],
-      description: 'AI-powered SaaS platform turning text descriptions into interactive workflow visualizations with 80% accuracy.',
-      image: 'https://media.jpstas.com/mindforge-hero.jpg',
-      slug: 'mindforge',
-      featured: true,
-    },
-    {
-      id: 'print-studio',
-      title: 'In-House Print Studio Build',
-      category: 'process',
-      tags: ['Print Production', 'Workflow', 'Process Innovation'],
-      description: 'Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.',
-      image: 'https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg',
-      slug: 'print-studio',
-      featured: true,
-    },
-    {
-      id: 'brand-evolution',
-      title: 'Caribbean Pools Brand Evolution',
-      category: 'design',
-      tags: ['Brand Identity', 'Design Systems', 'Creative Direction'],
-      description: 'Decade-long brand transformation from $7M to $17M with unified identity across all channels.',
-      image: 'https://media.jpstas.com/brand-evolution-hero.jpg',
-      slug: 'brand-evolution',
-      featured: true,
-    },
-    {
-      id: 'drone-media',
-      title: 'Drone Photo & Video Project',
-      category: 'design',
-      tags: ['Drone Photography', 'FPV', 'Content Production'],
-      description: 'Cinematic drone media campaign achieving 400% increase in social engagement and creating reusable media library.',
-      image: 'https://media.jpstas.com/drone-hero.jpg',
-      slug: 'drone-media',
-      featured: false,
-    },
-    {
-      id: 'email-marketing',
-      title: 'Email Marketing Campaigns',
-      category: 'design',
-      tags: ['Email Marketing', 'Automation', 'CRM Integration'],
-      description: 'Automated email campaigns achieving 45-60% open rates and 80% automation of customer communications.',
-      image: 'https://media.jpstas.com/email-marketing-hero.jpg',
-      slug: 'email-marketing',
-      featured: false,
-    },
-    {
-      id: 'ivr-system',
-      title: 'IVR Call Menu Optimization',
-      category: 'process',
-      tags: ['IVR System', 'Customer Experience', 'Process Optimization'],
-      description: 'Intelligent call routing reducing handling time by 35% and dropped calls by 60%.',
-      image: 'https://media.jpstas.com/ivr-hero.jpg',
-      slug: 'ivr-system',
-      featured: false,
-    },
-  ];
+  // Transform case study data into project format
+  const projects = caseStudyMapping.map(({ data, category, featured }) => ({
+    id: data.slug,
+    title: data.title,
+    category,
+    tags: data.meta?.tags || [],
+    description: data.tagline,
+    image: data.cardImage?.src || data.hero?.src || '',
+    alt: data.cardImage?.alt || data.hero?.alt || data.title,
+    slug: data.slug,
+    featured,
+  }));
 
   const categories = [
     {
@@ -203,15 +140,15 @@ export default component$(() => {
               key={project.id}
               href={`/portfolio/${project.slug}`}
               style={{ animationDelay: `${index * 100}ms` }}
-              class={`group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 block scroll-reveal hover:-translate-y-2 ${
+              class={`group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 block scroll-reveal hover:-translate-y-2 flex flex-col ${
                 isAnimating.value ? 'opacity-0' : ''
               }`}
             >
               {/* Hero Image Section - 60% of card */}
-              <div class="relative aspect-[4/3] overflow-hidden">
+              <div class="relative aspect-[4/3] overflow-hidden w-full">
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={project.alt}
                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -228,7 +165,7 @@ export default component$(() => {
               </div>
 
               {/* Content Section - 40% of card */}
-              <div class="p-6 bg-white border border-neutral/10 flex flex-col justify-between min-h-[160px]">
+              <div class="p-6 bg-white border border-neutral/10 flex flex-col justify-between min-h-[160px] w-full">
                 <div class="flex-1">
                   <h3 class="text-xl font-bold mb-3 text-primary leading-tight">
                     {project.title}

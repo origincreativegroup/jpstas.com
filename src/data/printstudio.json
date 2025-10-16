@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
     "alt": "HP Latex printer in production"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
+    "alt": "In-house print studio"
+  },
   "metrics": [
     {
       "label": "Cost Savings",

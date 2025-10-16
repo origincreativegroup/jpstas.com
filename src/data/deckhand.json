@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/deckhand-hero.jpg",
     "alt": "DeckHand mobile app interface"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/deckhand-hero.jpg",
+    "alt": "DeckHand field service app"
+  },
   "metrics": [
     {
       "label": "Report Time",

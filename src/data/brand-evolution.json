@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
     "alt": "Caribbean Pools brand evolution showcase"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
+    "alt": "Caribbean Pools brand evolution"
+  },
   "metrics": [
     {
       "label": "Cost Savings",

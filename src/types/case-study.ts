@@ -14,6 +14,7 @@ export type CaseStudy = {
   title: string;
   tagline: string;
   hero?: Media;
+  cardImage?: Media; // Optimized image for portfolio cards/listings (different aspect ratio)
   metrics: Metric[];
   meta?: { tags?: string[]; tools?: string[]; year?: string; client?: string };
   context: { problem: string; constraints?: string[]; quote?: string };

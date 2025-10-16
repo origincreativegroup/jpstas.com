@@ -5,7 +5,7 @@ import { AnimatedMetric } from '~/components/AnimatedMetric';
 export const ImpactStrip = component$(({ data }: { data: CaseStudy }) => {
   const items = data.impact.length ? data.impact : data.metrics;
   return (
-    <section class="rounded-3xl bg-neutral shadow-xl p-8 lg:p-12">
+    <section class="rounded-3xl bg-neutral shadow-xl p-6 lg:p-10">
       <div>
         {/* Header with icon */}
         <div class="flex items-center gap-4 mb-10">

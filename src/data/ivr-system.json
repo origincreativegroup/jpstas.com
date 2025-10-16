@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/ivr-hero.jpg",
     "alt": "IVR system flowchart"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/ivr-hero.jpg",
+    "alt": "IVR call menu optimization"
+  },
   "metrics": [
     {
       "label": "Handling Time",

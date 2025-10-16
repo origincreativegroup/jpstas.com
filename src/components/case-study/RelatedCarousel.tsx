@@ -5,7 +5,7 @@ import { Link } from '@builder.io/qwik-city';
 export const RelatedCarousel = component$(({ data }: { data: CaseStudy }) => {
   if (!data.related?.length) return null as any;
   return (
-    <section class="relative overflow-hidden rounded-3xl bg-white shadow-xl p-8 lg:p-12">
+    <section class="relative overflow-hidden rounded-3xl bg-white shadow-xl p-6 lg:p-10">
       <div class="relative z-10">
         <div class="flex items-center justify-center gap-3 mb-10">
           <div class="w-8 h-8 rounded-xl bg-primary flex items-center justify-center">

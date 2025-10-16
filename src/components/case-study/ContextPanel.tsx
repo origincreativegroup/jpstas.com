@@ -3,7 +3,7 @@ import type { CaseStudy } from '~/types/case-study';
 
 export const ContextPanel = component$(({ data }: { data: CaseStudy }) => {
   return (
-    <section class="relative overflow-hidden rounded-3xl bg-white shadow-xl p-8 lg:p-12">
+    <section class="relative overflow-hidden rounded-3xl bg-white shadow-xl p-6 lg:p-10">
       <div class="relative z-10">
         {/* Header with animated icon */}
         <div class="mb-8">

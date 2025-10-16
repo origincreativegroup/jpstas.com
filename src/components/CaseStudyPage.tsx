@@ -11,7 +11,7 @@ import { RelatedCarousel } from '~/components/case-study/RelatedCarousel';
 export const CaseStudyPage = component$(({ data }: { data: CaseStudy }) => {
   return (
     <div class="min-h-screen bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8 lg:space-y-12">
         <HeroUnit data={data} />
         <ContextPanel data={data} />
         <SolutionGrid data={data} />
@@ -19,7 +19,7 @@ export const CaseStudyPage = component$(({ data }: { data: CaseStudy }) => {
         <ProcessStepper data={data} />
         {data.context.quote && <QuoteBlock quote={data.context.quote} />}
         {data.reflection && (
-          <section class="rounded-3xl glass p-8 lg:p-12 shadow-xl">
+          <section class="rounded-3xl glass p-6 lg:p-10 shadow-xl">
             <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-charcoal flex items-center gap-3">
               <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-highlight text-white">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

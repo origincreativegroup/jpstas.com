@@ -6,6 +6,10 @@
     "src": "https://media.jpstas.com/drone-hero.jpg",
     "alt": "Aerial drone shot of completed pool"
   },
+  "cardImage": {
+    "src": "https://media.jpstas.com/drone-hero.jpg",
+    "alt": "Drone photo & video project"
+  },
   "metrics": [
     {
       "label": "Social Engagement",
