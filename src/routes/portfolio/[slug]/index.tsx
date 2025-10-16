@@ -15,7 +15,6 @@ const PORTFOLIO_SLUGS = [
   'email-marketing',
   'ivr-system',
   'mindforge',
-  'shopcaribbeanpools',
 ];
 
 export const useStudy = routeLoader$(async ({ params }) => {
@@ -31,7 +30,6 @@ export const useStudy = routeLoader$(async ({ params }) => {
     'email-marketing': await import('~/data/email-marketing.json'),
     'ivr-system': await import('~/data/ivr-system.json'),
     'mindforge': await import('~/data/mindforge.json'),
-    'shopcaribbeanpools': await import('~/data/shopcaribbeanpools.json'),
   };
   const mod = map[slug];
   if (!mod) throw new Error('Case study not found');

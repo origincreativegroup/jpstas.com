@@ -5,7 +5,6 @@ import type { CaseStudy } from '~/types/case-study';
 // Import all case study JSON files
 import formstackData from '~/data/formstack.json';
 import caribbeanpoolsData from '~/data/caribbeanpools.json';
-import shopcaribbeanpoolsData from '~/data/shopcaribbeanpools.json';
 import deckhandData from '~/data/deckhand.json';
 import mindforgeData from '~/data/mindforge.json';
 import printstudioData from '~/data/printstudio.json';
@@ -17,8 +16,7 @@ import ivrSystemData from '~/data/ivr-system.json';
 // Map case studies with their categories and featured status
 const caseStudyMapping = [
   { data: formstackData as CaseStudy, category: 'process', featured: true },
-  { data: caribbeanpoolsData as CaseStudy, category: 'design', featured: true },
-  { data: shopcaribbeanpoolsData as CaseStudy, category: 'development', featured: true },
+  { data: caribbeanpoolsData as CaseStudy, category: 'development', featured: true },
   { data: deckhandData as CaseStudy, category: 'development', featured: true },
   { data: mindforgeData as CaseStudy, category: 'development', featured: true },
   { data: printstudioData as CaseStudy, category: 'process', featured: true },
