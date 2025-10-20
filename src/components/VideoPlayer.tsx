@@ -17,11 +17,13 @@ export const VideoPlayer = component$<VideoPlayerProps>(({
 }) => {
   const isPlaying = useSignal(false);
   const showControls = useSignal(true);
+  const videoRef = useSignal<HTMLVideoElement | undefined>(undefined);
 
   return (
     <div class="group relative w-full overflow-hidden rounded-2xl bg-charcoal shadow-2xl">
       {/* Video Element */}
       <video
+        ref={(el) => (videoRef.value = el)}
         class="w-full h-full object-cover"
         src={src}
         poster={poster}
@@ -40,9 +42,10 @@ export const VideoPlayer = component$<VideoPlayerProps>(({
         <div class="absolute inset-0 flex items-center justify-center bg-charcoal/60 pointer-events-none">
           <div class="pointer-events-auto">
             <button
-              onClick$={(e) => {
-                const video = (e.currentTarget as HTMLElement).closest('div')?.previousElementSibling as HTMLVideoElement;
-                if (video) video.play();
+              onClick$={() => {
+                if (videoRef.value) {
+                  videoRef.value.play();
+                }
               }}
               class="flex items-center justify-center w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full shadow-2xl hover:bg-white hover:scale-110 transition-all duration-300 group"
               aria-label="Play video"

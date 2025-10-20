@@ -1,6 +1,7 @@
 import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 import { AnimatedMetric } from '~/components/AnimatedMetric';
+import homepageData from '../data/site/homepage.json';
 
 export default component$(() => {
   // Scroll reveal animation
@@ -45,16 +46,15 @@ export default component$(() => {
 
               <div class="space-y-6">
                 <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold text-primary leading-tight">
-                  Creative Technologist & Designer
+                  {homepageData.title}
                 </h1>
                 <p class="text-xl lg:text-2xl text-text-secondary font-medium leading-relaxed">
-                  Transforming business challenges into elegant solutions
+                  {homepageData.subtitle}
                 </p>
               </div>
               
               <p class="text-lg text-text-secondary leading-relaxed max-w-2xl">
-                I specialize in design thinking, technical expertise, and operational excellence 
-                to deliver measurable results across digital products and business processes.
+                {homepageData.description}
               </p>
 
               <div class="flex flex-col sm:flex-row gap-4 pt-4">
@@ -81,8 +81,8 @@ export default component$(() => {
               {/* Hero Image with overlay */}
               <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
                 <img
-                  src="https://placehold.co/800x600/2E3192/FFFFFF?text=Portfolio+Showcase"
-                  alt="Portfolio Showcase"
+                  src={homepageData.heroImage}
+                  alt={homepageData.heroImageAlt}
                   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   width="800"
                   height="600"
@@ -93,14 +93,12 @@ export default component$(() => {
                 {/* Stats overlay on image */}
                 <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                   <div class="grid grid-cols-2 gap-3">
-                    <div class="glass-dark rounded-xl p-4 backdrop-blur-lg border border-white/20">
-                      <div class="text-2xl font-bold text-white mb-1">80%</div>
-                      <div class="text-xs text-white/90 font-medium">Paper Reduction</div>
-                    </div>
-                    <div class="glass-dark rounded-xl p-4 backdrop-blur-lg border border-white/20">
-                      <div class="text-2xl font-bold text-white mb-1">$100k+</div>
-                      <div class="text-xs text-white/90 font-medium">Revenue Generated</div>
-                    </div>
+                    {homepageData.metrics.slice(0, 2).map((metric, index) => (
+                      <div key={index} class="glass-dark rounded-xl p-4 backdrop-blur-lg border border-white/20">
+                        <div class="text-2xl font-bold text-white mb-1">{metric.value}</div>
+                        <div class="text-xs text-white/90 font-medium">{metric.label}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -131,13 +129,13 @@ export default component$(() => {
           {/* Large Featured Card - Hero Style */}
           <div class="mb-8 scroll-reveal">
             <Link
-              href="/portfolio/print-studio"
+              href={`/portfolio/${homepageData.featuredProjects[0].slug}`}
               class="group relative block rounded-3xl overflow-hidden shadow-2xl hover:shadow-2xl transition-all duration-500"
             >
               <div class="relative aspect-[21/9] lg:aspect-[21/8]">
                 <img
-                  src="https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg"
-                  alt="In-House Print Studio Build"
+                  src={homepageData.featuredProjects[0].image}
+                  alt={homepageData.featuredProjects[0].title}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   width="1400"
                   height="600"
@@ -149,24 +147,20 @@ export default component$(() => {
                 <div class="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
                   <div class="max-w-3xl">
                     <div class="inline-block mb-4 px-4 py-2 bg-primary/20 backdrop-blur-sm rounded-lg border border-white/20">
-                      <span class="text-sm font-bold text-white">Process Innovation</span>
+                      <span class="text-sm font-bold text-white">{homepageData.featuredProjects[0].category}</span>
                     </div>
                     <h3 class="text-3xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                      In-House Print Studio Build
+                      {homepageData.featuredProjects[0].title}
                     </h3>
                     <p class="text-lg lg:text-xl text-white/90 mb-6 drop-shadow-lg">
-                      Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.
+                      {homepageData.featuredProjects[0].description}
                     </p>
                     <div class="flex gap-3 flex-wrap">
-                      <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
-                        Print Production
-                      </span>
-                      <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
-                        Apparel Design
-                      </span>
-                      <span class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
-                        Workflow Automation
-                      </span>
+                      {homepageData.featuredProjects[0].tags.map((tag, index) => (
+                        <span key={index} class="px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm font-semibold border border-white/20">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -176,80 +170,44 @@ export default component$(() => {
 
           {/* Two Column Featured Cards */}
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            {/* Card 2 - Brand Evolution */}
-            <Link
-              href="/portfolio/brand-evolution"
-              class="group relative block rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal"
-            >
-              <div class="relative aspect-[4/3]">
-                <img
-                  src="https://media.jpstas.com/brand-evolution-hero.jpg"
-                  alt="Caribbean Pools Brand Evolution"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  width="800"
-                  height="600"
-                />
-                <div class="absolute inset-0 bg-charcoal/70"></div>
+            {homepageData.featuredProjects.slice(1).map((project, index) => (
+              <Link
+                key={index}
+                href={`/portfolio/${project.slug}`}
+                class="group relative block rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal"
+                style={`animation-delay: ${index * 100}ms`}
+              >
+                <div class="relative aspect-[4/3]">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    width="800"
+                    height="600"
+                  />
+                  <div class="absolute inset-0 bg-charcoal/70"></div>
 
-                <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
-                  <div class="inline-block mb-3 px-3 py-2 bg-secondary/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
-                    <span class="text-sm font-bold text-white">Brand Identity</span>
-                  </div>
-                  <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 drop-shadow-lg">
-                    Caribbean Pools Brand Evolution
-                  </h3>
-                  <p class="text-white/90 mb-4 drop-shadow-lg">
-                    Decade-long brand transformation from $7M to $17M with unified identity across all channels
-                  </p>
-                  <div class="flex gap-2 flex-wrap">
-                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      Brand Identity
-                    </span>
-                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      Design Systems
-                    </span>
+                  <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+                    <div class="inline-block mb-3 px-3 py-2 bg-secondary/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
+                      <span class="text-sm font-bold text-white">{project.category}</span>
+                    </div>
+                    <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 drop-shadow-lg">
+                      {project.title}
+                    </h3>
+                    <p class="text-white/90 mb-4 drop-shadow-lg">
+                      {project.description}
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                      {project.tags.map((tag, tagIndex) => (
+                        <span key={tagIndex} class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-
-            {/* Card 3 - Caribbean Pools Website Redesign */}
-            <Link
-              href="/portfolio/caribbeanpools-redesign"
-              class="group relative block rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 scroll-reveal"
-              style="animation-delay: 100ms"
-            >
-              <div class="relative aspect-[4/3]">
-                <img
-                  src="https://media.jpstas.com/caribbean-hero.jpg"
-                  alt="Caribbean Pools Website Redesign"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  width="800"
-                  height="600"
-                />
-                <div class="absolute inset-0 bg-charcoal/70"></div>
-
-                <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
-                  <div class="inline-block mb-3 px-3 py-2 bg-highlight/20 backdrop-blur-sm rounded-lg border border-white/20 self-start">
-                    <span class="text-sm font-bold text-white">Web Design</span>
-                  </div>
-                  <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 drop-shadow-lg">
-                    Caribbean Pools Website Redesign
-                  </h3>
-                  <p class="text-white/90 mb-4 drop-shadow-lg">
-                    Website redesign that tells the story of the pool lifecycle with process visualization and improved engagement
-                  </p>
-                  <div class="flex gap-2 flex-wrap">
-                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      Web Design
-                    </span>
-                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm text-white rounded-lg text-xs font-semibold border border-white/20">
-                      UI/UX
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
           
           <div class="text-center mt-16 scroll-reveal">

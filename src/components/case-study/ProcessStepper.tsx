@@ -1,5 +1,5 @@
 import { component$, useSignal } from '@builder.io/qwik';
-import type { CaseStudy } from '~/types/case-study';
+import type { CaseStudy, Media } from '~/types/case-study';
 
 export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
   const hoveredNode = useSignal<number | null>(null);
@@ -36,7 +36,7 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
               return (
                 <path
                   key={i}
-                  d={`M ${isEven ? '50%' : '30%'} ${20 + i * 100} Q 50% ${60 + i * 100} ${isEven ? '30%' : '70%'} ${120 + i * 100}`}
+                  d={`M ${isEven ? 400 : 240} ${20 + i * 100} Q 400 ${60 + i * 100} ${isEven ? 240 : 560} ${120 + i * 100}`}
                   stroke="#00BF5F"
                   stroke-width="2"
                   fill="none"
@@ -95,13 +95,59 @@ export const ProcessStepper = component$(({ data }: { data: CaseStudy }) => {
                       {/* Process step visualization */}
                       <div class="lg:col-span-1">
                         <div class="relative aspect-square rounded-xl overflow-hidden shadow-lg">
-                          <img
-                            src={`https://placehold.co/300x300/${i % 3 === 0 ? '2E3192' : i % 3 === 1 ? '6B5D3F' : 'D4A14A'}/FFFFFF?text=Step+${i + 1}`}
-                            alt={`Process: ${s.title}`}
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            width="300"
-                            height="300"
-                          />
+                          {(() => {
+                            // Use gallery media if available, cycling through them for each step
+                            const galleryMedia = data.solution?.gallery || [];
+                            const mediaIndex = i % galleryMedia.length;
+                            const currentMedia = galleryMedia[mediaIndex];
+                            
+                            if (currentMedia?.src) {
+                              if (currentMedia.type === 'video') {
+                                // For videos, show thumbnail with play icon
+                                return (
+                                  <div class="relative w-full h-full">
+                                    <img
+                                      src={currentMedia.poster || `https://placehold.co/300x300/2E3192/FFFFFF?text=Video`}
+                                      alt={currentMedia.alt || `Process: ${s.title}`}
+                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                      width="300"
+                                      height="300"
+                                    />
+                                    {/* Video play icon overlay */}
+                                    <div class="absolute inset-0 flex items-center justify-center bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                      <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-charcoal ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              } else {
+                                // For images, show normally
+                                return (
+                                  <img
+                                    src={currentMedia.src}
+                                    alt={currentMedia.alt || `Process: ${s.title}`}
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    width="300"
+                                    height="300"
+                                  />
+                                );
+                              }
+                            }
+                            
+                            // Fallback to placeholder if no gallery media
+                            return (
+                              <img
+                                src={`https://placehold.co/300x300/${i % 3 === 0 ? '2E3192' : i % 3 === 1 ? '6B5D3F' : 'D4A14A'}/FFFFFF?text=Step+${i + 1}`}
+                                alt={`Process: ${s.title}`}
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                width="300"
+                                height="300"
+                              />
+                            );
+                          })()}
                         </div>
                       </div>
                     </div>

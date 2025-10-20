@@ -3,12 +3,12 @@
   "title": "In-House Print Studio Build",
   "tagline": "Building a self-sufficient creative production pipeline",
   "hero": {
-    "src": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
+    "src": "https://media.jpstas.com/portfolio/PrintStudio/hp-latex-315-printer-large-format-printing.png",
     "alt": "HP Latex printer in production"
   },
   "cardImage": {
     "src": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
-    "alt": "In-house print studio"
+    "alt": "315 printer in action"
   },
   "metrics": [
     {
@@ -56,23 +56,40 @@
         "caption": "Custom standee print detail and quality"
       },
       {
-        "src": "https://media.jpstas.com/print-studio-production.jpg",
+        "src": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
         "alt": "HP Latex printer in action",
         "caption": "Large-format printing operation"
       },
       {
-        "src": "https://media.jpstas.com/print-studio-apparel.jpg",
+        "src": "https://media.jpstas.com/portfolio/PrintStudio/caribbean-pools-htv-workstation.png",
         "alt": "Apparel pressing station",
         "caption": "Custom uniform production"
       },
       {
-        "src": "https://media.jpstas.com/print-studio-wrap-install.jpg",
+        "src": "https://media.jpstas.com/portfolio/PrintStudio/commercial-vehicle-wrap-ocean-theme-caribbean-pools.png",
         "alt": "Fleet wrap installation",
         "caption": "Vehicle wrap application process"
       },
       {
-        "src": "https://media.jpstas.com/print-studio-workflow.jpg",
+        "src": "https://media.jpstas.com/portfolio/PrintStudio/commercial-vehicle-wrap-ocean-theme-caribbean-pools.png",
+        "alt": "Fleet wrap installation",
+        "caption": "Vehicle wrap application process"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/PrintStudio/commercial-vehicle-wrap-ocean-theme-caribbean-pools.png",
+        "alt": "Fleet wrap installation",
+        "caption": "Vehicle wrap application process"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/PrintStudio/commercial-vehicle-wrap-ocean-theme-caribbean-pools.png",
+        "alt": "Fleet wrap installation",
+        "caption": "Vehicle wrap application process"
+      },
+      {
+        "src": "0c06b739b3b840c36693d3c50f1e5be7",
         "alt": "Production workflow infographic",
+        "type": "video",
+        "poster": "https://videodelivery.net/0c06b739b3b840c36693d3c50f1e5be7/thumbnails/thumbnail.jpg",
         "caption": "End-to-end production system"
       }
     ]

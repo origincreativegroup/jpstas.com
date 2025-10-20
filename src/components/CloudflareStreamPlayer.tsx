@@ -20,11 +20,11 @@ export const CloudflareStreamPlayer = component$<CloudflareStreamPlayerProps>(({
   controls = true,
 }) => {
   return (
-    <div class="relative w-full overflow-hidden rounded-2xl bg-charcoal shadow-2xl">
+    <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-2xl bg-charcoal shadow-2xl">
       <div class="relative w-full" style="padding-bottom: 56.25%;">
         <iframe
-          src={`https://customer-m033z846f826wo1v.cloudflarestream.com/${videoId}/iframe?${new URLSearchParams({
-            poster: poster || `https://customer-m033z846f826wo1v.cloudflarestream.com/${videoId}/thumbnails/thumbnail.jpg`,
+          src={`https://customer-h044ipu9nb6m47zm.cloudflarestream.com/${videoId}/iframe?${new URLSearchParams({
+            poster: poster || `https://customer-h044ipu9nb6m47zm.cloudflarestream.com/${videoId}/thumbnails/thumbnail.jpg`,
             autoplay: autoplay ? 'true' : 'false',
             loop: loop ? 'true' : 'false',
             muted: muted ? 'true' : 'false',

@@ -2,8 +2,9 @@
   "heading": "About Me",
   "subheading": "I'm a Creative Technologist who bridges the gap between design, development, and operations. With a unique blend of technical expertise and creative problem-solving, I help businesses transform their digital presence and operational efficiency.",
   "bio": "Throughout my career, I've worn many hats: designer, developer, process innovator, and technical leader. This diverse experience has given me a holistic understanding of how digital products come to life and thrive.\n\nMy approach combines design thinking with technical implementation, ensuring that solutions are not only beautiful and functional, but also scalable and maintainable.\n\nI'm passionate about continuous learning, staying current with emerging technologies, and finding innovative ways to solve complex business challenges.",
-  "photo": "https://placehold.co/600x600/2E3192/FFFFFF?text=Profile+Photo",
-  "photoAlt": "John P. Stas",
+  "src": "https://media.jpstas.com/about/Profile_headshot.png",
+  "alt": "jpstas profile headshot",
+  "caption": "jpstas profile headshot",
   "background": {
     "title": "Background",
     "paragraphs": [

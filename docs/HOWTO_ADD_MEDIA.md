@@ -66,3 +66,4 @@ You can embed Cloudflare Stream or link any direct video URL.
   ```
 
 That’s it. Your images/videos will appear in the correct sections automatically.
+

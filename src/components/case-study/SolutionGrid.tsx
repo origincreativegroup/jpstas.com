@@ -1,9 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import type { CaseStudy } from '~/types/case-study';
-import { ImageGallery } from '~/components/ImageGallery';
+import { MediaGallery } from '~/components/MediaGallery';
 import { ComparisonSlider } from '~/components/ComparisonSlider';
-import { CloudflareStreamPlayer } from '~/components/CloudflareStreamPlayer';
-import { VideoPlayer } from '~/components/VideoPlayer';
 
 export const SolutionGrid = component$(({ data }: { data: CaseStudy }) => {
   const g = data.solution;
@@ -72,52 +70,8 @@ export const SolutionGrid = component$(({ data }: { data: CaseStudy }) => {
           </div>
         )}
 
-        {/* Videos Section */}
-        {g.gallery && g.gallery.some((m) => m.type === 'video') && (
-          <div class="mt-12">
-            <div class="flex items-center justify-center gap-3 mb-8">
-              <div class="w-8 h-8 rounded-xl bg-primary flex items-center justify-center">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 class="text-2xl lg:text-3xl font-bold text-charcoal">Featured Videos</h3>
-            </div>
-            <div class="grid gap-8">
-              {g.gallery
-                .filter((m) => m.type === 'video')
-                .map((video) => {
-                  // Check if it's a Cloudflare Stream video ID (32 char hex)
-                  const isCloudflareStream = video.src.match(/^[a-f0-9]{32}$/i);
-                  
-                  return (
-                    <div key={video.src} class="w-full">
-                      {isCloudflareStream ? (
-                        <CloudflareStreamPlayer
-                          videoId={video.src}
-                          poster={video.poster}
-                          title={video.caption}
-                        />
-                      ) : (
-                        <VideoPlayer
-                          src={video.src}
-                          poster={video.poster}
-                          title={video.caption}
-                        />
-                      )}
-                      {video.caption && !isCloudflareStream && (
-                        <p class="text-sm text-charcoal/60 mt-4 text-center italic">{video.caption}</p>
-                      )}
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-        )}
-
-        {/* Image Gallery */}
-        {g.gallery && g.gallery.filter((m) => m.type !== 'video').length > 0 && (
+        {/* Unified Media Gallery */}
+        {g.gallery && g.gallery.length > 0 && (
           <div class="mt-12">
             <div class="flex items-center justify-center gap-3 mb-8">
               <div class="w-8 h-8 rounded-xl bg-primary flex items-center justify-center">
@@ -125,17 +79,9 @@ export const SolutionGrid = component$(({ data }: { data: CaseStudy }) => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 class="text-2xl lg:text-3xl font-bold text-charcoal">Visual Gallery</h3>
+              <h3 class="text-2xl lg:text-3xl font-bold text-charcoal">Media Gallery</h3>
             </div>
-            <ImageGallery
-              images={g.gallery
-                .filter((m) => m.type !== 'video')
-                .map((m, i) => ({
-                  src: m.src,
-                  alt: m.alt || `Gallery image ${i + 1}`,
-                  caption: m.caption,
-                }))}
-            />
+            <MediaGallery media={g.gallery} />
           </div>
         )}
       </div>
