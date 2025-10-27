@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, $ } from '@builder.io/qwik';
 
 interface DashboardPanelProps {
   title: string;
@@ -17,9 +17,9 @@ export const DashboardPanel = component$<DashboardPanelProps>(({
   const contentRef = useSignal<HTMLElement>();
   const chevronRef = useSignal<HTMLElement>();
 
-  const toggleExpanded = () => {
+  const toggleExpanded = $(() => {
     isExpanded.value = !isExpanded.value;
-  };
+  });
 
   return (
     <div class="dashboard-panel rounded-2xl glass p-6">
