@@ -1,0 +1,144 @@
+{
+  "metrics": [
+    {
+      "id": "revenue",
+      "label": "Revenue Generated",
+      "value": "$100k+",
+      "trend": "up",
+      "trendValue": "+25%",
+      "priority": "high",
+      "icon": "dollar",
+      "details": {
+        "description": "Total revenue generated through client projects and consulting work",
+        "breakdown": [
+          { "label": "Web Development", "value": "$45k", "percentage": 45, "color": "primary" },
+          { "label": "Design Services", "value": "$30k", "percentage": 30, "color": "secondary" },
+          { "label": "Process Consulting", "value": "$25k", "percentage": 25, "color": "highlight" }
+        ],
+        "lastUpdated": "2024-01-15"
+      }
+    },
+    {
+      "id": "cost-savings",
+      "label": "Cost Savings",
+      "value": "$250K+",
+      "trend": "up",
+      "trendValue": "+40%",
+      "priority": "high",
+      "icon": "trending-up",
+      "details": {
+        "description": "Total cost savings achieved through process optimization and automation",
+        "breakdown": [
+          { "label": "Print Studio Build", "value": "$180k", "percentage": 72, "color": "primary" },
+          { "label": "Workflow Automation", "value": "$45k", "percentage": 18, "color": "secondary" },
+          { "label": "Process Optimization", "value": "$25k", "percentage": 10, "color": "highlight" }
+        ],
+        "lastUpdated": "2024-01-15"
+      }
+    },
+    {
+      "id": "projects",
+      "label": "Projects Completed",
+      "value": "50+",
+      "trend": "up",
+      "trendValue": "+12",
+      "priority": "medium",
+      "icon": "briefcase",
+      "details": {
+        "description": "Total number of projects completed across all categories",
+        "breakdown": [
+          { "label": "Web Development", "value": "18", "percentage": 36, "color": "primary" },
+          { "label": "Brand Identity", "value": "12", "percentage": 24, "color": "secondary" },
+          { "label": "Process Design", "value": "20", "percentage": 40, "color": "highlight" }
+        ],
+        "lastUpdated": "2024-01-15"
+      }
+    },
+    {
+      "id": "experience",
+      "label": "Years Experience",
+      "value": "10+",
+      "trend": "neutral",
+      "priority": "medium",
+      "icon": "calendar",
+      "details": {
+        "description": "Years of professional experience in design, development, and operations",
+        "breakdown": [
+          { "label": "Design & UX", "value": "8 years", "percentage": 80, "color": "primary" },
+          { "label": "Development", "value": "6 years", "percentage": 60, "color": "secondary" },
+          { "label": "Operations", "value": "10 years", "percentage": 100, "color": "highlight" }
+        ],
+        "lastUpdated": "2024-01-15"
+      }
+    },
+    {
+      "id": "client-satisfaction",
+      "label": "Client Satisfaction",
+      "value": "98%",
+      "trend": "up",
+      "trendValue": "+3%",
+      "priority": "high",
+      "icon": "star",
+      "details": {
+        "description": "Average client satisfaction rating across all completed projects",
+        "breakdown": [
+          { "label": "Communication", "value": "99%", "percentage": 99, "color": "primary" },
+          { "label": "Quality", "value": "98%", "percentage": 98, "color": "secondary" },
+          { "label": "Timeliness", "value": "97%", "percentage": 97, "color": "highlight" }
+        ],
+        "lastUpdated": "2024-01-15"
+      }
+    },
+    {
+      "id": "paper-reduction",
+      "label": "Paper Reduction",
+      "value": "80%",
+      "trend": "up",
+      "trendValue": "+15%",
+      "priority": "medium",
+      "icon": "leaf",
+      "details": {
+        "description": "Reduction in paper usage through digital transformation initiatives",
+        "breakdown": [
+          { "label": "Digital Forms", "value": "60%", "percentage": 60, "color": "primary" },
+          { "label": "Online Documentation", "value": "25%", "percentage": 25, "color": "secondary" },
+          { "label": "Digital Workflows", "value": "15%", "percentage": 15, "color": "highlight" }
+        ],
+        "lastUpdated": "2024-01-15"
+      }
+    }
+  ],
+  "liveFeeds": [
+    {
+      "id": "portfolio-views",
+      "label": "Portfolio Views",
+      "value": 1247,
+      "previousValue": 1189,
+      "timestamp": 1705123200000,
+      "color": "primary"
+    },
+    {
+      "id": "contact-inquiries",
+      "label": "Contact Inquiries",
+      "value": 23,
+      "previousValue": 19,
+      "timestamp": 1705123200000,
+      "color": "secondary"
+    },
+    {
+      "id": "project-downloads",
+      "label": "Project Downloads",
+      "value": 156,
+      "previousValue": 142,
+      "timestamp": 1705123200000,
+      "color": "highlight"
+    }
+  ],
+  "config": {
+    "updateInterval": 5000,
+    "animationDuration": 1000,
+    "maxVisibleMetrics": 4,
+    "autoRefresh": true
+  }
+}
+

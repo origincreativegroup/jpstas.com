@@ -1,6 +1,11 @@
 import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import { type DocumentHead, Link, routeLoader$ } from '@builder.io/qwik-city';
+import { MetricGrid } from '~/components/dashboard/MetricGrid';
+import { DashboardPanel } from '~/components/dashboard/DashboardPanel';
+import { ProgressRing } from '~/components/dashboard/ProgressRing';
 import type { CaseStudy } from '~/types/case-study';
+import dashboardData from '../../data/site/dashboard.json';
+import type { Metric } from '../../types/dashboard';
 
 // Import all case study JSON files
 import formstackData from '~/data/formstack.json';
@@ -29,7 +34,7 @@ const caseStudyMapping = [
 export default component$(() => {
   const selectedFilter = useSignal('all');
   const isAnimating = useSignal(false);
-
+  const selectedMetric = useSignal<string | undefined>();
   // Transform case study data into project format
   const projects = caseStudyMapping.map(({ data, category, featured }) => ({
     id: data.slug,
@@ -42,6 +47,8 @@ export default component$(() => {
     slug: data.slug,
     featured,
   }));
+
+  const portfolioMetrics = useSignal<Metric[]>([]);
 
   const categories = [
     {
@@ -69,6 +76,75 @@ export default component$(() => {
   const filteredProjects = selectedFilter.value === 'all'
     ? projects
     : projects.filter(p => p.category === selectedFilter.value);
+
+  const handleMetricSelect = (metricId: string | undefined) => {
+    selectedMetric.value = metricId;
+  };
+
+  // Initialize portfolio metrics after projects and categories are defined
+  useVisibleTask$(() => {
+    const designCount = projects.filter(p => p.category === 'design').length;
+    const devCount = projects.filter(p => p.category === 'development').length;
+    const processCount = projects.filter(p => p.category === 'process').length;
+    const featuredCount = projects.filter(p => p.featured).length;
+    
+    portfolioMetrics.value = [
+      {
+        id: 'total-projects',
+        label: 'Total Projects',
+        value: projects.length,
+        trend: 'up',
+        trendValue: '+3',
+        priority: 'high',
+        icon: 'briefcase',
+        details: {
+          description: 'Total number of completed projects across all categories',
+          breakdown: [
+            { label: 'Design Projects', value: designCount, percentage: Math.round((designCount / projects.length) * 100), color: 'primary' },
+            { label: 'Development Projects', value: devCount, percentage: Math.round((devCount / projects.length) * 100), color: 'secondary' },
+            { label: 'Process Projects', value: processCount, percentage: Math.round((processCount / projects.length) * 100), color: 'highlight' }
+          ],
+          lastUpdated: new Date().toISOString().split('T')[0]
+        }
+      },
+      {
+        id: 'featured-projects',
+        label: 'Featured Projects',
+        value: featuredCount,
+        trend: 'up',
+        priority: 'high',
+        icon: 'star',
+        details: {
+          description: 'Number of featured projects showcasing key achievements',
+          lastUpdated: new Date().toISOString().split('T')[0]
+        }
+      },
+      {
+        id: 'categories',
+        label: 'Categories',
+        value: categories.length - 1, // Exclude 'all'
+        trend: 'neutral',
+        priority: 'medium',
+        icon: 'grid',
+        details: {
+          description: 'Number of project categories covered',
+          lastUpdated: new Date().toISOString().split('T')[0]
+        }
+      },
+      {
+        id: 'completion-rate',
+        label: 'Completion Rate',
+        value: '100%',
+        trend: 'up',
+        priority: 'high',
+        icon: 'check',
+        details: {
+          description: 'Percentage of projects completed successfully',
+          lastUpdated: new Date().toISOString().split('T')[0]
+        }
+      }
+    ];
+  });
 
   // Scroll reveal animation
   useVisibleTask$(() => {
@@ -106,6 +182,59 @@ export default component$(() => {
           <p class="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
             A showcase of projects spanning design, development, and operational excellence
           </p>
+        </section>
+
+        {/* Portfolio Performance Dashboard */}
+        <section class="mb-20 scroll-reveal">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              Portfolio Performance
+            </h2>
+            <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+              Key metrics and insights from completed projects
+            </p>
+          </div>
+          
+          <MetricGrid
+            metrics={portfolioMetrics.value}
+            selectedMetric={selectedMetric.value}
+            onMetricSelect={handleMetricSelect}
+            layout="executive"
+            maxColumns={4}
+          />
+
+          {/* Project Distribution */}
+          <div class="mt-8">
+            <DashboardPanel
+              title="Project Distribution by Category"
+              collapsible={true}
+              defaultExpanded={true}
+            >
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {categories.slice(1).map((category) => {
+                const categoryProjects = projects.filter(p => p.category === category.id);
+                const percentage = Math.round((categoryProjects.length / projects.length) * 100);
+                
+                return (
+                  <div key={category.id} class="text-center">
+                    <div class="mb-4">
+                      <ProgressRing 
+                        percentage={percentage}
+                        size={80}
+                        strokeWidth={6}
+                        color={category.id === 'design' ? '#2E3192' : 
+                               category.id === 'development' ? '#6B5D3F' : '#D4A14A'}
+                      />
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">{category.label}</h3>
+                    <div class="text-2xl font-bold text-text-primary mb-1">{categoryProjects.length}</div>
+                    <div class="text-sm text-text-secondary">Projects ({percentage}%)</div>
+                  </div>
+                );
+              })}
+            </div>
+            </DashboardPanel>
+          </div>
         </section>
 
         {/* Filter with Glassmorphism */}

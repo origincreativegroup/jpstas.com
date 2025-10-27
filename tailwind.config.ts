@@ -70,6 +70,10 @@ export default {
         'float': 'float 3s ease-in-out infinite',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'spin-slow': 'spin 8s linear infinite',
+        'zoom-in': 'zoomIn 0.4s ease-out forwards',
+        'zoom-out': 'zoomOut 0.4s ease-out forwards',
+        'data-flow': 'dataFlow 2s ease-in-out infinite',
+        'sparkline-draw': 'sparklineDraw 1.5s ease-out forwards',
       },
       keyframes: {
         fadeIn: {
@@ -100,6 +104,22 @@ export default {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },
         },
+        zoomIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95) translateZ(0px)' },
+          '100%': { opacity: '1', transform: 'scale(1.05) translateZ(20px)' },
+        },
+        zoomOut: {
+          '0%': { opacity: '1', transform: 'scale(1.05) translateZ(20px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateZ(0px)' },
+        },
+        dataFlow: {
+          '0%, 100%': { transform: 'translateX(0px)', opacity: '1' },
+          '50%': { transform: 'translateX(4px)', opacity: '0.8' },
+        },
+        sparklineDraw: {
+          '0%': { strokeDashoffset: '100%', opacity: '0' },
+          '100%': { strokeDashoffset: '0%', opacity: '1' },
+        },
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -107,6 +127,13 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      perspective: {
+        '1000': '1000px',
+        '2000': '2000px',
+      },
+      transformStyle: {
+        'preserve-3d': 'preserve-3d',
       },
     },
   },

@@ -1,5 +1,7 @@
 import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
+import { DashboardPanel } from '~/components/dashboard/DashboardPanel';
+import { ProgressRing } from '~/components/dashboard/ProgressRing';
 import aboutData from '../../data/site/about.json';
 
 export default component$(() => {
@@ -81,28 +83,56 @@ export default component$(() => {
           </div>
         </section>
 
-        {/* Skills */}
+        {/* Skills Dashboard */}
         <section class="mb-16 scroll-reveal">
           <h2 class="text-3xl lg:text-4xl font-bold mb-8 text-text-primary text-center">Skills & Expertise</h2>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {aboutData.skills.map((skill, index) => (
-              <div key={index} class="group rounded-2xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class={`w-12 h-12 bg-${skill.iconColor} rounded-xl flex items-center justify-center`}>
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
-                    </svg>
+              <div key={index} class="mb-6">
+                <DashboardPanel
+                  title={skill.category}
+                  collapsible={true}
+                  defaultExpanded={index < 2}
+                >
+                <div class="space-y-6">
+                  {/* Skill Level Indicators */}
+                  <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                      <ProgressRing 
+                        percentage={skill.category === 'Design & UX' ? 95 : 
+                                   skill.category === 'Development' ? 85 : 
+                                   skill.category === 'Operations' ? 90 : 80}
+                        size={60}
+                        strokeWidth={4}
+                        color={skill.iconColor === 'primary' ? '#2E3192' : 
+                               skill.iconColor === 'secondary' ? '#6B5D3F' : 
+                               skill.iconColor === 'highlight' ? '#D4A14A' : '#6B7280'}
+                      />
+                      <p class="text-sm font-medium text-text-secondary mt-2">Proficiency</p>
+                    </div>
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-text-primary">
+                        {skill.items.length}+
+                      </div>
+                      <p class="text-sm font-medium text-text-secondary">Skills</p>
+                    </div>
                   </div>
-                  <h3 class={`text-xl font-bold text-${skill.iconColor}`}>{skill.category}</h3>
+                  
+                  {/* Skills List */}
+                  <div class="space-y-3">
+                    {skill.items.map((item, itemIndex) => (
+                      <div key={itemIndex} class="flex items-center justify-between p-3 rounded-lg bg-white/50">
+                        <div class="flex items-center gap-3">
+                          <div class={`w-2 h-2 rounded-full bg-${skill.iconColor}`} />
+                          <span class="text-text-primary font-medium">{item}</span>
+                        </div>
+                        <div class={`w-3 h-3 rounded-full bg-${skill.iconColor} opacity-60`} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <ul class="space-y-3 text-text-primary">
-                  {skill.items.map((item, itemIndex) => (
-                    <li key={itemIndex} class="flex items-center gap-2">
-                      <span class={`text-${skill.iconColor}`}>✓</span> {item}
-                    </li>
-                  ))}
-                </ul>
+                </DashboardPanel>
               </div>
             ))}
           </div>

@@ -342,3 +342,111 @@ svg {
   overflow: hidden;
 }
 
+/* Dashboard Utilities */
+.dashboard-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.dashboard-card-executive {
+  min-height: 120px;
+}
+
+.dashboard-card-detailed {
+  min-height: 300px;
+  transform: scale(1.02);
+  z-index: 10;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.metric-highlight {
+  opacity: 1;
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(46, 49, 146, 0.2);
+  border-color: #2E3192;
+}
+
+.metric-dim {
+  opacity: 0.5;
+  transform: scale(0.98);
+  filter: grayscale(0.3);
+}
+
+.dashboard-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.data-point {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.data-point:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* 3D Transform Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-x-5 {
+  transform: rotateX(5deg);
+}
+
+.rotate-x-10 {
+  transform: rotateX(10deg);
+}
+
+.rotate-y-5 {
+  transform: rotateY(5deg);
+}
+
+.rotate-y-10 {
+  transform: rotateY(10deg);
+}
+
+/* Motion-safe variants for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-card,
+  .dashboard-panel,
+  .data-point {
+    transition: none;
+    transform: none !important;
+  }
+  
+  .dashboard-card:hover {
+    transform: none;
+  }
+  
+  .data-point:hover {
+    transform: none;
+  }
+}
+
