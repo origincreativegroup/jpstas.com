@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, $ } from '@builder.io/qwik';
 import { TrendIndicator } from './TrendIndicator';
 import { ProgressRing } from './ProgressRing';
 import { SparklineChart } from './SparklineChart';
@@ -17,13 +17,13 @@ export const ExecutiveMetricCard = component$<MetricCardProps>(({
   // Simple animation state
   hasAnimated.value = true;
 
-  const handleClick = () => {
+  const handleClick = $(() => {
     if (expanded) {
       onCollapse?.(metric.id);
     } else {
       onExpand?.(metric.id);
     }
-  };
+  });
 
   const getPriorityStyles = () => {
     switch (metric.priority) {

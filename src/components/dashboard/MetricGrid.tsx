@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, $ } from '@builder.io/qwik';
 import { ExecutiveMetricCard } from './ExecutiveMetricCard';
 import type { Metric, MetricGridProps } from '../../types/dashboard';
 
@@ -12,9 +12,9 @@ export const MetricGrid = component$<MetricGridProps>(({
   const gridRef = useSignal<HTMLElement>();
   // Cards will animate via CSS classes
 
-  const handleMetricClick = (metricId: string) => {
+  const handleMetricClick = $((metricId: string) => {
     onMetricSelect?.(metricId);
-  };
+  });
 
   const getGridClasses = () => {
     switch (layout) {
@@ -55,7 +55,7 @@ export const MetricGrid = component$<MetricGridProps>(({
             metric={metric}
             expanded={selectedMetric === metric.id}
             onExpand={handleMetricClick}
-            onCollapse={() => onMetricSelect?.(undefined as any)}
+            onCollapse={$(() => onMetricSelect?.(undefined as any))}
           />
         </div>
       ))}
