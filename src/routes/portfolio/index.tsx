@@ -1,4 +1,4 @@
-import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { component$, useSignal, useVisibleTask$, $ } from '@builder.io/qwik';
 import { type DocumentHead, Link, routeLoader$ } from '@builder.io/qwik-city';
 import { MetricGrid } from '~/components/dashboard/MetricGrid';
 import { DashboardPanel } from '~/components/dashboard/DashboardPanel';
@@ -77,9 +77,9 @@ export default component$(() => {
     ? projects
     : projects.filter(p => p.category === selectedFilter.value);
 
-  const handleMetricSelect = (metricId: string | undefined) => {
+  const handleMetricSelect = $((metricId: string | undefined) => {
     selectedMetric.value = metricId;
-  };
+  });
 
   // Initialize portfolio metrics after projects and categories are defined
   useVisibleTask$(() => {

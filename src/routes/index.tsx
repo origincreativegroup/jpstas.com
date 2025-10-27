@@ -2,7 +2,6 @@ import { component$, useVisibleTask$, useSignal, $ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 import { AnimatedMetric } from '~/components/AnimatedMetric';
 import { MetricGrid } from '~/components/dashboard/MetricGrid';
-import { LiveDataFeed } from '~/components/dashboard/LiveDataFeed';
 import { DashboardPanel } from '~/components/dashboard/DashboardPanel';
 import homepageData from '../data/site/homepage.json';
 import dashboardData from '../data/site/dashboard.json';
@@ -259,36 +258,6 @@ export default component$(() => {
               layout="executive"
               maxColumns={4}
             />
-          </div>
-        </div>
-      </section>
-
-      {/* Live Data Feed */}
-      <section class="py-20 bg-neutral">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div class="scroll-reveal">
-              <h2 class="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
-                Real-Time Portfolio Analytics
-              </h2>
-              <p class="text-lg text-text-secondary mb-8">
-                Live data showing portfolio engagement, inquiries, and project activity. 
-                Watch metrics update in real-time to see the impact of your work.
-              </p>
-              <div class="flex items-center gap-3">
-                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span class="text-sm font-medium text-text-secondary">Live data updates every 5 seconds</span>
-              </div>
-            </div>
-            
-            <div class="scroll-reveal">
-              <LiveDataFeed
-                dataPoints={dashboardData.liveFeeds}
-                updateInterval={5000}
-                animationDuration={1000}
-                showTrends={true}
-              />
-            </div>
           </div>
         </div>
       </section>
