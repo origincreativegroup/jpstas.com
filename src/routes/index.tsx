@@ -1,4 +1,4 @@
-import { component$, useVisibleTask$, useSignal } from '@builder.io/qwik';
+import { component$, useVisibleTask$, useSignal, $ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 import { AnimatedMetric } from '~/components/AnimatedMetric';
 import { MetricGrid } from '~/components/dashboard/MetricGrid';
@@ -34,9 +34,9 @@ export default component$(() => {
     return () => observer.disconnect();
   });
 
-  const handleMetricSelect = (metricId: string | undefined) => {
+  const handleMetricSelect = $((metricId: string | undefined) => {
     selectedMetric.value = metricId;
-  };
+  });
 
   return (
     <div class="min-h-screen bg-white">
