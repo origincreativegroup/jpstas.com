@@ -1,0 +1,46 @@
+{
+  "database": {
+    "path": "tmp/job-postings.sqlite"
+  },
+  "defaults": {
+    "postedWithinDays": 7,
+    "limitPerProvider": 40,
+    "requestDelayMs": 1500,
+    "maxPages": 3,
+    "saveRawHtml": true
+  },
+  "queries": [
+    {
+      "label": "ai_engineering_remote",
+      "keywords": [
+        "\"AI Engineer\"",
+        "\"Machine Learning Engineer\"",
+        "\"LLM Engineer\""
+      ],
+      "locations": ["Remote", "United States"],
+      "providers": ["indeed", "linkedin"],
+      "tags": ["ai", "machine-learning", "engineering"],
+      "filters": {
+        "remote": true,
+        "postedWithinDays": 7,
+        "maxPages": 2
+      }
+    },
+    {
+      "label": "ml_research",
+      "keywords": [
+        "\"Applied Scientist\"",
+        "\"Research Engineer\"",
+        "\"Generative AI\""
+      ],
+      "locations": ["Remote", "San Francisco, CA"],
+      "providers": ["indeed", "linkedin"],
+      "tags": ["ai", "research", "generative"],
+      "filters": {
+        "remote": true,
+        "postedWithinDays": 14,
+        "maxPages": 3
+      }
+    }
+  ]
+}
