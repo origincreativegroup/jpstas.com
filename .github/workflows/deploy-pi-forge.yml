@@ -35,6 +35,9 @@ jobs:
       - name: Reload nginx Docker container
         run: docker restart nginx-sites
 
+      - name: Wait for container to be ready
+        run: sleep 3
+
       - name: Health check
         run: curl -fsSL http://localhost:8000/health || (echo "Health check failed" && exit 1)
 
