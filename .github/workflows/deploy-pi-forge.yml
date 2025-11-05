@@ -29,11 +29,11 @@ jobs:
       # Self-hosted runner deployment (runs directly on pi-forge)
       - name: Sync to deployment directory
         run: |
-          mkdir -p ~/deployments/jpstas.com/current
-          rsync -av --delete dist/ ~/deployments/jpstas.com/current/
+          mkdir -p /home/admin/deployments/jpstas.com/current
+          rsync -av --delete dist/ /home/admin/deployments/jpstas.com/current/
 
       - name: Reload nginx Docker container
-        run: cd ~/docker/nginx-sites && docker compose restart nginx
+        run: cd /home/admin/docker/nginx-sites && docker compose restart nginx
 
       - name: Health check
         run: curl -fsSL http://localhost:8000/health || (echo "Health check failed" && exit 1)
