@@ -367,6 +367,21 @@ export default component$(() => {
 
 ### Registering Custom Components
 
+Custom Qwik components can be registered with Builder.io to enable drag-and-drop functionality in the visual editor.
+
+**We've created two custom components for Cloudflare integration:**
+
+1. **CloudflareR2Image** - Optimized image component for Cloudflare R2 with automatic image resizing
+2. **CloudflareStreamVideo** - Video player component for Cloudflare Stream
+
+These components are automatically registered when the app initializes in `src/root.tsx`.
+
+**For detailed documentation on using these components, see:**
+- [`docs/BUILDER_IO_CUSTOM_COMPONENTS.md`](./BUILDER_IO_CUSTOM_COMPONENTS.md) - Complete custom components guide
+- Demo page: `/builder-components-demo` - Live examples and usage
+
+**Example: Registering Your Own Component**
+
 ```typescript
 import { registerComponent } from '@builder.io/sdk-qwik';
 import { Hero } from '~/components/hero';

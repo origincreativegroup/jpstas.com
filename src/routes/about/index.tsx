@@ -2,6 +2,7 @@ import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 import { DashboardPanel } from '~/components/dashboard/DashboardPanel';
 import { ProgressRing } from '~/components/dashboard/ProgressRing';
+import { CloudflareR2Image } from '~/components/builder/CloudflareR2Image';
 import aboutData from '../../data/site/about.json';
 
 export default component$(() => {
@@ -50,12 +51,16 @@ export default component$(() => {
             <div class="lg:col-span-2">
               <div class="relative group">
                 <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                  <img
+                  <CloudflareR2Image
                     src={aboutData.src}
                     alt={aboutData.alt}
+                    width={600}
+                    height={600}
+                    optimize={true}
+                    quality={90}
+                    format="webp"
+                    lazy={true}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    width="600"
-                    height="600"
                   />
                 </div>
                 {/* Decorative elements */}

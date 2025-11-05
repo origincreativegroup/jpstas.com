@@ -24,10 +24,10 @@ export default component$(() => {
   const builderContent = useHomepageBuilder();
 
   // Use Builder.io content if available, fallback to JSON
-  const content = builderContent.value?.data || homepageData;
+  const content = builderContent.value || homepageData;
 
   // Determine if we're using Builder.io or fallback
-  const isBuilderContent = !!builderContent.value;
+  const isBuilderContent = builderContent.value !== homepageData;
 
   return (
     <div class="min-h-screen bg-white">
@@ -78,7 +78,7 @@ export default component$(() => {
         <section class="py-16 bg-gray-50">
           <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {content.metrics.map((metric, index) => (
+              {content.metrics.map((metric: { label: string; value: string }, index: number) => (
                 <div key={index} class="text-center">
                   <div class="text-4xl font-bold text-primary mb-2">
                     {metric.value}
@@ -107,7 +107,7 @@ export default component$(() => {
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {content.featuredProjects.map((project, index) => (
+              {content.featuredProjects.map((project: any, index: number) => (
                 <article key={index} class="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
                   {/* Project Image */}
                   <div class="relative aspect-[4/3] overflow-hidden">
@@ -138,7 +138,7 @@ export default component$(() => {
                     {/* Tags */}
                     {project.tags && project.tags.length > 0 && (
                       <div class="flex flex-wrap gap-2">
-                        {project.tags.map((tag, tagIndex) => (
+                        {project.tags.map((tag: string, tagIndex: number) => (
                           <span
                             key={tagIndex}
                             class="px-2 py-1 bg-white/20 backdrop-blur-sm text-xs rounded"
@@ -173,14 +173,14 @@ export default component$(() => {
               {isBuilderContent && builderContent.value && (
                 <>
                   <div>
-                    <strong>Entry ID:</strong> {builderContent.value.id}
+                    <strong>Entry ID:</strong> {(builderContent.value as any).id || 'N/A'}
                   </div>
                   <div>
                     <strong>Last Updated:</strong>{' '}
-                    {new Date(builderContent.value.lastUpdated).toLocaleString()}
+                    {(builderContent.value as any).lastUpdated ? new Date((builderContent.value as any).lastUpdated).toLocaleString() : 'N/A'}
                   </div>
                   <div>
-                    <strong>Published:</strong> {builderContent.value.published}
+                    <strong>Published:</strong> {(builderContent.value as any).published ? 'Yes' : 'No'}
                   </div>
                 </>
               )}
