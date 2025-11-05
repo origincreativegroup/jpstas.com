@@ -1,0 +1,59 @@
+name: Deploy to Pi-Forge (develop)
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    # Option 1: Use self-hosted runner (recommended - runs directly on pi-forge, no SSH needed)
+    # runs-on: self-hosted
+    # Option 2: Use ubuntu-latest with SSH (requires PI_FORGE_SSH_KEY secret)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build.client
+
+      # SSH-based deployment (for ubuntu-latest runner)
+      - name: Prep SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PI_FORGE_SSH_KEY }}
+
+      - name: Create remote path
+        run: ssh -o StrictHostKeyChecking=no admin@192.168.50.157 "mkdir -p ~/deployments/jpstas.com/current"
+
+      - name: Rsync dist to server
+        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" dist/ admin@192.168.50.157:~/deployments/jpstas.com/current/
+
+      - name: Reload nginx Docker container
+        run: ssh -o StrictHostKeyChecking=no admin@192.168.50.157 "cd ~/docker/nginx-sites && docker compose restart nginx"
+
+      - name: Health check
+        run: |
+          curl -fsSL http://192.168.50.157:8000/health || (echo "Health check failed" && exit 1)
+
+      # Alternative: Self-hosted runner deployment (uncomment if using self-hosted runner)
+      # - name: Sync to deployment directory
+      #   run: |
+      #     mkdir -p ~/deployments/jpstas.com/current
+      #     rsync -av --delete dist/ ~/deployments/jpstas.com/current/
+      #
+      # - name: Reload nginx Docker container
+      #   run: cd ~/docker/nginx-sites && docker compose restart nginx
+      #
+      # - name: Health check
+      #   run: curl -fsSL http://localhost:8000/health || (echo "Health check failed" && exit 1)
+
