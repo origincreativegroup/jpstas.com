@@ -39,7 +39,7 @@ jobs:
         run: sleep 3
 
       - name: Health check
-        run: curl -fsSL http://localhost:8000/health || (echo "Health check failed" && exit 1)
+        run: curl -fsSL http://192.168.50.157:8000/health || (echo "Health check failed" && exit 1)
 
       # Alternative: SSH-based deployment (for ubuntu-latest runner with public IP/VPN)
       # - name: Prep SSH
