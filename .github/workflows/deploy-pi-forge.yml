@@ -33,7 +33,7 @@ jobs:
           rsync -av --delete dist/ /home/admin/deployments/jpstas.com/current/
 
       - name: Reload nginx Docker container
-        run: cd /home/admin/docker/nginx-sites && docker compose restart nginx
+        run: docker restart nginx-sites
 
       - name: Health check
         run: curl -fsSL http://localhost:8000/health || (echo "Health check failed" && exit 1)
