@@ -1,16 +1,8 @@
-import { component$, useVisibleTask$, useSignal, $ } from '@builder.io/qwik';
+import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
-import { AnimatedMetric } from '~/components/AnimatedMetric';
-import { MetricGrid } from '~/components/dashboard/MetricGrid';
-import { DashboardPanel } from '~/components/dashboard/DashboardPanel';
 import homepageData from '../data/site/homepage.json';
-import dashboardData from '../data/site/dashboard.json';
-import type { Metric } from '../types/dashboard';
 
 export default component$(() => {
-  const selectedMetric = useSignal<string | undefined>();
-  const metrics = useSignal<Metric[]>(dashboardData.metrics as Metric[]);
-
   // Scroll reveal animation
   useVisibleTask$(() => {
     if (typeof window === 'undefined') return;
@@ -31,10 +23,6 @@ export default component$(() => {
     });
 
     return () => observer.disconnect();
-  });
-
-  const handleMetricSelect = $((metricId: string | undefined) => {
-    selectedMetric.value = metricId;
   });
 
   return (
@@ -231,33 +219,6 @@ export default component$(() => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Executive Dashboard */}
-      <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-16 scroll-reveal">
-            <div class="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
-              <span class="text-sm font-semibold text-primary uppercase tracking-wide">Executive Dashboard</span>
-            </div>
-            <h2 class="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
-              Key Metrics & Performance
-            </h2>
-            <p class="text-xl text-text-secondary max-w-3xl mx-auto">
-              Click any metric to explore detailed insights and breakdowns
-            </p>
-          </div>
-          
-          <div class="mb-12">
-            <MetricGrid
-              metrics={metrics.value}
-              selectedMetric={selectedMetric.value}
-              onMetricSelect={handleMetricSelect}
-              layout="executive"
-              maxColumns={4}
-            />
           </div>
         </div>
       </section>
