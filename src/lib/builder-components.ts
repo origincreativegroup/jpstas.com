@@ -10,8 +10,8 @@ import { CloudflareR2Image } from '~/components/builder/CloudflareR2Image';
 import { CloudflareStreamVideo } from '~/components/builder/CloudflareStreamVideo';
 
 /**
- * Array of registered custom components for Builder.io
- * Pass this to <RenderContent customComponents={CUSTOM_COMPONENTS} />
+ * Custom components registered with Builder.io
+ * Pass this to <Content customComponents={CUSTOM_COMPONENTS} />
  */
 export const CUSTOM_COMPONENTS: RegisteredComponent[] = [
   {

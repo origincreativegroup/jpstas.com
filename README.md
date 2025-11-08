@@ -6,6 +6,7 @@ A modern, high-performance portfolio website built with Qwik and deployed on Clo
 
 - **Framework**: [Qwik](https://qwik.builder.io/) - Resumable framework for instant page loads
 - **Styling**: Tailwind CSS
+- **CMS**: [Builder.io](https://builder.io) - Headless CMS with visual editor
 - **Hosting**: Cloudflare Pages
 - **Media Storage**: Cloudflare R2, Images & Stream
 - **Language**: TypeScript
@@ -52,6 +53,23 @@ npm run preview
 npm run serve
 ```
 
+## 🧰 Asset Pipeline (jspow)
+
+Media assets and Cloudflare mappings are curated in the [`jspow/jpstas_portfolio_assets_FINAL_with_portfolio`](../jspow/jpstas_portfolio_assets_FINAL_with_portfolio/) repository.
+
+1. Stage and describe assets in that repo (see `docs/staging-pipeline.md`).
+2. Fill R2 URLs / Stream IDs via `npm run assets:gui` in the jspow project.
+3. Inject Markdown placeholders with `node scripts/inject-assets.mjs` (dry-run first).
+4. Sync this site’s JSON data:
+   ```bash
+   cd ../jspow/jpstas_portfolio_assets_FINAL_with_portfolio
+   node scripts/sync-jpstacom.mjs --dry   # preview changes
+   node scripts/sync-jpstacom.mjs         # write updates into ../jpstas.com/src/data
+   ```
+5. Return here, review `git status`, and run `npm run build:check` before committing.
+
+The sync script reconciles hero images, gallery assets, and Cloudflare Stream videos with `src/data/*.json`, ensuring URLs stay aligned with `media.jpstas.com`.
+
 ## 🌐 Deployment
 
 The site automatically deploys to Cloudflare Pages when pushing to `main` branch.
@@ -65,20 +83,35 @@ npx wrangler pages deploy dist --project-name=jpstas-com
 
 ## 📝 Content Management
 
-### CMS Admin (Decap CMS)
+### Builder.io CMS (Primary)
 
-Access the visual CMS at **`/admin`** to manage all content without touching code:
+**Builder.io** is the primary content management system, providing a visual editor for managing all content:
+
+- ✅ Portfolio case studies (all projects)
+- ✅ Homepage and About page content
+- ✅ Site settings and SEO
+- ✅ Custom pages with drag-and-drop builder
+- ✅ Custom components (Cloudflare R2 Images, Stream Videos)
+
+**Quick Start:**
+1. Go to [Builder.io Dashboard](https://builder.io/content)
+2. Edit content visually
+3. Publish changes (live immediately)
+
+**Documentation:**
+- [Builder.io Quick Start](./docs/BUILDER_IO_QUICKSTART.md) - 5-minute setup guide
+- [Builder.io Setup Guide](./docs/BUILDER_IO_SETUP.md) - Complete setup instructions
+- [Builder.io Custom Components](./docs/BUILDER_IO_CUSTOM_COMPONENTS.md) - Component documentation
+- [Builder.io Field Mapping](./docs/BUILDER_IO_FIELD_MAPPING.md) - All model fields
+
+### CMS Admin (Decap CMS - Legacy)
+
+Access the visual CMS at **`/admin`** (legacy option):
 
 - ✅ Portfolio case studies (all projects)
 - ✅ Homepage and About page content
 - ✅ Media library (images/videos)
 - ✅ Site settings and SEO
-
-**Quick Start:**
-1. Navigate to `https://jpstas.com/admin`
-2. Authenticate with Cloudflare Access
-3. Edit content visually
-4. Publish changes (auto-commits to Git)
 
 **Documentation:**
 - [CMS Admin Guide](./docs/cms/CMS_ADMIN_GUIDE.md) - How to use the CMS
@@ -113,21 +146,30 @@ Content can also be edited directly:
 - ⚡ Instant page loads with Qwik's resumability
 - 📱 Fully responsive design
 - 🎯 SEO optimized
-- 📝 **Decap CMS** - Visual content management at `/admin`
-- 🖼️ Optimized images with Cloudflare R2 & custom CDN
+- 📝 **Builder.io CMS** - Visual content management with drag-and-drop editor
+- 🖼️ Optimized images with Cloudflare R2 & Image Resizing API
 - 🎥 Video streaming with Cloudflare Stream
 - 📧 Contact form with serverless function
 - 🚀 Edge-deployed for global performance
 - 🔐 Cloudflare Access authentication for admin
-- 💾 Git-based content storage & version control
+- 💾 Git-based content storage & version control (JSON fallback)
 
 ## 📚 Documentation
 
+### AI Agent Handshake
+- **[AI Agent Handshake](./AI-AGENT-HANDSHAKE.md)** - Complete Builder.io integration guide for AI agents
+
 ### CMS & Content Management
-- [CMS Admin Guide](./docs/cms/CMS_ADMIN_GUIDE.md) - How to use the visual CMS
-- [CMS Deployment Guide](./docs/cms/CMS_DEPLOYMENT.md) - Setup and configuration
-- [CMS Implementation Summary](./docs/cms/CMS_IMPLEMENTATION_SUMMARY.md) - Technical details
-- [CMS Options](./docs/cms/CMS_OPTIONS.md) - Alternative CMS solutions
+- **Builder.io (Primary)**
+  - [Builder.io Quick Start](./docs/BUILDER_IO_QUICKSTART.md) - 5-minute setup
+  - [Builder.io Setup Guide](./docs/BUILDER_IO_SETUP.md) - Complete setup
+  - [Builder.io Custom Components](./docs/BUILDER_IO_CUSTOM_COMPONENTS.md) - Component docs
+  - [Builder.io Field Mapping](./docs/BUILDER_IO_FIELD_MAPPING.md) - All model fields
+- **Decap CMS (Legacy)**
+  - [CMS Admin Guide](./docs/cms/CMS_ADMIN_GUIDE.md) - How to use the visual CMS
+  - [CMS Deployment Guide](./docs/cms/CMS_DEPLOYMENT.md) - Setup and configuration
+  - [CMS Implementation Summary](./docs/cms/CMS_IMPLEMENTATION_SUMMARY.md) - Technical details
+  - [CMS Options](./docs/cms/CMS_OPTIONS.md) - Alternative CMS solutions
 
 ### Deployment & Build
 - [Deployment Guide](./docs/deployment/DEPLOYMENT_GUIDE.md) - Main deployment procedures
@@ -145,6 +187,14 @@ Content can also be edited directly:
 
 ### Debugging & Development
 - [Debugging Tools Summary](./docs/debugging/DEBUGGING_TOOLS_SUMMARY.md) - Available debugging tools
+
+### Internal Operations (local only)
+These documents are gitignored and intended for internal use:
+- `docs/internal/SECRETS.md`
+- `docs/internal/OPERATIONS.md`
+- `docs/internal/WORKFLOWS.md`
+- `docs/internal/ENVIRONMENT.md`
+- `docs/internal/CONTACTS.md`
 
 ### Archive
 Historical documentation and completed project summaries are archived in [`/archive`](./archive/) for reference.

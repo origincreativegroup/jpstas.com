@@ -6,28 +6,28 @@
   "heroImageAlt": "Portfolio Showcase",
   "featuredProjects": [
     {
-      "title": "In-House Print Studio Build",
-      "slug": "print-studio",
-      "description": "Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.",
-      "image": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
-      "category": "Process Innovation",
-      "tags": ["Print Production", "Apparel Design", "Workflow Automation"]
-    },
-    {
       "title": "Caribbean Pools Brand Evolution",
       "slug": "brand-evolution",
-      "description": "Decade-long brand transformation from $7M to $17M with unified identity across all channels",
-      "image": "https://media.jpstas.com/brand-evolution-hero.jpg",
+      "description": "Unified a decades-old brand across every channel, scaling identity systems as the business grew to $17M revenue.",
+      "image": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_hero_21x9.webp",
       "category": "Brand Identity",
-      "tags": ["Brand Identity", "Design Systems"]
+      "tags": ["Design Systems", "Creative Direction", "Fleet Design"]
     },
     {
-      "title": "Caribbean Pools Website Redesign",
-      "slug": "caribbeanpools-redesign",
-      "description": "Website redesign that tells the story of the pool lifecycle with process visualization and improved engagement",
-      "image": "https://media.jpstas.com/caribbean-hero.jpg",
-      "category": "Web Design",
-      "tags": ["Web Design", "UI/UX"]
+      "title": "CaribbeanPools.com Platform Evolution",
+      "slug": "website-redesign",
+      "description": "Merged e-commerce and services into a unified digital experience that increased revenue, engagement, and conversion clarity.",
+      "image": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_hero_21x9.webp",
+      "category": "Digital Platforms",
+      "tags": ["UX Design", "E-Commerce", "Systems Integration"]
+    },
+    {
+      "title": "In-House Print Studio Build",
+      "slug": "in-house-print-studio",
+      "description": "Engineered a self-sufficient print and apparel studio that cut outsourcing costs by six figures and accelerated production.",
+      "image": "https://media.jpstas.com/portfolio/in-house-print-studio/in-house-print-studio_hero_21x9.webp",
+      "category": "Operational Systems",
+      "tags": ["Print Production", "Workflow Automation", "Process Design"]
     }
   ],
   "metrics": [

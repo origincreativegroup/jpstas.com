@@ -1,0 +1,177 @@
+{
+  "slug": "customer-experience-systems",
+  "title": "Customer Experience Systems",
+  "tagline": "Between 2016 and 2025, I helped design and implement every major customer-facing system at Caribbean Pools—from the first Mailchimp email list to a fully integrated CRM platform that connects marketing, operations, and service. By transforming paper processes, centralizing communication, and defining the structure for customer care, I helped the company deliver a faster, smarter, and more consistent experience across every touchpoint.",
+  "hero": {
+    "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_hero_21x9.webp",
+    "alt": "Wide systems map diagram connecting Mailchimp, Formstack, Jobber, and VoIP"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_hero_21x9.webp",
+    "alt": "Wide systems map diagram connecting Mailchimp, Formstack, Jobber, and VoIP"
+  },
+  "metrics": [
+    {
+      "label": "Speed",
+      "value": "invoicing and customer communications cut from days to hours."
+    },
+    {
+      "label": "Integration",
+      "value": "all major systems (Formstack, Jobber, Mailchimp, VoIP) now share live data."
+    },
+    {
+      "label": "Efficiency",
+      "value": "automated 80% of recurring communications."
+    }
+  ],
+  "meta": {
+    "tags": [
+      "customer experience",
+      "CRM",
+      "automation",
+      "workflow design",
+      "service management",
+      "digital transformation",
+      "process strategy",
+      "Workflow Design",
+      "Process Automation",
+      "CRM Integration",
+      "CX Strategy",
+      "Service System Architecture",
+      "Team Training",
+      "Digital Communication Design"
+    ],
+    "tools": [
+      "Formstack",
+      "Jobber CRM",
+      "Mailchimp",
+      "Spectrum VoIP",
+      "Adobe Audition",
+      "Google Workspace",
+      "WooCommerce",
+      "WordPress",
+      "Adobe Illustrator"
+    ]
+  },
+  "context": {
+    "problem": "The company’s communication flow was fragmented. We needed a connected workflow that united marketing, retail, service, and operations without slowing down the business.",
+    "constraints": [
+      "Technicians filled out paper forms that took days to process.",
+      "The admin team had to manually update customers and invoice completed jobs.",
+      "Retail stores and service departments had no shared system for online orders or scheduling.",
+      "Customer calls overwhelmed staff every spring, leading to long hold times and misrouted inquiries."
+    ]
+  },
+  "solution": {
+    "approach": "I introduced Mailchimp as a dedicated platform for updates, promotions, and newsletters. Then I implemented Formstack to digitize paper-heavy workflows—moving more than 100 field technicians from daily paper forms to digital submissions. I built ShopCaribbeanPools.com so local customers could schedule service and buy pool chemicals online. Worked with leadership to form a dedicated Customer Care Team and MARS (Maintenance Account Representatives) for weekly pool maintenance customers. Analyzed call logs and designed a multi-level IVR system. Assisted in selecting and rolling out Jobber CRM to match real-world workflows; completed migration before Spring 2025. Merged the legacy 2016 Mailchimp master list into Jobber-synced audiences—finally enabling fully automated, trigger-based communication tied to service events.",
+    "bullets": [
+      "Admin could view job data instantly, invoice completed jobs, and trigger follow-ups.",
+      "I designed each form to match technician workflows while giving the admin team structured data.",
+      "Chemical purchases routed to the nearest retail store.",
+      "Service requests routed to our new Customer Care Team, whose processes and procedures I helped define.",
+      "Wrote training docs and evaluation criteria to ensure consistent account management and performance.",
+      "Customers reached the right person faster; branded prompts improved clarity.",
+      "Average handling time dropped 35%, first-contact resolution improved 40%."
+    ],
+    "gallery": [
+      {
+        "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_hero_21x9.webp",
+        "alt": "Wide systems map diagram connecting Mailchimp, Formstack, Jobber, and VoIP",
+        "caption": "Systems map"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_formstack-template_4x3.webp",
+        "alt": "Formstack template with conditional logic and signatures",
+        "caption": "Formstack template"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_mailchimp-journey_16x9.webp",
+        "alt": "Mailchimp customer journey automation editor",
+        "caption": "Mailchimp journey"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_jobber-dashboard_16x9.webp",
+        "alt": "Jobber dashboard showing live jobs and synced contacts",
+        "caption": "Jobber dashboard"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_ivr-tree_4x3.webp",
+        "alt": "IVR call routing tree with main and after-hours paths",
+        "caption": "IVR tree"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_org-cc-mars_4x3.webp",
+        "alt": "Org diagram of Customer Care team and MARS roles",
+        "caption": "Org diagram"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/customer-experience-systems/customer-experience-systems_before-after-metrics_16x9.webp",
+        "alt": "Before/after metrics chart showing faster response and fewer dropped calls",
+        "caption": "Metrics comparison"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Speed",
+      "value": "invoicing and customer communications cut from days to hours."
+    },
+    {
+      "label": "Integration",
+      "value": "all major systems (Formstack, Jobber, Mailchimp, VoIP) now share live data."
+    },
+    {
+      "label": "Efficiency",
+      "value": "automated 80% of recurring communications."
+    },
+    {
+      "label": "Call experience",
+      "value": "dropped calls down 60%, smarter routing via IVR."
+    },
+    {
+      "label": "Scale",
+      "value": "digital processes supported growth to 100+ field techs without adding admin headcount."
+    }
+  ],
+  "process": [
+    {
+      "title": "Audit"
+    },
+    {
+      "title": "Form Digitization"
+    },
+    {
+      "title": "Online Access"
+    },
+    {
+      "title": "Team Development"
+    },
+    {
+      "title": "IVR Design"
+    },
+    {
+      "title": "CRM Migration"
+    },
+    {
+      "title": "Automation Integration"
+    },
+    {
+      "title": "Optimization"
+    }
+  ],
+  "reflection": {
+    "learning": "When I started managing Caribbean Pools’ communications in 2016, the company had hundreds of customers, dozens of technicians, and zero automation. Every call, form, and email was manual. Over the next nine years, I worked with leadership, admin, and field teams to design and implement a connected Customer Experience System—a framework that streamlined how we communicate, collect information, and serve customers. This transformation happened step by step, starting with Mailchimp and ending with a fully integrated CRM. Each phase solved a specific problem while building toward a unified customer experience.",
+    "reuse": [
+      "Workflow Design",
+      "Process Automation",
+      "CRM Integration",
+      "CX Strategy",
+      "Service System Architecture",
+      "Team Training",
+      "Digital Communication Design"
+    ]
+  },
+  "category": "process",
+  "featured": true,
+  "related": []
+}

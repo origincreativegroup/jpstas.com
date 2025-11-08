@@ -1,0 +1,165 @@
+{
+  "slug": "website-redesign",
+  "title": "CaribbeanPools.com Redesign & Digital Platform Evolution",
+  "tagline": "I led Caribbean Pools’ digital evolution—building its first e-commerce platform, ShopCaribbeanPools.com, and later redesigning CaribbeanPools.com in 2025 to unify both into a cohesive customer experience. The overhaul modernized UX, clarified the service journey, and turned the company’s websites into active revenue engines instead of static brochures.",
+  "hero": {
+    "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_hero_21x9.webp",
+    "alt": "Wide composite of redesigned homepage and key sections"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_hero_21x9.webp",
+    "alt": "Wide composite of redesigned homepage and key sections"
+  },
+  "metrics": [
+    {
+      "label": "Revenue efficiency",
+      "value": "online sales grew 35% year-over-year following the integration."
+    },
+    {
+      "label": "Engagement",
+      "value": "average time on site increased by 70%; bounce rate dropped below 30%."
+    },
+    {
+      "label": "Conversion clarity",
+      "value": "quote and service requests doubled within six months."
+    }
+  ],
+  "meta": {
+    "tags": [
+      "web design",
+      "UX/UI",
+      "e-commerce",
+      "digital strategy",
+      "process visualization",
+      "brand storytelling",
+      "UX Design",
+      "E-Commerce Development",
+      "Brand Storytelling",
+      "Web Architecture",
+      "Systems Integration",
+      "Process Optimization"
+    ],
+    "tools": [
+      "WordPress",
+      "WooCommerce",
+      "Adobe XD",
+      "Illustrator",
+      "Photoshop",
+      "Formstack",
+      "Google Analytics"
+    ]
+  },
+  "context": {
+    "problem": "The legacy CaribbeanPools.com was showing its age. Navigation was confusing, the design wasn’t responsive, and content updates required developer intervention. The tone didn’t reflect the premium feel of our in-store experience, and the ShopCaribbeanPools site existed as a separate ecosystem—two brands that didn’t talk to each other. We needed to unify everything under one visual and functional system: a single digital identity that could educate, inspire, and transact."
+  },
+  "solution": {
+    "approach": "I approached the project as both designer and systems integrator. The new site functioned like a living brand hub—marketing, retail, and service all under one consistent design system.",
+    "bullets": [
+      "Platform refresh: migrated both sites to a modern WordPress framework with modular block components, allowing quick page builds and future scalability.",
+      "Unified UX system: merged e-commerce functionality from ShopCaribbeanPools into the main site with consistent navigation, typography, and color palette.",
+      "Process-based storytelling: reorganized content around Design → Build → Maintain, visually mapping the full customer journey.",
+      "E-commerce optimization: rebuilt product cards and checkout flow for mobile use, simplifying forms and improving load time by ~45%.",
+      "Visual integration: pulled imagery from my drone and print studio projects—giving customers a seamless experience from ad to purchase.",
+      "Team enablement: created pre-styled content blocks and trained staff to manage updates in-house, removing the dependency on external developers."
+    ],
+    "gallery": [
+      {
+        "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_hero_21x9.webp",
+        "alt": "Wide composite of redesigned homepage and key sections",
+        "caption": "Homepage composite"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_before-after-homepage_21x9.webp",
+        "alt": "Side-by-side before/after of homepage layout",
+        "caption": "Before/after"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_ux-wireframes_16x9.webp",
+        "alt": "Wireframes showing sitemap and screen flows",
+        "caption": "Wireframes"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_mobile-checkout-flow_9x16.webp",
+        "alt": "Vertical sequence of mobile checkout screens",
+        "caption": "Mobile checkout"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_process-infographic_16x9.webp",
+        "alt": "Design → Build → Maintain process graphic",
+        "caption": "Process infographic"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_analytics-dashboard_16x9.webp",
+        "alt": "GA dashboard highlighting bounce rate and session improvements",
+        "caption": "Analytics"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/website-redesign/website-redesign_block-library_16x9.webp",
+        "alt": "CMS block library for staff-friendly updates",
+        "caption": "Block library"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Revenue efficiency",
+      "value": "online sales grew 35% year-over-year following the integration."
+    },
+    {
+      "label": "Engagement",
+      "value": "average time on site increased by 70%; bounce rate dropped below 30%."
+    },
+    {
+      "label": "Conversion clarity",
+      "value": "quote and service requests doubled within six months."
+    },
+    {
+      "label": "Operational autonomy",
+      "value": "marketing staff can now launch seasonal campaigns without outside support."
+    },
+    {
+      "label": "Brand continuity",
+      "value": "the entire digital footprint now mirrors in-store experience and printed materials for a consistent customer journey."
+    }
+  ],
+  "process": [
+    {
+      "title": "Audit"
+    },
+    {
+      "title": "Strategy"
+    },
+    {
+      "title": "Information Architecture"
+    },
+    {
+      "title": "Design System"
+    },
+    {
+      "title": "Development"
+    },
+    {
+      "title": "Integration"
+    },
+    {
+      "title": "Training"
+    },
+    {
+      "title": "Continuous Optimization"
+    }
+  ],
+  "reflection": {
+    "learning": "Back in 2019, I built ShopCaribbeanPools.com, a WooCommerce site that digitized the company’s seasonal Early-Buy Program. It replaced paper forms with a 24/7 ordering experience and handled over $100 K in sales its first year. That project proved the value of digital integration and gave us a framework for how customers wanted to interact with the brand online. By 2025, the company had outgrown that early architecture. The brand, the workflows, and the customer expectations had all evolved. The next step was to redesign CaribbeanPools.com itself—to merge the clarity and performance of the retail site with the storytelling of the parent brand. My goal was simple: make the website feel like the company we had become—modern, transparent, and genuinely helpful.",
+    "reuse": [
+      "UX Design",
+      "E-Commerce Development",
+      "Brand Storytelling",
+      "Web Architecture",
+      "Systems Integration",
+      "Process Optimization"
+    ]
+  },
+  "category": "development",
+  "featured": true,
+  "related": []
+}

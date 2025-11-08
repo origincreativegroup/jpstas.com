@@ -27,6 +27,8 @@ export type CaseStudy = {
   impact: Metric[];
   process: Step[];
   reflection?: { learning: string; reuse?: string[] };
+  category?: 'design' | 'development' | 'process';
+  featured?: boolean;
   related?: { title: string; href: string }[];
 };
 

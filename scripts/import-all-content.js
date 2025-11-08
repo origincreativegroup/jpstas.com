@@ -58,16 +58,11 @@ const models = [
  * Portfolio projects to import
  */
 const portfolioProjects = [
-  'printstudio',
   'brand-evolution',
-  'caribbeanpools',
-  'deckhand',
-  'drone-media',
-  'formstack',
-  'ivr-system',
-  'email-marketing',
-  'mindforge',
-  'shopcaribbeanpools',
+  'website-redesign',
+  'customer-experience-systems',
+  'in-house-print-studio',
+  'media-campaigns',
 ];
 
 /**
@@ -271,7 +266,7 @@ async function main() {
   console.log('=' .repeat(60));
 
   for (const projectSlug of portfolioProjects) {
-    const projectData = readJSON(`src/data/${projectSlug}.json`);
+    const projectData = readJSON(`src/data/portfolio/${projectSlug}.json`);
 
     if (projectData) {
       const result = await createContent(

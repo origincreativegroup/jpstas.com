@@ -1,0 +1,175 @@
+{
+  "slug": "brand-evolution",
+  "title": "Caribbean Pools Brand Evolution",
+  "tagline": "Over more than a decade, I guided Caribbean Pools through a complete brand evolution—modernizing its identity, creating unified design systems across print, apparel, fleet, and digital, and aligning the company’s creative output with its operational growth. The brand system I built became the foundation for every visual and communication channel, scaling with the company as it grew from $7M to $17M in annual revenue.",
+  "hero": {
+    "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_hero_21x9.webp",
+    "alt": "Hero composite of new logo system across fleet, apparel, signage"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_hero_21x9.webp",
+    "alt": "Hero composite of new logo system across fleet, apparel, signage"
+  },
+  "metrics": [
+    {
+      "label": "Consistency",
+      "value": "Achieved 100% brand alignment across 100+ fleet vehicles, 3 retail stores, and 120+ employee uniforms."
+    },
+    {
+      "label": "Cost savings",
+      "value": "Eliminated $250K+ in outsourced design and print costs within three years."
+    },
+    {
+      "label": "Efficiency",
+      "value": "Reduced turnaround for new marketing materials from 7 days to 48 hours."
+    }
+  ],
+  "meta": {
+    "tags": [
+      "branding",
+      "design systems",
+      "creative direction",
+      "marketing strategy",
+      "print production",
+      "fleet design",
+      "apparel production",
+      "Brand Identity Design",
+      "Creative Direction",
+      "Print Production",
+      "Process Design",
+      "System Thinking",
+      "Marketing Strategy"
+    ],
+    "tools": [
+      "Adobe Illustrator",
+      "Photoshop",
+      "InDesign",
+      "HP Latex 315 Printer-Cutter",
+      "HTV Vinyl",
+      "Graphtec Cutter",
+      "Mailchimp",
+      "WordPress"
+    ]
+  },
+  "context": {
+    "problem": "Caribbean Pools’ growth was outpacing its brand infrastructure. Without consistent guidelines, creative output was fragmented and expensive to maintain. The company needed a visual foundation as robust and efficient as its operations.",
+    "constraints": [
+      "Multiple vendors produced inconsistent materials.",
+      "Color and logo variations diluted recognition.",
+      "Employees lacked pride in branded apparel because nothing matched.",
+      "Marketing campaigns took longer and cost more due to redundant design work."
+    ]
+  },
+  "solution": {
+    "approach": "I approached the rebrand not as a one-time design project but as a system engineering challenge—how to make creativity scalable. This wasn’t just about making things look nice—it was about creating a repeatable, documented system that anyone in the company could use to produce brand-correct materials without designer intervention.",
+    "bullets": [
+      "Refined the original logo into a flexible mark with multiple lockups suitable for print, embroidery, and digital use.",
+      "Established a cohesive color palette with Pantone-matched vinyl and fabric samples for consistency across mediums.",
+      "Chose modern geometric sans-serif typography that balanced approachability and professionalism.",
+      "Built a centralized asset library with templates for business cards, signage, uniforms, and vehicle wraps.",
+      "Created guidelines for logo usage, spacing, and color application—simple enough for staff to follow but robust enough for vendors.",
+      "Introduced digital templates for social media, ads, and web banners so seasonal marketing could be produced quickly in-house.",
+      "Leveraged the in-house print studio I built to handle all large-format and apparel production internally.",
+      "Designed cut files and press-ready documents optimized for the HP Latex 315 printer and Graphtec cutter.",
+      "Worked cross-functionally with field and retail teams to deploy new branding assets across every location and fleet vehicle.",
+      "Conducted short workshops with management and field staff to explain why consistency mattered.",
+      "Produced an internal “Brand Quick Guide” summarizing usage standards and visual references."
+    ],
+    "gallery": [
+      {
+        "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_hero_21x9.webp",
+        "alt": "Hero composite of new logo system across fleet, apparel, signage",
+        "caption": "New system applied across touchpoints"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_logo-timeline_21x9.webp",
+        "alt": "Logo evolution timeline showing old vs new wordmark, color, spacing",
+        "caption": "Brand modernization"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_fleet-wrap-01_3x2.webp",
+        "alt": "Branded service truck wrap photographed on location",
+        "caption": "Service fleet wrap"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_fleet-wrap-02_3x2.webp",
+        "alt": "Branded construction trailer wrap with large mark",
+        "caption": "Construction fleet wrap"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_uniforms-overview_4x3.webp",
+        "alt": "Department color-coded uniforms flat lay",
+        "caption": "Uniform system overview"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_retail-signage_16x9.webp",
+        "alt": "Retail storefront signage with updated typography and palette",
+        "caption": "Retail signage"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/brand-evolution/brand-evolution_brand-guide-spreads_16x9.webp",
+        "alt": "Internal brand guide spreads with color, type, usage examples",
+        "caption": "Brand guide"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Consistency",
+      "value": "Achieved 100% brand alignment across 100+ fleet vehicles, 3 retail stores, and 120+ employee uniforms."
+    },
+    {
+      "label": "Cost savings",
+      "value": "Eliminated $250K+ in outsourced design and print costs within three years."
+    },
+    {
+      "label": "Efficiency",
+      "value": "Reduced turnaround for new marketing materials from 7 days to 48 hours."
+    },
+    {
+      "label": "Perception",
+      "value": "Strengthened brand trust with customers, contractors, and suppliers through cohesive visuals."
+    },
+    {
+      "label": "Culture",
+      "value": "Employees took renewed pride in the brand; staff began submitting photos of new trucks and uniforms for social use—something that never happened before."
+    }
+  ],
+  "process": [
+    {
+      "title": "Audit"
+    },
+    {
+      "title": "Research"
+    },
+    {
+      "title": "System Design"
+    },
+    {
+      "title": "Brand Modernization"
+    },
+    {
+      "title": "Implementation"
+    },
+    {
+      "title": "Training"
+    },
+    {
+      "title": "Refinement"
+    }
+  ],
+  "reflection": {
+    "learning": "When I joined Caribbean Pools, the company had been around for decades but had never established a unified identity. Each department—service, retail, construction—had its own look. Logos varied from truck to truck, uniforms didn’t match signage, and color palettes shifted depending on which vendor handled the job that week. It wasn’t a lack of care; it was a lack of system. So I built one. Starting in 2015, I began developing the Caribbean Pools Design System, a set of scalable, production-ready assets and processes that gave the company one visual language—something it had never truly had before. Over time, this system expanded into every aspect of the business. I didn’t just update logos; I engineered workflows that made brand consistency automatic. From fleet graphics to employee apparel to web design templates, every creative deliverable stemmed from a single, unified set of standards.",
+    "reuse": [
+      "Brand Identity Design",
+      "Creative Direction",
+      "Print Production",
+      "Process Design",
+      "System Thinking",
+      "Marketing Strategy"
+    ]
+  },
+  "category": "design",
+  "featured": true,
+  "related": []
+}

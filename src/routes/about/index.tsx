@@ -56,9 +56,7 @@ export default component$(() => {
                     alt={aboutData.alt}
                     width={600}
                     height={600}
-                    optimize={true}
-                    quality={90}
-                    format="webp"
+                    optimize={false}
                     lazy={true}
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />

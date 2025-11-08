@@ -23,16 +23,11 @@ const BUILDER_PRIVATE_KEY = 'bpk-b9e456431ef94b648ed510057e7dec99';
  * Portfolio projects to import
  */
 const portfolioProjects = [
-  'printstudio',
   'brand-evolution',
-  'caribbeanpools',
-  'deckhand',
-  'drone-media',
-  'formstack',
-  'ivr-system',
-  'email-marketing',
-  'mindforge',
-  'shopcaribbeanpools',
+  'website-redesign',
+  'customer-experience-systems',
+  'in-house-print-studio',
+  'media-campaigns',
 ];
 
 /**
@@ -180,7 +175,7 @@ async function main() {
   console.log('-'.repeat(60));
 
   for (const projectSlug of portfolioProjects) {
-    const projectData = readJSON(`src/data/${projectSlug}.json`);
+    const projectData = readJSON(`src/data/portfolio/${projectSlug}.json`);
 
     if (projectData) {
       const result = await createContent(
@@ -199,9 +194,6 @@ async function main() {
       }
 
       await new Promise(resolve => setTimeout(resolve, 500));
-    } else {
-      console.log(`\n📤 ${projectSlug}`);
-      console.log(`   ⚠️  Data file not found, skipping`);
     }
   }
 

@@ -7,7 +7,7 @@
 
 import { component$ } from '@builder.io/qwik';
 import { routeLoader$, type DocumentHead } from '@builder.io/qwik-city';
-import { RenderContent, fetchOneEntry, getBuilderSearchParams } from '@builder.io/sdk-qwik';
+import { Content, fetchOneEntry, getBuilderSearchParams } from '@builder.io/sdk-qwik';
 import { BUILDER_PUBLIC_KEY } from '~/lib/builder';
 import { CUSTOM_COMPONENTS } from '~/lib/builder-components';
 
@@ -56,7 +56,7 @@ export default component$(() => {
 
   // Render Builder.io content with custom components
   return (
-    <RenderContent
+    <Content
       model="page"
       content={content.value}
       apiKey={BUILDER_PUBLIC_KEY}

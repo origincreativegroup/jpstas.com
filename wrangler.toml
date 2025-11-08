@@ -6,6 +6,7 @@ pages_build_output_dir = "dist"
 # Environment variables
 [vars]
 CLOUDFLARE_ACCOUNT_ID = "fa917615d33ac203929027798644acef"
+# Note: CLOUDFLARE_API_TOKEN should NOT be stored here - use GitHub secrets or wrangler secret put
 
 # R2 bucket binding for media storage
 [[r2_buckets]]

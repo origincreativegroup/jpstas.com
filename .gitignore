@@ -34,3 +34,7 @@ tmp/
 server/
 build-debug-report.json
 *.tsbuildinfo
+
+# Internal documentation (local-only)
+docs/internal/
+docs/internal/**

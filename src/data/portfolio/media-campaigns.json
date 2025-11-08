@@ -1,0 +1,179 @@
+{
+  "slug": "media-campaigns",
+  "title": "Caribbean Pools Media Campaigns",
+  "tagline": "From 2017 to 2025, I led all visual media creation at Caribbean Pools—concepting, shooting, editing, and distributing photo, video, and digital graphics that redefined how the company presented itself. By building an in-house media ecosystem capable of handling everything from cinematic drone work to animated social content, I turned marketing into a repeatable production engine that drove engagement, sales, and brand trust.",
+  "hero": {
+    "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_hero_21x9.webp",
+    "alt": "Cinematic still showing pool installation with strong lighting and brand tones"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_hero_21x9.webp",
+    "alt": "Cinematic still showing pool installation with strong lighting and brand tones"
+  },
+  "metrics": [
+    {
+      "label": "Engagement",
+      "value": "social interactions grew more than 400% between 2017 and 2025."
+    },
+    {
+      "label": "Reach",
+      "value": "video views averaged 5× higher than static image posts."
+    },
+    {
+      "label": "Efficiency",
+      "value": "production turnaround for campaigns dropped from two weeks to three days."
+    }
+  ],
+  "meta": {
+    "tags": [
+      "media production",
+      "photography",
+      "videography",
+      "motion graphics",
+      "social media marketing",
+      "storytelling",
+      "content strategy",
+      "Photography",
+      "Cinematography",
+      "Drone Operation",
+      "Motion Design",
+      "Storyboarding",
+      "Video Editing",
+      "Content Strategy",
+      "Analytics"
+    ],
+    "tools": [
+      "DJI Phantom 4",
+      "Custom FPV Drones",
+      "Sony Alpha DSLR",
+      "GoPro Hero 11",
+      "Adobe Premiere Pro",
+      "After Effects",
+      "DaVinci Resolve",
+      "Photoshop",
+      "Lightroom",
+      "Illustrator",
+      "Meta Business Suite",
+      "Later App"
+    ]
+  },
+  "context": {
+    "problem": "The company’s visuals were fragmented. Each department created its own marketing content using different styles, filters, and tone. Outsourced campaigns lacked authenticity, and internal posts lacked polish. We needed a unified creative process that could scale—one that could capture real craftsmanship in the field, translate it into usable media, and distribute it across every platform without losing coherence or momentum."
+  },
+  "solution": {
+    "approach": "I built a media workflow that covered the full creative lifecycle—from concept to camera to campaign. Before any shoot, I created lightweight storyboards and shot lists mapped to campaign goals. Whether it was a spring promotion or a highlight reel for new pool builds, every frame served a purpose. Using a mix of DSLR, mirrorless, and drone equipment, I captured both planned footage and candid moments that showcased craftsmanship and emotion. FPV drones provided dynamic movement; stabilized gimbals gave cinematic polish. I also photographed products, retail displays, and staff portraits for seasonal campaigns. Footage and photos flowed into a unified editing pipeline: color correction in DaVinci Resolve, compositing and motion graphics in After Effects, and still retouching in Photoshop and Lightroom. I created branded templates—lower thirds, logo animations, LUTs—that standardized our look across every video. From those assets, I designed campaign-ready deliverables: Each asset was tagged, cataloged, and stored in a shared library for quick reuse by the marketing and sales teams. I scheduled campaigns through Meta Business Suite and tracked performance using platform analytics. Data on engagement, retention, and shares directly influenced what we filmed next—closing the feedback loop between content and audience insight.",
+    "bullets": [
+      "short-form social videos",
+      "web hero animations",
+      "before/after carousels",
+      "printed collateral layouts",
+      "internal training clips"
+    ],
+    "gallery": [
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_hero_21x9.webp",
+        "alt": "Cinematic still showing pool installation with strong lighting and brand tones",
+        "caption": "Cinematic hero"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_storyboard_4x3.webp",
+        "alt": "Storyboard or shot list sketch scan",
+        "caption": "Storyboard"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_bts-rig_3x2.webp",
+        "alt": "Behind-the-scenes rig photo of camera/drone setup",
+        "caption": "BTS rig"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_drone-still-01_16x9.webp",
+        "alt": "Aerial drone still of finished pool",
+        "caption": "Drone still"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_dslr-still-01_3x2.webp",
+        "alt": "DSLR still with corrected color and composition",
+        "caption": "DSLR still"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_timeline-edit_16x9.webp",
+        "alt": "Editing timeline screenshot with layers and branded LUTs",
+        "caption": "Editing timeline"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_mograph-frames_16x9.webp",
+        "alt": "Motion graphic frames showing logo lockup and lower thirds",
+        "caption": "Motion frames"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/media-campaigns/media-campaigns_social-grid_1x1.webp",
+        "alt": "Instagram grid layout showing consistent brand tiles",
+        "caption": "Social grid"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Engagement",
+      "value": "social interactions grew more than 400% between 2017 and 2025."
+    },
+    {
+      "label": "Reach",
+      "value": "video views averaged 5× higher than static image posts."
+    },
+    {
+      "label": "Efficiency",
+      "value": "production turnaround for campaigns dropped from two weeks to three days."
+    },
+    {
+      "label": "Brand impact",
+      "value": "consistent, high-quality visuals became a key differentiator in regional advertising and sales presentations."
+    },
+    {
+      "label": "Cultural shift",
+      "value": "employees began contributing ideas and behind-the-scenes footage because they were proud of how their work looked online."
+    }
+  ],
+  "process": [
+    {
+      "title": "Concept"
+    },
+    {
+      "title": "Storyboard"
+    },
+    {
+      "title": "Capture"
+    },
+    {
+      "title": "Edit"
+    },
+    {
+      "title": "Design"
+    },
+    {
+      "title": "Publish"
+    },
+    {
+      "title": "Analyze"
+    },
+    {
+      "title": "Iterate"
+    }
+  ],
+  "reflection": {
+    "learning": "When I joined Caribbean Pools, marketing visuals were whatever we could grab on a phone between service calls. The work was exceptional—the visuals weren’t. Starting in 2017, I took ownership of the company’s media production. I designed and implemented a system for how the brand documented, produced, and published its story. Every campaign—whether a short-form Instagram reel, a banner animation, or a seasonal ad—originated from a deliberate creative process built to move fast and look professional. I wasn’t just shooting content; I was building an internal creative pipeline. Over eight years, that pipeline expanded from simple job-site photography into a full-scale media operation covering drone video, DSLR photography, graphic design, and digital motion work. The goal was consistency: capture the craftsmanship, tell the story clearly, and make sure every image that left our office looked like it came from the same brand.",
+    "reuse": [
+      "Photography",
+      "Cinematography",
+      "Drone Operation",
+      "Motion Design",
+      "Storyboarding",
+      "Video Editing",
+      "Content Strategy",
+      "Analytics"
+    ]
+  },
+  "category": "design",
+  "featured": false,
+  "related": []
+}
