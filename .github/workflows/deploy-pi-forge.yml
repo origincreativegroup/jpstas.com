@@ -1,8 +1,8 @@
-name: Deploy to Pi-Forge (Local Development)
+name: Deploy to Pi-Forge
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
   workflow_dispatch:
 
 env:
