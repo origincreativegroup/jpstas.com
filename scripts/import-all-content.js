@@ -16,8 +16,19 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const BUILDER_PRIVATE_KEY = 'bpk-b9e456431ef94b648ed510057e7dec99';
-const BUILDER_PUBLIC_KEY = '6dd7a0cce2ea426ebd00be77c2af34e3';
+const { BUILDER_PRIVATE_KEY, BUILDER_PUBLIC_KEY } = process.env;
+
+if (!BUILDER_PRIVATE_KEY) {
+  console.error('❌ Missing BUILDER_PRIVATE_KEY environment variable.');
+  console.error('   Set it before running this script (see .env.example for details).');
+  process.exit(1);
+}
+
+if (!BUILDER_PUBLIC_KEY) {
+  console.error('❌ Missing BUILDER_PUBLIC_KEY environment variable.');
+  console.error('   Set it before running this script (see .env.example for details).');
+  process.exit(1);
+}
 
 const API_BASE = 'https://builder.io/api/v1';
 
@@ -154,7 +165,7 @@ function readJSON(filepath) {
 async function main() {
   console.log('🚀 Builder.io Content Import');
   console.log('=' .repeat(60));
-  console.log(`API Key: ${BUILDER_PRIVATE_KEY.substring(0, 10)}...`);
+  console.log(`Using Builder API key (masked): ${BUILDER_PRIVATE_KEY.substring(0, 6)}…`);
   console.log('=' .repeat(60));
 
   const results = {

@@ -17,7 +17,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const BUILDER_PRIVATE_KEY = 'bpk-b9e456431ef94b648ed510057e7dec99';
+const { BUILDER_PRIVATE_KEY } = process.env;
+
+if (!BUILDER_PRIVATE_KEY) {
+  console.error('❌ Missing BUILDER_PRIVATE_KEY environment variable.');
+  console.error('   Set it before running this script (see .env.example for details).');
+  process.exit(1);
+}
 
 /**
  * Portfolio projects to import

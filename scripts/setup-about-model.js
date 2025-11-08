@@ -5,7 +5,13 @@
  * Run: node scripts/setup-about-model.js
  */
 
-const BUILDER_PRIVATE_KEY = 'bpk-b9e456431ef94b648ed510057e7dec99';
+const { BUILDER_PRIVATE_KEY } = process.env;
+
+if (!BUILDER_PRIVATE_KEY) {
+  console.error('❌ Missing BUILDER_PRIVATE_KEY environment variable.');
+  console.error('   Set it before running this script (see .env.example for details).');
+  process.exit(1);
+}
 
 async function setupAboutPageModel() {
   console.log('🔧 Setting up about-page model in Builder.io...\n');
