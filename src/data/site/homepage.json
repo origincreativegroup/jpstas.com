@@ -36,6 +36,46 @@
       "image": "https://media.jpstas.com/media-campaigns-hero.jpg",
       "category": "Media Production",
       "tags": ["Photography", "Videography", "Content Strategy"]
+    },
+    {
+      "title": "Operations Dashboard",
+      "slug": "operations-dashboard",
+      "description": "Real-time operational intelligence platform providing executive insights and performance tracking",
+      "image": "https://media.jpstas.com/portfolio/Dashboard/dashboard-overview.png",
+      "category": "Digital Tools",
+      "tags": ["Data Visualization", "Process Automation", "Analytics"]
+    },
+    {
+      "title": "Fleet Branding System",
+      "slug": "fleet-branding",
+      "description": "Comprehensive vehicle wrap design system maintaining brand consistency across 50+ service vehicles",
+      "image": "https://media.jpstas.com/portfolio/FleetBranding/fleet-showcase.jpg",
+      "category": "Brand Application",
+      "tags": ["Vehicle Graphics", "Brand Guidelines", "Production"]
+    },
+    {
+      "title": "Marketing Automation Platform",
+      "slug": "marketing-automation",
+      "description": "Custom email marketing and automation system driving customer engagement and retention",
+      "image": "https://media.jpstas.com/portfolio/Marketing/automation-platform.png",
+      "category": "Digital Marketing",
+      "tags": ["Email Marketing", "Automation", "CRM Integration"]
+    },
+    {
+      "title": "Apparel & Uniform Design",
+      "slug": "apparel-design",
+      "description": "Professional uniform program elevating team presentation and brand recognition in the field",
+      "image": "https://media.jpstas.com/portfolio/Apparel/uniform-collection.jpg",
+      "category": "Brand Application",
+      "tags": ["Apparel Design", "Screen Printing", "Embroidery"]
+    },
+    {
+      "title": "Social Media Content Library",
+      "slug": "content-library",
+      "description": "Centralized media asset management system streamlining content production and distribution",
+      "image": "https://media.jpstas.com/portfolio/ContentLibrary/asset-library.png",
+      "category": "Media Production",
+      "tags": ["Asset Management", "Content Strategy", "Digital Organization"]
     }
   ],
   "metrics": [
