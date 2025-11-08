@@ -1,7 +1,7 @@
 {
   "slug": "caribbeanpools-redesign",
-  "title": "Caribbean Pools Website & E-Commerce Platform",
-  "tagline": "Complete digital transformation from legacy website to modern e-commerce ecosystem",
+  "title": "CaribbeanPools.com Redesign & Digital Platform Evolution",
+  "tagline": "I led Caribbean Pools' digital evolution—building its first e-commerce platform, ShopCaribbeanPools.com, and later redesigning CaribbeanPools.com in 2025 to unify both into a cohesive customer experience. The overhaul modernized UX, clarified the service journey, and turned the company's websites into active revenue engines instead of static brochures.",
   "hero": {
     "src": "https://media.jpstas.com/portfolio/caribbeanpools.com/caribbeanpools-website-redesign-homepage-drone-banner.png",
     "alt": "Caribbean Pools website and e-commerce platform"
@@ -12,45 +12,43 @@
   },
   "metrics": [
     {
-      "label": "Year 1 Revenue",
-      "value": "$100K+"
+      "label": "Online Sales Growth",
+      "value": "↑ 35% YoY"
     },
     {
-      "label": "Engagement",
-      "value": "↑ 45%"
+      "label": "Time on Site",
+      "value": "↑ 70%"
     },
     {
-      "label": "Sales Cycle",
-      "value": "30% shorter"
+      "label": "Quote Requests",
+      "value": "2x in 6mo"
     }
   ],
   "meta": {
-    "tags": ["E-Commerce", "UI/UX Design", "WordPress", "WooCommerce", "Web Development"],
-    "tools": ["Figma", "WordPress", "WooCommerce", "Jobber CRM", "Mailchimp", "Custom PHP"],
-    "year": "2020-2023",
+    "tags": ["Web Design", "UX/UI", "E-Commerce", "Digital Strategy", "Process Visualization", "Brand Storytelling"],
+    "tools": ["WordPress", "WooCommerce", "Adobe XD", "Illustrator", "Photoshop", "Formstack", "Google Analytics"],
+    "year": "2019-2025",
     "client": "Caribbean Pools & Spas"
   },
   "context": {
-    "problem": "Legacy website failed to communicate process clarity and craftsmanship, while all retail sales were handled manually by phone or paper forms. This created conversion issues, seasonal bottlenecks, and missed revenue opportunities.",
+    "problem": "The legacy CaribbeanPools.com was showing its age. Navigation was confusing, the design wasn't responsive, and content updates required developer intervention. The tone didn't reflect the premium feel of our in-store experience, and the ShopCaribbeanPools site existed as a separate ecosystem—two brands that didn't talk to each other. We needed to unify everything under one visual and functional system: a single digital identity that could educate, inspire, and transact.",
     "constraints": [
-      "Must integrate with existing service CRM and inventory",
-      "Need to digitize complex Early Buy program logic",
-      "Support seasonal content updates and promotions",
-      "Mobile-first for on-site consultations and customer ordering",
-      "Minimal e-commerce team experience"
-    ],
-    "quote": "Show the journey, not just the product. Let customers order when it's convenient for them."
+      "Navigation was confusing and not user-friendly",
+      "Design wasn't responsive for mobile devices",
+      "Content updates required developer intervention",
+      "Two separate sites (CaribbeanPools.com and ShopCaribbeanPools.com) with disconnected branding",
+      "Tone didn't reflect premium in-store experience"
+    ]
   },
   "solution": {
-    "approach": "Complete digital ecosystem redesign combining responsive WordPress architecture with WooCommerce e-commerce. Integrated process storytelling, custom lifecycle illustrations, Early Buy program automation, and seamless CRM connectivity.",
+    "approach": "I approached the project as both designer and systems integrator. The new site functioned like a living brand hub—marketing, retail, and service all under one consistent design system.",
     "bullets": [
-      "Comprehensive sitemap, wireframes, and information architecture",
-      "Custom pool lifecycle illustrations and process infographics",
-      "Modular WordPress CMS with custom blocks for content flexibility",
-      "ShopCaribbeanPools.com e-commerce platform with Early Buy logic",
-      "Bi-directional Jobber CRM and inventory integration",
-      "Mobile-first checkout and consultation experience",
-      "Automated email marketing and promotional workflows"
+      "Platform refresh: Migrated both sites to a modern WordPress framework with modular block components, allowing quick page builds and future scalability",
+      "Unified UX system: Merged e-commerce functionality from ShopCaribbeanPools into the main site with consistent navigation, typography, and color palette",
+      "Process-based storytelling: Reorganized content around Design → Build → Maintain, visually mapping the full customer journey",
+      "E-commerce optimization: Rebuilt product cards and checkout flow for mobile use, simplifying forms and improving load time by ~45%",
+      "Visual integration: Pulled imagery from my drone and print studio projects—giving customers a seamless experience from ad to purchase",
+      "Team enablement: Created pre-styled content blocks and trained staff to manage updates in-house, removing the dependency on external developers"
     ],
     "gallery": [
       {
@@ -89,80 +87,70 @@
   },
   "impact": [
     {
-      "label": "First-Year E-Commerce Revenue",
-      "value": "$100K+"
+      "label": "Revenue Efficiency",
+      "value": "+35% YoY",
+      "description": "Online sales grew 35% year-over-year following the integration"
     },
     {
-      "label": "Website Engagement",
-      "value": "+45%"
+      "label": "Time on Site",
+      "value": "+70%",
+      "description": "Average time on site increased by 70%"
     },
     {
-      "label": "Sales Cycle Duration",
-      "value": "-30%"
+      "label": "Bounce Rate",
+      "value": "<30%",
+      "description": "Bounce rate dropped below 30%"
     },
     {
-      "label": "Support Call Volume",
-      "value": "-30%"
+      "label": "Quote & Service Requests",
+      "value": "2x",
+      "description": "Quote and service requests doubled within six months"
     },
     {
-      "label": "Order Accessibility",
-      "value": "24/7"
+      "label": "Operational Autonomy",
+      "value": "Achieved",
+      "description": "Marketing staff can now launch seasonal campaigns without outside support"
     },
     {
-      "label": "Lead Quality",
-      "value": "Improved"
+      "label": "Brand Continuity",
+      "value": "Unified",
+      "description": "The entire digital footprint now mirrors in-store experience and printed materials for a consistent customer journey"
     }
   ],
   "process": [
     {
-      "title": "Research & Discovery",
-      "description": "Customer interviews, sales process mapping, competitor analysis, and journey mapping"
+      "title": "Audit",
+      "description": "Evaluate existing site performance, user feedback, and identify pain points in navigation and content management"
+    },
+    {
+      "title": "Strategy",
+      "description": "Define unified brand approach and goals for merging two separate platforms into one cohesive experience"
     },
     {
       "title": "Information Architecture",
-      "description": "Site structure, navigation design, and low-fidelity wireframes for both platforms"
+      "description": "Reorganize site structure around Design → Build → Maintain customer journey and map full user experience"
     },
     {
-      "title": "Visual Design",
-      "description": "High-fidelity mockups, custom pool lifecycle illustrations, and brand application"
+      "title": "Design System",
+      "description": "Create modular block components, unified typography, color palette, and responsive templates"
     },
     {
-      "title": "WordPress Development",
-      "description": "Custom theme build, modular content blocks, and responsive templates"
-    },
-    {
-      "title": "E-Commerce Build",
-      "description": "WooCommerce platform, Early Buy program logic, and mobile checkout optimization"
+      "title": "Development",
+      "description": "Migrate to modern WordPress framework, build custom blocks, and optimize checkout flow for mobile"
     },
     {
       "title": "Integration",
-      "description": "Jobber CRM sync, inventory management, payment processing, and email automation"
+      "description": "Merge e-commerce functionality from ShopCaribbeanPools into main site and integrate visual assets from other projects"
     },
     {
-      "title": "Testing & QA",
-      "description": "User testing, checkout flow optimization, and cross-device compatibility"
+      "title": "Training",
+      "description": "Train marketing staff on content management system and establish workflows for in-house campaign launches"
     },
     {
-      "title": "Launch & Training",
-      "description": "Deploy platforms, train team, and establish content workflows"
-    },
-    {
-      "title": "Optimization",
-      "description": "Monitor analytics, iterate on UX, and refine promotional strategies"
+      "title": "Continuous Optimization",
+      "description": "Monitor analytics, iterate on UX based on user behavior, and refine content strategy"
     }
   ],
-  "reflection": {
-    "learning": "Visual storytelling builds trust and educates before asking for the sale. E-commerce success requires removing friction and meeting customers where they are—whether that's researching services or buying supplies at 2 AM.",
-    "reuse": [
-      "Process visualization and lifecycle storytelling patterns",
-      "Mobile-first content blocks and responsive templates",
-      "WooCommerce + CRM integration architecture",
-      "Service-to-product customer journey design",
-      "Early Buy promotional program logic",
-      "Checkout optimization techniques",
-      "Analytics dashboard templates"
-    ]
-  },
   "related": [
     {
       "title": "Formstack Digital Forms",

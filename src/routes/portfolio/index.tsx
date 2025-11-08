@@ -8,27 +8,17 @@ import dashboardData from '../../data/site/dashboard.json';
 import type { Metric } from '../../types/dashboard';
 
 // Import all case study JSON files
-import formstackData from '~/data/formstack.json';
 import caribbeanpoolsData from '~/data/caribbeanpools.json';
-import deckhandData from '~/data/deckhand.json';
-import mindforgeData from '~/data/mindforge.json';
 import printstudioData from '~/data/printstudio.json';
 import brandEvolutionData from '~/data/brand-evolution.json';
-import droneMediaData from '~/data/drone-media.json';
-import emailMarketingData from '~/data/email-marketing.json';
-import ivrSystemData from '~/data/ivr-system.json';
+import mediaCampaignsData from '~/data/media-campaigns.json';
 
 // Map case studies with their categories and featured status
 const caseStudyMapping = [
-  { data: formstackData as CaseStudy, category: 'process', featured: true },
-  { data: caribbeanpoolsData as CaseStudy, category: 'development', featured: true },
-  { data: deckhandData as CaseStudy, category: 'development', featured: true },
-  { data: mindforgeData as CaseStudy, category: 'development', featured: true },
-  { data: printstudioData as CaseStudy, category: 'process', featured: true },
   { data: brandEvolutionData as CaseStudy, category: 'design', featured: true },
-  { data: droneMediaData as CaseStudy, category: 'design', featured: false },
-  { data: emailMarketingData as CaseStudy, category: 'design', featured: false },
-  { data: ivrSystemData as CaseStudy, category: 'process', featured: false },
+  { data: printstudioData as CaseStudy, category: 'process', featured: true },
+  { data: caribbeanpoolsData as CaseStudy, category: 'development', featured: true },
+  { data: mediaCampaignsData as CaseStudy, category: 'design', featured: true },
 ];
 
 export default component$(() => {
@@ -182,59 +172,6 @@ export default component$(() => {
           <p class="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
             A showcase of projects spanning design, development, and operational excellence
           </p>
-        </section>
-
-        {/* Portfolio Performance Dashboard */}
-        <section class="mb-20 scroll-reveal">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Portfolio Performance
-            </h2>
-            <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-              Key metrics and insights from completed projects
-            </p>
-          </div>
-          
-          <MetricGrid
-            metrics={portfolioMetrics.value}
-            selectedMetric={selectedMetric.value}
-            onMetricSelect={handleMetricSelect}
-            layout="executive"
-            maxColumns={4}
-          />
-
-          {/* Project Distribution */}
-          <div class="mt-8">
-            <DashboardPanel
-              title="Project Distribution by Category"
-              collapsible={true}
-              defaultExpanded={true}
-            >
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {categories.slice(1).map((category) => {
-                const categoryProjects = projects.filter(p => p.category === category.id);
-                const percentage = Math.round((categoryProjects.length / projects.length) * 100);
-                
-                return (
-                  <div key={category.id} class="text-center">
-                    <div class="mb-4">
-                      <ProgressRing 
-                        percentage={percentage}
-                        size={80}
-                        strokeWidth={6}
-                        color={category.id === 'design' ? '#2E3192' : 
-                               category.id === 'development' ? '#6B5D3F' : '#D4A14A'}
-                      />
-                    </div>
-                    <h3 class="text-lg font-semibold text-text-primary mb-2">{category.label}</h3>
-                    <div class="text-2xl font-bold text-text-primary mb-1">{categoryProjects.length}</div>
-                    <div class="text-sm text-text-secondary">Projects ({percentage}%)</div>
-                  </div>
-                );
-              })}
-            </div>
-            </DashboardPanel>
-          </div>
         </section>
 
         {/* Filter with Glassmorphism */}

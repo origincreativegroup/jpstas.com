@@ -1,51 +1,59 @@
 {
-  "title": "Creative Technologist & Designer",
-  "subtitle": "Transforming business challenges into elegant solutions",
-  "description": "I specialize in design thinking, technical expertise, and operational excellence to deliver measurable results across digital products and business processes.",
+  "title": "Brand Designer & Creative Technologist",
+  "subtitle": "Portfolio Overview — 2014 to 2025",
+  "description": "From 2014 to 2025, I helped transform Caribbean Pools & Spas from a family-run service company into a modern, fully integrated brand and customer experience. Over twelve years, I built the systems—visual, digital, and operational—that connected the company's identity to its performance. I designed the brand's visual language, engineered an in-house print studio, created its digital platforms, and implemented automation systems that made the business faster and more consistent. My work spanned design, marketing, technology, and operations—bridging creative thinking with real-world execution.",
   "heroImage": "https://placehold.co/800x600/2E3192/FFFFFF?text=Portfolio+Showcase",
   "heroImageAlt": "Portfolio Showcase",
   "featuredProjects": [
     {
-      "title": "In-House Print Studio Build",
-      "slug": "print-studio",
-      "description": "Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually.",
-      "image": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
-      "category": "Process Innovation",
-      "tags": ["Print Production", "Apparel Design", "Workflow Automation"]
-    },
-    {
       "title": "Caribbean Pools Brand Evolution",
       "slug": "brand-evolution",
-      "description": "Decade-long brand transformation from $7M to $17M with unified identity across all channels",
+      "description": "Decade-long brand transformation creating unified design systems across print, apparel, fleet, and digital—scaling from $7M to $17M in annual revenue",
       "image": "https://media.jpstas.com/brand-evolution-hero.jpg",
       "category": "Brand Identity",
-      "tags": ["Brand Identity", "Design Systems"]
+      "tags": ["Branding", "Design Systems", "Creative Direction"]
     },
     {
-      "title": "Caribbean Pools Website Redesign",
+      "title": "In-House Print Studio Build",
+      "slug": "print-studio",
+      "description": "Built in-house print and apparel studio saving $250K+ and producing 100+ fleet wraps and 120+ uniforms annually",
+      "image": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
+      "category": "Process Innovation",
+      "tags": ["Print Production", "Workflow Automation", "Process Design"]
+    },
+    {
+      "title": "CaribbeanPools.com Redesign & Digital Platform Evolution",
       "slug": "caribbeanpools-redesign",
-      "description": "Website redesign that tells the story of the pool lifecycle with process visualization and improved engagement",
-      "image": "https://media.jpstas.com/caribbean-hero.jpg",
+      "description": "Led digital evolution—building first e-commerce platform and redesigning main site to unify both into cohesive customer experience, increasing online sales 35% YoY",
+      "image": "https://media.jpstas.com/portfolio/caribbeanpools.com/caribbeanpools-website-redesign-homepage-drone-banner.png",
       "category": "Web Design",
-      "tags": ["Web Design", "UI/UX"]
+      "tags": ["Web Design", "UX/UI", "E-Commerce"]
+    },
+    {
+      "title": "Caribbean Pools Media Campaigns",
+      "slug": "media-campaigns",
+      "description": "Led visual media creation from 2017-2025, building in-house media ecosystem that drove 400% engagement growth through cinematic drone work and animated social content",
+      "image": "https://media.jpstas.com/media-campaigns-hero.jpg",
+      "category": "Media Production",
+      "tags": ["Photography", "Videography", "Content Strategy"]
     }
   ],
   "metrics": [
     {
-      "label": "Paper Reduction",
-      "value": "80%"
+      "label": "Years of Transformation",
+      "value": "12 Years"
     },
     {
-      "label": "Revenue Generated",
-      "value": "$100k+"
+      "label": "Revenue Growth",
+      "value": "$7M → $17M"
     },
     {
       "label": "Cost Savings",
       "value": "$250K+"
     },
     {
-      "label": "Years Experience",
-      "value": "10+"
+      "label": "Social Engagement Growth",
+      "value": "+400%"
     }
   ]
 }

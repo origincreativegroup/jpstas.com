@@ -1,7 +1,7 @@
 {
   "slug": "brand-evolution",
   "title": "Caribbean Pools Brand Evolution",
-  "tagline": "A decade-long brand transformation from $7M to $17M",
+  "tagline": "Over more than a decade, I guided Caribbean Pools through a complete brand evolution—modernizing its identity, creating unified design systems across print, apparel, fleet, and digital, and aligning the company's creative output with its operational growth. The brand system I built became the foundation for every visual and communication channel, scaling with the company as it grew from $7M to $17M in annual revenue.",
   "hero": {
     "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
     "alt": "Caribbean Pools brand evolution showcase"
@@ -12,43 +12,40 @@
   },
   "metrics": [
     {
+      "label": "Brand Consistency",
+      "value": "100%"
+    },
+    {
       "label": "Cost Savings",
       "value": "$250K+"
     },
     {
       "label": "Turnaround Time",
-      "value": "60% faster"
-    },
-    {
-      "label": "Fleet Branded",
-      "value": "20+ vehicles"
+      "value": "7 days → 48hr"
     }
   ],
   "meta": {
-    "tags": ["Brand Identity", "Design Systems", "Creative Direction", "Fleet Design"],
-    "tools": ["Adobe Illustrator", "Photoshop", "InDesign", "HP Latex 315"],
-    "year": "2014-2025",
+    "tags": ["Branding", "Design Systems", "Creative Direction", "Marketing Strategy", "Print Production", "Fleet Design", "Apparel Production"],
+    "tools": ["Adobe Illustrator", "Photoshop", "InDesign", "HP Latex 315 Printer-Cutter", "HTV Vinyl", "Graphtec Cutter", "Mailchimp", "WordPress"],
+    "year": "2015-2025",
     "client": "Caribbean Pools & Spas"
   },
   "context": {
-    "problem": "Inconsistent brand presence across channels—uniforms, signage, and vehicles used different logo versions and colors. Multiple vendors with no unified guidelines.",
+    "problem": "When I joined Caribbean Pools, the company had been around for decades but had never established a unified identity. Each department—service, retail, construction—had its own look. Logos varied from truck to truck, uniforms didn't match signage, and color palettes shifted depending on which vendor handled the job that week. Caribbean Pools' growth was outpacing its brand infrastructure. Without consistent guidelines, creative output was fragmented and expensive to maintain.",
     "constraints": [
-      "Multi-year transformation during active operations",
-      "3 retail locations requiring consistency",
-      "20+ fleet vehicles needing updates",
-      "120+ employees wearing branded apparel"
-    ],
-    "quote": "We needed one brand, one voice, one look—everywhere."
+      "Multiple vendors produced inconsistent materials",
+      "Color and logo variations diluted recognition",
+      "Employees lacked pride in branded apparel because nothing matched",
+      "Marketing campaigns took longer and cost more due to redundant design work"
+    ]
   },
   "solution": {
-    "approach": "Comprehensive brand system overhaul including style guide development, logo modernization, fleet wraps, uniform production, and standardized signage templates with consistent messaging.",
+    "approach": "I approached the rebrand not as a one-time design project but as a system engineering challenge—how to make creativity scalable. This wasn't just about making things look nice—it was about creating a repeatable, documented system that anyone in the company could use to produce brand-correct materials without designer intervention.",
     "bullets": [
-      "Created comprehensive brand style guide",
-      "Modernized logo lockups and color systems",
-      "Wrapped 20+ fleet vehicles with unified design",
-      "Produced uniforms for 120+ employees annually",
-      "Standardized all signage and print templates",
-      "Established tone and messaging guidelines"
+      "Brand Audit & Modernization: Refined the original logo into a flexible mark with multiple lockups suitable for print, embroidery, and digital use. Established a cohesive color palette with Pantone-matched vinyl and fabric samples for consistency across mediums. Chose modern geometric sans-serif typography that balanced approachability and professionalism.",
+      "Design System Development: Built a centralized asset library with templates for business cards, signage, uniforms, and vehicle wraps. Created guidelines for logo usage, spacing, and color application—simple enough for staff to follow but robust enough for vendors. Introduced digital templates for social media, ads, and web banners so seasonal marketing could be produced quickly in-house.",
+      "Production Integration: Leveraged the in-house print studio I built to handle all large-format and apparel production internally. Designed cut files and press-ready documents optimized for the HP Latex 315 printer and Graphtec cutter. Worked cross-functionally with field and retail teams to deploy new branding assets across every location and fleet vehicle.",
+      "Internal Brand Education: Conducted short workshops with management and field staff to explain why consistency mattered. Produced an internal \"Brand Quick Guide\" summarizing usage standards and visual references."
     ],
     "gallery": [
       {
@@ -71,57 +68,61 @@
   },
   "impact": [
     {
-      "label": "Brand Consistency",
-      "value": "Unified Across All Media"
+      "label": "Consistency",
+      "value": "100%",
+      "description": "Achieved 100% brand alignment across 100+ fleet vehicles, 3 retail stores, and 120+ employee uniforms"
     },
     {
-      "label": "Creative Turnaround",
-      "value": "-60%"
+      "label": "Cost Savings",
+      "value": "$250K+",
+      "description": "Eliminated $250K+ in outsourced design and print costs within three years"
     },
     {
-      "label": "Outsourcing Savings",
-      "value": "$250K+"
+      "label": "Efficiency",
+      "value": "48 Hours",
+      "description": "Reduced turnaround for new marketing materials from 7 days to 48 hours"
     },
     {
-      "label": "Customer Trust",
-      "value": "Strengthened"
+      "label": "Perception",
+      "value": "Strengthened",
+      "description": "Strengthened brand trust with customers, contractors, and suppliers through cohesive visuals"
+    },
+    {
+      "label": "Culture",
+      "value": "Transformed",
+      "description": "Employees took renewed pride in the brand; staff began submitting photos of new trucks and uniforms for social use—something that never happened before"
     }
   ],
   "process": [
     {
-      "title": "Discovery",
-      "description": "Brand audit and stakeholder interviews"
+      "title": "Audit",
+      "description": "Document inconsistencies across all visual and communication touchpoints"
     },
     {
-      "title": "Brand Audit",
-      "description": "Document inconsistencies across all touchpoints"
+      "title": "Research",
+      "description": "Analyze competitor branding, stakeholder interviews, and industry standards"
     },
     {
       "title": "System Design",
-      "description": "Create style guide, templates, and standards"
+      "description": "Create comprehensive style guide with templates and usage standards"
+    },
+    {
+      "title": "Brand Modernization",
+      "description": "Refine logo, establish color palette, and select typography system"
     },
     {
       "title": "Implementation",
-      "description": "Roll out across fleet, apparel, signage, and digital"
+      "description": "Roll out new branding across fleet, apparel, signage, print, and digital channels"
     },
     {
-      "title": "Internal Training",
-      "description": "Train team on brand standards and usage"
+      "title": "Training",
+      "description": "Conduct workshops and create Brand Quick Guide for staff and vendors"
     },
     {
-      "title": "Continuous Refinement",
-      "description": "Monitor and iterate based on feedback"
+      "title": "Refinement",
+      "description": "Monitor consistency, gather feedback, and optimize system based on real-world use"
     }
   ],
-  "reflection": {
-    "learning": "Brand consistency isn't a project—it's a system. When everyone owns the standards, the brand maintains itself.",
-    "reuse": [
-      "Brand style guide templates",
-      "Fleet wrap design patterns",
-      "Apparel production workflow",
-      "Template standardization framework"
-    ]
-  },
   "related": [
     {
       "title": "Print Studio Operations",
