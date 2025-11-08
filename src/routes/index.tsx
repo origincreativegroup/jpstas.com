@@ -234,10 +234,10 @@ export default component$(() => {
               Core Skills
             </h2>
             <p class="text-xl text-text-secondary max-w-3xl mx-auto">
-              Specialized skills across design, development, and process innovation
+              Specialized skills across brand design, media production, and operational systems
             </p>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="group rounded-3xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 scroll-reveal">
               <div class="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -245,33 +245,33 @@ export default component$(() => {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-text-primary mb-4">Design & UX</h3>
+              <h3 class="text-2xl font-bold text-text-primary mb-4">Brand & Visual Design</h3>
               <p class="text-text-secondary leading-relaxed">
-                Creating intuitive, beautiful interfaces that solve real business problems through user-centered design principles.
+                Creating unified brand identities and scalable design systems that bring consistency across print, digital, fleet, and apparel.
               </p>
             </div>
-            
+
             <div class="group rounded-3xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 scroll-reveal" style="animation-delay: 100ms">
               <div class="w-16 h-16 bg-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-text-primary mb-4">Development</h3>
+              <h3 class="text-2xl font-bold text-text-primary mb-4">Media Production</h3>
               <p class="text-text-secondary leading-relaxed">
-                Building scalable, performant web applications with modern technologies and best practices.
+                Producing cinematic photography, drone videography, and motion graphics that tell compelling brand stories across all channels.
               </p>
             </div>
-            
+
             <div class="group rounded-3xl glass p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 scroll-reveal" style="animation-delay: 200ms">
               <div class="w-16 h-16 bg-highlight rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold text-text-primary mb-4">Process Innovation</h3>
+              <h3 class="text-2xl font-bold text-text-primary mb-4">Process & Systems</h3>
               <p class="text-text-secondary leading-relaxed">
-                Optimizing workflows and operations for maximum efficiency and measurable business impact.
+                Engineering production workflows, digital platforms, and automation systems that scale operations and deliver measurable results.
               </p>
             </div>
           </div>
