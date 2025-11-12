@@ -1,0 +1,93 @@
+{
+  "slug": "generative-ai",
+  "title": "Generative AI Concept Lab",
+  "tagline": "Rapid prototyping of AI-assisted creative workflows for web, print, and motion teams.",
+  "hero": {
+    "src": "https://media.jpstas.com/generative-ai-hero.jpg",
+    "alt": "Abstract generative AI visual interface"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/generative-ai-card.jpg",
+    "alt": "Generative AI experiments moodboard"
+  },
+  "metrics": [
+    { "label": "Concepts Delivered", "value": "45" },
+    { "label": "Turnaround", "value": "48 hrs" },
+    { "label": "Team Adoption", "value": "80%" }
+  ],
+  "meta": {
+    "tags": ["Generative AI", "Creative Ops", "Automation", "Prompt Engineering"],
+    "tools": ["Midjourney", "Stable Diffusion", "Runway", "Figma", "After Effects Scripts"],
+    "year": "2024",
+    "client": "Internal Innovation Program"
+  },
+  "context": {
+    "problem": "Creative teams were stretched thin delivering bespoke visuals for campaigns, with ideation cycles taking days before reaching production.",
+    "constraints": [
+      "Limited design bandwidth for experimentation",
+      "Need for consistent branded output",
+      "Strict privacy requirements for training data",
+      "Skepticism around AI adoption across stakeholders"
+    ]
+  },
+  "solution": {
+    "approach": "Established a generative AI lab to prototype brand-safe workflows, train multidisciplinary teams, and ship production-ready assets within 48 hours.",
+    "bullets": [
+      "Codified prompt libraries aligned to brand language and mood boards",
+      "Developed QA checklist for bias mitigation and accessibility compliance",
+      "Integrated generative outputs into Figma and After Effects pipelines",
+      "Automated versioning and approvals through Notion + Slack integration"
+    ],
+    "gallery": [
+      {
+        "src": "https://media.jpstas.com/generative-ai-storyboards.jpg",
+        "alt": "AI-generated storyboard set"
+      },
+      {
+        "src": "https://media.jpstas.com/generative-ai-styles.jpg",
+        "alt": "Exploration of AI-driven brand styles"
+      },
+      {
+        "src": "https://media.jpstas.com/generative-ai-dashboard.jpg",
+        "alt": "Prompt tracking dashboard screenshot"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Cycle Time",
+      "value": "-65%",
+      "description": "Compressed creative ideation from 3 days to under 24 hours."
+    },
+    {
+      "label": "Cost Offset",
+      "value": "$45K",
+      "description": "Reduced outsourced concept spend across quarterly campaigns."
+    },
+    {
+      "label": "Confidence",
+      "value": "High",
+      "description": "Leadership approved scaling AI workflows across design pods."
+    }
+  ],
+  "process": [
+    { "title": "Discovery", "description": "Audit existing creative workflows and bottlenecks." },
+    { "title": "Experimentation", "description": "Prototype prompt stacks and guardrails with design leads." },
+    { "title": "Production", "description": "Operationalize AI-assisted delivery across formats." },
+    { "title": "Enablement", "description": "Train teams, document SOPs, and schedule ongoing reviews." }
+  ],
+  "reflection": {
+    "learning": "AI accelerates human creativity when paired with strong guardrails, transparent review, and brand ownership.",
+    "reuse": [
+      "Prompt pattern library",
+      "Accessibility QA template",
+      "Notion asset tracker",
+      "Training workshop curriculum"
+    ]
+  },
+  "related": [
+    { "title": "Motion Systems", "href": "/portfolio/motion-systems" },
+    { "title": "Print Studio", "href": "/portfolio/print-studio" }
+  ]
+}
+

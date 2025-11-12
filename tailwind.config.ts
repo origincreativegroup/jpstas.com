@@ -6,6 +6,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        inter: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        montserrat: ['Montserrat', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         // Primary Color Palette (from design image)
@@ -45,6 +47,14 @@ export default {
         'brand-dark': '#2C2C2C',
         'accent-dark': '#C08F39',
         dark: '#1a1a1a',
+        // Homepage refresh palette
+        ink: '#0E0E12',
+        cream: '#F6F5F2',
+        violet: '#5A3CF4',
+        amberFresh: '#F59E0B',
+        oliveTone: '#6B7D57',
+        lavenderTint: '#CBC0FF',
+        mutedGray: '#A8A8B3',
       },
       borderRadius: {
         '2xl': '1.25rem',

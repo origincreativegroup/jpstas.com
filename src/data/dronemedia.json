@@ -1,7 +1,7 @@
 {
   "slug": "drone-media",
   "title": "New Pool Drone Photo & Video Project",
-  "tagline": "Cinematic storytelling that elevated brand perception",
+  "tagline": "Cinematic storytelling that elevated brand perception.",
   "hero": {
     "src": "https://media.jpstas.com/drone-hero.jpg",
     "alt": "Aerial drone shot of completed pool"
@@ -13,7 +13,7 @@
   "metrics": [
     {
       "label": "Social Engagement",
-      "value": "↑ 400%"
+      "value": "+400%"
     },
     {
       "label": "Media Library",
@@ -25,8 +25,18 @@
     }
   ],
   "meta": {
-    "tags": ["Drone Photography", "FPV", "Videography", "Content Production"],
-    "tools": ["DJI Phantom", "FPV Drones", "Adobe Premiere", "DaVinci Resolve"],
+    "tags": [
+      "Drone Photography",
+      "FPV",
+      "Videography",
+      "Content Production"
+    ],
+    "tools": [
+      "DJI Phantom",
+      "FPV Drones",
+      "Adobe Premiere",
+      "DaVinci Resolve"
+    ],
     "year": "2018-2021",
     "client": "Caribbean Pools & Spas"
   },
@@ -53,6 +63,7 @@
       {
         "src": "af4889355cd0d36bac6722871cb2bcb3",
         "type": "video",
+        "poster": "https://media.jpstas.com/drone-video-poster.jpg",
         "caption": "FPV Drone Flythrough - Caribbean Pools Project",
         "alt": "FPV drone video flythrough of pool installation"
       },
@@ -77,41 +88,45 @@
   "impact": [
     {
       "label": "Social Engagement",
-      "value": "+400%"
+      "value": "+400%",
+      "description": "4x increase in social engagement across Instagram and Facebook."
     },
     {
       "label": "Brand Perception",
-      "value": "Elevated"
+      "value": "Elevated",
+      "description": "Positioned Caribbean Pools as a premium builder through cinematic storytelling."
     },
     {
       "label": "Conversion Rates",
-      "value": "Improved"
+      "value": "Improved",
+      "description": "Sales teams leveraged footage in consultations to close deals faster."
     },
     {
       "label": "Reusable Assets",
-      "value": "100+"
+      "value": "100+",
+      "description": "Built a searchable library of photos and video assets for ongoing marketing."
     }
   ],
   "process": [
     {
       "title": "Pre-Production",
-      "description": "Site scouting, flight planning, and safety review"
+      "description": "Site scouting, flight planning, and safety review."
     },
     {
       "title": "Capture",
-      "description": "Aerial photography and FPV videography"
+      "description": "Aerial photography and FPV videography."
     },
     {
       "title": "Editing",
-      "description": "Color grading, branded overlays, and audio mixing"
+      "description": "Color grading, branded overlays, and audio mixing."
     },
     {
       "title": "Distribution",
-      "description": "Optimize for web, social, and sales materials"
+      "description": "Optimized assets for web, social, and sales materials."
     },
     {
       "title": "Optimization",
-      "description": "Analyze performance and refine approach"
+      "description": "Reviewed performance analytics to refine future shoots."
     }
   ],
   "reflection": {
@@ -129,13 +144,9 @@
       "href": "/portfolio/brand-evolution"
     },
     {
-      "title": "Email Marketing Campaigns",
-      "href": "/portfolio/email-marketing"
+      "title": "Print Studio",
+      "href": "/portfolio/print-studio"
     }
   ]
 }
-
-
-
-
 

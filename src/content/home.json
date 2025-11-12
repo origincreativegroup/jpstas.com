@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "slides": [
+      {
+        "slug": "brand-evolution",
+        "headline": "Brand Systems Engineered for Growth",
+        "category": "Brand Systems",
+        "description": "Modernized identity, tooling, and rollout playbooks for a decade of scale.",
+        "media": {
+          "type": "image",
+          "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
+          "alt": "Caribbean Pools brand evolution showcase"
+        }
+      },
+      {
+        "slug": "drone-media",
+        "headline": "Cinematic Drone Storytelling",
+        "category": "Content Production",
+        "description": "FPV and aerial capture program that quadrupled social engagement.",
+        "media": {
+          "type": "image",
+          "src": "https://media.jpstas.com/drone-hero.jpg",
+          "alt": "Aerial drone shot of completed pool"
+        }
+      },
+      {
+        "slug": "generative-ai",
+        "headline": "AI-Assisted Creative Ops",
+        "category": "Innovation Lab",
+        "description": "Rapid concept generation with brand-safe AI workflows.",
+        "media": {
+          "type": "image",
+          "src": "https://media.jpstas.com/generative-ai-hero.jpg",
+          "alt": "Abstract generative AI visual interface"
+        }
+      }
+    ]
+  },
+  "bento": {
+    "items": [
+      {
+        "slug": "brand-evolution",
+        "layout": {
+          "md": { "colSpan": 8, "rowSpan": 2 },
+          "xl": { "colSpan": 6, "rowSpan": 2 }
+        }
+      },
+      {
+        "slug": "generative-ai",
+        "layout": {
+          "md": { "colSpan": 4, "rowSpan": 1 },
+          "xl": { "colSpan": 3, "rowSpan": 1 }
+        }
+      },
+      {
+        "slug": "caribbeanpools-redesign",
+        "layout": {
+          "md": { "colSpan": 4, "rowSpan": 1 },
+          "xl": { "colSpan": 3, "rowSpan": 1 }
+        }
+      },
+      {
+        "slug": "mixed-media",
+        "layout": {
+          "md": { "colSpan": 4, "rowSpan": 2 },
+          "xl": { "colSpan": 6, "rowSpan": 2 }
+        }
+      },
+      {
+        "slug": "motion-systems",
+        "layout": {
+          "md": { "colSpan": 4, "rowSpan": 1 },
+          "xl": { "colSpan": 3, "rowSpan": 1 }
+        }
+      },
+      {
+        "slug": "print-systems",
+        "layout": {
+          "md": { "colSpan": 4, "rowSpan": 1 },
+          "xl": { "colSpan": 3, "rowSpan": 1 }
+        }
+      }
+    ],
+    "cta": {
+      "label": "View All Work",
+      "href": "/portfolio"
+    }
+  },
+  "metrics": [
+    {
+      "title": "Tools & Platforms",
+      "items": [
+        "Adobe CC Suite",
+        "Figma & FigJam",
+        "TouchDesigner & MadMapper",
+        "Runway & Stable Diffusion",
+        "DJI & FPV Drone Systems"
+      ]
+    },
+    {
+      "title": "Core Skills",
+      "items": [
+        "Brand & Design Systems",
+        "Motion & Mixed Media",
+        "Generative AI Ops",
+        "Print Production Engineering",
+        "Cross-Disciplinary Enablement"
+      ]
+    },
+    {
+      "title": "Process & Philosophy",
+      "items": [
+        "Systems Thinking",
+        "Rapid Prototyping",
+        "Integrated Operations",
+        "Evidence-Based Iteration",
+        "Human-Centered Storytelling"
+      ]
+    }
+  ]
+}
+

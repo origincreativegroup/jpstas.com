@@ -1,0 +1,19 @@
+{
+  "slug": "caribbeanpools-redesign",
+  "title": "Caribbean Pools Digital Platform",
+  "category": "Product UX",
+  "summary": "Unified e-commerce and service experience with modular content blocks and conversion-focused storytelling.",
+  "tags": ["UX/UI", "E-Commerce", "Systems"],
+  "hero": {
+    "type": "image",
+    "src": "https://media.jpstas.com/portfolio/caribbeanpools.com/caribbeanpools-website-redesign-homepage-drone-banner.png",
+    "alt": "Caribbean Pools website redesign hero"
+  },
+  "thumbnail": {
+    "type": "image",
+    "src": "https://media.jpstas.com/portfolio/caribbeanpools.com/caribbeanpools-website-redesign-homepage-drone-banner.png",
+    "alt": "Caribbean Pools website redesign"
+  },
+  "accent": "#F59E0B"
+}
+

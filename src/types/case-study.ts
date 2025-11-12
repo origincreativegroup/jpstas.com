@@ -1,4 +1,4 @@
-export type Metric = { label: string; value: string };
+export type Metric = { label: string; value: string; description?: string };
 export type Step = { title: string; description?: string; icon?: string };
 export type Media = { 
   src: string; 

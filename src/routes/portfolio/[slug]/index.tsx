@@ -5,31 +5,27 @@ import { CaseStudyPage } from '~/components/CaseStudyPage';
 
 // List of all portfolio case study slugs for static generation
 const PORTFOLIO_SLUGS = [
-  'formstack-integration',
-  'caribbeanpools-redesign',
-  'deckhand-prototype',
-  'print-studio',
   'brand-evolution',
-  'caribbean-drone',
-  'personal-drone',
-  'email-marketing',
-  'ivr-system',
-  'mindforge',
+  'caribbeanpools-redesign',
+  'generative-ai',
+  'mixed-media',
+  'motion-systems',
+  'print-systems',
+  'drone-media',
+  'print-studio',
 ];
 
 export const useStudy = routeLoader$(async ({ params }) => {
   const slug = params.slug;
   const map: Record<string, any> = {
-    'formstack-integration': await import('~/data/formstack.json'),
-    'caribbeanpools-redesign': await import('~/data/caribbeanpools.json'),
-    'deckhand-prototype': await import('~/data/deckhand.json'),
-    'print-studio': await import('~/data/printstudio.json'),
     'brand-evolution': await import('~/data/brand-evolution.json'),
-    'caribbean-drone': await import('~/data/caribbean-drone.json'),
-    'personal-drone': await import('~/data/personal-drone.json'),
-    'email-marketing': await import('~/data/email-marketing.json'),
-    'ivr-system': await import('~/data/ivr-system.json'),
-    'mindforge': await import('~/data/mindforge.json'),
+    'caribbeanpools-redesign': await import('~/data/caribbeanpools.json'),
+    'generative-ai': await import('~/data/generative-ai.json'),
+    'mixed-media': await import('~/data/mixed.json'),
+    'motion-systems': await import('~/data/motion.json'),
+    'print-systems': await import('~/data/print.json'),
+    'drone-media': await import('~/data/dronemedia.json'),
+    'print-studio': await import('~/data/printstudio.json'),
   };
   const mod = map[slug];
   if (!mod) throw new Error('Case study not found');

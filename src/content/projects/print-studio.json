@@ -1,0 +1,19 @@
+{
+  "slug": "print-studio",
+  "title": "In-House Print Studio",
+  "category": "Operations",
+  "summary": "Built and scaled an internal print and apparel studio delivering on-demand brand assets.",
+  "tags": ["Print", "Apparel", "Workflow"],
+  "hero": {
+    "type": "image",
+    "src": "https://media.jpstas.com/portfolio/PrintStudio/hp-latex-315-printer-large-format-printing.png",
+    "alt": "HP Latex printer in production"
+  },
+  "thumbnail": {
+    "type": "image",
+    "src": "https://media.jpstas.com/portfolio/PrintStudio/IMG_0620.jpeg",
+    "alt": "HP Latex printer close-up"
+  },
+  "accent": "#5A3CF4"
+}
+

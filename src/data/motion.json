@@ -1,0 +1,93 @@
+{
+  "slug": "motion-systems",
+  "title": "Motion Systems Library",
+  "tagline": "Reusable motion design systems for product launches, walkthroughs, and support content.",
+  "hero": {
+    "src": "https://media.jpstas.com/motion-hero.jpg",
+    "alt": "Motion design interface preview"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/motion-card.jpg",
+    "alt": "Storyboard frames for motion graphics"
+  },
+  "metrics": [
+    { "label": "Brand Kits", "value": "6" },
+    { "label": "Sequences", "value": "120+" },
+    { "label": "Delivery", "value": "4K & Social" }
+  ],
+  "meta": {
+    "tags": ["Motion Design", "Systems", "Storyboarding", "Animation"],
+    "tools": ["After Effects", "Figma", "Lottie", "Premiere", "Cinema 4D"],
+    "year": "2020-2024",
+    "client": "SaaS Product Teams"
+  },
+  "context": {
+    "problem": "Each product launch required bespoke animations, resulting in inconsistent pacing, voice, and asset management.",
+    "constraints": [
+      "Multiple product teams with unique requirements",
+      "Aggressive launch timelines",
+      "Need for localization-ready templates",
+      "Support for both marketing and in-app education"
+    ]
+  },
+  "solution": {
+    "approach": "Created a modular motion language with reusable components, flexible story structures, and a delivery pipeline that served marketing and product teams alike.",
+    "bullets": [
+      "Developed brand motion principles and timing curves",
+      "Built After Effects master files and converted key loops to Lottie",
+      "Automated exports with render queue presets for every channel",
+      "Documented usage guidelines for design and marketing leads"
+    ],
+    "gallery": [
+      {
+        "src": "https://media.jpstas.com/motion-storyboard.jpg",
+        "alt": "Storyboard for onboarding motion sequence"
+      },
+      {
+        "src": "https://media.jpstas.com/motion-breakdown.gif",
+        "type": "gif",
+        "alt": "Breakdown of animated UI transitions"
+      },
+      {
+        "src": "https://media.jpstas.com/motion-toolkit.jpg",
+        "alt": "Motion toolkit overview"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Production Time",
+      "value": "-55%",
+      "description": "Cut animation turnaround from 9 days to 4 days."
+    },
+    {
+      "label": "Revisions",
+      "value": "-70%",
+      "description": "Reduced feedback cycles thanks to shared storyboard language."
+    },
+    {
+      "label": "Globalization",
+      "value": "12 locales",
+      "description": "Built-in localization support across motion deliverables."
+    }
+  ],
+  "process": [
+    { "title": "Discovery", "description": "Audit launch assets, identify repeatable patterns, and align on motion voice." },
+    { "title": "System Design", "description": "Create timing curves, easing, and modular sequences." },
+    { "title": "Production", "description": "Animate hero templates, export formats, and document usage." },
+    { "title": "Enablement", "description": "Train teams, deliver toolkit, and schedule refresh cycles." }
+  ],
+  "reflection": {
+    "learning": "Motion systems should feel alive yet dependable—consistency comes from rules, not repetition.",
+    "reuse": [
+      "Motion principle playbook",
+      "Storyboard template kit",
+      "Render automation scripts"
+    ]
+  },
+  "related": [
+    { "title": "Generative AI Concept Lab", "href": "/portfolio/generative-ai" },
+    { "title": "Mixed Media Installations", "href": "/portfolio/mixed-media" }
+  ]
+}
+

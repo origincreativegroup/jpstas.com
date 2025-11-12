@@ -1,0 +1,92 @@
+{
+  "slug": "mixed-media",
+  "title": "Mixed Media Installations",
+  "tagline": "Immersive brand moments blending projection, sculpture, and tactile fabrication.",
+  "hero": {
+    "src": "https://media.jpstas.com/mixed-media-hero.jpg",
+    "alt": "Mixed media installation with light projections"
+  },
+  "cardImage": {
+    "src": "https://media.jpstas.com/mixed-media-card.jpg",
+    "alt": "Mixed media fabrication close-up"
+  },
+  "metrics": [
+    { "label": "Installations", "value": "12" },
+    { "label": "Foot Traffic", "value": "25K+" },
+    { "label": "Avg Build", "value": "3 weeks" }
+  ],
+  "meta": {
+    "tags": ["Experiential Design", "Projection Mapping", "Fabrication", "Lighting"],
+    "tools": ["TouchDesigner", "MadMapper", "CNC Router", "Rhino", "Arduino"],
+    "year": "2019-2024",
+    "client": "Experiential Agency Collective"
+  },
+  "context": {
+    "problem": "Brands wanted immersive activations without the typical high-production overhead or vendor sprawl.",
+    "constraints": [
+      "Tight install windows inside active retail locations",
+      "Safety requirements for interactive elements",
+      "Need for modular design to tour multiple cities",
+      "Coordination across fabricators and content teams"
+    ]
+  },
+  "solution": {
+    "approach": "Designed modular mixed-media environments that could be prototyped virtually, fabricated locally, and assembled on-site with minimal downtime.",
+    "bullets": [
+      "Developed 3D previsualizations to validate flow and lighting",
+      "Created CNC-ready fabrication files and projection maps",
+      "Built reusable control systems for syncing motion, sound, and light",
+      "Documented install guides enabling local crews to execute quickly"
+    ],
+    "gallery": [
+      {
+        "src": "https://media.jpstas.com/mixed-media-projection.jpg",
+        "alt": "Projection mapped sculpture"
+      },
+      {
+        "src": "https://media.jpstas.com/mixed-media-cnc.jpg",
+        "alt": "CNC fabricated panels"
+      },
+      {
+        "src": "https://media.jpstas.com/mixed-media-detail.jpg",
+        "alt": "Installation detail with lighting"
+      }
+    ]
+  },
+  "impact": [
+    {
+      "label": "Install Speed",
+      "value": "↑ 50%",
+      "description": "Cut install time in half through modular kit-of-parts."
+    },
+    {
+      "label": "Audience Dwell",
+      "value": "7 min",
+      "description": "Average engagement time from in-person observation."
+    },
+    {
+      "label": "Reuse",
+      "value": "4 cities",
+      "description": "Portable design deployed across four national retail tours."
+    }
+  ],
+  "process": [
+    { "title": "Blueprint", "description": "Collaborate with brand teams to define narrative arcs and touch-points." },
+    { "title": "Prototype", "description": "Material tests, lighting studies, and interactive proof-of-concepts." },
+    { "title": "Fabricate", "description": "Produce modular components and tune projection content." },
+    { "title": "Install", "description": "Coordinate on-site crews, calibrate systems, and document runbooks." }
+  ],
+  "reflection": {
+    "learning": "Immersive work succeeds when every component—digital or physical—shares a unified story and operational plan.",
+    "reuse": [
+      "Projection calibration templates",
+      "Tour-ready crate system",
+      "Maintenance checklist"
+    ]
+  },
+  "related": [
+    { "title": "Motion Systems", "href": "/portfolio/motion-systems" },
+    { "title": "Print Studio", "href": "/portfolio/print-studio" }
+  ]
+}
+

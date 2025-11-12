@@ -1,0 +1,19 @@
+{
+  "slug": "brand-evolution",
+  "title": "Brand Evolution System",
+  "category": "Brand Systems",
+  "summary": "A decade-long modernization of Caribbean Pools' identity, tooling, and rollout playbooks to support rapid growth.",
+  "tags": ["Brand Identity", "Systems Design", "Operations"],
+  "hero": {
+    "type": "image",
+    "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
+    "alt": "Caribbean Pools brand evolution showcase"
+  },
+  "thumbnail": {
+    "type": "image",
+    "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
+    "alt": "Caribbean Pools brand evolution"
+  },
+  "accent": "#5A3CF4"
+}
+
