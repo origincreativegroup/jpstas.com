@@ -20,7 +20,7 @@ export const CloudflareStreamPlayer = component$<CloudflareStreamPlayerProps>(({
   controls = true,
 }) => {
   return (
-    <div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-2xl bg-charcoal shadow-2xl">
+    <div class="relative mx-auto w-full max-w-4xl overflow-hidden rounded-2xl bg-surface-mid shadow-[0_35px_80px_rgba(0,0,0,0.45)]">
       <div class="relative w-full" style="padding-bottom: 56.25%;">
         <iframe
           src={`https://customer-h044ipu9nb6m47zm.cloudflarestream.com/${videoId}/iframe?${new URLSearchParams({
@@ -40,8 +40,8 @@ export const CloudflareStreamPlayer = component$<CloudflareStreamPlayerProps>(({
       
       {/* Title Overlay */}
       {title && (
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-charcoal/90 to-transparent p-6 pointer-events-none">
-          <h3 class="text-white text-xl font-bold drop-shadow-lg">{title}</h3>
+        <div class="pointer-events-none absolute bottom-0 left-0 right-0 bg-surface-deep/80 p-6">
+          <h3 class="text-cream text-xl font-bold drop-shadow-lg">{title}</h3>
         </div>
       )}
     </div>

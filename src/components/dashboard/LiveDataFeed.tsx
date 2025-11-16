@@ -1,6 +1,14 @@
 import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import type { LiveDataFeedProps, LiveDataPoint } from '../../types/dashboard';
 
+const livePalette: Record<string, string> = {
+  primary: '#b98f45',
+  secondary: '#454529',
+  highlight: '#6c3727',
+};
+
+const getPointColor = (token?: string) => (token ? livePalette[token] ?? '#b98f45' : '#b98f45');
+
 export const LiveDataFeed = component$<LiveDataFeedProps>(({ 
   dataPoints, 
   updateInterval = 5000,
@@ -113,9 +121,7 @@ export const LiveDataFeed = component$<LiveDataFeedProps>(({
             <div class="flex items-center gap-3">
               <div 
                 class="w-3 h-3 rounded-full"
-                style={{ backgroundColor: point.color === 'primary' ? '#2E3192' : 
-                                       point.color === 'secondary' ? '#6B5D3F' : 
-                                       point.color === 'highlight' ? '#D4A14A' : '#6B7280' }}
+                style={{ backgroundColor: getPointColor(point.color) }}
               />
               <div>
                 <h4 class="text-sm font-medium text-text-secondary">{point.label}</h4>

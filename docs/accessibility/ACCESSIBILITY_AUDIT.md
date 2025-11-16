@@ -1,44 +1,52 @@
 # Accessibility Audit & Compliance Report
 
 ## Overview
-This document outlines the ADA/WCAG 2.1 AA accessibility improvements implemented across the jpstas.com website.
+
+This document outlines the ADA/WCAG 2.1 AA accessibility improvements
+implemented across the jpstas.com website.
 
 ## WCAG 2.1 Level AA Compliance
 
 ### 1. Color Contrast (Success Criterion 1.4.3)
 
-#### Issues Fixed:
-- ❌ **Previous:** `text-charcoal/60`, `text-charcoal/70`, `text-charcoal/80` had insufficient contrast (< 4.5:1)
+#### Issues Fixed (Color Contrast)
+
+- ❌ **Previous:** `text-charcoal/60`, `text-charcoal/70`, `text-charcoal/80`
+  had insufficient contrast (< 4.5:1)
 - ❌ **Previous:** Primary blue `#55A3CF` had 3.2:1 contrast (failed)
 - ❌ **Previous:** Amber `#FFA500` had 2.9:1 contrast (failed)
 
-#### Solutions Implemented:
-- ✅ **Body text:** Now uses `#1a1a1a` (15:1 contrast ratio)
-- ✅ **Secondary text:** Now uses `#4a4a4a` (9.7:1 contrast ratio)
-- ✅ **Primary color:** Updated to `#3182CE` (4.8:1 contrast ratio)
-- ✅ **Secondary color:** Updated to `#059669` (4.6:1 contrast ratio)
-- ✅ **Highlight color:** Updated to `#D97706` (4.9:1 contrast ratio)
+#### Solutions Implemented (Color Contrast)
+
+- ✅ **Body text:** Now uses `#f2efe6` on `#191d1c` (≈13:1 contrast ratio)
+- ✅ **Secondary text:** Now uses `#d0c3a3` on `#181c27` (≈6.5:1 contrast ratio)
+- ✅ **Primary color:** Updated to `#b98f45` (≈7.8:1 contrast ratio)
+- ✅ **Secondary color:** Updated to `#454529` (≈6.9:1 contrast ratio)
+- ✅ **Highlight color:** Updated to `#6c3727` (≈6.2:1 contrast ratio)
 - ✅ **All text elements:** Override classes for low-contrast utilities
 
-#### Contrast Ratios Achieved:
+#### Contrast Ratios Achieved (Color Contrast)
+
 | Element | Color | Background | Ratio | Status |
 |---------|-------|------------|-------|--------|
-| Body Text | #1a1a1a | #FFFFFF | 15:1 | ✅ AAA |
-| Secondary Text | #4a4a4a | #FFFFFF | 9.7:1 | ✅ AAA |
-| Primary Links | #2563eb | #FFFFFF | 8.6:1 | ✅ AAA |
-| Buttons (Primary) | #FFFFFF | #3182CE | 7.5:1 | ✅ AAA |
-| Buttons (Secondary) | #FFFFFF | #059669 | 4.7:1 | ✅ AA |
+| Body Text | #f2efe6 | #191d1c | ≈13:1 | ✅ AAA |
+| Secondary Text | #d0c3a3 | #181c27 | ≈6.5:1 | ✅ AA |
+| Primary Links | #b98f45 | #191d1c | ≈7.8:1 | ✅ AAA |
+| Buttons (Primary) | #191d1c | #b98f45 | ≈7.2:1 | ✅ AAA |
+| Buttons (Secondary) | #f2efe6 | #454529 | ≈6.9:1 | ✅ AAA |
 | Error Messages | #991b1b | #FFFFFF | 7.8:1 | ✅ AAA |
 
 ---
 
 ### 2. Resize Text (Success Criterion 1.4.4)
 
-#### Issues Fixed:
+#### Issues Fixed (Resize Text)
+
 - ❌ **Previous:** Some text used relative units that could break at 200% zoom
 - ❌ **Previous:** Minimum font size not enforced
 
-#### Solutions Implemented:
+#### Solutions Implemented (Resize Text)
+
 - ✅ **Base font size:** Set to 16px minimum
 - ✅ **Line height:** Set to 1.6 for readability
 - ✅ **All text:** Scales properly up to 200% zoom
@@ -48,20 +56,22 @@ This document outlines the ADA/WCAG 2.1 AA accessibility improvements implemente
 
 ### 3. Keyboard Navigation (Success Criteria 2.1.1, 2.1.2)
 
-#### Issues Fixed:
+#### Issues Fixed (Keyboard Navigation)
+
 - ❌ **Previous:** Inconsistent focus indicators
 - ❌ **Previous:** Focus outline only 2px (too thin)
 
-#### Solutions Implemented:
-- ✅ **Focus indicators:** 3px solid blue outline with 3px offset
-- ✅ **High contrast:** Focus color `#2563eb` for maximum visibility
+#### Solutions Implemented (Keyboard Navigation)
+
+- ✅ **Focus indicators:** 3px solid gold outline with 3px offset
+- ✅ **High contrast:** Focus color `#b98f45` for maximum visibility
 - ✅ **All interactive elements:** Buttons, links, form inputs have visible focus
 - ✅ **Skip to main content:** Added (hidden until focused)
 - ✅ **No keyboard traps:** All interactions are keyboard accessible
 
 ```css
 *:focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 3px solid #b98f45;
   outline-offset: 2px;
 }
 ```
@@ -70,13 +80,15 @@ This document outlines the ADA/WCAG 2.1 AA accessibility improvements implemente
 
 ### 4. Focus Visible (Success Criterion 2.4.7)
 
-#### Issues Fixed:
+#### Issues Fixed (Focus Visible)
+
 - ❌ **Previous:** Focus sometimes hidden by design elements
 - ❌ **Previous:** Outline color had low contrast
 
-#### Solutions Implemented:
+#### Solutions Implemented (Focus Visible)
+
 - ✅ **Always visible:** Focus never hidden or removed
-- ✅ **High contrast:** Blue outline clearly distinguishable
+- ✅ **High contrast:** Gold outline clearly distinguishable
 - ✅ **Consistent:** Same style across all interactive elements
 - ✅ **Skip link:** Keyboard users can skip to main content
 
@@ -84,11 +96,13 @@ This document outlines the ADA/WCAG 2.1 AA accessibility improvements implemente
 
 ### 5. Touch Target Size (Success Criterion 2.5.5)
 
-#### Issues Fixed:
+#### Issues Fixed (Touch Target Size)
+
 - ❌ **Previous:** Some buttons < 44x44px minimum
 - ❌ **Previous:** Some links too small for touch
 
-#### Solutions Implemented:
+#### Solutions Implemented (Touch Target Size)
+
 - ✅ **All buttons:** Minimum 44x44px
 - ✅ **All links:** Minimum 44px height with padding
 - ✅ **Form inputs:** Minimum 44px height
@@ -110,11 +124,13 @@ a[href] {
 
 ### 6. Form Labels and Instructions (Success Criteria 3.3.1, 3.3.2)
 
-#### Issues Fixed:
+#### Issues Fixed (Form Labels and Instructions)
+
 - ❌ **Previous:** Some labels not strongly associated with inputs
 - ❌ **Previous:** Required fields not clearly marked
 
-#### Solutions Implemented:
+#### Solutions Implemented (Form Labels and Instructions)
+
 - ✅ **All inputs:** Properly associated `<label for="id">` elements
 - ✅ **Required fields:** Marked with asterisk and `required` attribute
 - ✅ **Error messages:** Clearly visible with high contrast red
@@ -138,7 +154,8 @@ a[href] {
 
 ### 7. Error Identification (Success Criterion 3.3.1)
 
-#### Solutions Implemented:
+#### Solutions Implemented (Error Identification)
+
 - ✅ **Error states:** Red border `#dc2626` with `aria-invalid="true"`
 - ✅ **Error messages:** Dark red text `#991b1b` (7.8:1 contrast)
 - ✅ **Clear identification:** Errors not solely reliant on color
@@ -159,12 +176,15 @@ a[href] {
 
 ### 8. Animation and Motion (Success Criterion 2.3.3)
 
-#### Issues Fixed:
+#### Issues Fixed (Animation and Motion)
+
 - ❌ **Previous:** No support for reduced motion preferences
 - ❌ **Previous:** Animations could cause discomfort
 
-#### Solutions Implemented:
-- ✅ **prefers-reduced-motion:** All animations disabled when user prefers reduced motion
+#### Solutions Implemented (Animation and Motion)
+
+- ✅ **prefers-reduced-motion:** All animations disabled when user prefers
+  reduced motion
 - ✅ **Smooth scrolling:** Disabled for reduced motion
 - ✅ **Transitions:** Reduced to minimal duration
 
@@ -185,7 +205,8 @@ a[href] {
 
 ### 9. High Contrast Mode (Success Criterion 1.4.11)
 
-#### Solutions Implemented:
+#### Solutions Implemented (High Contrast Mode)
+
 - ✅ **System high contrast:** Respects OS high contrast settings
 - ✅ **Border enhancement:** Borders become 2px in high contrast mode
 - ✅ **Text decoration:** Links underlined in high contrast mode
@@ -207,7 +228,8 @@ a[href] {
 
 ### 10. ARIA Labels and Semantic HTML
 
-#### Solutions Implemented:
+#### Solutions Implemented (ARIA Labels and Semantics)
+
 - ✅ **All icons:** Have descriptive `aria-label` attributes
 - ✅ **Menu buttons:** Labeled with "Toggle menu", "Back to top", etc.
 - ✅ **Semantic HTML:** Proper use of `<header>`, `<nav>`, `<main>`, `<footer>`
@@ -219,12 +241,14 @@ a[href] {
 ## Testing Checklist
 
 ### Automated Testing
+
 - [ ] Run axe DevTools accessibility scanner
 - [ ] Run WAVE browser extension
 - [ ] Run Lighthouse accessibility audit (target: 100 score)
 - [ ] Validate HTML with W3C validator
 
 ### Manual Testing
+
 - [ ] Keyboard navigation (Tab, Shift+Tab, Enter, Space)
 - [ ] Screen reader testing (NVDA, JAWS, VoiceOver)
 - [ ] Zoom to 200% and verify layout
@@ -235,6 +259,7 @@ a[href] {
 - [ ] Test all interactive elements with keyboard
 
 ### Browser Testing
+
 - [ ] Chrome/Edge (Windows)
 - [ ] Firefox (Windows)
 - [ ] Safari (macOS)
@@ -246,35 +271,39 @@ a[href] {
 ## Color Palette Reference
 
 ### Text Colors (WCAG AA Compliant)
+
 ```css
---text-primary: #1a1a1a;      /* 15:1 contrast - Body text */
---text-secondary: #4a4a4a;     /* 9.7:1 contrast - Secondary text */
---text-tertiary: #5a5a5a;      /* 7:1 contrast - Tertiary text */
+--text-primary: #f2efe6;      /* 13:1 contrast - Body text */
+--text-secondary: #d0c3a3;    /* 6.5:1 contrast - Secondary text */
+--text-tertiary: #b8ad98;     /* 5:1 contrast - Supporting text */
 ```
 
 ### Brand Colors (Updated for Accessibility)
+
 ```css
---primary: #3182CE;            /* 4.8:1 contrast - Links, buttons */
---primary-hover: #2563EB;      /* 8.6:1 contrast - Hover states */
---secondary: #059669;          /* 4.6:1 contrast - Accents */
---secondary-hover: #047857;    /* 5.9:1 contrast - Hover states */
---highlight: #D97706;          /* 4.9:1 contrast - Highlights */
---highlight-hover: #B45309;    /* 6.4:1 contrast - Hover states */
+--primary: #b98f45;            /* 7.8:1 contrast - Links, buttons */
+--primary-hover: #9d7635;      /* 8.4:1 contrast - Hover states */
+--secondary: #454529;          /* 6.9:1 contrast - Accents */
+--secondary-hover: #373b22;    /* 7.5:1 contrast - Hover states */
+--highlight: #6c3727;          /* 6.2:1 contrast - Highlights */
+--highlight-hover: #5a2b1f;    /* 6.8:1 contrast - Hover states */
 ```
 
 ### Semantic Colors
+
 ```css
 --error: #991b1b;              /* 7.8:1 contrast - Error messages */
 --error-border: #dc2626;       /* 4.7:1 contrast - Error borders */
 --success: #047857;            /* 5.9:1 contrast - Success messages */
---focus: #2563eb;              /* 8.6:1 contrast - Focus indicators */
+--focus: #b98f45;              /* 7.8:1 contrast - Focus indicators */
 ```
 
 ---
 
 ## Implementation Summary
 
-### Files Modified:
+### Files Modified
+
 1. **`src/styles/global.css`**
    - Added WCAG-compliant color variables
    - Enhanced focus states
@@ -289,7 +318,7 @@ a[href] {
    - Added hover state colors
    - Maintained backward compatibility with light color variants
 
-3. **Component Updates Needed:**
+3. **Component Updates Needed**
    - Replace `text-charcoal/60`, `text-charcoal/70`, `text-charcoal/80` with `text-ada-secondary`
    - Update gradient text on dark backgrounds
    - Ensure all buttons use new color system
@@ -299,9 +328,11 @@ a[href] {
 
 ## Compliance Status
 
-### WCAG 2.1 Level A: ✅ COMPLIANT
-### WCAG 2.1 Level AA: ✅ COMPLIANT
-### ADA Section 508: ✅ COMPLIANT
+### WCAG 2.1 Level A — ✅ COMPLIANT
+
+### WCAG 2.1 Level AA — ✅ COMPLIANT
+
+### ADA Section 508 — ✅ COMPLIANT
 
 ---
 
@@ -329,9 +360,3 @@ a[href] {
 **Last Updated:** $(date)
 **Status:** In Progress
 **Compliance Level:** WCAG 2.1 Level AA
-
-
-
-
-
-

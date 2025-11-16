@@ -11,18 +11,18 @@ export const MetricStrip = component$<MetricStripProps>(({ metrics }) => {
   }
 
   return (
-    <section class="bg-[#0E0E12] py-16 text-[#CBC0FF] md:py-20">
+    <section class="bg-surface-deep py-16 text-cream md:py-20">
       <div class="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 md:px-6 lg:px-8">
         <div class="grid gap-8 md:grid-cols-3">
           {metrics.map((metric) => (
             <article
               key={metric.title}
-              class="flex flex-col gap-4 rounded-3xl border border-[#CBC0FF]/20 bg-[#15151F]/70 p-8 backdrop-blur-sm ring-1 ring-white/5"
+              class="flex flex-col gap-4 rounded-3xl border border-cream/10 bg-[#181c27]/80 p-8 backdrop-blur-sm ring-1 ring-black/20"
             >
-              <h3 class="font-montserrat text-lg font-bold uppercase tracking-[0.35em] text-[#CBC0FF]">
+              <h3 class="font-montserrat text-lg font-bold uppercase tracking-[0.35em] text-gold">
                 {metric.title}
               </h3>
-              <ul class="space-y-2 font-inter text-sm leading-relaxed text-[#F6F5F2]/70">
+              <ul class="space-y-2 font-inter text-sm leading-relaxed text-cream/70">
                 {metric.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}

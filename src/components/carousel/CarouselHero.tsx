@@ -67,7 +67,7 @@ export const CarouselHero = component$<CarouselHeroProps>(({ slides }) => {
 
   return (
     <section
-      class="relative flex min-h-[90vh] w-full items-center justify-center overflow-hidden bg-[#0E0E12] text-[#F6F5F2]"
+      class="relative flex min-h-[90vh] w-full items-center justify-center overflow-hidden bg-surface-deep text-cream"
       onMouseEnter$={() => (isHovered.value = true)}
       onMouseLeave$={() => (isHovered.value = false)}
     >
@@ -84,30 +84,30 @@ export const CarouselHero = component$<CarouselHeroProps>(({ slides }) => {
             <div class="grid w-full max-w-6xl gap-12 lg:grid-cols-2 lg:items-center">
               <div class="space-y-6">
                 <div class="space-y-3">
-                  <span class="font-montserrat text-sm font-semibold uppercase tracking-[0.35em] text-[#F59E0B]">
+                  <span class="font-montserrat text-sm font-semibold uppercase tracking-[0.35em] text-gold">
                     {slide.category}
                   </span>
-                  <h1 class="font-montserrat text-4xl font-bold leading-tight text-[#F6F5F2] md:text-5xl lg:text-6xl">
+                  <h1 class="font-montserrat text-4xl font-bold leading-tight text-cream md:text-5xl lg:text-6xl">
                     {slide.headline}
                   </h1>
                 </div>
-                <p class="font-inter text-base text-[#F6F5F2]/70 md:text-lg">{slide.description}</p>
+                <p class="font-inter text-base text-cream/70 md:text-lg">{slide.description}</p>
                 <div class="flex flex-wrap gap-4 pt-2">
                   <a
                     href={`/portfolio/${slide.slug}`}
-                    class="inline-flex items-center gap-2 rounded-full border border-[#F6F5F2]/20 bg-[#5A3CF4] px-6 py-3 font-montserrat text-sm font-semibold uppercase tracking-[0.3em] text-[#F6F5F2] transition hover:-translate-y-0.5 hover:shadow-[0_24px_60px_rgba(90,60,244,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F5F2]/80"
+                    class="inline-flex items-center gap-2 rounded-full border border-cream/10 bg-gold px-6 py-3 font-montserrat text-sm font-semibold uppercase tracking-[0.3em] text-surface-deep transition hover:-translate-y-0.5 hover:shadow-[0_24px_60px_rgba(185,143,69,0.45)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold/60"
                   >
                     View Case Study
                   </a>
                   <a
                     href="/portfolio"
-                    class="inline-flex items-center gap-2 rounded-full border border-[#F6F5F2]/30 px-6 py-3 font-montserrat text-sm uppercase tracking-[0.3em] text-[#F6F5F2] transition hover:-translate-y-0.5 hover:bg-[#F6F5F2]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F5F2]/80"
+                    class="inline-flex items-center gap-2 rounded-full border border-cream/30 px-6 py-3 font-montserrat text-sm uppercase tracking-[0.3em] text-cream transition hover:-translate-y-0.5 hover:bg-cream/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream/60"
                   >
                     Explore Work
                   </a>
                 </div>
               </div>
-              <div class="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-[#F6F5F2]/10 bg-[#15151F] shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
+              <div class="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-cream/10 bg-[#181c27] shadow-[0_40px_80px_rgba(0,0,0,0.55)]">
                 {slide.media.type === 'video' ? (
                   <video
                     muted
@@ -127,18 +127,18 @@ export const CarouselHero = component$<CarouselHeroProps>(({ slides }) => {
                     class="h-full w-full object-cover"
                   />
                 )}
-                <span class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#0E0E12]/50 via-transparent to-[#5A3CF4]/20" />
+                <span class="pointer-events-none absolute inset-0 bg-surface-deep/50" />
               </div>
             </div>
           </article>
         ))}
       </div>
 
-      <div class="relative z-10 flex w-full max-w-6xl items-center justify-between px-4 md:px-10 lg:px-16">
+      <div class="pointer-events-none absolute inset-0 flex items-center justify-between px-4 md:px-10 lg:px-16">
         <button
           type="button"
           aria-label="Previous slide"
-          class="rounded-full border border-[#F6F5F2]/20 bg-[#15151F]/60 p-3 text-[#F6F5F2] transition hover:-translate-x-1 hover:bg-[#5A3CF4]/40 focus-visible:-translate-x-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F5F2]/80"
+          class="pointer-events-auto rounded-full border border-cream/20 bg-[#181c27]/70 p-3 text-cream transition hover:-translate-x-1 hover:bg-cream/10 focus-visible:-translate-x-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold/60"
           onClick$={goPrev}
         >
           <span aria-hidden="true" class="block text-2xl leading-none">
@@ -148,7 +148,7 @@ export const CarouselHero = component$<CarouselHeroProps>(({ slides }) => {
         <button
           type="button"
           aria-label="Next slide"
-          class="rounded-full border border-[#F6F5F2]/20 bg-[#15151F]/60 p-3 text-[#F6F5F2] transition hover:translate-x-1 hover:bg-[#5A3CF4]/40 focus-visible:translate-x-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F5F2]/80"
+          class="pointer-events-auto rounded-full border border-cream/20 bg-[#181c27]/70 p-3 text-cream transition hover:translate-x-1 hover:bg-cream/10 focus-visible:translate-x-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold/60"
           onClick$={goNext}
         >
           <span aria-hidden="true" class="block text-2xl leading-none">

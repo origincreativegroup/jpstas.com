@@ -13,7 +13,7 @@ export const SparklineChart = component$<SparklineChartProps>(({
   data, 
   width = 120, 
   height = 30,
-  color = '#2E3192',
+  color = '#b98f45',
   className = '',
   animated = true
 }) => {

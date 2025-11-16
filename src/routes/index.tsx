@@ -9,7 +9,7 @@ export default component$(() => {
   const home = getHomeContent();
 
   return (
-    <main class="min-h-screen bg-[#0E0E12] text-[#F6F5F2]">
+    <main class="min-h-screen bg-surface-deep text-cream">
       <CarouselHero slides={home.hero} />
       <BentoGrid items={home.bento.items} cta={home.bento.cta} />
       <MetricStrip metrics={home.metrics} />

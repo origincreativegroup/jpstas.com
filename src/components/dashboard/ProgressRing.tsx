@@ -13,7 +13,7 @@ export const ProgressRing = component$<ProgressRingProps>(({
   percentage, 
   size = 60, 
   strokeWidth = 4,
-  color = '#2E3192',
+  color = '#b98f45',
   className = '',
   animated = true
 }) => {

@@ -42,7 +42,7 @@ This guide provides step-by-step instructions for testing the accessibility impr
 5. Press `Space` on buttons
 
 **What to verify:**
-- [ ] Visible focus indicator on all elements (blue 3px outline)
+- [ ] Visible focus indicator on all elements (gold 3px outline)
 - [ ] Logical tab order (top to bottom, left to right)
 - [ ] "Skip to main content" link appears when pressing Tab
 - [ ] All buttons and links are reachable
@@ -90,9 +90,9 @@ This guide provides step-by-step instructions for testing the accessibility impr
 **Tool:** [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 
 **What to verify:**
-- [ ] Body text: `#1a1a1a` on `#FFFFFF` = **15:1** ✅
-- [ ] Secondary text: `#4a4a4a` on `#FFFFFF` = **9.7:1** ✅
-- [ ] Primary links: `#2563eb` on `#FFFFFF` = **8.6:1** ✅
+- [ ] Body text: `#f2efe6` on `#191d1c` = **passes AA/AAA** ✅
+- [ ] Secondary text: `#d0c3a3` on `#181c27` = **passes AA** ✅
+- [ ] Primary links: `#b98f45` on `#191d1c` = **passes AA** ✅
 - [ ] Buttons on gradient backgrounds (manually check)
 - [ ] White text on colored backgrounds (manually check)
 
@@ -231,7 +231,7 @@ This guide provides step-by-step instructions for testing the accessibility impr
 - Touch targets < 44x44px
 
 ### ✅ PASSES
-- Clear focus indicators (3px blue outline)
+- Clear focus indicators (3px gold outline)
 - All text ≥ 4.5:1 contrast
 - All forms properly labeled
 - All buttons have clear purposes

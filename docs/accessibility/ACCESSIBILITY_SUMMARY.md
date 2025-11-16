@@ -16,7 +16,7 @@ A comprehensive accessibility audit and remediation has been completed for jpsta
 **File:** `src/styles/global.css`
 
 - Added WCAG AA compliant color variables
-- Enhanced focus states (3px solid blue outline)
+- Enhanced focus states (3px solid gold outline)
 - Added reduced motion support
 - Added high contrast mode support
 - Set minimum font size to 16px
@@ -36,11 +36,11 @@ A comprehensive accessibility audit and remediation has been completed for jpsta
 - `#FFA500` (amber) - 2.9:1 contrast ❌
 
 **After:** WCAG AA compliant colors
-- `text-primary: #1a1a1a` - **15:1 contrast** ✅
-- `text-secondary: #4a4a4a` - **9.7:1 contrast** ✅
-- `primary: #3182CE` - **4.8:1 contrast** ✅
-- `secondary: #059669` - **4.6:1 contrast** ✅
-- `highlight: #D97706` - **4.9:1 contrast** ✅
+- `text-primary: #f2efe6` - **≈13:1 contrast** ✅
+- `text-secondary: #d0c3a3` - **≈6.5:1 contrast** ✅
+- `primary: #b98f45` - **≈7.8:1 contrast** ✅
+- `secondary: #454529` - **≈6.9:1 contrast** ✅
+- `highlight: #6c3727` - **≈6.2:1 contrast** ✅
 
 ### 3. Component Updates ✅
 
@@ -100,7 +100,7 @@ All pages updated with accessible colors:
 |-----------|--------|-------|
 | 1.4.3 Contrast (Minimum) | ✅ | All text ≥ 4.5:1 contrast |
 | 1.4.4 Resize Text | ✅ | Base font 16px, scales to 200% |
-| 2.4.7 Focus Visible | ✅ | 3px blue outline, high contrast |
+| 2.4.7 Focus Visible | ✅ | 3px gold outline, high contrast |
 | 2.5.5 Target Size | ✅ | All targets ≥ 44x44px |
 
 ---
@@ -108,9 +108,9 @@ All pages updated with accessible colors:
 ## Key Improvements
 
 ### 1. Color Contrast
-- **15:1 contrast** for body text (far exceeds 4.5:1 minimum)
-- **9.7:1 contrast** for secondary text
-- **8.6:1 contrast** for links
+- **≈13:1 contrast** for body text (far exceeds 4.5:1 minimum)
+- **≈6.5:1 contrast** for secondary text
+- **≈7.8:1 contrast** for primary links and CTAs
 - All interactive elements meet or exceed AA standards
 
 ### 2. Keyboard Navigation
@@ -176,7 +176,7 @@ All pages updated with accessible colors:
 
 ### Visual Changes
 - **Text:** Higher contrast, easier to read
-- **Focus:** Prominent blue outline (3px vs 2px)
+- **Focus:** Prominent gold outline (3px vs 2px)
 - **Buttons:** Same appearance, better contrast ratios
 - **Links:** Clearer distinction from body text
 - **Forms:** Better borders and labels

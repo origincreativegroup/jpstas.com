@@ -5,33 +5,41 @@
 @tailwind utilities;
 
 :root {
-  --brand: #1e40af;
-  --accent: #fbbf24;
-  --neutral: #475569;
-  
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-bg-dark: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  
-  /* Advanced Gradients */
-  --gradient-primary: linear-gradient(135deg, #55A3CF 0%, #00BF5F 100%);
-  --gradient-secondary: linear-gradient(135deg, #FFA500 0%, #FF6B6B 100%);
-  --gradient-dark: linear-gradient(135deg, #2C2C2C 0%, #1E3C0F 100%);
-  --gradient-light: linear-gradient(135deg, #E8E8F0 0%, #FFFFFF 100%);
-  
+  /* Earthy palette */
+  --surface-deep: #191d1c;
+  --surface-mid: #181c27;
+  --surface-olive: #454529;
+  --sand: #d0c3a3;
+  --cream: #f2efe6;
+  --gold: #b98f45;
+  --rust: #6c3727;
+
+  --brand: var(--gold);
+  --accent: var(--rust);
+  --neutral: var(--sand);
+  --text-primary: var(--cream);
+  --text-secondary: var(--sand);
+  --text-tertiary: rgba(242, 239, 230, 0.7);
+  --text-on-light: #191d1c;
+  --text-on-dark: #f2efe6;
+
+  /* Glassmorphism tuned for dark surfaces */
+  --glass-bg: rgba(25, 29, 28, 0.8);
+  --glass-bg-dark: rgba(24, 28, 39, 0.7);
+  --glass-border: rgba(208, 195, 163, 0.25);
+  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #191d1c 0%, #6c3727 40%, #b98f45 100%);
+  --gradient-secondary: linear-gradient(135deg, #454529 0%, #b98f45 100%);
+  --gradient-light: linear-gradient(135deg, #f2efe6 0%, #d0c3a3 100%);
+
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.15);
-  --shadow-glow: 0 0 20px rgba(85, 163, 207, 0.3);
-  
-  /* ADA Compliant Colors - WCAG AA 4.5:1 minimum contrast ratio */
-  --text-primary: #1a1a1a; /* Very dark gray for maximum contrast on white */
-  --text-secondary: #4a4a4a; /* Dark gray - 4.5:1 contrast on white */
-  --text-tertiary: #5a5a5a; /* Medium-dark gray - 7:1 contrast */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 25px rgba(185, 143, 69, 0.35);
 }
 
 * {
@@ -51,7 +59,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #1a1a1a; /* Updated for better contrast - WCAG AA compliant */
+  background-color: var(--surface-mid);
+  color: var(--text-primary);
   font-size: 16px; /* Minimum readable font size */
   line-height: 1.6; /* WCAG recommended line height */
   overflow-x: hidden;
@@ -65,13 +74,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: #2563eb; /* High contrast blue - WCAG AA compliant */
+  color: var(--gold);
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 a:hover {
-  color: #1d4ed8; /* Darker blue on hover */
+  color: var(--cream);
 }
 
 img, video {
@@ -159,7 +168,7 @@ a[href]:not([class*="px-"]):not([class*="py-"]) {
 
 /* Focus States - WCAG 2.4.7 Focus Visible (Level AA) */
 *:focus-visible {
-  outline: 3px solid #2563eb; /* High contrast blue - 3px for better visibility */
+  outline: 3px solid var(--gold); /* High contrast focus indicator */
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -169,13 +178,13 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #2563eb; /* High contrast focus indicator */
+  outline: 3px solid var(--gold); /* High contrast focus indicator */
   outline-offset: 3px;
 }
 
 /* Ensure focus is never removed */
 *:focus {
-  outline: 3px solid #2563eb;
+  outline: 3px solid var(--gold);
   outline-offset: 2px;
 }
 
@@ -185,8 +194,8 @@ select:focus-visible {
   left: -9999px;
   z-index: 999;
   padding: 1rem 2rem;
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--gold);
+  color: var(--surface-deep);
   font-weight: bold;
   text-decoration: none;
 }
@@ -211,21 +220,21 @@ select:focus-visible {
 
 /* Selection */
 ::selection {
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--gold);
+  color: var(--surface-deep);
 }
 
 /* ADA Compliant Text Utilities */
 .text-ada-primary {
-  color: #1a1a1a !important; /* 15:1 contrast on white */
+  color: var(--text-on-light) !important;
 }
 
 .text-ada-secondary {
-  color: #4a4a4a !important; /* 9.7:1 contrast on white */
+  color: var(--surface-olive) !important;
 }
 
 .text-ada-body {
-  color: #2C2C2C !important; /* 10:1 contrast - perfect for body text */
+  color: var(--surface-olive) !important;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -234,7 +243,7 @@ select:focus-visible {
 .text-charcoal\/60,
 .text-charcoal\/70,
 .text-charcoal\/80 {
-  color: #4a4a4a !important; /* Override with WCAG compliant color */
+  color: var(--surface-olive) !important;
 }
 
 /* Text links (not styled as buttons) should have underlines for accessibility */
@@ -257,7 +266,7 @@ button,
 /* Form labels must be visible and associated */
 label {
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--text-on-light);
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -266,7 +275,8 @@ label {
 input,
 textarea,
 select {
-  border: 2px solid #4a4a4a; /* High contrast border */
+  background-color: rgba(25, 29, 28, 0.05);
+  border: 2px solid rgba(25, 29, 28, 0.3); /* High contrast border */
   font-size: 16px; /* Prevent zoom on mobile */
   padding: 0.75rem 1rem;
 }
@@ -274,8 +284,8 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(185, 143, 69, 0.25);
 }
 
 /* Error states */
@@ -304,7 +314,7 @@ textarea:disabled,
 select:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  background-color: #f3f4f6;
+  background-color: rgba(242, 239, 230, 0.15);
 }
 
 /* Ensure SVG icons have proper color contrast */
@@ -373,8 +383,8 @@ svg {
 .metric-highlight {
   opacity: 1;
   transform: scale(1.02);
-  box-shadow: 0 12px 40px rgba(46, 49, 146, 0.2);
-  border-color: #2E3192;
+  box-shadow: 0 12px 40px rgba(185, 143, 69, 0.25);
+  border-color: var(--gold);
 }
 
 .metric-dim {

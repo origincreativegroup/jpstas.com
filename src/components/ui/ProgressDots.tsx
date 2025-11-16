@@ -26,7 +26,9 @@ export const ProgressDots = component$<ProgressDotsProps>(({ count, currentIndex
           aria-current={index === currentIndex ? 'true' : undefined}
           class={[
             'h-2 rounded-full transition-all duration-300',
-            index === currentIndex ? 'w-8 bg-[#F6F5F2]' : 'w-2 bg-[#F6F5F2]/40 hover:bg-[#F6F5F2]/70 focus-visible:bg-[#F6F5F2]/70',
+            index === currentIndex
+              ? 'w-8 bg-cream'
+              : 'w-2 bg-cream/40 hover:bg-cream/70 focus-visible:bg-cream/70',
           ].join(' ')}
           onClick$={$(() => handleClick(index, onSelect$))}
         />

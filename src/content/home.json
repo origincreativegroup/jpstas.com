@@ -8,7 +8,7 @@
         "description": "Modernized identity, tooling, and rollout playbooks for a decade of scale.",
         "media": {
           "type": "image",
-          "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
+          "src": "https://media.jpstas.com/homepage/hero-carousel/brand-evolution-hero.jpg",
           "alt": "Caribbean Pools brand evolution showcase"
         }
       },
@@ -19,7 +19,7 @@
         "description": "FPV and aerial capture program that quadrupled social engagement.",
         "media": {
           "type": "image",
-          "src": "https://media.jpstas.com/drone-hero.jpg",
+          "src": "https://media.jpstas.com/homepage/hero-carousel/drone-hero.jpg",
           "alt": "Aerial drone shot of completed pool"
         }
       },
@@ -30,7 +30,7 @@
         "description": "Rapid concept generation with brand-safe AI workflows.",
         "media": {
           "type": "image",
-          "src": "https://media.jpstas.com/generative-ai-hero.jpg",
+          "src": "https://media.jpstas.com/homepage/hero-carousel/generative-ai-hero.jpg",
           "alt": "Abstract generative AI visual interface"
         }
       }

@@ -84,7 +84,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
 
   const getThumbnailSrc = (item: Media) => {
     if (item.type === 'video') {
-      return item.poster || `https://placehold.co/300x300/2E3192/FFFFFF?text=Video`;
+      return item.poster || `https://placehold.co/300x300/b98f45/f2efe6?text=Video`;
     }
     return item.src;
   };
@@ -98,7 +98,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
       
       if (isThumbnail) {
         return (
-          <div class="relative aspect-square overflow-hidden rounded-xl bg-neutral/20">
+          <div class="relative aspect-square overflow-hidden rounded-xl bg-surface-mid/40">
             <img
               src={getThumbnailSrc(item)}
               alt={item.alt || 'Video thumbnail'}
@@ -106,9 +106,9 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
               loading="lazy"
             />
             {/* Video play icon overlay */}
-            <div class="absolute inset-0 flex items-center justify-center bg-charcoal/20">
-              <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
-                <svg class="w-6 h-6 text-charcoal ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <div class="absolute inset-0 flex items-center justify-center bg-surface-deep/40">
+              <div class="w-12 h-12 rounded-full bg-cream/90 flex items-center justify-center">
+                <svg class="w-6 h-6 text-surface-deep ml-1" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
               </div>
@@ -120,7 +120,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
       return (
         <div class="w-full">
           {isCloudflareStream ? (
-            <div class="relative w-full overflow-hidden rounded-2xl bg-charcoal shadow-2xl">
+            <div class="relative w-full overflow-hidden rounded-2xl bg-surface-mid shadow-2xl">
               <div class="relative w-full" style="padding-bottom: 56.25%;">
                 <iframe
                   src={`https://customer-h044ipu9nb6m47zm.cloudflarestream.com/${videoId}/iframe?${new URLSearchParams({
@@ -173,30 +173,30 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
   return (
     <div>
       {/* Thumbnail Grid */}
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {media.map((item, index) => (
           <button
             key={index}
             onClick$={() => openGallery(index)}
-            class="group relative aspect-square overflow-hidden rounded-xl bg-neutral/20 transition-all duration-300 hover:scale-105 hover:shadow-xl focus:ring-2 focus:ring-primary"
+            class="group relative aspect-square overflow-hidden rounded-xl bg-surface-mid/40 transition-all duration-300 hover:scale-105 hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] focus:ring-2 focus:ring-gold/50"
           >
             {renderMediaItem(item, true)}
-            <div class="absolute inset-0 bg-charcoal/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div class="absolute inset-0 bg-surface-deep/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <div class="absolute bottom-3 left-3 right-3">
-                <p class="text-sm font-medium text-white line-clamp-2">{item.alt}</p>
+                <p class="text-sm font-medium text-cream line-clamp-2">{item.alt}</p>
                 {item.type === 'video' && (
                   <div class="flex items-center gap-1 mt-1">
-                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-3 h-3 text-cream" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
-                    <span class="text-xs text-white/80">Video</span>
+                    <span class="text-xs text-cream/80">Video</span>
                   </div>
                 )}
               </div>
             </div>
             {/* Expand Icon */}
-            <div class="absolute right-2 top-2 rounded-full bg-white/90 p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              <svg class="h-4 w-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="absolute right-2 top-2 rounded-full bg-cream/90 p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <svg class="h-4 w-4 text-surface-deep" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
               </svg>
             </div>
@@ -207,7 +207,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
       {/* Lightbox Modal */}
       {isOpen.value && (
         <div
-          class="fixed inset-0 z-[9999] flex items-center justify-center bg-charcoal/95 backdrop-blur-sm animate-fadeIn"
+          class="fixed inset-0 z-[9999] flex items-center justify-center bg-surface-deep/95 backdrop-blur-sm animate-fadeIn"
           onClick$={closeGallery}
           onTouchStart$={handleTouchStart}
           onTouchMove$={handleTouchMove}
@@ -216,7 +216,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
           {/* Close Button */}
           <button
             onClick$={closeGallery}
-            class="absolute right-6 top-20 z-[10000] rounded-full bg-white/20 p-4 text-white backdrop-blur-md transition-all hover:bg-white/30 hover:scale-110 shadow-lg"
+            class="absolute right-6 top-20 z-[10000] rounded-full bg-cream/15 p-4 text-cream backdrop-blur-md transition-all hover:bg-cream/25 hover:scale-110 shadow-lg"
             aria-label="Close gallery"
           >
             <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -225,7 +225,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
           </button>
 
           {/* Media Counter */}
-          <div class="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md">
+          <div class="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-full bg-cream/10 px-4 py-2 text-sm font-medium text-cream backdrop-blur-md">
             {currentIndex.value + 1} / {media.length}
             {media[currentIndex.value].type === 'video' && (
               <span class="ml-2 text-xs opacity-75">Video</span>
@@ -237,13 +237,13 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
             class="relative flex h-full w-full items-center justify-center p-4 md:p-12"
             onClick$={(e) => e.stopPropagation()}
           >
-            <div class="relative max-h-[90vh] max-w-6xl w-full animate-scaleIn">
+            <div class="relative max-h-[90vh] w-full max-w-6xl animate-scaleIn">
               {renderMediaItem(media[currentIndex.value])}
               
               {/* Caption */}
               {media[currentIndex.value].caption && (
-                <div class="mt-4 rounded-lg bg-white/10 p-4 text-center backdrop-blur-md">
-                  <p class="text-sm text-white md:text-base">{media[currentIndex.value].caption}</p>
+                <div class="mt-4 rounded-lg bg-cream/10 p-4 text-center backdrop-blur-md">
+                  <p class="text-sm text-cream md:text-base">{media[currentIndex.value].caption}</p>
                 </div>
               )}
             </div>
@@ -256,7 +256,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
                     e.stopPropagation();
                     prevMedia();
                   }}
-                  class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition-all hover:bg-white/20 hover:scale-110 md:left-8"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-cream/10 p-3 text-cream backdrop-blur-md transition-all hover:bg-cream/20 hover:scale-110 md:left-8"
                   aria-label="Previous media"
                 >
                   <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -269,7 +269,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
                     e.stopPropagation();
                     nextMedia();
                   }}
-                  class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition-all hover:bg-white/20 hover:scale-110 md:right-8"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-cream/10 p-3 text-cream backdrop-blur-md transition-all hover:bg-cream/20 hover:scale-110 md:right-8"
                   aria-label="Next media"
                 >
                   <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -282,7 +282,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
 
           {/* Thumbnail Strip */}
           {media.length > 1 && (
-            <div class="absolute bottom-4 left-1/2 z-10 flex max-w-full -translate-x-1/2 gap-2 overflow-x-auto rounded-lg bg-white/10 p-3 backdrop-blur-md">
+            <div class="absolute bottom-4 left-1/2 z-10 flex max-w-full -translate-x-1/2 gap-2 overflow-x-auto rounded-lg bg-cream/10 p-3 backdrop-blur-md">
               {media.map((item, index) => (
                 <button
                   key={index}

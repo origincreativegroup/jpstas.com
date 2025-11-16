@@ -10,51 +10,42 @@ export default {
         montserrat: ['Montserrat', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // Primary Color Palette (from design image)
-        'navy': '#2E3192', // Deep Navy/Purple - Primary brand color
-        'lavender': '#E8E8F0', // Soft Lavender - Neutral/backgrounds
-        'golden': '#D4A14A', // Golden Yellow - Accent/highlight
-        'olive': '#6B5D3F', // Olive Brown - Secondary/earthy tone
-        'charcoal': '#2E3192', // Navy - matches primary
+        // Earthy redesign palette
+        'surface-deep': '#191d1c',
+        'surface-mid': '#181c27',
+        'surface-olive': '#454529',
+        sand: '#d0c3a3',
+        cream: '#f2efe6',
+        gold: '#b98f45',
+        rust: '#6c3727',
 
-        // Semantic color mappings
-        primary: '#2E3192', // Navy
-        'primary-hover': '#252980', // Darker navy for hover
-        'primary-light': '#4A4DB8', // Lighter navy for backgrounds
-        secondary: '#6B5D3F', // Olive
-        'secondary-hover': '#5A4D34', // Darker olive
-        'secondary-light': '#8B7D5F', // Lighter olive
-        tertiary: '#2E3192', // Navy (same as primary)
-        neutral: '#E8E8F0', // Lavender
-        highlight: '#D4A14A', // Golden
-        'highlight-hover': '#C08F39', // Darker golden
-        'highlight-light': '#E0B765', // Lighter golden
+        // Semantic mappings
+        primary: '#b98f45', // gold CTA
+        'primary-hover': '#9d7635',
+        'primary-light': '#d6b36b',
+        secondary: '#454529', // deep olive
+        'secondary-hover': '#373b22',
+        'secondary-light': '#6a6b45',
+        neutral: '#d0c3a3', // sand
+        'neutral-light': '#f2efe6', // cream
+        'neutral-dark': '#191d1c',
+        highlight: '#6c3727', // rust accent
+        'highlight-hover': '#5a2b1f',
+        'highlight-light': '#8a4a36',
 
-        // Text colors (ADA compliant)
-        'text-primary': '#2E3192', // Navy - primary text color
-        'text-secondary': '#6B5D3F', // Olive - secondary text
-        'text-tertiary': '#5a5a5a', // Medium-dark gray - 7:1 contrast
+        // Text colors
+        'text-dark': '#191d1c',
+        'text-mid': '#454529',
+        'text-light': '#f2efe6',
 
         // Legacy/compatibility (map to new palette)
-        'royal-blue': '#2E3192',
-        'teal-aqua': '#6B5D3F',
-        'navy-blue': '#2E3192',
-        'amber': '#D4A14A',
-        'pure-white': '#FFFFFF',
-        brand: '#2E3192',
-        accent: '#D4A14A',
-        'brand-light': '#E8E8F0',
-        'brand-dark': '#2C2C2C',
-        'accent-dark': '#C08F39',
-        dark: '#1a1a1a',
-        // Homepage refresh palette
-        ink: '#0E0E12',
-        cream: '#F6F5F2',
-        violet: '#5A3CF4',
-        amberFresh: '#F59E0B',
-        oliveTone: '#6B7D57',
-        lavenderTint: '#CBC0FF',
-        mutedGray: '#A8A8B3',
+        brand: '#b98f45',
+        accent: '#6c3727',
+        'brand-light': '#f2efe6',
+        'brand-dark': '#191d1c',
+        'accent-dark': '#5a2b1f',
+        dark: '#191d1c',
+        light: '#f2efe6',
       },
       borderRadius: {
         '2xl': '1.25rem',

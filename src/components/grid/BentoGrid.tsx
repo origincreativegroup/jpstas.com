@@ -43,7 +43,7 @@ const createLayoutClasses = (layout: BentoItem['layout']) =>
 
 export const BentoGrid = component$<BentoGridProps>(({ items, cta }) => {
   return (
-    <section class="bg-[#F6F5F2] py-16 md:py-24">
+    <section class="bg-surface-mid py-16 md:py-24 text-cream">
       <div class="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 md:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-4 md:auto-rows-[240px] md:grid-cols-8 xl:auto-rows-[260px] xl:grid-cols-12">
           {items.map((item) => (
@@ -55,7 +55,7 @@ export const BentoGrid = component$<BentoGridProps>(({ items, cta }) => {
         <div class="flex justify-center">
           <a
             href={cta.href}
-            class="inline-flex items-center gap-2 rounded-full border border-[#0E0E12]/20 bg-[#5A3CF4] px-6 py-3 font-montserrat text-sm font-semibold uppercase tracking-[0.3em] text-[#F6F5F2] transition hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(90,60,244,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F6F5F2]/80"
+            class="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold px-6 py-3 font-montserrat text-sm font-semibold uppercase tracking-[0.3em] text-surface-deep transition hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(185,143,69,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold/60"
           >
             {cta.label}
           </a>

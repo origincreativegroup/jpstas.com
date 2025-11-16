@@ -4,6 +4,14 @@ import { ProgressRing } from './ProgressRing';
 import { SparklineChart } from './SparklineChart';
 import type { MetricCardProps } from '../../types/dashboard';
 
+const metricPalette: Record<string, string> = {
+  primary: '#b98f45',
+  secondary: '#454529',
+  highlight: '#6c3727',
+};
+
+const getMetricColor = (token?: string) => (token ? metricPalette[token] ?? '#b98f45' : '#b98f45');
+
 export const ExecutiveMetricCard = component$<MetricCardProps>(({ 
   metric, 
   expanded = false, 
@@ -138,7 +146,7 @@ export const ExecutiveMetricCard = component$<MetricCardProps>(({
                 data={metric.details.chart.data}
                 width={100}
                 height={20}
-                color={metric.priority === 'high' ? '#2E3192' : '#6B5D3F'}
+                color={metric.priority === 'high' ? getMetricColor('primary') : getMetricColor('secondary')}
               />
             </div>
           )}
@@ -206,9 +214,7 @@ export const ExecutiveMetricCard = component$<MetricCardProps>(({
                     <div class="flex items-center gap-3">
                       <div 
                         class="w-3 h-3 rounded-full"
-                        style={{ backgroundColor: item.color === 'primary' ? '#2E3192' : 
-                                               item.color === 'secondary' ? '#6B5D3F' : 
-                                               item.color === 'highlight' ? '#D4A14A' : '#6B7280' }}
+                        style={{ backgroundColor: getMetricColor(item.color) }}
                       />
                       <span class="text-sm text-text-secondary">{item.label}</span>
                     </div>
@@ -219,9 +225,7 @@ export const ExecutiveMetricCard = component$<MetricCardProps>(({
                           percentage={item.percentage}
                           size={24}
                           strokeWidth={2}
-                          color={item.color === 'primary' ? '#2E3192' : 
-                                 item.color === 'secondary' ? '#6B5D3F' : 
-                                 item.color === 'highlight' ? '#D4A14A' : '#6B7280'}
+                          color={getMetricColor(item.color)}
                         />
                       )}
                     </div>
