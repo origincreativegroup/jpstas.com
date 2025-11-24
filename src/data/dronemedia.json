@@ -3,11 +3,13 @@
   "title": "New Pool Drone Photo & Video Project",
   "tagline": "Cinematic storytelling that elevated brand perception.",
   "hero": {
-    "src": "https://media.jpstas.com/drone-hero.jpg",
-    "alt": "Aerial drone shot of completed pool"
+    "type": "video",
+    "src": "3d064713769ec888614a54d4dbeb94ff",
+    "alt": "Aerial drone shot of completed pool",
+    "poster": "https://media.jpstas.com/portfolio/images/heroes/drone-hero-800x600.png"
   },
   "cardImage": {
-    "src": "https://media.jpstas.com/drone-hero.jpg",
+    "src": "https://media.jpstas.com/portfolio/drone/drone-social-media.png",
     "alt": "Drone photo & video project"
   },
   "metrics": [
@@ -52,13 +54,6 @@
   },
   "solution": {
     "approach": "Developed comprehensive drone media initiative using DJI and custom FPV drones to capture cinematic aerial footage and photography, creating a reusable media library for all marketing channels.",
-    "bullets": [
-      "Captured cinematic drone and FPV footage at project sites",
-      "Built repeatable workflow for scouting, flight planning, and editing",
-      "Applied branded overlays and LUT color grading",
-      "Created searchable media library for marketing and sales",
-      "Integrated content into web, social, and digital ads"
-    ],
     "gallery": [
       {
         "src": "af4889355cd0d36bac6722871cb2bcb3",
@@ -109,24 +104,20 @@
   ],
   "process": [
     {
-      "title": "Pre-Production",
-      "description": "Site scouting, flight planning, and safety review."
+      "title": "Capture & Workflow",
+      "description": "Captured cinematic drone and FPV footage at project sites. Built repeatable workflow for scouting, flight planning, and editing."
     },
     {
-      "title": "Capture",
-      "description": "Aerial photography and FPV videography."
+      "title": "Brand Integration",
+      "description": "Applied branded overlays and LUT color grading to maintain visual consistency across all media."
     },
     {
-      "title": "Editing",
-      "description": "Color grading, branded overlays, and audio mixing."
+      "title": "Media Library",
+      "description": "Created searchable media library for marketing and sales teams to access assets quickly."
     },
     {
-      "title": "Distribution",
-      "description": "Optimized assets for web, social, and sales materials."
-    },
-    {
-      "title": "Optimization",
-      "description": "Reviewed performance analytics to refine future shoots."
+      "title": "Multi-Channel Distribution",
+      "description": "Integrated content into web, social, and digital ads for maximum reach and engagement."
     }
   ],
   "reflection": {
@@ -144,7 +135,7 @@
       "href": "/portfolio/brand-evolution"
     },
     {
-      "title": "Print Studio",
+      "title": "In-House Print Studio Build",
       "href": "/portfolio/print-studio"
     }
   ]

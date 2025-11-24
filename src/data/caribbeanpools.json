@@ -42,14 +42,6 @@
   },
   "solution": {
     "approach": "I approached the project as both designer and systems integrator. The new site functioned like a living brand hub—marketing, retail, and service all under one consistent design system.",
-    "bullets": [
-      "Platform refresh: Migrated both sites to a modern WordPress framework with modular block components, allowing quick page builds and future scalability",
-      "Unified UX system: Merged e-commerce functionality from ShopCaribbeanPools into the main site with consistent navigation, typography, and color palette",
-      "Process-based storytelling: Reorganized content around Design → Build → Maintain, visually mapping the full customer journey",
-      "E-commerce optimization: Rebuilt product cards and checkout flow for mobile use, simplifying forms and improving load time by ~45%",
-      "Visual integration: Pulled imagery from my drone and print studio projects—giving customers a seamless experience from ad to purchase",
-      "Team enablement: Created pre-styled content blocks and trained staff to manage updates in-house, removing the dependency on external developers"
-    ],
     "gallery": [
       {
         "src": "https://media.jpstas.com/portfolio/caribbeanpools.com/Caribbeanpools-website-pentair-mainteance-dealer-page.png",
@@ -119,50 +111,42 @@
   ],
   "process": [
     {
-      "title": "Audit",
-      "description": "Evaluate existing site performance, user feedback, and identify pain points in navigation and content management"
+      "title": "Platform Refresh",
+      "description": "Migrated both sites to a modern WordPress framework with modular block components, allowing quick page builds and future scalability"
     },
     {
-      "title": "Strategy",
-      "description": "Define unified brand approach and goals for merging two separate platforms into one cohesive experience"
+      "title": "Unified UX System",
+      "description": "Merged e-commerce functionality from ShopCaribbeanPools into the main site with consistent navigation, typography, and color palette"
     },
     {
-      "title": "Information Architecture",
-      "description": "Reorganize site structure around Design → Build → Maintain customer journey and map full user experience"
+      "title": "Process-Based Storytelling",
+      "description": "Reorganized content around Design → Build → Maintain, visually mapping the full customer journey"
     },
     {
-      "title": "Design System",
-      "description": "Create modular block components, unified typography, color palette, and responsive templates"
+      "title": "E-Commerce Optimization",
+      "description": "Rebuilt product cards and checkout flow for mobile use, simplifying forms and improving load time by ~45%"
     },
     {
-      "title": "Development",
-      "description": "Migrate to modern WordPress framework, build custom blocks, and optimize checkout flow for mobile"
+      "title": "Visual Integration",
+      "description": "Pulled imagery from my drone and print studio projects—giving customers a seamless experience from ad to purchase"
     },
     {
-      "title": "Integration",
-      "description": "Merge e-commerce functionality from ShopCaribbeanPools into main site and integrate visual assets from other projects"
-    },
-    {
-      "title": "Training",
-      "description": "Train marketing staff on content management system and establish workflows for in-house campaign launches"
-    },
-    {
-      "title": "Continuous Optimization",
-      "description": "Monitor analytics, iterate on UX based on user behavior, and refine content strategy"
+      "title": "Team Enablement",
+      "description": "Created pre-styled content blocks and trained staff to manage updates in-house, removing the dependency on external developers"
     }
   ],
   "related": [
     {
-      "title": "Formstack Digital Forms",
-      "href": "/portfolio/formstack-integration"
+      "title": "Caribbean Pools Brand Evolution",
+      "href": "/portfolio/brand-evolution"
     },
     {
-      "title": "Email Marketing Campaigns",
-      "href": "/portfolio/email-marketing"
-    },
-    {
-      "title": "Print Studio Operations",
+      "title": "In-House Print Studio Build",
       "href": "/portfolio/print-studio"
+    },
+    {
+      "title": "New Pool Drone Photo & Video Project",
+      "href": "/portfolio/drone-media"
     }
   ]
 }

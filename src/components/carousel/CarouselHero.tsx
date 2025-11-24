@@ -1,6 +1,7 @@
 import { $, component$, useComputed$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import type { HeroSlide } from '~/lib/content';
 import { ProgressDots } from '~/components/ui/ProgressDots';
+import { CloudflareStreamPlayer } from '~/components/CloudflareStreamPlayer';
 
 type CarouselHeroProps = {
   slides: HeroSlide[];
@@ -109,16 +110,29 @@ export const CarouselHero = component$<CarouselHeroProps>(({ slides }) => {
               </div>
               <div class="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-cream/10 bg-[#181c27] shadow-[0_40px_80px_rgba(0,0,0,0.55)]">
                 {slide.media.type === 'video' ? (
-                  <video
-                    muted
-                    loop
-                    playsInline
-                    aria-hidden="true"
-                    poster={slide.media.poster}
-                    class="h-full w-full object-cover"
-                  >
-                    <source src={slide.media.src} />
-                  </video>
+                  /^[a-f0-9]{32}$/i.test(slide.media.src) ? (
+                    <CloudflareStreamPlayer
+                      videoId={slide.media.src}
+                      poster={slide.media.poster}
+                      autoplay={true}
+                      loop={true}
+                      muted={true}
+                      controls={false}
+                      fill={true}
+                      class="rounded-none shadow-none bg-transparent"
+                    />
+                  ) : (
+                    <video
+                      muted
+                      loop
+                      playsInline
+                      aria-hidden="true"
+                      poster={slide.media.poster}
+                      class="h-full w-full object-cover"
+                    >
+                      <source src={slide.media.src} />
+                    </video>
+                  )
                 ) : (
                   <img
                     src={slide.media.src}
@@ -127,7 +141,6 @@ export const CarouselHero = component$<CarouselHeroProps>(({ slides }) => {
                     class="h-full w-full object-cover"
                   />
                 )}
-                <span class="pointer-events-none absolute inset-0 bg-surface-deep/50" />
               </div>
             </div>
           </article>

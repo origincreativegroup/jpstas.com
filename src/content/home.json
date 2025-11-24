@@ -3,35 +3,35 @@
     "slides": [
       {
         "slug": "brand-evolution",
-        "headline": "Brand Systems Engineered for Growth",
+        "headline": "Brand & Visual Systems Built to Scale",
         "category": "Brand Systems",
-        "description": "Modernized identity, tooling, and rollout playbooks for a decade of scale.",
+        "description": "Modern identity, layout, and tooling designed to stay consistent across print, web, fleet, and retail.",
         "media": {
           "type": "image",
-          "src": "https://media.jpstas.com/homepage/hero-carousel/brand-evolution-hero.jpg",
-          "alt": "Caribbean Pools brand evolution showcase"
+          "src": "https://media.jpstas.com/portfolio/images/heroes/brand-evolution-hero.png",
+          "alt": "Caribbean Pools brand evolution showcase across print and digital applications"
         }
       },
       {
         "slug": "drone-media",
-        "headline": "Cinematic Drone Storytelling",
-        "category": "Content Production",
-        "description": "FPV and aerial capture program that quadrupled social engagement.",
+        "headline": "Motion & Media for Story-Driven Brands",
+        "category": "Motion & Content",
+        "description": "Cinematic drone and motion work that turns real-world projects into compelling narratives.",
         "media": {
           "type": "image",
-          "src": "https://media.jpstas.com/homepage/hero-carousel/drone-hero.jpg",
-          "alt": "Aerial drone shot of completed pool"
+          "src": "https://media.jpstas.com/portfolio/drone/drone-social-media.png",
+          "alt": "Aerial drone shot of a completed pool used in brand storytelling"
         }
       },
       {
         "slug": "generative-ai",
-        "headline": "AI-Assisted Creative Ops",
-        "category": "Innovation Lab",
-        "description": "Rapid concept generation with brand-safe AI workflows.",
+        "headline": "Creative Intelligence That Supports Designers",
+        "category": "Creative Technology",
+        "description": "AI-assisted workflows, local models, and automation that enhance design systems without replacing the designer.",
         "media": {
           "type": "image",
-          "src": "https://media.jpstas.com/homepage/hero-carousel/generative-ai-hero.jpg",
-          "alt": "Abstract generative AI visual interface"
+          "src": "https://media.jpstas.com/portfolio/images/heroes/generative-ai-hero.png",
+          "alt": "Abstract generative AI interface supporting a design workflow"
         }
       }
     ]
@@ -46,14 +46,14 @@
         }
       },
       {
-        "slug": "generative-ai",
+        "slug": "caribbeanpools-redesign",
         "layout": {
           "md": { "colSpan": 4, "rowSpan": 1 },
           "xl": { "colSpan": 3, "rowSpan": 1 }
         }
       },
       {
-        "slug": "caribbeanpools-redesign",
+        "slug": "print-studio",
         "layout": {
           "md": { "colSpan": 4, "rowSpan": 1 },
           "xl": { "colSpan": 3, "rowSpan": 1 }
@@ -74,7 +74,7 @@
         }
       },
       {
-        "slug": "print-systems",
+        "slug": "generative-ai",
         "layout": {
           "md": { "colSpan": 4, "rowSpan": 1 },
           "xl": { "colSpan": 3, "rowSpan": 1 }
@@ -90,31 +90,34 @@
     {
       "title": "Tools & Platforms",
       "items": [
-        "Adobe CC Suite",
+        "Adobe Creative Cloud (Illustrator, Photoshop, InDesign, Premiere)",
         "Figma & FigJam",
-        "TouchDesigner & MadMapper",
-        "Runway & Stable Diffusion",
+        "WordPress & WooCommerce",
+        "Runway, Stable Diffusion, Midjourney",
+        "Local LLMs, Docker, Raspberry Pi & NAS",
         "DJI & FPV Drone Systems"
       ]
     },
     {
       "title": "Core Skills",
       "items": [
-        "Brand & Design Systems",
-        "Motion & Mixed Media",
-        "Generative AI Ops",
-        "Print Production Engineering",
+        "Brand & Visual Design Systems",
+        "Web & Interface Design",
+        "Motion, Drone & Mixed Media Storytelling",
+        "Print Production & Fabrication Workflows",
+        "Creative Automation & AI-Augmented Ops",
         "Cross-Disciplinary Enablement"
       ]
     },
     {
       "title": "Process & Philosophy",
       "items": [
-        "Systems Thinking",
-        "Rapid Prototyping",
-        "Integrated Operations",
-        "Evidence-Based Iteration",
-        "Human-Centered Storytelling"
+        "Design-Led Systems Thinking",
+        "Rapid Prototyping & Iteration",
+        "Integrated Operations Across Teams",
+        "Evidence-Based Decision Making",
+        "Human-Centered Storytelling",
+        "Tools That Feel Like Extensions of the Mind"
       ]
     }
   ]

@@ -1,9 +1,9 @@
 {
   "slug": "mixed-media",
-  "title": "Mixed Media Installations",
+  "title": "Mixed Media",
   "tagline": "Immersive brand moments blending projection, sculpture, and tactile fabrication.",
   "hero": {
-    "src": "https://media.jpstas.com/mixed-media-hero.jpg",
+    "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-hero-1.png",
     "alt": "Mixed media installation with light projections"
   },
   "cardImage": {
@@ -32,24 +32,78 @@
   },
   "solution": {
     "approach": "Designed modular mixed-media environments that could be prototyped virtually, fabricated locally, and assembled on-site with minimal downtime.",
-    "bullets": [
-      "Developed 3D previsualizations to validate flow and lighting",
-      "Created CNC-ready fabrication files and projection maps",
-      "Built reusable control systems for syncing motion, sound, and light",
-      "Documented install guides enabling local crews to execute quickly"
-    ],
     "gallery": [
       {
-        "src": "https://media.jpstas.com/mixed-media-projection.jpg",
-        "alt": "Projection mapped sculpture"
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-4th-shirt.png",
+        "alt": "Fourth of July themed shirt design"
       },
       {
-        "src": "https://media.jpstas.com/mixed-media-cnc.jpg",
-        "alt": "CNC fabricated panels"
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-banner.png",
+        "alt": "Mixed media banner display"
       },
       {
-        "src": "https://media.jpstas.com/mixed-media-detail.jpg",
-        "alt": "Installation detail with lighting"
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-christmas-shirts.png",
+        "alt": "Christmas themed shirt collection"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-cover-star-switch.png",
+        "alt": "Cover star switch installation"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-hoodie.png",
+        "alt": "Hoodie design and production"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-shirt-closeup.png",
+        "alt": "Close-up detail of shirt design"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-st-patricks.png",
+        "alt": "St. Patrick's Day themed design"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-stickers.png",
+        "alt": "Custom sticker designs and production"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-store-decor.png",
+        "alt": "Retail store decoration and signage"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-t-shirt.png",
+        "alt": "T-shirt design and branding"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-undercounter.png",
+        "alt": "Undercounter display installation"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-vertical-banner.png",
+        "alt": "Vertical banner design"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-wall-graphic-full.png",
+        "alt": "Full wall graphic installation"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-wall-graphic.png",
+        "alt": "Wall graphic design"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-waterlab_1.png",
+        "alt": "Waterlab installation view"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-waterlab.png",
+        "alt": "Waterlab branded installation"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-window-graphics_1.png",
+        "alt": "Window graphics installation detail"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-window-graphics.png",
+        "alt": "Retail window graphics display"
       }
     ]
   },
@@ -71,10 +125,22 @@
     }
   ],
   "process": [
-    { "title": "Blueprint", "description": "Collaborate with brand teams to define narrative arcs and touch-points." },
-    { "title": "Prototype", "description": "Material tests, lighting studies, and interactive proof-of-concepts." },
-    { "title": "Fabricate", "description": "Produce modular components and tune projection content." },
-    { "title": "Install", "description": "Coordinate on-site crews, calibrate systems, and document runbooks." }
+    {
+      "title": "3D Previsualization",
+      "description": "Developed 3D previsualizations to validate flow and lighting before fabrication"
+    },
+    {
+      "title": "Fabrication Files",
+      "description": "Created CNC-ready fabrication files and projection maps for precise production"
+    },
+    {
+      "title": "Control Systems",
+      "description": "Built reusable control systems for syncing motion, sound, and light across installations"
+    },
+    {
+      "title": "Installation Documentation",
+      "description": "Documented install guides enabling local crews to execute quickly and consistently"
+    }
   ],
   "reflection": {
     "learning": "Immersive work succeeds when every component—digital or physical—shares a unified story and operational plan.",
@@ -85,8 +151,8 @@
     ]
   },
   "related": [
-    { "title": "Motion Systems", "href": "/portfolio/motion-systems" },
-    { "title": "Print Studio", "href": "/portfolio/print-studio" }
+    { "title": "Motion Systems Library", "href": "/portfolio/motion-systems" },
+    { "title": "In-House Print Studio Build", "href": "/portfolio/print-studio" }
   ]
 }
 

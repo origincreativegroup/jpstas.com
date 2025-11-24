@@ -1,6 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import type { CaseStudy } from '~/types/case-study';
 import { MediaGallery } from '~/components/MediaGallery';
+import { CloudflareStreamPlayer } from '~/components/CloudflareStreamPlayer';
 
 const badgeClass =
   'inline-flex items-center justify-center rounded-full border border-gold/30 bg-gold/10 px-3 py-1 font-inter text-xs uppercase tracking-[0.2em] text-gold';
@@ -18,12 +19,21 @@ export const CaseStudyPage = component$(({ data }: { data: CaseStudy }) => {
       <section class="relative overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24">
         {data.hero?.src && (
           <>
-            <img
-              src={data.hero.src}
-              alt={data.hero.alt ?? data.title}
-              class="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
+            {data.hero.type === 'video' && data.hero.poster ? (
+              <img
+                src={data.hero.poster}
+                alt={data.hero.alt ?? data.title}
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : data.hero.type !== 'video' ? (
+              <img
+                src={data.hero.src}
+                alt={data.hero.alt ?? data.title}
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : null}
             <div class="absolute inset-0 bg-surface-deep/80" />
           </>
         )}
@@ -54,7 +64,32 @@ export const CaseStudyPage = component$(({ data }: { data: CaseStudy }) => {
             </div>
             {data.hero?.src ? (
               <div class="relative overflow-hidden rounded-3xl border border-cream/15 bg-surface-mid/80 shadow-[0_40px_80px_rgba(0,0,0,0.55)]">
-                <img src={data.hero.src} alt={data.hero.alt ?? data.title} class="h-full w-full object-cover" loading="lazy" />
+                {data.hero.type === 'video' && /^[a-f0-9]{32}$/i.test(data.hero.src) ? (
+                  <CloudflareStreamPlayer
+                    videoId={data.hero.src}
+                    poster={data.hero.poster}
+                    autoplay={true}
+                    loop={true}
+                    muted={true}
+                    controls={true}
+                    fill={false}
+                    class="w-full"
+                  />
+                ) : data.hero.type === 'video' ? (
+                  <video
+                    src={data.hero.src}
+                    poster={data.hero.poster}
+                    autoplay
+                    loop
+                    muted
+                    controls
+                    class="h-full w-full object-cover"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img src={data.hero.src} alt={data.hero.alt ?? data.title} class="h-full w-full object-cover" loading="lazy" />
+                )}
               </div>
             ) : null}
           </div>

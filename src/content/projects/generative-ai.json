@@ -1,9 +1,9 @@
 {
   "slug": "generative-ai",
   "title": "Generative AI Concept Lab",
-  "category": "Innovation",
-  "summary": "Brand-safe AI workflows delivering production-ready concepts within 48 hours.",
-  "tags": ["Generative AI", "Creative Ops", "Automation"],
+  "category": "Creative Technology",
+  "summary": "AI-assisted workflows, local models, and automation that enhance design systems without replacing the designer.",
+  "tags": ["Creative Technology", "AI Workflows", "Design Systems", "Automation"],
   "hero": {
     "type": "image",
     "src": "https://media.jpstas.com/generative-ai-hero.jpg",
@@ -11,7 +11,7 @@
   },
   "thumbnail": {
     "type": "image",
-    "src": "https://media.jpstas.com/generative-ai-card.jpg",
+    "src": "https://media.jpstas.com/portfolio/images/heroes/cards-home/genai-card-AI-V2.png",
     "alt": "Generative AI experiments moodboard"
   },
   "accent": "#f2efe6"

@@ -41,12 +41,6 @@
   },
   "solution": {
     "approach": "I approached the rebrand not as a one-time design project but as a system engineering challenge—how to make creativity scalable. This wasn't just about making things look nice—it was about creating a repeatable, documented system that anyone in the company could use to produce brand-correct materials without designer intervention.",
-    "bullets": [
-      "Brand Audit & Modernization: Refined the original logo into a flexible mark with multiple lockups suitable for print, embroidery, and digital use. Established a cohesive color palette with Pantone-matched vinyl and fabric samples for consistency across mediums. Chose modern geometric sans-serif typography that balanced approachability and professionalism.",
-      "Design System Development: Built a centralized asset library with templates for business cards, signage, uniforms, and vehicle wraps. Created guidelines for logo usage, spacing, and color application—simple enough for staff to follow but robust enough for vendors. Introduced digital templates for social media, ads, and web banners so seasonal marketing could be produced quickly in-house.",
-      "Production Integration: Leveraged the in-house print studio I built to handle all large-format and apparel production internally. Designed cut files and press-ready documents optimized for the HP Latex 315 printer and Graphtec cutter. Worked cross-functionally with field and retail teams to deploy new branding assets across every location and fleet vehicle.",
-      "Internal Brand Education: Conducted short workshops with management and field staff to explain why consistency mattered. Produced an internal \"Brand Quick Guide\" summarizing usage standards and visual references."
-    ],
     "gallery": [
       {
         "src": "https://media.jpstas.com/brand-logo-evolution.jpg",
@@ -95,41 +89,29 @@
   ],
   "process": [
     {
-      "title": "Audit",
-      "description": "Document inconsistencies across all visual and communication touchpoints"
+      "title": "Brand Audit & Modernization",
+      "description": "Refined the original logo into a flexible mark with multiple lockups suitable for print, embroidery, and digital use. Established a cohesive color palette with Pantone-matched vinyl and fabric samples for consistency across mediums. Chose modern geometric sans-serif typography that balanced approachability and professionalism."
     },
     {
-      "title": "Research",
-      "description": "Analyze competitor branding, stakeholder interviews, and industry standards"
+      "title": "Design System Development",
+      "description": "Built a centralized asset library with templates for business cards, signage, uniforms, and vehicle wraps. Created guidelines for logo usage, spacing, and color application—simple enough for staff to follow but robust enough for vendors. Introduced digital templates for social media, ads, and web banners so seasonal marketing could be produced quickly in-house."
     },
     {
-      "title": "System Design",
-      "description": "Create comprehensive style guide with templates and usage standards"
+      "title": "Production Integration",
+      "description": "Leveraged the in-house print studio I built to handle all large-format and apparel production internally. Designed cut files and press-ready documents optimized for the HP Latex 315 printer and Graphtec cutter. Worked cross-functionally with field and retail teams to deploy new branding assets across every location and fleet vehicle."
     },
     {
-      "title": "Brand Modernization",
-      "description": "Refine logo, establish color palette, and select typography system"
-    },
-    {
-      "title": "Implementation",
-      "description": "Roll out new branding across fleet, apparel, signage, print, and digital channels"
-    },
-    {
-      "title": "Training",
-      "description": "Conduct workshops and create Brand Quick Guide for staff and vendors"
-    },
-    {
-      "title": "Refinement",
-      "description": "Monitor consistency, gather feedback, and optimize system based on real-world use"
+      "title": "Internal Brand Education",
+      "description": "Conducted short workshops with management and field staff to explain why consistency mattered. Produced an internal \"Brand Quick Guide\" summarizing usage standards and visual references."
     }
   ],
   "related": [
     {
-      "title": "Print Studio Operations",
+      "title": "In-House Print Studio Build",
       "href": "/portfolio/print-studio"
     },
     {
-      "title": "Caribbean Pools E-Commerce",
+      "title": "CaribbeanPools.com Redesign & Digital Platform Evolution",
       "href": "/portfolio/caribbeanpools-redesign"
     }
   ]

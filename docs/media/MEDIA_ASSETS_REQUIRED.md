@@ -129,9 +129,24 @@ This document lists all media assets required for the refreshed homepage and cas
 3. **generative-ai-dashboard.jpg** - Prompt tracking dashboard screenshot
 
 ### Mixed Media Gallery:
-1. **mixed-media-projection.jpg** - Projection mapped sculpture
-2. **mixed-media-cnc.jpg** - CNC fabricated panels
-3. **mixed-media-detail.jpg** - Installation detail with lighting
+1. **mixed-media-4th-shirt.png** - Fourth of July themed shirt design
+2. **mixed-media-banner.png** - Mixed media banner display
+3. **mixed-media-christmas-shirts.png** - Christmas themed shirt collection
+4. **mixed-media-cover-star-switch.png** - Cover star switch installation
+5. **mixed-media-hoodie.png** - Hoodie design and production
+6. **mixed-media-shirt-closeup.png** - Close-up detail of shirt design
+7. **mixed-media-st-patricks.png** - St. Patrick's Day themed design
+8. **mixed-media-stickers.png** - Custom sticker designs and production
+9. **mixed-media-store-decor.png** - Retail store decoration and signage
+10. **mixed-media-t-shirt.png** - T-shirt design and branding
+11. **mixed-media-undercounter.png** - Undercounter display installation
+12. **mixed-media-vertical-banner.png** - Vertical banner design
+13. **mixed-media-wall-graphic-full.png** - Full wall graphic installation
+14. **mixed-media-wall-graphic.png** - Wall graphic design
+15. **mixed-media-waterlab_1.png** - Waterlab installation view
+16. **mixed-media-waterlab.png** - Waterlab branded installation
+17. **mixed-media-window-graphics_1.png** - Window graphics installation detail
+18. **mixed-media-window-graphics.png** - Retail window graphics display
 
 ### Motion Systems Gallery:
 1. **motion-storyboard.jpg** - Storyboard for onboarding motion sequence

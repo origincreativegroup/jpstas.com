@@ -1,17 +1,18 @@
 {
   "slug": "drone-media",
   "title": "FPV Drone Media Program",
-  "category": "Content Systems",
-  "summary": "Cinematic drone capture pipeline that multiplied social reach and built a reusable asset library.",
-  "tags": ["Content Production", "FPV", "Storytelling"],
+  "category": "Motion & Content",
+  "summary": "Cinematic drone and motion work that turns real-world projects into compelling narratives for story-driven brands.",
+  "tags": ["Motion", "Content Production", "Storytelling", "Drone Media"],
   "hero": {
-    "type": "image",
-    "src": "https://media.jpstas.com/drone-hero.jpg",
-    "alt": "Aerial drone shot of completed pool"
+    "type": "video",
+    "src": "3d064713769ec888614a54d4dbeb94ff",
+    "alt": "Aerial drone shot of completed pool",
+    "poster": "https://media.jpstas.com/portfolio/images/heroes/drone-hero-800x600.png"
   },
   "thumbnail": {
     "type": "image",
-    "src": "https://media.jpstas.com/drone-hero.jpg",
+    "src": "https://media.jpstas.com/portfolio/drone/drone-social-media.png",
     "alt": "Drone photo & video project"
   },
   "accent": "#454529"

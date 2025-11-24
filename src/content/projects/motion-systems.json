@@ -1,9 +1,9 @@
 {
   "slug": "motion-systems",
   "title": "Motion Systems Library",
-  "category": "Motion Design",
-  "summary": "Reusable animation kits and story structures fueling product launches and support content.",
-  "tags": ["Motion Design", "Systems", "Storyboarding"],
+  "category": "Motion & Content",
+  "summary": "Reusable animation kits and story structures that fuel product launches and support content through systematic storytelling.",
+  "tags": ["Motion & Content", "Design Systems", "Storyboarding", "Animation"],
   "hero": {
     "type": "image",
     "src": "https://media.jpstas.com/motion-hero.jpg",
@@ -11,7 +11,7 @@
   },
   "thumbnail": {
     "type": "image",
-    "src": "https://media.jpstas.com/motion-card.jpg",
+    "src": "https://media.jpstas.com/portfolio/images/heroes/cards-home/motion-card-V2.png",
     "alt": "Storyboard frames for motion graphics"
   },
   "accent": "#b98f45"

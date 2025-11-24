@@ -32,12 +32,6 @@
   },
   "solution": {
     "approach": "Created a modular motion language with reusable components, flexible story structures, and a delivery pipeline that served marketing and product teams alike.",
-    "bullets": [
-      "Developed brand motion principles and timing curves",
-      "Built After Effects master files and converted key loops to Lottie",
-      "Automated exports with render queue presets for every channel",
-      "Documented usage guidelines for design and marketing leads"
-    ],
     "gallery": [
       {
         "src": "https://media.jpstas.com/motion-storyboard.jpg",
@@ -72,10 +66,22 @@
     }
   ],
   "process": [
-    { "title": "Discovery", "description": "Audit launch assets, identify repeatable patterns, and align on motion voice." },
-    { "title": "System Design", "description": "Create timing curves, easing, and modular sequences." },
-    { "title": "Production", "description": "Animate hero templates, export formats, and document usage." },
-    { "title": "Enablement", "description": "Train teams, deliver toolkit, and schedule refresh cycles." }
+    {
+      "title": "Motion Principles",
+      "description": "Developed brand motion principles and timing curves to establish consistent animation language"
+    },
+    {
+      "title": "Asset Production",
+      "description": "Built After Effects master files and converted key loops to Lottie for web and mobile integration"
+    },
+    {
+      "title": "Export Automation",
+      "description": "Automated exports with render queue presets for every channel—social, web, and in-app"
+    },
+    {
+      "title": "Documentation & Training",
+      "description": "Documented usage guidelines for design and marketing leads to ensure consistent application"
+    }
   ],
   "reflection": {
     "learning": "Motion systems should feel alive yet dependable—consistency comes from rules, not repetition.",

@@ -10,7 +10,6 @@ const PORTFOLIO_SLUGS = [
   'generative-ai',
   'mixed-media',
   'motion-systems',
-  'print-systems',
   'drone-media',
   'print-studio',
 ];
@@ -23,7 +22,6 @@ export const useStudy = routeLoader$(async ({ params }) => {
     'generative-ai': await import('~/data/generative-ai.json'),
     'mixed-media': await import('~/data/mixed.json'),
     'motion-systems': await import('~/data/motion.json'),
-    'print-systems': await import('~/data/print.json'),
     'drone-media': await import('~/data/dronemedia.json'),
     'print-studio': await import('~/data/printstudio.json'),
   };

@@ -32,12 +32,6 @@
   },
   "solution": {
     "approach": "Established a generative AI lab to prototype brand-safe workflows, train multidisciplinary teams, and ship production-ready assets within 48 hours.",
-    "bullets": [
-      "Codified prompt libraries aligned to brand language and mood boards",
-      "Developed QA checklist for bias mitigation and accessibility compliance",
-      "Integrated generative outputs into Figma and After Effects pipelines",
-      "Automated versioning and approvals through Notion + Slack integration"
-    ],
     "gallery": [
       {
         "src": "https://media.jpstas.com/generative-ai-storyboards.jpg",
@@ -71,10 +65,22 @@
     }
   ],
   "process": [
-    { "title": "Discovery", "description": "Audit existing creative workflows and bottlenecks." },
-    { "title": "Experimentation", "description": "Prototype prompt stacks and guardrails with design leads." },
-    { "title": "Production", "description": "Operationalize AI-assisted delivery across formats." },
-    { "title": "Enablement", "description": "Train teams, document SOPs, and schedule ongoing reviews." }
+    {
+      "title": "Prompt Library Development",
+      "description": "Codified prompt libraries aligned to brand language and mood boards"
+    },
+    {
+      "title": "Quality Assurance",
+      "description": "Developed QA checklist for bias mitigation and accessibility compliance"
+    },
+    {
+      "title": "Pipeline Integration",
+      "description": "Integrated generative outputs into Figma and After Effects pipelines"
+    },
+    {
+      "title": "Automation & Workflow",
+      "description": "Automated versioning and approvals through Notion + Slack integration"
+    }
   ],
   "reflection": {
     "learning": "AI accelerates human creativity when paired with strong guardrails, transparent review, and brand ownership.",
@@ -86,8 +92,8 @@
     ]
   },
   "related": [
-    { "title": "Motion Systems", "href": "/portfolio/motion-systems" },
-    { "title": "Print Studio", "href": "/portfolio/print-studio" }
+    { "title": "Motion Systems Library", "href": "/portfolio/motion-systems" },
+    { "title": "In-House Print Studio Build", "href": "/portfolio/print-studio" }
   ]
 }
 

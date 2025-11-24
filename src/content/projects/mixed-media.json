@@ -1,17 +1,17 @@
 {
   "slug": "mixed-media",
-  "title": "Mixed Media Installations",
-  "category": "Experiential",
-  "summary": "Modular projection, sculpture, and fabrication system for immersive brand activations.",
-  "tags": ["Experiential", "Projection", "Fabrication"],
+  "title": "Mixed Media",
+  "category": "Motion & Content",
+  "summary": "Modular projection, sculpture, and fabrication system that transforms installations into compelling storytelling experiences.",
+  "tags": ["Motion & Content", "Mixed Media", "Storytelling", "Installation"],
   "hero": {
     "type": "image",
-    "src": "https://media.jpstas.com/mixed-media-hero.jpg",
+    "src": "https://media.jpstas.com/portfolio/mixed%20media/mixed-media-hero-1.png",
     "alt": "Mixed media installation with light projections"
   },
   "thumbnail": {
     "type": "image",
-    "src": "https://media.jpstas.com/mixed-media-card.jpg",
+    "src": "https://media.jpstas.com/portfolio/images/heroes/cards-home/mixed-media-card.png",
     "alt": "Mixed media fabrication close-up"
   },
   "accent": "#6c3727"

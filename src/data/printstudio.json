@@ -41,13 +41,6 @@
   },
   "solution": {
     "approach": "I approached the build like an engineering project: identify bottlenecks, design workflows, and prototype every step before scaling. I handled everything—research, purchasing, installation, and process design. Within months, we had converted an unused storeroom into a full-scale production space equipped with an HP Latex 315 printer, Graphtec plotter, and a dedicated apparel production station. Over eight years, I expanded the operation into a hybrid print and fabrication studio that supported every department—marketing, retail, construction, and service.",
-    "bullets": [
-      "Equipment & Layout Design: Selected the HP Latex 315 for its eco-friendly inks and material flexibility, paired with a Graphtec cutting plotter for precision contour cuts. Designed the floor plan for efficient flow—intake → print → cure → cut → finish—with safety and ergonomics in mind.",
-      "Production Workflow & Templates: Built standardized templates for fleet graphics, signage, apparel, and marketing collateral. Implemented a consistent color-management system using ICC profiles and Pantone-calibrated vinyl samples. Created digital production checklists and SOPs for printing, cutting, and finishing to ensure repeatability across seasonal staff.",
-      "Apparel Program Expansion: Introduced heat-transfer vinyl for uniforms and small-batch apparel runs. Designed uniform layouts for over 120 employees annually—split by department color for quick identification in the field.",
-      "Training & Knowledge Transfer: Trained seasonal production assistants on machine operation, finishing techniques, and design file preparation. Developed quick-reference guides so anyone could step into the workflow and produce professional-grade output.",
-      "Cross-Department Integration: Integrated the print studio into company operations. Marketing used it for event signage and retail displays. Service used it for vehicle decals and instructional placards. Construction used it for safety and compliance labeling. The studio became the creative backbone of the company."
-    ],
     "gallery": [
       {
         "src": "https://media.jpstas.com/portfolio/PrintStudio/Finals/Caribbean-pools-in-house-print-studio-setup-workspace-2017.png",
@@ -100,11 +93,6 @@
       "description": "Saved more than $250,000 in outsourcing within three years"
     },
     {
-      "label": "Speed",
-      "value": "48 Hours",
-      "description": "Reduced turnaround times from 10–14 days to under 48 hours for most projects"
-    },
-    {
       "label": "Brand Consistency",
       "value": "100%",
       "description": "Achieved 100% brand-accurate color and typography across every output"
@@ -132,28 +120,24 @@
   ],
   "process": [
     {
-      "title": "Research",
-      "description": "Equipment evaluation and vendor comparison for large-format printing solutions"
+      "title": "Equipment & Layout Design",
+      "description": "Selected the HP Latex 315 for its eco-friendly inks and material flexibility, paired with a Graphtec cutting plotter for precision contour cuts. Designed the floor plan for efficient flow—intake → print → cure → cut → finish—with safety and ergonomics in mind."
     },
     {
-      "title": "Equipment Setup",
-      "description": "Install HP Latex 315 printer, Graphtec plotter, and apparel production station"
+      "title": "Production Workflow & Templates",
+      "description": "Built standardized templates for fleet graphics, signage, apparel, and marketing collateral. Implemented a consistent color-management system using ICC profiles and Pantone-calibrated vinyl samples. Created digital production checklists and SOPs for printing, cutting, and finishing to ensure repeatability across seasonal staff."
     },
     {
-      "title": "Workflow Design",
-      "description": "Design efficient production flow from intake to print, cure, cut, and finish"
+      "title": "Apparel Program Expansion",
+      "description": "Introduced heat-transfer vinyl for uniforms and small-batch apparel runs. Designed uniform layouts for over 120 employees annually—split by department color for quick identification in the field."
     },
     {
-      "title": "Template Development",
-      "description": "Build standardized templates for fleet graphics, signage, apparel, and marketing collateral"
+      "title": "Training & Knowledge Transfer",
+      "description": "Trained seasonal production assistants on machine operation, finishing techniques, and design file preparation. Developed quick-reference guides so anyone could step into the workflow and produce professional-grade output."
     },
     {
-      "title": "Training",
-      "description": "Train seasonal production assistants on machine operation, finishing techniques, and file preparation"
-    },
-    {
-      "title": "Optimization",
-      "description": "Refine processes and expand capabilities across all departments"
+      "title": "Cross-Department Integration",
+      "description": "Integrated the print studio into company operations. Marketing used it for event signage and retail displays. Service used it for vehicle decals and instructional placards. Construction used it for safety and compliance labeling. The studio became the creative backbone of the company."
     }
   ],
   "related": [
@@ -162,8 +146,8 @@
       "href": "/portfolio/brand-evolution"
     },
     {
-      "title": "Formstack Digital Forms",
-      "href": "/portfolio/formstack-integration"
+      "title": "CaribbeanPools.com Redesign & Digital Platform Evolution",
+      "href": "/portfolio/caribbeanpools-redesign"
     }
   ]
 }
