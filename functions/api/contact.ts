@@ -1,6 +1,17 @@
 // Contact form handler for Cloudflare Pages
-export const onRequestPost: PagesFunction = async ({ request }) => {
+export const onRequestPost = async ({ request }: { request: Request; env?: any; context?: any }) => {
   try {
+    // Ensure we have a request object
+    if (!request) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     const formData = await request.formData();
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
@@ -65,7 +76,7 @@ export const onRequestPost: PagesFunction = async ({ request }) => {
 };
 
 // Handle CORS preflight
-export const onRequestOptions: PagesFunction = async () => {
+export const onRequestOptions = async ({ request }: { request: Request }) => {
   return new Response(null, {
     status: 204,
     headers: {

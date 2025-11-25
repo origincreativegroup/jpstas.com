@@ -1,99 +1,122 @@
 {
   "slug": "motion-systems",
   "title": "Motion Systems Library",
-  "tagline": "Reusable motion design systems for product launches, walkthroughs, and support content.",
+  "tagline": "The central hub for all animation and video work—spanning brand cinematics, product explainers, children's IP motion tests, and AI-assisted sequences, plus a decade of Caribbean Pools content.",
   "hero": {
     "src": "https://media.jpstas.com/motion-hero.jpg",
-    "alt": "Motion design interface preview"
+    "alt": "Motion Systems Library hero"
   },
   "cardImage": {
     "src": "https://media.jpstas.com/motion-card.jpg",
-    "alt": "Storyboard frames for motion graphics"
+    "alt": "Motion Systems Library preview"
   },
   "metrics": [
-    { "label": "Brand Kits", "value": "6" },
-    { "label": "Sequences", "value": "120+" },
-    { "label": "Delivery", "value": "4K & Social" }
+    { "label": "Years of Content", "value": "12+" },
+    { "label": "Caribbean Pools Videos", "value": "100+" },
+    { "label": "Revenue Impact", "value": "$7M→$17M" }
   ],
   "meta": {
-    "tags": ["Motion Design", "Systems", "Storyboarding", "Animation"],
-    "tools": ["After Effects", "Figma", "Lottie", "Premiere", "Cinema 4D"],
-    "year": "2020-2024",
-    "client": "SaaS Product Teams"
+    "tags": ["Motion Design", "Video Editing", "Animation", "FPV Drone", "Brand Storytelling", "Caribbean Pools", "Product Explainers", "Kids' IP", "AI Tools"],
+    "tools": ["Adobe Premiere Pro", "Adobe After Effects", "Adobe Illustrator", "Adobe Animate", "Adobe Audition", "DJI & FPV Drones", "ElevenLabs", "ComfyUI / SD / Flux"],
+    "year": "2012-2024",
+    "client": "Caribbean Pools, Origin Creative Group, Personal Projects"
   },
   "context": {
-    "problem": "Each product launch required bespoke animations, resulting in inconsistent pacing, voice, and asset management.",
+    "problem": "I needed a single place where all of my motion output—Caribbean Pools, SaaS product explainers, kids' animation, and AI experiments—could exist as a coherent body of work. Caribbean Pools videos were created over a decade with evolving tools, cameras, workflows, and visual standards; they needed a unifying structure. My current ecosystem (MindForge, Nodeo, NexusCore, Origin Creative Group) requires motion assets that feel consistent, not like separate identities stitched together.",
     "constraints": [
-      "Multiple product teams with unique requirements",
-      "Aggressive launch timelines",
-      "Need for localization-ready templates",
-      "Support for both marketing and in-app education"
+      "Merge traditional production (Premiere, Illustrator, drone footage) with AI-assisted workflows (synthetic voice, generated backgrounds, concept frames)",
+      "Unify 10+ years of Caribbean Pools content with evolving visual standards",
+      "Create consistent motion language across multiple brand worlds",
+      "Maintain brand control while leveraging AI tools for efficiency"
     ]
   },
   "solution": {
-    "approach": "Created a modular motion language with reusable components, flexible story structures, and a delivery pipeline that served marketing and product teams alike.",
+    "approach": "I defined the Motion Systems Library as a unified portfolio section and a reusable design system. Rather than treating pieces as isolated clips, everything in the library is built around an underlying motion design system: a cohesive set of timing, transitions, compositional behaviors, and animation patterns that unify my work across brand worlds, clients, and formats.",
+    "bullets": [
+      "Brand & Environment Cinematics: Caribbean Pools cornerstone content including drone fly-throughs, seasonal promos, service announcements, on-site storytelling, and visual proof-of-quality videos with consistent lower-third systems and brand-color overlays.",
+      "Product & Systems Explainers: Visual explanations for MindForge, Nodeo, NexusCore, and home-lab workflows, plus process shorts for Caribbean Pools covering openings, closings, equipment tips, and workflow steps.",
+      "Characters, Kids' IP, and Educational Motion: Motion prototypes for original children's IP with limited animation in UPA-inspired style, character expressions, blinks, head turns, and educational micro-beats—future-ready for Adobe Character Animator and puppet workflows.",
+      "AI-Assisted Motion Experiments: Hybrid production combining traditional tools with AI—ElevenLabs voiceover narrations, AI-generated background plates, conceptual animation frames from Flux/SD/ComfyUI, and edits merging vector graphics with AI-rendered environments."
+    ],
     "gallery": [
       {
-        "src": "https://media.jpstas.com/motion-storyboard.jpg",
-        "alt": "Storyboard for onboarding motion sequence"
+        "src": "https://media.jpstas.com/motion-library-hero.jpg",
+        "alt": "Motion Systems Library hero visual"
       },
       {
-        "src": "https://media.jpstas.com/motion-breakdown.gif",
-        "type": "gif",
-        "alt": "Breakdown of animated UI transitions"
+        "src": "https://media.jpstas.com/caribbean-pools-drone-shots.jpg",
+        "alt": "Caribbean Pools drone cinematography"
       },
       {
-        "src": "https://media.jpstas.com/motion-toolkit.jpg",
-        "alt": "Motion toolkit overview"
+        "src": "https://media.jpstas.com/workflow-explainers.jpg",
+        "alt": "Workflow explainer motion graphics"
+      },
+      {
+        "src": "https://media.jpstas.com/product-system-motion.jpg",
+        "alt": "Product and system motion graphics"
+      },
+      {
+        "src": "https://media.jpstas.com/kids-ip-motion-tests.jpg",
+        "alt": "Kids' IP motion test animations"
+      },
+      {
+        "src": "https://media.jpstas.com/ai-assisted-frames.jpg",
+        "alt": "AI-assisted animation frames"
       }
     ]
   },
   "impact": [
     {
-      "label": "Production Time",
-      "value": "-55%",
-      "description": "Cut animation turnaround from 9 days to 4 days."
+      "label": "Centralized Motion Identity",
+      "value": "100%",
+      "description": "All video + animation work now lives in a coherent, systematized hub instead of being scattered across case studies and hard drives."
     },
     {
-      "label": "Revisions",
-      "value": "-70%",
-      "description": "Reduced feedback cycles thanks to shared storyboard language."
+      "label": "Production Speed",
+      "value": "Faster",
+      "description": "Reusable AE/Premiere templates, icon systems, overlays, voice workflows, and narrative structures significantly reduce build time for new content."
     },
     {
-      "label": "Globalization",
-      "value": "12 locales",
-      "description": "Built-in localization support across motion deliverables."
+      "label": "Reusable Motion Language",
+      "value": "Unified",
+      "description": "Consistent easing, pacing, grid-aligned movements, wipes, and transitions unify everything—from corporate explainers to kids' animation."
     }
   ],
   "process": [
     {
-      "title": "Motion Principles",
-      "description": "Developed brand motion principles and timing curves to establish consistent animation language"
+      "title": "Gather & Audit Legacy Work",
+      "description": "Reviewed 10+ years of Caribbean Pools footage: drone shots, in-store promos, training clips, seasonal edits, testimonials. Extracted the strongest pieces and identified recurring motion patterns."
     },
     {
-      "title": "Asset Production",
-      "description": "Built After Effects master files and converted key loops to Lottie for web and mobile integration"
+      "title": "Extract Motion Language",
+      "description": "Pulled out shared design traits: clean, geometric, vector-built overlays; subtle but purposeful motion (slides, wipes, reveals); iconography-driven storytelling; color systems aligned with brand identity."
     },
     {
-      "title": "Export Automation",
-      "description": "Automated exports with render queue presets for every channel—social, web, and in-app"
+      "title": "Build Template Library",
+      "description": "Created repeatable structures in Premiere/AE: lower-third packs, title cards, branded transitions, multi-aspect export profiles, audio mixing presets, and voiceover workflows with ElevenLabs."
     },
     {
-      "title": "Documentation & Training",
-      "description": "Documented usage guidelines for design and marketing leads to ensure consistent application"
+      "title": "Integrate AI Tools",
+      "description": "Used AI to accelerate concept exploration: synthetic voiceovers, AI-generated backgrounds, script-to-shot visual boards, and experimental animation frames."
+    },
+    {
+      "title": "Expand to New Worlds",
+      "description": "Applied the same motion system to MindForge, Nodeo, NexusCore, and children's IP—creating a unified Origin Creative Group motion language."
     }
   ],
   "reflection": {
-    "learning": "Motion systems should feel alive yet dependable—consistency comes from rules, not repetition.",
+    "learning": "Motion systems should feel alive yet dependable—consistency comes from rules, not repetition. The Motion Systems Library elevates Caribbean Pools output into portfolio context, showcasing drone cinematics, promos, and educational videos not just as one-offs, but as evidence of consistent brand-directed motion design.",
     "reuse": [
-      "Motion principle playbook",
-      "Storyboard template kit",
-      "Render automation scripts"
+      "Motion design system principles",
+      "Premiere/AE template library",
+      "ElevenLabs voiceover workflows",
+      "AI-assisted production pipeline",
+      "Reusable icon and overlay systems"
     ]
   },
   "related": [
     { "title": "Generative AI Concept Lab", "href": "/portfolio/generative-ai" },
-    { "title": "Mixed Media Installations", "href": "/portfolio/mixed-media" }
+    { "title": "Caribbean Pools Redesign", "href": "/portfolio/caribbeanpools-redesign" },
+    { "title": "Drone Media", "href": "/portfolio/drone-media" }
   ]
 }
-

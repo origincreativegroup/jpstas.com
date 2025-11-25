@@ -2,18 +2,18 @@
   "slug": "motion-systems",
   "title": "Motion Systems Library",
   "category": "Motion & Content",
-  "summary": "Reusable animation kits and story structures that fuel product launches and support content through systematic storytelling.",
-  "tags": ["Motion & Content", "Design Systems", "Storyboarding", "Animation"],
+  "summary": "The central hub for all animation and video work—spanning brand cinematics, product explainers, children's IP motion tests, and AI-assisted sequences, plus a decade of Caribbean Pools content.",
+  "tags": ["Motion Design", "Video Editing", "Animation", "FPV Drone", "Brand Storytelling", "Caribbean Pools", "Product Explainers", "Kids' IP", "AI Tools"],
   "hero": {
     "type": "image",
     "src": "https://media.jpstas.com/motion-hero.jpg",
-    "alt": "Motion design interface preview"
+    "alt": "Motion Systems Library hero"
   },
   "thumbnail": {
     "type": "image",
     "src": "https://media.jpstas.com/portfolio/images/heroes/cards-home/motion-card-V2.png",
-    "alt": "Storyboard frames for motion graphics"
+    "alt": "Motion Systems Library preview"
   },
-  "accent": "#b98f45"
+  "accent": "#b98f45",
+  "featured": true
 }
-
