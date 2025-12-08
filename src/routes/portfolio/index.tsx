@@ -80,11 +80,13 @@ export default component$(() => {
               Selected Work
             </span>
             <h1 class="font-montserrat text-4xl font-bold leading-tight text-cream md:text-5xl lg:text-6xl">
-              Systems-led storytelling across brand, media, and production.
+              Intelligent Systems for Human Creativity
             </h1>
             <p class="font-inter text-lg text-cream/75 md:text-xl">
-              Each case study pairs a focused hero narrative with the gallery and operations that brought it to life—
-              from brand governance to generative workflows and immersive installations.
+            Most people drown in digital tools.  
+            They chase the newest app, the latest cloud service, the hottest AI model.  
+            Their world becomes more fragmented, not less. I build the opposite. 
+            Designing cohesive systems where creativity, automation, and technology finally work in harmony. 
             </p>
           </div>
         </div>

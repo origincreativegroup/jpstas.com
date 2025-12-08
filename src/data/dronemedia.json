@@ -4,9 +4,9 @@
   "tagline": "Cinematic storytelling that elevated brand perception.",
   "hero": {
     "type": "video",
-    "src": "3d064713769ec888614a54d4dbeb94ff",
+    "src": "3210b25316ee82d5b0a7cc8ff4605cba",
     "alt": "Aerial drone shot of completed pool",
-    "poster": "https://media.jpstas.com/portfolio/images/heroes/drone-hero-800x600.png"
+    "poster": "https://media.jpstas.com/portfolio/drone/drone-hero.png"
   },
   "cardImage": {
     "src": "https://media.jpstas.com/portfolio/drone/drone-social-media.png",
@@ -56,27 +56,23 @@
     "approach": "Developed comprehensive drone media initiative using DJI and custom FPV drones to capture cinematic aerial footage and photography, creating a reusable media library for all marketing channels.",
     "gallery": [
       {
-        "src": "af4889355cd0d36bac6722871cb2bcb3",
+        "src": "4eb68b505af26087f50275fc1075cd99",
         "type": "video",
-        "poster": "https://media.jpstas.com/drone-video-poster.jpg",
+        "poster": "https://media.jpstas.com/portfolio/drone/drone-hero.png",
         "caption": "FPV Drone Flythrough - Caribbean Pools Project",
         "alt": "FPV drone video flythrough of pool installation"
       },
       {
-        "src": "https://media.jpstas.com/drone-aerial-1.jpg",
-        "alt": "Aerial pool photography"
+        "src": "https://media.jpstas.com/portfolio/drone/aerial_dusk_view_of_luxury_residence_with_pool_surrounded_by_dense_forest_and_illuminated_by_string_lights_and_outdoor_furniture.jpg",
+        "alt": "Aerial dusk view of luxury residence with pool"
       },
       {
-        "src": "https://media.jpstas.com/drone-fpv-1.jpg",
-        "alt": "FPV flythrough footage"
+        "src": "https://media.jpstas.com/portfolio/drone/aerial_top_down_view_of_modern_residential_pool_area_with_blue_water_surrounded_by_grass_and_paved_lawn_spaces_and_outdoor_furniture.jpg",
+        "alt": "Aerial top-down view of modern residential pool area"
       },
       {
-        "src": "https://media.jpstas.com/drone-video-reel.jpg",
+        "src": "https://media.jpstas.com/portfolio/drone/drone-social-media.png",
         "alt": "Social media video reel"
-      },
-      {
-        "src": "https://media.jpstas.com/drone-marketing-use.jpg",
-        "alt": "Marketing campaign integration"
       }
     ]
   },

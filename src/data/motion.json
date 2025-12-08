@@ -3,11 +3,11 @@
   "title": "Motion Systems Library",
   "tagline": "The central hub for all animation and video work—spanning brand cinematics, product explainers, children's IP motion tests, and AI-assisted sequences, plus a decade of Caribbean Pools content.",
   "hero": {
-    "src": "https://media.jpstas.com/motion-hero.jpg",
+    "src": "https://media.jpstas.com/portfolio/motion%20systems/dino_force_hero.png",
     "alt": "Motion Systems Library hero"
   },
   "cardImage": {
-    "src": "https://media.jpstas.com/motion-card.jpg",
+    "src": "https://media.jpstas.com/portfolio/motion-systems/motion-card.jpg",
     "alt": "Motion Systems Library preview"
   },
   "metrics": [
@@ -40,28 +40,88 @@
     ],
     "gallery": [
       {
-        "src": "https://media.jpstas.com/motion-library-hero.jpg",
-        "alt": "Motion Systems Library hero visual"
+        "src": "https://media.jpstas.com/portfolio/motion%20systems/dino_force_hero.png",
+        "alt": "Dino Force hero visual"
       },
       {
-        "src": "https://media.jpstas.com/caribbean-pools-drone-shots.jpg",
-        "alt": "Caribbean Pools drone cinematography"
+        "type": "video",
+        "src": "bb1312445f67fec7e49286451a690633",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/bb1312445f67fec7e49286451a690633/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
       },
       {
-        "src": "https://media.jpstas.com/workflow-explainers.jpg",
-        "alt": "Workflow explainer motion graphics"
+        "type": "video",
+        "src": "c2e470e8a64b8413f604a603f1e9c296",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/c2e470e8a64b8413f604a603f1e9c296/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
       },
       {
-        "src": "https://media.jpstas.com/product-system-motion.jpg",
-        "alt": "Product and system motion graphics"
+        "type": "video",
+        "src": "ba5df5ea0f92a63484e37c63830515b9",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/ba5df5ea0f92a63484e37c63830515b9/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
       },
       {
-        "src": "https://media.jpstas.com/kids-ip-motion-tests.jpg",
-        "alt": "Kids' IP motion test animations"
+        "type": "video",
+        "src": "4eb68b505af26087f50275fc1075cd99",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/4eb68b505af26087f50275fc1075cd99/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
       },
       {
-        "src": "https://media.jpstas.com/ai-assisted-frames.jpg",
-        "alt": "AI-assisted animation frames"
+        "type": "video",
+        "src": "bba06835f1c4979ff93ffb05995d3bfb",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/bba06835f1c4979ff93ffb05995d3bfb/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
+      },
+      {
+        "type": "video",
+        "src": "0818da768387171bb3ac2fcafeab4ad1",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/0818da768387171bb3ac2fcafeab4ad1/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
+      },
+      {
+        "type": "video",
+        "src": "ab4f9dce69a1eec2b09a9f3be62d1183",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/ab4f9dce69a1eec2b09a9f3be62d1183/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
+      },
+      {
+        "type": "video",
+        "src": "aeb05758c2c719fb824b3cf62625e43a",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/aeb05758c2c719fb824b3cf62625e43a/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
+      },
+      {
+        "type": "video",
+        "src": "71d6a3fc8f1ff6169f351f67e07cf779",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/71d6a3fc8f1ff6169f351f67e07cf779/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
+      },
+      {
+        "type": "video",
+        "src": "636cdd457085e5fddcb7c717b3e20b05",
+        "poster": "https://customer-h044ipu9nb6m47zm.cloudflarestream.com/636cdd457085e5fddcb7c717b3e20b05/thumbnails/thumbnail.jpg",
+        "aspectRatio": "9:16",
+        "alt": "Motion Systems social media reel",
+        "caption": "Social Media Reel - Motion Systems Library"
       }
     ]
   },

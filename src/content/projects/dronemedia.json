@@ -6,9 +6,9 @@
   "tags": ["Motion", "Content Production", "Storytelling", "Drone Media"],
   "hero": {
     "type": "video",
-    "src": "3d064713769ec888614a54d4dbeb94ff",
+    "src": "3210b25316ee82d5b0a7cc8ff4605cba",
     "alt": "Aerial drone shot of completed pool",
-    "poster": "https://media.jpstas.com/portfolio/images/heroes/drone-hero-800x600.png"
+    "poster": "https://media.jpstas.com/portfolio/drone/drone-hero.png"
   },
   "thumbnail": {
     "type": "image",

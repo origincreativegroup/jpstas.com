@@ -96,9 +96,15 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
       const isCloudflareStream = videoIdMatch !== null || item.src.includes('cloudflarestream.com');
       const videoId = videoIdMatch ? videoIdMatch[1] : item.src;
       
+      const aspectRatio = item.aspectRatio || '16:9';
+      
       if (isThumbnail) {
+        // Determine thumbnail aspect class based on video aspect ratio
+        const isVertical = aspectRatio === '9:16' || aspectRatio === '1:2' || aspectRatio === '3:4';
+        const thumbnailAspectClass = isVertical ? 'aspect-[9/16]' : 'aspect-square';
+        
         return (
-          <div class="relative aspect-square overflow-hidden rounded-xl bg-surface-mid/40">
+          <div class={`relative ${thumbnailAspectClass} overflow-hidden rounded-xl bg-surface-mid/40`}>
             <img
               src={getThumbnailSrc(item)}
               alt={item.alt || 'Video thumbnail'}
@@ -117,33 +123,34 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
         );
       }
 
+      // Calculate padding-bottom percentage from aspect ratio
+      const getAspectRatioPadding = (ratio: string = '16:9'): string => {
+        const [width, height] = ratio.split(':').map(Number);
+        return `${(height / width) * 100}%`;
+      };
+      
+      // For the main player, use a more flexible container that adapts to content
+      // If aspectRatio is provided, use it; otherwise let the video determine its own size
       return (
-        <div class="w-full">
+        <div class="w-full flex items-center justify-center">
           {isCloudflareStream ? (
-            <div class="relative w-full overflow-hidden rounded-2xl bg-surface-mid shadow-2xl">
-              <div class="relative w-full" style="padding-bottom: 56.25%;">
-                <iframe
-                  src={`https://customer-h044ipu9nb6m47zm.cloudflarestream.com/${videoId}/iframe?${new URLSearchParams({
-                    poster: item.poster || `https://customer-h044ipu9nb6m47zm.cloudflarestream.com/${videoId}/thumbnails/thumbnail.jpg`,
-                    autoplay: 'false',
-                    loop: 'false',
-                    muted: 'false',
-                    controls: 'true',
-                  }).toString()}`}
-                  style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                  allowFullscreen={true}
-                  loading="lazy"
-                  title={item.caption || 'Video player'}
-                />
-              </div>
+            <div class="w-full max-w-full">
+              <CloudflareStreamPlayer
+                videoId={videoId}
+                poster={item.poster}
+                title={item.caption}
+                aspectRatio={aspectRatio}
+              />
             </div>
           ) : (
-            <VideoPlayer
-              src={item.src}
-              poster={item.poster}
-              title={item.caption}
-            />
+            <div class="w-full max-w-full">
+              <VideoPlayer
+                src={item.src}
+                poster={item.poster}
+                title={item.caption}
+                aspectRatio={aspectRatio}
+              />
+            </div>
           )}
         </div>
       );
@@ -165,7 +172,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
       <img
         src={item.src}
         alt={item.alt || 'Gallery image'}
-        class="max-h-[80vh] w-auto rounded-lg shadow-2xl"
+        class="max-h-[85vh] max-w-full w-auto mx-auto rounded-lg shadow-2xl"
       />
     );
   };
@@ -174,13 +181,18 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
     <div>
       {/* Thumbnail Grid */}
       <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {media.map((item, index) => (
-          <button
-            key={index}
-            onClick$={() => openGallery(index)}
-            class="group relative aspect-square overflow-hidden rounded-xl bg-surface-mid/40 transition-all duration-300 hover:scale-105 hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] focus:ring-2 focus:ring-gold/50"
-          >
-            {renderMediaItem(item, true)}
+        {media.map((item, index) => {
+          // Determine aspect class based on media type and aspect ratio
+          const isVerticalVideo = item.type === 'video' && (item.aspectRatio === '9:16' || item.aspectRatio === '1:2' || item.aspectRatio === '3:4');
+          const aspectClass = isVerticalVideo ? 'aspect-[9/16]' : 'aspect-square';
+          
+          return (
+            <button
+              key={index}
+              onClick$={() => openGallery(index)}
+              class={`group relative ${aspectClass} overflow-hidden rounded-xl bg-surface-mid/40 transition-all duration-300 hover:scale-105 hover:shadow-[0_25px_50px_rgba(0,0,0,0.35)] focus:ring-2 focus:ring-gold/50`}
+            >
+              {renderMediaItem(item, true)}
             <div class="absolute inset-0 bg-surface-deep/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <div class="absolute bottom-3 left-3 right-3">
                 <p class="text-sm font-medium text-cream line-clamp-2">{item.alt}</p>
@@ -201,7 +213,8 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
               </svg>
             </div>
           </button>
-        ))}
+          );
+        })}
       </div>
 
       {/* Lightbox Modal */}
@@ -234,19 +247,30 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
 
           {/* Main Media Container */}
           <div
-            class="relative flex h-full w-full items-center justify-center p-4 md:p-12"
-            onClick$={(e) => e.stopPropagation()}
+            class="relative flex h-full w-full items-center justify-center p-4 md:p-12 pointer-events-none"
           >
-            <div class="relative max-h-[90vh] w-full max-w-6xl animate-scaleIn">
-              {renderMediaItem(media[currentIndex.value])}
+            {(() => {
+              const currentMedia = media[currentIndex.value];
+              const isVerticalVideo = currentMedia.type === 'video' && (currentMedia.aspectRatio === '9:16' || currentMedia.aspectRatio === '1:2' || currentMedia.aspectRatio === '3:4');
+              const containerClass = isVerticalVideo 
+                ? 'relative max-h-[90vh] w-full max-w-md animate-scaleIn flex flex-col items-center pointer-events-auto'
+                : 'relative max-h-[90vh] w-full max-w-6xl animate-scaleIn flex flex-col items-center pointer-events-auto';
               
-              {/* Caption */}
-              {media[currentIndex.value].caption && (
-                <div class="mt-4 rounded-lg bg-cream/10 p-4 text-center backdrop-blur-md">
-                  <p class="text-sm text-cream md:text-base">{media[currentIndex.value].caption}</p>
+              return (
+                <div class={containerClass} onClick$={(e) => e.stopPropagation()}>
+                  <div class="relative z-10 w-full flex flex-col items-center">
+                    {renderMediaItem(currentMedia)}
+                  </div>
+                  
+                  {/* Caption */}
+                  {currentMedia.caption && (
+                    <div class="mt-4 rounded-lg bg-cream/10 p-4 text-center backdrop-blur-md relative z-10">
+                      <p class="text-sm text-cream md:text-base">{currentMedia.caption}</p>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              );
+            })()}
 
             {/* Navigation Buttons */}
             {media.length > 1 && (
@@ -256,7 +280,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
                     e.stopPropagation();
                     prevMedia();
                   }}
-                  class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-cream/10 p-3 text-cream backdrop-blur-md transition-all hover:bg-cream/20 hover:scale-110 md:left-8"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-cream/10 p-3 text-cream backdrop-blur-md transition-all hover:bg-cream/20 hover:scale-110 md:left-8 pointer-events-auto"
                   aria-label="Previous media"
                 >
                   <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -269,7 +293,7 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
                     e.stopPropagation();
                     nextMedia();
                   }}
-                  class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-cream/10 p-3 text-cream backdrop-blur-md transition-all hover:bg-cream/20 hover:scale-110 md:right-8"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-cream/10 p-3 text-cream backdrop-blur-md transition-all hover:bg-cream/20 hover:scale-110 md:right-8 pointer-events-auto"
                   aria-label="Next media"
                 >
                   <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -278,29 +302,35 @@ export const MediaGallery = component$<MediaGalleryProps>(({ media, initialIndex
                 </button>
               </>
             )}
-          </div>
 
-          {/* Thumbnail Strip */}
-          {media.length > 1 && (
-            <div class="absolute bottom-4 left-1/2 z-10 flex max-w-full -translate-x-1/2 gap-2 overflow-x-auto rounded-lg bg-cream/10 p-3 backdrop-blur-md">
-              {media.map((item, index) => (
-                <button
-                  key={index}
-                  onClick$={(e) => {
-                    e.stopPropagation();
-                    currentIndex.value = index;
-                  }}
-                  class={`h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
-                    index === currentIndex.value
-                      ? 'border-primary scale-110'
-                      : 'border-transparent opacity-60 hover:opacity-100'
-                  }`}
-                >
-                  {renderMediaItem(item, true)}
-                </button>
-              ))}
-            </div>
-          )}
+            {/* Thumbnail Strip */}
+            {media.length > 1 && (
+              <div class="absolute bottom-4 left-1/2 z-20 flex max-w-full -translate-x-1/2 gap-2 overflow-x-auto rounded-lg bg-cream/10 p-3 backdrop-blur-md pointer-events-auto">
+                {media.map((item, index) => {
+                  // Determine thumbnail size based on aspect ratio
+                  const isVerticalVideo = item.type === 'video' && (item.aspectRatio === '9:16' || item.aspectRatio === '1:2' || item.aspectRatio === '3:4');
+                  const thumbnailSizeClass = isVerticalVideo ? 'h-20 w-11' : 'h-16 w-16';
+                  
+                  return (
+                    <button
+                      key={index}
+                      onClick$={(e) => {
+                        e.stopPropagation();
+                        currentIndex.value = index;
+                      }}
+                      class={`${thumbnailSizeClass} flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                        index === currentIndex.value
+                          ? 'border-primary scale-110'
+                          : 'border-transparent opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      {renderMediaItem(item, true)}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

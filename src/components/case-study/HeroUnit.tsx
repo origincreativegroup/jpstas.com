@@ -2,6 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import type { CaseStudy } from '~/types/case-study';
 import { AnimatedMetric } from '~/components/AnimatedMetric';
 import { VideoPlayer } from '~/components/VideoPlayer';
+import { CloudflareStreamPlayer } from '~/components/CloudflareStreamPlayer';
 
 export const HeroUnit = component$(({ data }: { data: CaseStudy }) => {
   return (
@@ -79,11 +80,28 @@ export const HeroUnit = component$(({ data }: { data: CaseStudy }) => {
         <div class="relative group">
           <div class="w-full overflow-hidden rounded-2xl shadow-2xl">
             {data.hero?.type === 'video' ? (
-              <VideoPlayer 
-                src={data.hero.src} 
-                poster={data.hero.poster}
-                title={data.title}
-              />
+              (() => {
+                // Check if it's a Cloudflare Stream video ID (32 char hex)
+                const videoIdMatch = data.hero.src.match(/([a-f0-9]{32})/i);
+                const isCloudflareStream = videoIdMatch !== null || data.hero.src.includes('cloudflarestream.com');
+                const videoId = videoIdMatch ? videoIdMatch[1] : data.hero.src;
+                
+                return isCloudflareStream ? (
+                  <CloudflareStreamPlayer
+                    videoId={videoId}
+                    poster={data.hero.poster}
+                    title={data.title}
+                    aspectRatio={data.hero.aspectRatio}
+                  />
+                ) : (
+                  <VideoPlayer 
+                    src={data.hero.src} 
+                    poster={data.hero.poster}
+                    title={data.title}
+                    aspectRatio={data.hero.aspectRatio}
+                  />
+                );
+              })()
             ) : (
               <div class="w-full overflow-hidden bg-neutral/10">
                 <img

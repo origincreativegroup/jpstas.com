@@ -6,6 +6,7 @@ export type Media = {
   type?: 'image' | 'video' | 'gif';
   poster?: string; // Thumbnail for videos
   caption?: string; // Caption for images/videos
+  aspectRatio?: string; // Aspect ratio for videos (e.g., "9:16" for portrait, "16:9" for landscape)
 };
 export type Testimonial = { quote: string; author?: string; role?: string };
 

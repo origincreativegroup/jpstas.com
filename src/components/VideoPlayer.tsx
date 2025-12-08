@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 
 interface VideoPlayerProps {
   src: string;
@@ -6,6 +6,8 @@ interface VideoPlayerProps {
   title?: string;
   autoplay?: boolean;
   loop?: boolean;
+  aspectRatio?: string; // Aspect ratio (e.g., "9:16" for portrait, "16:9" for landscape)
+  class?: string;
 }
 
 export const VideoPlayer = component$<VideoPlayerProps>(({ 
@@ -13,29 +15,85 @@ export const VideoPlayer = component$<VideoPlayerProps>(({
   poster,
   title,
   autoplay = false,
-  loop = false
+  loop = false,
+  aspectRatio = '16:9',
+  class: className,
 }) => {
   const isPlaying = useSignal(false);
   const showControls = useSignal(true);
   const videoRef = useSignal<HTMLVideoElement | undefined>(undefined);
+  const detectedAspectRatio = useSignal<string | null>(null);
+
+  // Calculate padding-bottom percentage from aspect ratio
+  const getAspectRatioPadding = (ratio: string): string => {
+    const [width, height] = ratio.split(':').map(Number);
+    return `${(height / width) * 100}%`;
+  };
+
+  // Detect actual video aspect ratio from video element
+  useVisibleTask$(({ track }) => {
+    const video = track(() => videoRef.value);
+    if (!video) return;
+
+    const handleLoadedMetadata = () => {
+      if (video.videoWidth && video.videoHeight) {
+        // Calculate aspect ratio from actual video dimensions
+        const ratio = video.videoWidth / video.videoHeight;
+        // Determine if it's closer to 16:9 (landscape) or 9:16 (portrait)
+        if (ratio > 1) {
+          // Landscape - use actual ratio or round to 16:9
+          const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
+          const w = video.videoWidth;
+          const h = video.videoHeight;
+          const divisor = gcd(w, h);
+          detectedAspectRatio.value = `${w / divisor}:${h / divisor}`;
+        } else {
+          // Portrait - use actual ratio or round to 9:16
+          const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
+          const w = video.videoWidth;
+          const h = video.videoHeight;
+          const divisor = gcd(w, h);
+          detectedAspectRatio.value = `${w / divisor}:${h / divisor}`;
+        }
+      }
+    };
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    // Also check if metadata is already loaded
+    if (video.readyState >= 1) {
+      handleLoadedMetadata();
+    }
+
+    return () => {
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
+  });
+
+  const effectiveAspectRatio = detectedAspectRatio.value || aspectRatio;
 
   return (
-    <div class="group relative w-full overflow-hidden rounded-2xl bg-charcoal shadow-2xl">
+    <div class={['group relative w-full overflow-hidden rounded-2xl bg-charcoal shadow-2xl z-10', className].join(' ')}>
       {/* Video Element */}
-      <video
-        ref={(el) => (videoRef.value = el)}
-        class="w-full h-full object-cover"
-        src={src}
-        poster={poster}
-        controls={showControls.value}
-        autoplay={autoplay}
-        loop={loop}
-        onPlay$={() => (isPlaying.value = true)}
-        onPause$={() => (isPlaying.value = false)}
-        preload="metadata"
+      <div 
+        class="relative w-full z-10" 
+        style={`padding-bottom: ${getAspectRatioPadding(effectiveAspectRatio)}`}
+        key={effectiveAspectRatio}
       >
-        Your browser does not support the video tag.
-      </video>
+        <video
+          ref={(el) => (videoRef.value = el)}
+          class="absolute top-0 left-0 w-full h-full object-contain z-10 bg-charcoal"
+          src={src}
+          poster={poster}
+          controls={showControls.value}
+          autoplay={autoplay}
+          loop={loop}
+          onPlay$={() => (isPlaying.value = true)}
+          onPause$={() => (isPlaying.value = false)}
+          preload="metadata"
+        >
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
       {/* Overlay with Play Button (shown when not playing) */}
       {!isPlaying.value && (
