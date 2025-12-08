@@ -1,4 +1,4 @@
-const staticPaths = new Set(["/","/.DS_Store","/about/","/contact/","/favicon.ico","/favicon.svg","/images/.DS_Store","/images/headshot.svg","/images/placeholder.svg","/js_resume_25.2.pdf","/manifest.json","/portfolio/","/portfolio/brand-evolution/","/portfolio/caribbeanpools-redesign/","/portfolio/drone-media/","/portfolio/generative-ai/","/portfolio/mixed-media/","/portfolio/motion-systems/","/portfolio/print-studio/","/portfolio/print-systems/","/q-manifest.json","/resume/","/sitemap.xml"]);
+const staticPaths = new Set(["/","/.DS_Store","/about/","/contact/","/favicon.ico","/favicon.svg","/images/.DS_Store","/images/headshot.svg","/images/placeholder.svg","/js_resume_25.2.pdf","/manifest.json","/portfolio/","/portfolio/brand-evolution/","/portfolio/caribbeanpools-redesign/","/portfolio/drone-media/","/portfolio/generative-ai/","/portfolio/mixed-media/","/portfolio/motion-systems/","/portfolio/print-studio/","/q-manifest.json","/resume/","/sitemap.xml"]);
 function isStaticPath(method, url) {
   if (method.toUpperCase() !== 'GET') {
     return false;
