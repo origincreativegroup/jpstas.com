@@ -3,7 +3,7 @@
   "title": "Caribbean Pools Brand Evolution",
   "tagline": "Over more than a decade, I guided Caribbean Pools through a complete brand evolution—modernizing its identity, creating unified design systems across print, apparel, fleet, and digital, and aligning the company's creative output with its operational growth. The brand system I built became the foundation for every visual and communication channel, scaling with the company as it grew from $7M to $17M in annual revenue.",
   "hero": {
-    "src": "https://media.jpstas.com/brand-evolution-hero.jpg",
+    "src": "https://media.jpstas.com/portfolio/CPI_BrandEvo/brand_evo03.png",
     "alt": "Caribbean Pools brand evolution showcase"
   },
   "cardImage": {
@@ -43,20 +43,20 @@
     "approach": "I approached the rebrand not as a one-time design project but as a system engineering challenge—how to make creativity scalable. This wasn't just about making things look nice—it was about creating a repeatable, documented system that anyone in the company could use to produce brand-correct materials without designer intervention.",
     "gallery": [
       {
-        "src": "https://media.jpstas.com/brand-logo-evolution.jpg",
+        "src": "https://media.jpstas.com/portfolio/CPI_BrandEvo/brand_evo01.png",
         "alt": "Logo evolution timeline"
       },
       {
-        "src": "https://media.jpstas.com/brand-fleet-wraps.jpg",
+        "src": "https://media.jpstas.com/portfolio/CPI_BrandEvo/brand_evo02.png",
+        "alt": "Brand evolution"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/CPI_BrandEvo/caringforyourpoolguide_2023.png",
+        "alt": "Caring for your pool guide"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/CPI_BrandEvo/truck%20wrap%20evolution.png",
         "alt": "Fleet vehicle wrap gallery"
-      },
-      {
-        "src": "https://media.jpstas.com/brand-uniforms.jpg",
-        "alt": "Uniform production showcase"
-      },
-      {
-        "src": "https://media.jpstas.com/brand-signage.jpg",
-        "alt": "Signage template system"
       }
     ]
   },

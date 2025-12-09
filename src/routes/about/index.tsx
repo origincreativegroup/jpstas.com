@@ -1,7 +1,6 @@
 import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 import { DashboardPanel } from '~/components/dashboard/DashboardPanel';
-import { ProgressRing } from '~/components/dashboard/ProgressRing';
 import aboutData from '../../data/site/about.json';
 
 const colorHexMap: Record<string, string> = {
@@ -117,35 +116,6 @@ export default component$(() => {
                   collapsible={true}
                   defaultExpanded={index < 2}
                 >
-                <div class="space-y-6">
-                  {/* Skill Level Indicators */}
-                  <div class="grid grid-cols-2 gap-4">
-                    <div class="text-center">
-                      <ProgressRing 
-                        percentage={
-                          skill.category === 'Design & UX'
-                            ? 95
-                            : skill.category === 'Development'
-                              ? 85
-                              : skill.category === 'Operations'
-                                ? 90
-                                : 80
-                        }
-                        size={60}
-                        strokeWidth={4}
-                        color={getColorHex(skill.iconColor)}
-                      />
-                      <p class="text-sm font-medium text-cream/70 mt-2">Proficiency</p>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-2xl font-bold text-cream">
-                        {skill.items.length}+
-                      </div>
-                      <p class="text-sm font-medium text-cream/70">Skills</p>
-                    </div>
-                  </div>
-                  
-                  {/* Skills List */}
                   <div class="space-y-3">
                     {skill.items.map((item, itemIndex) => (
                       <div key={itemIndex} class="flex items-center justify-between p-3 rounded-lg border border-cream/10 bg-surface-mid/60">
@@ -157,7 +127,6 @@ export default component$(() => {
                       </div>
                     ))}
                   </div>
-                </div>
                 </DashboardPanel>
               </div>
             ))}

@@ -3,47 +3,67 @@
   "title": "Generative AI Concept Lab",
   "tagline": "Rapid prototyping of AI-assisted creative workflows for web, print, and motion teams.",
   "hero": {
-    "src": "https://media.jpstas.com/generative-ai-hero.jpg",
+    "src": "https://media.jpstas.com/portfolio/ai_images/Surfer%20riding%20a%20massive%20turquoise%20wave%20at%20sunset%20with%20golden%20light%20piercing%20through%20the%20curl%2C%20captured%20from%20an%20immersive%20underwater%20perspective.png",
     "alt": "Abstract generative AI visual interface"
   },
   "cardImage": {
-    "src": "https://media.jpstas.com/generative-ai-card.jpg",
+    "src": "https://media.jpstas.com/portfolio/ai_images/A%20surreal%20fantasy%20landscape%20featuring%20vibrant%20crystalline%20flora%20in%20warm%20orange%20and%20cool%20teal%20hues%2C%20set%20against%20a%20majestic%20snow-capped%20mountain%20range%20under%20a%20golden%20sunset%20sky%2C%20rendered%20with%20high%20detail%20and%20cinematic%20lighting..png",
     "alt": "Generative AI experiments moodboard"
   },
   "metrics": [
-    { "label": "Concepts Delivered", "value": "45" },
-    { "label": "Turnaround", "value": "48 hrs" },
-    { "label": "Team Adoption", "value": "80%" }
+    { "label": "Manual Work Eliminated", "value": "74%" },
+    { "label": "Creative Bottlenecks Removed", "value": "52" },
+    { "label": "Future-Proof Bets in Motion", "value": "6" }
   ],
   "meta": {
     "tags": ["Generative AI", "Creative Ops", "Automation", "Prompt Engineering"],
-    "tools": ["Midjourney", "Stable Diffusion", "Runway", "Figma", "After Effects Scripts"],
-    "year": "2024",
-    "client": "Internal Innovation Program"
+    "tools": ["LM Studio", "Ollama", "Stable Diffusion", "n8n Workflows", "ComfyUI", "Hunyuan Video", "Flux Dev"],
+    "year": "2024-Present",
+    "client": "Self-Directed"
   },
   "context": {
-    "problem": "Creative teams were stretched thin delivering bespoke visuals for campaigns, with ideation cycles taking days before reaching production.",
-    "constraints": [
-      "Limited design bandwidth for experimentation",
-      "Need for consistent branded output",
-      "Strict privacy requirements for training data",
+    "problem": "Generative AI design is where the industry is headed. The line between design and engineering is dissolving fast, and staying relevant now means understanding both. This work came from deliberately leaning into that shift. Learning the tools, testing the limits, tracking the trends, and actively integrating AI into real creative production instead of watching the wave from the shore.",
+    "The goal was simple:": [
+      "Stay ahead of the curve.",
+      "Build real-world fluency, not surface-level experiments.",
+      "Merge creative direction with technical execution in a way that actually ships.",
       "Skepticism around AI adoption across stakeholders"
     ]
   },
   "solution": {
-    "approach": "Established a generative AI lab to prototype brand-safe workflows, train multidisciplinary teams, and ship production-ready assets within 48 hours.",
+    "approach": "Built a practical, hands-on generative AI workflow focused on control, quality, and production readiness. Instead of treating AI as a gimmick, it was developed as a design system extension. Prototyping rapidly, validating outputs against brand standards, and pushing assets directly into motion and layout pipelines.",
     "gallery": [
       {
-        "src": "https://media.jpstas.com/generative-ai-storyboards.jpg",
-        "alt": "AI-generated storyboard set"
+        "src": "https://media.jpstas.com/portfolio/ai_images/A%20dense%20army%20of%20fluffy%20white-haired%20fantasy%20creatures%20with%20red%20eyes%20and%20swords%20standing%20in%20a%20sunlit%20forest%20clearing%2C%20rendered%20in%20detailed%20digital%20art%20style%20with%20soft%20natural%20lighting%20and%20vibrant%20greenery.png",
+        "alt": "Fluffy white sword-bearing creatures gathered in a sunlit forest"
       },
       {
-        "src": "https://media.jpstas.com/generative-ai-styles.jpg",
-        "alt": "Exploration of AI-driven brand styles"
+        "src": "https://media.jpstas.com/portfolio/ai_images/A%20hyperrealistic%20AI-generated%20illustration%20of%20a%20cute%20yellow%20fox%20cub%20with%20oversized%20expressive%20eyes%20sitting%20on%20a%20colorful%20rug%20in%20a%20softly%20lit%20children's%20room%2C%20rendered%20in%20high%20detail%20with%20vibrant%20colors%20and%20shallow%20depth%20of%20field..png",
+        "alt": "Hyperreal yellow fox cub with oversized eyes on a colorful rug"
       },
       {
-        "src": "https://media.jpstas.com/generative-ai-dashboard.jpg",
-        "alt": "Prompt tracking dashboard screenshot"
+        "src": "https://media.jpstas.com/portfolio/ai_images/Abstract%20Geometric%20Pattern%20With%20Overlapping%20Shapes%20In%20Warm%20And%20Cool%20Tones%20Including%20Orange%20Teal%20Black%20And%20White.png",
+        "alt": "Abstract overlapping geometric pattern in orange, teal, black, and white"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/ai_images/A%20surreal%20digital%20artwork%20featuring%20a%20hyperrealistic%20human%20eye%20with%20vibrant%20blue%20iris%2C%20seamlessly%20integrated%20into%20a%20fragmented%20collage%20of%20urban%20decay%2C%20coastal%20landscapes%2C%20and%20floating%20celestial%20spheres%20under%20dramatic%20lighting..png",
+        "alt": "Blue iris collage blending urban decay, coastline, and floating spheres"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/ai_images/A%20surreal%20portrait%20of%20a%20man%20with%20glowing%20orange%20particles%20and%20branching%20structures%20erupting%20from%20his%20head%20against%20a%20dark%20teal%20background%2C%20rendered%20in%20hyperrealistic%20digital%20art%20style.png",
+        "alt": "Portrait with glowing orange particle branches erupting from the head"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/ai_images/A%20close-up%20of%20a%20fluffy%20white%20creature%20with%20large%20blue%20eyes%20and%20sharp%20teeth%2C%20crouching%20on%20a%20ground%20covered%20in%20seeds.png",
+        "alt": "Close-up of a fluffy white creature with big blue eyes and sharp teeth"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/ai_images/A%20luminous%20translucent%20blue%20crystalline%20organism%20resembling%20a%20flower%20or%20coral%2C%20glowing%20from%20within%20against%20a%20dark%20teal%20underwater%20background%20with%20soft%20lighting%20and%20intricate%20organic%20structures.png",
+        "alt": "Glowing translucent blue crystalline organism resembling coral"
+      },
+      {
+        "src": "https://media.jpstas.com/portfolio/ai_images/A%20majestic%20white%20winged%20horse%20gallops%20forward%20on%20a%20dirt%20path%20at%20sunset%2C%20its%20feathers%20and%20mane%20glowing%20in%20warm%20golden%20light%20against%20a%20dramatic%20cloudy%20sky.png",
+        "alt": "White winged horse galloping down a sunset path with glowing feathers"
       }
     ]
   },

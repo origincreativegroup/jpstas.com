@@ -15,47 +15,114 @@
   },
   "skills": [
     {
-      "category": "Design & UX",
+      "category": "Brand Systems & Identity",
       "iconColor": "primary",
       "items": [
-        "UI/UX Design",
         "Brand Identity",
         "Design Systems",
-        "User Research",
-        "Prototyping"
+        "Visual/Brand Storytelling",
+        "Creative Direction",
+        "Marketing Strategy",
+        "Process Visualization",
+        "Brand Operations",
+        "Internal Brand Education"
       ]
     },
     {
-      "category": "Development",
+      "category": "Web & Digital Platforms",
       "iconColor": "secondary",
       "items": [
-        "React & TypeScript",
-        "Modern JavaScript",
-        "Responsive Design",
-        "API Integration",
-        "Performance Optimization"
+        "Web Design",
+        "UX/UI",
+        "E-Commerce",
+        "Digital Strategy",
+        "Modular Block Systems",
+        "Analytics/Optimization",
+        "CMS Enablement",
+        "Automation/Approvals"
       ]
     },
     {
-      "category": "Operations",
+      "category": "Motion & Content",
       "iconColor": "highlight",
       "items": [
-        "Process Design",
-        "Workflow Automation",
-        "Team Leadership",
-        "Project Management",
-        "Quality Assurance"
+        "Motion Design",
+        "Animation",
+        "Video Editing",
+        "Product Explainers",
+        "Kids' IP Motion",
+        "FPV/Drone Cinematics",
+        "Storytelling",
+        "Overlays/Template Systems",
+        "AI-Assisted Motion"
       ]
     },
     {
-      "category": "Tools & Platforms",
+      "category": "Generative AI & Automation",
+      "iconColor": "primary",
+      "items": [
+        "AI Workflows",
+        "Prompt Engineering",
+        "Local/Edge Model Ops (LM Studio, Ollama)",
+        "Stable Diffusion/ComfyUI/Flux",
+        "Hunyuan Video",
+        "Automation with n8n/Notion/Slack",
+        "QA for Bias/Accessibility"
+      ]
+    },
+    {
+      "category": "Print, Fabrication & Experiential",
+      "iconColor": "secondary",
+      "items": [
+        "Large-Format Print Production",
+        "Apparel Design/HTV",
+        "Fleet Wraps",
+        "Projection Mapping",
+        "Fabrication/CNC",
+        "Lighting/Control Systems",
+        "Modular Touring Installs",
+        "Color Management/Pantone/ICC"
+      ]
+    },
+    {
+      "category": "Photography & Drone",
+      "iconColor": "highlight",
+      "items": [
+        "Drone Photography",
+        "FPV Flight Planning",
+        "Media Library Design",
+        "LUT/Color Grading",
+        "Multi-Channel Content Packaging"
+      ]
+    },
+    {
+      "category": "Operations & Systems Design",
+      "iconColor": "primary",
+      "items": [
+        "Workflow Automation",
+        "Template Libraries",
+        "SOPs and Training",
+        "Cross-Department Rollout",
+        "Procurement/Layout Planning",
+        "Production Scheduling",
+        "Maintainability and Reuse Playbooks"
+      ]
+    },
+    {
+      "category": "Tools (Highlights)",
       "iconColor": "charcoal",
       "items": [
-        "Figma & Adobe Suite",
-        "VS Code & Git",
-        "Cloudflare Hosting",
-        "Analytics & SEO",
-        "CI/CD & DevOps"
+        "Adobe CC (Illustrator, Photoshop, InDesign, Premiere, After Effects, Animate, Audition)",
+        "DaVinci Resolve",
+        "TouchDesigner, MadMapper",
+        "Rhino, Arduino",
+        "WordPress/WooCommerce, Adobe XD",
+        "Figma Integration",
+        "HP Latex 315, Graphtec Plotter, Cricut",
+        "DJI/FPV Drones",
+        "ElevenLabs",
+        "LM Studio/Ollama/Stable Diffusion/Flux/ComfyUI",
+        "n8n, Notion, Slack"
       ]
     }
   ],

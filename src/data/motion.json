@@ -23,26 +23,12 @@
   },
   "context": {
     "problem": "I needed a single place where all of my motion output—Caribbean Pools, SaaS product explainers, kids' animation, and AI experiments—could exist as a coherent body of work. Caribbean Pools videos were created over a decade with evolving tools, cameras, workflows, and visual standards; they needed a unifying structure. My current ecosystem (MindForge, Nodeo, NexusCore, Origin Creative Group) requires motion assets that feel consistent, not like separate identities stitched together.",
-    "constraints": [
-      "Merge traditional production (Premiere, Illustrator, drone footage) with AI-assisted workflows (synthetic voice, generated backgrounds, concept frames)",
-      "Unify 10+ years of Caribbean Pools content with evolving visual standards",
-      "Create consistent motion language across multiple brand worlds",
-      "Maintain brand control while leveraging AI tools for efficiency"
-    ]
+    "constraints": []
   },
   "solution": {
     "approach": "I defined the Motion Systems Library as a unified portfolio section and a reusable design system. Rather than treating pieces as isolated clips, everything in the library is built around an underlying motion design system: a cohesive set of timing, transitions, compositional behaviors, and animation patterns that unify my work across brand worlds, clients, and formats.",
-    "bullets": [
-      "Brand & Environment Cinematics: Caribbean Pools cornerstone content including drone fly-throughs, seasonal promos, service announcements, on-site storytelling, and visual proof-of-quality videos with consistent lower-third systems and brand-color overlays.",
-      "Product & Systems Explainers: Visual explanations for MindForge, Nodeo, NexusCore, and home-lab workflows, plus process shorts for Caribbean Pools covering openings, closings, equipment tips, and workflow steps.",
-      "Characters, Kids' IP, and Educational Motion: Motion prototypes for original children's IP with limited animation in UPA-inspired style, character expressions, blinks, head turns, and educational micro-beats—future-ready for Adobe Character Animator and puppet workflows.",
-      "AI-Assisted Motion Experiments: Hybrid production combining traditional tools with AI—ElevenLabs voiceover narrations, AI-generated background plates, conceptual animation frames from Flux/SD/ComfyUI, and edits merging vector graphics with AI-rendered environments."
-    ],
+    "bullets": [],
     "gallery": [
-      {
-        "src": "https://media.jpstas.com/portfolio/motion%20systems/dino_force_hero.png",
-        "alt": "Dino Force hero visual"
-      },
       {
         "type": "video",
         "src": "bb1312445f67fec7e49286451a690633",
