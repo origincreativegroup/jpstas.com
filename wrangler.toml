@@ -16,3 +16,10 @@ preview_bucket_name = "jpstas-media"
 # CMS Media API Worker Configuration
 # Deploy with: npx wrangler deploy workers/cms-media-api.ts --name cms-media-api
 # Route: /api/cms/*
+
+# Email binding for contact form
+# This allows Pages Functions to send emails via Cloudflare Email Workers
+# Requires Email Routing to be enabled and info@jpstas.com to be verified
+[[send_email]]
+name = "CONTACT_EMAIL"
+destination_address = "info@jpstas.com"

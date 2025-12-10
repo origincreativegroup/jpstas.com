@@ -19,7 +19,7 @@ export default component$(() => {
 
           {/* Download Button */}
           <a
-            href="/js_resume_25.2.pdf"
+            href="https://media.jpstas.com/about/resume%20.26.pdf"
             download
             class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-surface-deep rounded-2xl hover:bg-gold/90 transition-all duration-300 text-lg font-semibold"
           >
@@ -69,7 +69,7 @@ export default component$(() => {
             <h2 class="text-2xl lg:text-3xl font-bold text-cream">Professional Summary</h2>
           </div>
           <p class="text-cream/75 leading-relaxed text-lg">
-            Creative Technologist with expertise in design, development, and operational excellence.
+            Creative Technologist, Designer & Process Innovator with expertise in design, development, and operational excellence.
             Proven track record of transforming business challenges into elegant solutions through
             design thinking, technical implementation, and process innovation. Passionate about
             creating user-centered experiences that drive measurable business results.
@@ -90,49 +90,49 @@ export default component$(() => {
             <div class="rounded-2xl bg-surface-deep/60 p-6 border border-gold/20">
               <h3 class="font-bold mb-4 text-gold text-lg flex items-center gap-2">
                 <span class="w-2 h-8 bg-gold rounded-full"></span>
-                Design & UX
+                Brand Systems & Identity
               </h3>
               <ul class="text-cream/75 space-y-2 text-sm">
-                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> UI/UX Design & Prototyping</li>
                 <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Brand Identity & Design Systems</li>
-                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> User Research & Testing</li>
-                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Responsive Web Design</li>
+                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Visual/Brand Storytelling</li>
+                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Creative Direction</li>
+                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Process Visualization</li>
               </ul>
             </div>
             <div class="rounded-2xl bg-surface-deep/60 p-6 border border-surface-olive/20">
               <h3 class="font-bold mb-4 text-surface-olive text-lg flex items-center gap-2">
                 <span class="w-2 h-8 bg-surface-olive rounded-full"></span>
-                Development
+                Web & Digital Platforms
               </h3>
               <ul class="text-cream/75 space-y-2 text-sm">
+                <li class="flex items-start gap-2"><span class="text-surface-olive mt-1">•</span> UI/UX Design & Prototyping</li>
                 <li class="flex items-start gap-2"><span class="text-surface-olive mt-1">•</span> React, TypeScript & Modern JavaScript</li>
-                <li class="flex items-start gap-2"><span class="text-surface-olive mt-1">•</span> HTML5, CSS3 & Tailwind CSS</li>
-                <li class="flex items-start gap-2"><span class="text-surface-olive mt-1">•</span> API Integration & Development</li>
-                <li class="flex items-start gap-2"><span class="text-surface-olive mt-1">•</span> Performance Optimization</li>
+                <li class="flex items-start gap-2"><span class="text-surface-olive mt-1">•</span> E-Commerce & Digital Strategy</li>
+                <li class="flex items-start gap-2"><span class="text-surface-olive mt-1">•</span> WordPress, CMS & Analytics</li>
               </ul>
             </div>
             <div class="rounded-2xl bg-surface-deep/60 p-6 border border-rust/20">
               <h3 class="font-bold mb-4 text-rust text-lg flex items-center gap-2">
                 <span class="w-2 h-8 bg-rust rounded-full"></span>
-                Operations & Process
+                Motion & Content
               </h3>
               <ul class="text-cream/75 space-y-2 text-sm">
-                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> Process Design & Optimization</li>
-                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> Workflow Automation</li>
-                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> Team Leadership & Training</li>
-                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> Project Management</li>
+                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> Motion Design & Animation</li>
+                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> Video Editing & FPV/Drone Cinematics</li>
+                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> Product Explainers & Brand Storytelling</li>
+                <li class="flex items-start gap-2"><span class="text-rust mt-1">•</span> AI-Assisted Motion</li>
               </ul>
             </div>
             <div class="rounded-2xl bg-surface-deep/60 p-6 border border-gold/20">
               <h3 class="font-bold mb-4 text-gold text-lg flex items-center gap-2">
                 <span class="w-2 h-8 bg-gold rounded-full"></span>
-                Tools & Platforms
+                Operations & Process Innovation
               </h3>
               <ul class="text-cream/75 space-y-2 text-sm">
-                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Figma & Adobe Creative Suite</li>
-                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Git, VS Code & Modern DevTools</li>
-                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Cloudflare, Vercel & Netlify</li>
-                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> WordPress & Headless CMS</li>
+                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Workflow Automation & Process Design</li>
+                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Print Production & Fabrication</li>
+                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Generative AI & Automation</li>
+                <li class="flex items-start gap-2"><span class="text-gold mt-1">•</span> Team Training & Systems Integration</li>
               </ul>
             </div>
           </div>
@@ -144,37 +144,27 @@ export default component$(() => {
           <div class="space-y-8">
             {[
               {
-                role: 'Creative Technologist',
-                org: 'Freelance / Contract',
-                period: '2020 - Present',
+                role: 'Creative Technologist, Designer & Process Innovator',
+                org: 'Caribbean Pools & Spas / Freelance',
+                period: '2014 - 2025',
                 bullets: [
-                  'Led digital transformation initiatives for e-commerce and service businesses',
-                  'Designed and developed custom web applications using modern frameworks',
-                  'Optimized operational workflows, reducing processing time by 40%',
-                  'Created comprehensive design systems and brand guidelines',
-                  'Managed cross-functional teams and client relationships',
+                  'Led 12-year brand transformation, scaling company from $7M to $17M in annual revenue',
+                  'Designed and built unified brand systems across print, digital, fleet, and apparel',
+                  'Engineered in-house print studio, saving $250K+ annually in outsourcing costs',
+                  'Created comprehensive design systems and digital platforms, increasing online sales 35% YoY',
+                  'Developed motion and media programs, driving 400% growth in social engagement',
+                  'Optimized operational workflows and implemented automation systems across departments',
                 ],
               },
               {
                 role: 'Designer & Developer',
-                org: 'Previous Role',
-                period: '2018 - 2020',
+                org: 'Freelance / Contract',
+                period: '2012 - 2014',
                 bullets: [
                   'Designed and built responsive websites and web applications',
                   'Conducted user research and usability testing',
                   'Collaborated with stakeholders to define project requirements',
                   'Implemented SEO best practices and analytics tracking',
-                ],
-              },
-              {
-                role: 'Operations & Process Designer',
-                org: 'Previous Role',
-                period: '2015 - 2018',
-                bullets: [
-                  'Designed and implemented operational workflows and procedures',
-                  'Trained staff on new systems and best practices',
-                  'Analyzed business processes and identified improvement opportunities',
-                  'Developed documentation and training materials',
                 ],
               },
             ].map((job) => (

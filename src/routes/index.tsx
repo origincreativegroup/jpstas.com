@@ -22,12 +22,12 @@ export const head: DocumentHead = () => {
   const firstSlide = home.hero[0];
 
   return {
-    title: 'John P. Stas – Creative Systems & Experiential Design',
+    title: 'John P. Stas – Creative Technologist, Designer & Process Innovator',
     meta: [
     {
       name: 'description',
         content:
-          'Portfolio homepage for John P. Stas featuring immersive brand systems, generative AI experimentation, motion design, and mixed-media installations.',
+          'Portfolio of John P. Stas - Creative Technologist, Designer & Process Innovator specializing in brand systems, generative AI, motion design, web development, and operational excellence.',
       },
     ],
     links: firstSlide

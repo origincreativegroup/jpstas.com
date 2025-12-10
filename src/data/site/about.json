@@ -1,6 +1,6 @@
 {
   "heading": "About Me",
-  "subheading": "I'm a Creative Technologist who bridges the gap between design, development, and operations. With a unique blend of technical expertise and creative problem-solving, I help businesses transform their digital presence and operational efficiency.",
+  "subheading": "I'm a Creative Technologist, Designer & Process Innovator who bridges the gap between design, development, and operations. With a unique blend of technical expertise and creative problem-solving, I help businesses transform their digital presence and operational efficiency.",
   "bio": "Throughout my career, I've worn many hats: designer, developer, process innovator, and technical leader. This diverse experience has given me a holistic understanding of how digital products come to life and thrive.\n\nMy approach combines design thinking with technical implementation, ensuring that solutions are not only beautiful and functional, but also scalable and maintainable.\n\nI'm passionate about continuous learning, staying current with emerging technologies, and finding innovative ways to solve complex business challenges.",
   "src": "https://media.jpstas.com/about/Profile_headshot.png",
   "alt": "jpstas profile headshot",
@@ -128,22 +128,16 @@
   ],
   "experience": [
     {
-      "period": "2020 - Present",
-      "role": "Creative Technologist",
-      "description": "Leading digital transformation initiatives, designing and building custom solutions, and optimizing operational workflows for improved efficiency.",
+      "period": "2014 - 2025",
+      "role": "Creative Technologist, Designer & Process Innovator",
+      "description": "Led 12-year brand transformation at Caribbean Pools & Spas, scaling from $7M to $17M revenue. Designed unified brand systems, engineered in-house print studio saving $250K+ annually, created digital platforms increasing online sales 35% YoY, and developed motion/media programs driving 400% social engagement growth.",
       "color": "primary"
     },
     {
-      "period": "2018 - 2020",
+      "period": "2012 - 2014",
       "role": "Designer & Developer",
-      "description": "Created user-centered digital experiences, developed responsive web applications, and collaborated with cross-functional teams.",
+      "description": "Created user-centered digital experiences, developed responsive web applications, and collaborated with cross-functional teams on freelance and contract projects.",
       "color": "secondary"
-    },
-    {
-      "period": "2015 - 2018",
-      "role": "Operations & Process Designer",
-      "description": "Streamlined business processes, implemented new systems, and trained teams on best practices for operational excellence.",
-      "color": "highlight"
     }
   ],
   "cta": {
