@@ -23,7 +23,7 @@ export const head: DocumentHead = () => {
 
   return {
     title: 'John P. Stas – Creative Systems & Experiential Design',
-  meta: [
+    meta: [
     {
       name: 'description',
         content:
